@@ -22,6 +22,17 @@ services:
 #    ports:
 #      - "80:80"
 
+  user-ms:
+    build: ./user-ms
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:mysql://db:3306/fullstack24
+      SPRING_DATASOURCE_USERNAME: user
+      SPRING_DATASOURCE_PASSWORD: password
+    depends_on:
+      - db
+    networks:
+      - backend-network
+
   db:
     image: mysql:8.0
     environment:
@@ -38,6 +49,5 @@ services:
 
 volumes:
   db-data:
-
 networks:
   backend-network:
