@@ -4,10 +4,13 @@ import com.fullstackdevops.userms.dto.UserDto;
 
 public interface UserService {
 
-    public UserDto createUser(UserDto user);
+    UserDto createUser(UserDto user);
 
-    public UserDto updateUser(Long id, UserDto userDto);
+    UserDto updateUser(Long id, UserDto userDto);
 
-    public UserDto getUserById(Long id);
+    UserDto getUserById(Long id);
+
+    UserDto login(String username, String password);
+
 }
 

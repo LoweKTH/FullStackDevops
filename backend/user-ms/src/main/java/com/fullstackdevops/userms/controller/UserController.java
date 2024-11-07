@@ -1,6 +1,7 @@
 package com.fullstackdevops.userms.controller;
 
 
+import com.fullstackdevops.userms.dto.LoginDto;
 import com.fullstackdevops.userms.dto.UserDto;
 import com.fullstackdevops.userms.service.UserService;
 import lombok.AllArgsConstructor;
@@ -18,5 +19,12 @@ public class UserController {
     @PostMapping("/register")
     public ResponseEntity<UserDto> createUser(@RequestBody UserDto userDto) {
         return new ResponseEntity<>(userService.createUser(userDto), HttpStatus.CREATED);
+    }
+
+    @PostMapping("/login")
+    public ResponseEntity<UserDto> login(@RequestBody LoginDto loginDto) {
+
+        UserDto user = userService.login(loginDto.getUsername(), loginDto.getPassword());
+        return new ResponseEntity<>(user, HttpStatus.OK);
     }
 }
