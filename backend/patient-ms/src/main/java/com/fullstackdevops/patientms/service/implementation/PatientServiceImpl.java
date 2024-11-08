@@ -1,12 +1,17 @@
 package com.fullstackdevops.patientms.service.implementation;
 
+import com.fullstackdevops.patientms.dto.NoteDto;
+import com.fullstackdevops.patientms.model.Note;
+import com.fullstackdevops.patientms.repository.NoteRepository;
 import com.fullstackdevops.patientms.repository.PatientRepository;
 import com.fullstackdevops.patientms.dto.PatientDto;
 import com.fullstackdevops.patientms.model.Patient;
 import com.fullstackdevops.patientms.service.PatientService;
+import com.fullstackdevops.patientms.utils.NoteMapper;
 import com.fullstackdevops.patientms.utils.PatientMapper;
 
 import com.fullstackdevops.patientms.utils.PatientNotFoundException;
+import jakarta.transaction.Transactional;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -17,6 +22,7 @@ import java.util.List;
 @AllArgsConstructor
 public class PatientServiceImpl implements PatientService{
     private final PatientRepository patientRepository;
+    private final NoteRepository noteRepository;
 
     @Override
     public PatientDto createPatient(PatientDto patientDto) {
@@ -44,6 +50,22 @@ public class PatientServiceImpl implements PatientService{
                         new PatientNotFoundException("Patient with specified ID not found"));
 
         return PatientMapper.toDto(patient);
+    }
+
+    @Override
+    @Transactional
+    public NoteDto addNoteToPatient(Long patientId, NoteDto noteDto, Long doctorId) {
+        Patient patient = patientRepository.findById(patientId)
+                .orElseThrow(() -> new PatientNotFoundException("Patient with specified ID not found"));
+
+        Note note = new Note();
+        note.setContent(noteDto.getContent());
+        note.setDoctorId(doctorId);
+        note.setPatient(patient);
+
+        note = noteRepository.save(note);
+
+        return NoteMapper.toDto(note);
     }
 
 }

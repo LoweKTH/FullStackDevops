@@ -8,6 +8,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.util.Date;
+import java.util.List;
 
 @Entity
 @Getter
@@ -25,8 +26,9 @@ public class Patient {
     private String gender;
     private String email;
     private String phoneNumber;
+    @OneToMany(mappedBy = "patient", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Note> notes;
-    private List<Encounter> encounters;
-    private Set<Conditions> conditions;
+    /*private List<Encounter> encounters;
+    private Set<Conditions> conditions;*/
 
 }
