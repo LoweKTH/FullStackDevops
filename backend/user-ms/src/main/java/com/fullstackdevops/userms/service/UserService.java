@@ -1,10 +1,11 @@
 package com.fullstackdevops.userms.service;
 
+import com.fullstackdevops.userms.dto.RegistrationDto;
 import com.fullstackdevops.userms.dto.UserDto;
 
 public interface UserService {
 
-    UserDto createUser(UserDto user);
+    UserDto createUser(RegistrationDto registrationDto);
 
     UserDto updateUser(Long id, UserDto userDto);
 

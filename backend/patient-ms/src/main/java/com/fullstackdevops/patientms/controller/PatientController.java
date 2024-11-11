@@ -8,8 +8,11 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/api/patients")
+@CrossOrigin(origins = "http://localhost:3000")
 public class PatientController {
 
     private final PatientService patientService;
@@ -29,5 +32,11 @@ public class PatientController {
         Long doctorId = noteDto.getDoctorId();
         NoteDto createdNote = patientService.addNoteToPatient(patientId, noteDto, doctorId);
         return new ResponseEntity<>(createdNote, HttpStatus.CREATED);
+    }
+
+    @GetMapping("/")
+    public ResponseEntity<List<PatientDto>> getAllPatients() {
+        List<PatientDto> patients = patientService.getAllPatients();
+        return new ResponseEntity<>(patients, HttpStatus.OK);
     }
 }

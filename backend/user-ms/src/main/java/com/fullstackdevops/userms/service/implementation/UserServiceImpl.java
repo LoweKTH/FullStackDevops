@@ -1,5 +1,7 @@
 package com.fullstackdevops.userms.service.implementation;
 
+import com.fullstackdevops.userms.dto.PatientDto;
+import com.fullstackdevops.userms.dto.RegistrationDto;
 import com.fullstackdevops.userms.repository.UserRepository;
 import com.fullstackdevops.userms.service.UserService;
 import com.fullstackdevops.userms.dto.UserDto;
@@ -11,6 +13,7 @@ import lombok.AllArgsConstructor;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.client.RestTemplate;
 
 @Service
 @AllArgsConstructor
@@ -18,10 +21,14 @@ public class UserServiceImpl implements UserService {
 
     private final UserRepository userRepository;
     private final BCryptPasswordEncoder passwordEncoder;
+    private final RestTemplate restTemplate;
 
 
     @Override
-    public UserDto createUser(UserDto userDto){
+    public UserDto createUser(RegistrationDto registrationDto){
+
+        UserDto userDto = registrationDto.getUserDetails();
+        PatientDto patientDto = registrationDto.getPatientDetails();
 
         if(userRepository.existsByUsername(userDto.getUsername()) || userRepository.existsByEmail(userDto.getEmail())){
             throw new UserExistsException("This username or email is already taken");
@@ -33,6 +40,19 @@ public class UserServiceImpl implements UserService {
         User user = UserMapper.toEntity(userDto);
         userRepository.save(user);
         userDto = UserMapper.toDto(user);
+
+        if(userDto.getRole().equalsIgnoreCase("patient")){
+            String patientServiceEndpoint = "http://patient-ms:8080/api/patients/addPatient";
+
+            patientDto.setId(userDto.getId());
+            patientDto.setEmail(userDto.getEmail());
+
+            try {
+                restTemplate.postForEntity(patientServiceEndpoint, patientDto, PatientDto.class);
+            } catch (Exception e) {
+                System.out.println("Failed to create patient in Patient MS: " + e.getMessage());
+            }
+        }
         return userDto;
     }
 
