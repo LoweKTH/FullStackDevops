@@ -22,6 +22,5 @@ public class Encounter {
     private Long id;
     private String title;
     private String description;
-    private
 
 }
