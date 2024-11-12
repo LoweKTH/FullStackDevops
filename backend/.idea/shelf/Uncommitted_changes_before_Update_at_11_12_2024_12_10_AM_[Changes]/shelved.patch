@@ -1,0 +1,232 @@
+Index: encounter-ms/src/main/java/com/fullstackdevops/encounterms/model/Encounter.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.fullstackdevops.encounterms.model;\r\n\r\n\r\nimport jakarta.persistence.Entity;\r\nimport jakarta.persistence.GeneratedValue;\r\nimport jakarta.persistence.GenerationType;\r\nimport jakarta.persistence.Id;\r\nimport lombok.AllArgsConstructor;\r\nimport lombok.Getter;\r\nimport lombok.NoArgsConstructor;\r\nimport lombok.Setter;\r\n\r\n@Entity\r\n@Getter\r\n@Setter\r\n@NoArgsConstructor\r\n@AllArgsConstructor\r\npublic class Encounter {\r\n\r\n    @Id\r\n    @GeneratedValue(strategy = GenerationType.IDENTITY)\r\n    private Long id;\r\n    private String title;\r\n    private String description;\r\n    private\r\n\r\n}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/encounter-ms/src/main/java/com/fullstackdevops/encounterms/model/Encounter.java b/encounter-ms/src/main/java/com/fullstackdevops/encounterms/model/Encounter.java
+--- a/encounter-ms/src/main/java/com/fullstackdevops/encounterms/model/Encounter.java	(revision e01ddda06ffbe5cf78859e44f428cf5c3c2675b6)
++++ b/encounter-ms/src/main/java/com/fullstackdevops/encounterms/model/Encounter.java	(date 1731329334227)
+@@ -22,6 +22,5 @@
+     private Long id;
+     private String title;
+     private String description;
+-    private
+ 
+ }
+Index: ../frontend/src/Login.css
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/../frontend/src/Login.css b/../frontend/src/Login.css
+new file mode 100644
+--- /dev/null	(date 1731366385890)
++++ b/../frontend/src/Login.css	(date 1731366385890)
+@@ -0,0 +1,62 @@
++/* LoginPage.css */
++
++/* Style for the login container */
++.login {
++    display: flex;
++    justify-content: center;
++    align-items: center;
++    height: 100vh;
++    background-color: #f4f4f4;
++    font-family: Arial, sans-serif;
++    flex-direction: column;
++}
++
++h2 {
++    margin-bottom: 20px;
++    text-align: center;
++    color: #333;
++}
++
++form {
++    display: flex;
++    flex-direction: column;
++    gap: 15px;
++    padding: 20px;
++    border-radius: 8px;
++    background-color: white;
++    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
++    width: 100%;
++    max-width: 400px;
++}
++
++input {
++    padding: 10px;
++    font-size: 16px;
++    border: 1px solid #ccc;
++    border-radius: 4px;
++    width: 95%;
++}
++
++button {
++    padding: 12px;
++    font-size: 16px;
++    border: none;
++    border-radius: 4px;
++    background-color: #007bff;
++    color: white;
++    cursor: pointer;
++    transition: background-color 0.3s;
++}
++
++button:hover {
++    background-color: #0056b3;
++}
++
++/* Styling for error message */
++.error-message {
++    text-align: center;
++    color: red;
++    font-size: 14px;
++    margin-top: 10px;
++    margin-bottom: 0;
++}
+Index: ../frontend/.idea/inspectionProfiles/Project_Default.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/../frontend/.idea/inspectionProfiles/Project_Default.xml b/../frontend/.idea/inspectionProfiles/Project_Default.xml
+new file mode 100644
+--- /dev/null	(date 1731365535108)
++++ b/../frontend/.idea/inspectionProfiles/Project_Default.xml	(date 1731365535108)
+@@ -0,0 +1,6 @@
++<component name="InspectionProjectProfileManager">
++  <profile version="1.0">
++    <option name="myName" value="Project Default" />
++    <inspection_tool class="Eslint" enabled="true" level="WARNING" enabled_by_default="true" />
++  </profile>
++</component>
+\ No newline at end of file
+Index: ../frontend/src/components/Login.jsx
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/../frontend/src/components/Login.jsx b/../frontend/src/components/Login.jsx
+new file mode 100644
+--- /dev/null	(date 1731366083439)
++++ b/../frontend/src/components/Login.jsx	(date 1731366083439)
+@@ -0,0 +1,59 @@
++import React, { useState } from 'react';
++import './LoginPage.css';  // Import the CSS for the LoginPage
++
++function LoginPage() {
++    // Define state for username, password, and error message
++    const [username, setUsername] = useState('');
++    const [password, setPassword] = useState('');
++    const [error, setError] = useState('');
++
++    const handleLogin = async (event) => {
++        event.preventDefault();
++
++       /* try {
++            const response = await fetch('http://localhost:8081/api/user/login', {
++                method: 'POST',
++                headers: {
++                    'Content-Type': 'application/json',
++                },
++                body: JSON.stringify({ username, password }),
++            });
++
++            if (response.ok) {
++                const data = await response.json();
++                console.log('Login successful:', data);
++            } else {
++                const errorData = await response.json();
++                setError(errorData.message || 'Wrong password or username');
++            }
++        } catch (error) {
++            setError('An error occurred. Please try again later.');
++            console.error('Error during login:', error);
++        }*/
++    };
++
++    return (
++        <div className="login">
++            <form onSubmit={handleLogin}>
++                <input
++                    type="text"
++                    placeholder="Username"
++                    value={username}
++                    onChange={(e) => setUsername(e.target.value)} // Update username state
++                />
++                <input
++                    type="password"
++                    placeholder="Password"
++                    value={password}
++                    onChange={(e) => setPassword(e.target.value)} // Update password state
++                />
++                <button type="submit">Login</button>
++            </form>
++
++            {/* Display error message if there is one */}
++            {error && <p className="error-message">{error}</p>}
++        </div>
++    );
++}
++
++export default LoginPage;
+Index: ../frontend/.idea/vcs.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/../frontend/.idea/vcs.xml b/../frontend/.idea/vcs.xml
+new file mode 100644
+--- /dev/null	(date 1731365535384)
++++ b/../frontend/.idea/vcs.xml	(date 1731365535384)
+@@ -0,0 +1,6 @@
++<?xml version="1.0" encoding="UTF-8"?>
++<project version="4">
++  <component name="VcsDirectoryMappings">
++    <mapping directory="$PROJECT_DIR$/.." vcs="Git" />
++  </component>
++</project>
+\ No newline at end of file
+Index: ../frontend/.idea/misc.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/../frontend/.idea/misc.xml b/../frontend/.idea/misc.xml
+new file mode 100644
+--- /dev/null	(date 1731365535359)
++++ b/../frontend/.idea/misc.xml	(date 1731365535359)
+@@ -0,0 +1,6 @@
++<?xml version="1.0" encoding="UTF-8"?>
++<project version="4">
++  <component name="ProjectRootManager" version="2" languageLevel="JDK_21" default="true" project-jdk-name="openjdk-21" project-jdk-type="JavaSDK">
++    <output url="file://$PROJECT_DIR$/out" />
++  </component>
++</project>
+\ No newline at end of file
+Index: ../frontend/.idea/modules.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/../frontend/.idea/modules.xml b/../frontend/.idea/modules.xml
+new file mode 100644
+--- /dev/null	(date 1731365535349)
++++ b/../frontend/.idea/modules.xml	(date 1731365535349)
+@@ -0,0 +1,8 @@
++<?xml version="1.0" encoding="UTF-8"?>
++<project version="4">
++  <component name="ProjectModuleManager">
++    <modules>
++      <module fileurl="file://$PROJECT_DIR$/.idea/frontend.iml" filepath="$PROJECT_DIR$/.idea/frontend.iml" />
++    </modules>
++  </component>
++</project>
+\ No newline at end of file
+diff --git a/../frontend/src/api/Patient-ms-api.js b/../frontend/src/api/Patient-ms-api.js
+new file mode 100644
+diff --git a/../frontend/src/components/PatientList.jsx b/../frontend/src/components/PatientList.jsx
+new file mode 100644

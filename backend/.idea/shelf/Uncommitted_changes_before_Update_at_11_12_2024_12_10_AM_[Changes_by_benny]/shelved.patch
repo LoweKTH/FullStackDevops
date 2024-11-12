@@ -1,0 +1,70 @@
+Index: user-ms/src/main/java/com/fullstackdevops/userms/model/User.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.fullstackdevops.userms.model;\r\n\r\n\r\nimport jakarta.persistence.*;\r\nimport lombok.AllArgsConstructor;\r\nimport lombok.Getter;\r\nimport lombok.NoArgsConstructor;\r\nimport lombok.Setter;\r\n\r\n@Entity\r\n@Getter\r\n@Setter\r\n@NoArgsConstructor\r\n@AllArgsConstructor\r\npublic class User {\r\n\r\n    @Id\r\n    @GeneratedValue(strategy = GenerationType.IDENTITY)\r\n    private Long id;\r\n    private String email;\r\n    @Column(unique = true, name = \"username\")\r\n    private String username;\r\n    @Column(name = \"password\")\r\n    private String password;\r\n    @Column(name = \"role\")\r\n    private String role;\r\n}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/user-ms/src/main/java/com/fullstackdevops/userms/model/User.java b/user-ms/src/main/java/com/fullstackdevops/userms/model/User.java
+--- a/user-ms/src/main/java/com/fullstackdevops/userms/model/User.java	(revision e01ddda06ffbe5cf78859e44f428cf5c3c2675b6)
++++ b/user-ms/src/main/java/com/fullstackdevops/userms/model/User.java	(date 1730974200360)
+@@ -17,6 +17,7 @@
+     @Id
+     @GeneratedValue(strategy = GenerationType.IDENTITY)
+     private Long id;
++    @Column(unique = true, name = "email")
+     private String email;
+     @Column(unique = true, name = "username")
+     private String username;
+Index: ../frontend/.idea/.gitignore
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/../frontend/.idea/.gitignore b/../frontend/.idea/.gitignore
+new file mode 100644
+--- /dev/null	(date 1731365535298)
++++ b/../frontend/.idea/.gitignore	(date 1731365535298)
+@@ -0,0 +1,8 @@
++# Default ignored files
++/shelf/
++/workspace.xml
++# Editor-based HTTP Client requests
++/httpRequests/
++# Datasource local storage ignored files
++/dataSources/
++/dataSources.local.xml
+Index: ../frontend/src/Dockerfile
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/../frontend/src/Dockerfile b/../frontend/src/Dockerfile
+new file mode 100644
+--- /dev/null	(date 1731365867829)
++++ b/../frontend/src/Dockerfile	(date 1731365867829)
+@@ -0,0 +1,21 @@
++# Stage 1: Build the React application
++FROM node:latest as build
++
++WORKDIR /app
++
++COPY package.json package-lock.json ./
++
++RUN npm install
++
++COPY . ./
++
++RUN npm run build
++
++# Stage 2: Serve the application with Nginx
++FROM nginx:stable-alpine
++
++COPY --from=build /app/build /usr/share/nginx/html
++
++EXPOSE 80
++
++CMD ["nginx", "-g", "daemon off;"]
+\ No newline at end of file
+diff --git a/../frontend/src/api/User-ms-api.js b/../frontend/src/api/User-ms-api.js
+new file mode 100644
