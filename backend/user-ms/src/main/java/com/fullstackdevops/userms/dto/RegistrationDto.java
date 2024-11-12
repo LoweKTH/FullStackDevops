@@ -11,5 +11,5 @@ import lombok.Setter;
 @AllArgsConstructor
 public class RegistrationDto {
     private UserDto userDetails;
-    private PatientDto patientDetails;
+    private AdditionalInfoDto additionalInfoDetails;
 }

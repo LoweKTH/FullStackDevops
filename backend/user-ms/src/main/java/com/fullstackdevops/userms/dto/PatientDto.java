@@ -13,7 +13,8 @@ import java.util.Date;
 @NoArgsConstructor
 @AllArgsConstructor
 public class PatientDto {
-    private Long Id;
+    private Long socialSecurityNumber;
+    private Long userId;
     private String firstname;
     private String lastname;
     private Date dateOfBirth;
@@ -21,4 +22,5 @@ public class PatientDto {
     private String gender;
     private String phoneNumber;
     private String email;
+
 }

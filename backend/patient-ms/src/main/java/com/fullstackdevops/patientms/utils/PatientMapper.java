@@ -8,7 +8,8 @@ public class PatientMapper {
     public static PatientDto toDto(Patient patient) {
         if(patient == null) return null;
         PatientDto dto = new PatientDto();
-        dto.setId(patient.getId());
+        dto.setSocialSecurityNumber(patient.getSocialSecurityNumber());
+        dto.setUserId(patient.getUserId());
         dto.setFirstname(patient.getFirstname());
         dto.setLastname(patient.getLastname());
         dto.setDateOfBirth(patient.getDateOfBirth());
@@ -24,7 +25,8 @@ public class PatientMapper {
         if(dto == null) return null;
 
         Patient patient = new Patient();
-        patient.setId(dto.getId());
+        patient.setSocialSecurityNumber(dto.getSocialSecurityNumber());
+        patient.setUserId(dto.getUserId());
         patient.setFirstname(dto.getFirstname());
         patient.setLastname(dto.getLastname());
         patient.setDateOfBirth(dto.getDateOfBirth());

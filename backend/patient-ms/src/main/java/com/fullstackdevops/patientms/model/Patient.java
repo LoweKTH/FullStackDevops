@@ -16,9 +16,12 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 public class Patient {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    private Long socialSecurityNumber;
+    private Long userId;
     private String firstname;
     private String lastname;
     private Date dateOfBirth;

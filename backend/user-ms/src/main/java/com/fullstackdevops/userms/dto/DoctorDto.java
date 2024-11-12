@@ -1,4 +1,4 @@
-package com.fullstackdevops.patientms.dto;
+package com.fullstackdevops.userms.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -12,15 +12,12 @@ import java.util.Date;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class PatientDto {
-
+public class DoctorDto {
     private Long socialSecurityNumber;
     private Long userId;
     private String firstname;
     private String lastname;
-    private Date dateOfBirth;
-    private String address;
-    private String gender;
-    private String email;
     private String phoneNumber;
+    private String email;
+    private String specialty;
 }

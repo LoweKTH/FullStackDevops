@@ -1,10 +1,8 @@
 package com.fullstackdevops.userms.service.implementation;
 
-import com.fullstackdevops.userms.dto.PatientDto;
-import com.fullstackdevops.userms.dto.RegistrationDto;
+import com.fullstackdevops.userms.dto.*;
 import com.fullstackdevops.userms.repository.UserRepository;
 import com.fullstackdevops.userms.service.UserService;
-import com.fullstackdevops.userms.dto.UserDto;
 import com.fullstackdevops.userms.utils.UserExistsException;
 import com.fullstackdevops.userms.utils.UserMapper;
 import com.fullstackdevops.userms.model.User;
@@ -28,7 +26,8 @@ public class UserServiceImpl implements UserService {
     public UserDto createUser(RegistrationDto registrationDto){
 
         UserDto userDto = registrationDto.getUserDetails();
-        PatientDto patientDto = registrationDto.getPatientDetails();
+        AdditionalInfoDto additionalInfoDto = registrationDto.getAdditionalInfoDetails();
+        System.out.println(additionalInfoDto.toString());
 
         if(userRepository.existsByUsername(userDto.getUsername()) || userRepository.existsByEmail(userDto.getEmail())){
             throw new UserExistsException("This username or email is already taken");
@@ -44,15 +43,43 @@ public class UserServiceImpl implements UserService {
         if(userDto.getRole().equalsIgnoreCase("patient")){
             String patientServiceEndpoint = "http://patient-ms:8080/api/patients/addPatient";
 
-            patientDto.setId(userDto.getId());
+            PatientDto patientDto = new PatientDto();
+            patientDto.setUserId(userDto.getId());
             patientDto.setEmail(userDto.getEmail());
+            patientDto.setSocialSecurityNumber(additionalInfoDto.getSocialSecurityNumber());
+            patientDto.setFirstname(additionalInfoDto.getFirstname());
+            patientDto.setLastname(additionalInfoDto.getLastname());
+            patientDto.setPhoneNumber(additionalInfoDto.getPhoneNumber());
+            patientDto.setAddress(additionalInfoDto.getAddress());
+            patientDto.setGender(additionalInfoDto.getGender());
+            patientDto.setDateOfBirth(additionalInfoDto.getDateOfBirth());
 
             try {
                 restTemplate.postForEntity(patientServiceEndpoint, patientDto, PatientDto.class);
             } catch (Exception e) {
                 System.out.println("Failed to create patient in Patient MS: " + e.getMessage());
             }
+        }else if(userDto.getRole().equalsIgnoreCase("doctor")){
+            String doctorServiceEndpoint = "http://doctorstaff-ms:8080/api/doctors/addDoctor";
+
+            DoctorDto doctorDto = new DoctorDto();
+            doctorDto.setSocialSecurityNumber(additionalInfoDto.getSocialSecurityNumber());
+            doctorDto.setUserId(userDto.getId());
+            doctorDto.setEmail(userDto.getEmail());
+            doctorDto.setFirstname(additionalInfoDto.getFirstname());
+            doctorDto.setLastname(additionalInfoDto.getLastname());
+            doctorDto.setSpecialty(additionalInfoDto.getSpecialty());
+            doctorDto.setPhoneNumber(additionalInfoDto.getPhoneNumber());
+
+
+            try {
+                restTemplate.postForEntity(doctorServiceEndpoint, doctorDto, DoctorDto.class);
+            } catch (Exception e) {
+                System.out.println("Failed to create doctor in Doctor MS: " + e.getMessage());
+            }
         }
+
+
         return userDto;
     }
 
