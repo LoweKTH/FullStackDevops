@@ -1,20 +1,23 @@
-package com.fullstackdevops.doctorstaffms.dto;
+package com.fullstackdevops.userms.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.Date;
+
+
 @Getter
 @Setter
-@AllArgsConstructor
 @NoArgsConstructor
+@AllArgsConstructor
 public class DoctorDto {
     private Long socialSecurityNumber;
     private Long userId;
     private String firstname;
     private String lastname;
-    private String email;
     private String phoneNumber;
+    private String email;
     private String specialty;
 }
