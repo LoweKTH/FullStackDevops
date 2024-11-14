@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 import './LoginPage.css';
-import {loginUser, registerUser} from "../api/User-ms-api";
+import {loginUser} from "../api/User-ms-api";
 import {useNavigate} from "react-router-dom";
 
-function LoginPage() {
+function Login() {
     // Define state for username, password, and error message
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
@@ -54,4 +54,4 @@ function LoginPage() {
     );
 }
 
-export default LoginPage;
+export default Login;
