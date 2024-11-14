@@ -1,5 +1,6 @@
 package com.fullstackdevops.patientms.controller;
 
+import com.fullstackdevops.patientms.dto.DiagnosisDto;
 import com.fullstackdevops.patientms.dto.NoteDto;
 import com.fullstackdevops.patientms.dto.PatientDto;
 import com.fullstackdevops.patientms.service.PatientService;
@@ -42,5 +43,11 @@ public class PatientController {
     public ResponseEntity<List<PatientDto>> getAllPatients() {
         List<PatientDto> patients = patientService.getAllPatients();
         return new ResponseEntity<>(patients, HttpStatus.OK);
+    }
+
+    @PostMapping("/{patientId}/diagnosis")
+    public DiagnosisDto addDiagnosis(@PathVariable Long patientId, @RequestBody DiagnosisDto diagnosisDto) {
+        Long doctorId = diagnosisDto.getDoctorId();
+        return patientService.addDiagnosisToPatient(patientId, diagnosisDto, doctorId);
     }
 }

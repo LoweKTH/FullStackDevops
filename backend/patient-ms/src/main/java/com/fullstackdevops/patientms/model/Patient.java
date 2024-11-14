@@ -31,7 +31,9 @@ public class Patient {
     private String phoneNumber;
     @OneToMany(mappedBy = "patient", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Note> notes;
-    /*private List<Encounter> encounters;
-    private Set<Conditions> conditions;*/
+    @OneToMany(mappedBy = "patient", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Diagnosis> diagnoses;
+
+    /*private List<Encounter> encounters;*/
 
 }
