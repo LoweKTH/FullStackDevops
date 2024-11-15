@@ -1,5 +1,6 @@
 package com.fullstackdevops.messagingms.service.implementation;
 
+import com.fullstackdevops.messagingms.dto.ConversationDto;
 import com.fullstackdevops.messagingms.dto.MessageDto;
 import com.fullstackdevops.messagingms.model.Message;
 import com.fullstackdevops.messagingms.repository.ConversationRepository;
@@ -53,6 +54,24 @@ public class MessagingServiceImpl implements MessagingService {
             messageDtos.add(messageDto);
         }
         return messageDtos;
+    }
+
+    @Override
+    public List<ConversationDto> getAllUserConversations(Long userId) {
+        List<Conversation> conversations = conversationRepository.findBySenderIdOrRecipientId(userId, userId);
+        List<ConversationDto> conversationDtos = new ArrayList<>();
+
+        for (Conversation conversation : conversations) {
+            ConversationDto conversationDto = new ConversationDto(
+                    conversation.getId(),
+                    conversation.getSenderId(),
+                    conversation.getRecipientId(),
+                    conversation.getCreatedAt()
+            );
+            conversationDtos.add(conversationDto);
+        }
+
+        return conversationDtos;
     }
 
 

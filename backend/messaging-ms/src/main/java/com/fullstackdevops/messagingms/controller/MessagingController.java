@@ -1,6 +1,7 @@
 package com.fullstackdevops.messagingms.controller;
 
 
+import com.fullstackdevops.messagingms.dto.ConversationDto;
 import com.fullstackdevops.messagingms.dto.MessageDto;
 import com.fullstackdevops.messagingms.model.Conversation;
 import com.fullstackdevops.messagingms.service.MessagingService;
@@ -37,6 +38,12 @@ public class MessagingController {
     public ResponseEntity<List<MessageDto>> getMessages(@PathVariable Long conversationId) {
         List<MessageDto> messages = messagingService.getMessages(conversationId);
         return ResponseEntity.ok(messages);
+    }
+
+    @GetMapping("/getconversations")
+    public ResponseEntity<List<ConversationDto>> getUserConversations(@RequestParam Long userId) {
+        List<ConversationDto> conversations = messagingService.getAllUserConversations(userId);
+        return ResponseEntity.ok(conversations);
     }
 }
 
