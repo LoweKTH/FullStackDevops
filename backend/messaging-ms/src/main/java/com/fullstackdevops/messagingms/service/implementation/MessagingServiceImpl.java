@@ -21,12 +21,12 @@ public class MessagingServiceImpl implements MessagingService {
     private final MessageRepository messageRepository;
 
     @Override
-    public Conversation createOrGetConversation(Long patientId, Long doctorId) {
-        return conversationRepository.findByPatientIdAndDoctorId(patientId, doctorId)
+    public Conversation createOrGetConversation(Long senderId, Long recipientId) {
+        return conversationRepository.findBySenderIdAndRecipientId(senderId, recipientId)
                 .orElseGet(() -> {
                     Conversation conversation = new Conversation();
-                    conversation.setPatientId(patientId);
-                    conversation.setDoctorId(doctorId);
+                    conversation.setSenderId(senderId);
+                    conversation.setRecipientId(recipientId);
                     return conversationRepository.save(conversation);
                 });
     }

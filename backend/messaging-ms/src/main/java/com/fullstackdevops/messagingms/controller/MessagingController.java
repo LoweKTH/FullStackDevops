@@ -20,8 +20,8 @@ public class MessagingController {
     private final MessagingService messagingService;
 
     @PostMapping("/conversation")
-    public ResponseEntity<Conversation> createConversation(@RequestParam Long patientId, @RequestParam Long doctorId) {
-        Conversation conversation = messagingService.createOrGetConversation(patientId, doctorId);
+    public ResponseEntity<Conversation> createConversation(@RequestParam Long senderId, @RequestParam Long recipientId) {
+        Conversation conversation = messagingService.createOrGetConversation(senderId, recipientId);
         return ResponseEntity.ok(conversation);
     }
 
