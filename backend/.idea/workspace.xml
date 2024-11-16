@@ -4,7 +4,23 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="09d6a3b5-9b2e-4587-b1b1-5156eb6a8f42" name="Changes" comment="#5" />
+    <list default="true" id="09d6a3b5-9b2e-4587-b1b1-5156eb6a8f42" name="Changes" comment="#5">
+      <change afterPath="$PROJECT_DIR$/../.idea/FullStack24.iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../.idea/misc.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../.idea/modules.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../frontend/src/components/Dashboard.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docker-compose.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/docker-compose.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../frontend/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../frontend/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../frontend/src/App.js" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/src/App.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../frontend/src/Dockerfile" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/Dockerfile" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../frontend/src/api/Patient-ms-api.js" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/src/api/Patient-ms-api.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../frontend/src/components/Login.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/src/components/Login.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../frontend/src/components/PatientList.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/src/components/PatientList.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../frontend/src/components/Register.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/src/components/Register.jsx" afterDir="false" />
+    </list>
     <list id="79177b7e-e8af-49c6-aa54-aba545e8c75b" name="Changes by benny" comment="Changes by benny" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -53,7 +69,7 @@
 }</component>
   <component name="GithubPullRequestsUISettings">{
   &quot;selectedUrlAndAccountId&quot;: {
-    &quot;url&quot;: &quot;https://github.com/LoweKTH/FullStackDevops.git&quot;,
+    &quot;url&quot;: &quot;https://github.com/LoweKTH/FullStackDevops&quot;,
     &quot;accountId&quot;: &quot;efe60eb1-5111-4245-91a9-57d0a59d0e09&quot;
   }
 }</component>
@@ -75,34 +91,40 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;Docker.docker-compose.yaml: Compose Deployment.executor&quot;: &quot;Run&quot;,
-    &quot;RequestMappingsPanelOrder0&quot;: &quot;0&quot;,
-    &quot;RequestMappingsPanelOrder1&quot;: &quot;1&quot;,
-    &quot;RequestMappingsPanelWidth0&quot;: &quot;75&quot;,
-    &quot;RequestMappingsPanelWidth1&quot;: &quot;75&quot;,
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;Spring Boot.UserMsApplication.executor&quot;: &quot;Run&quot;,
-    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;frontend&quot;,
-    &quot;jdk.selected.JAVA_MODULE&quot;: &quot;17&quot;,
-    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/LoweL/OneDrive/Dokument/Skolkurser/FullStack24/FullStackDevops/frontend&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
-    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
-    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
-    &quot;run.configurations.included.in.services&quot;: &quot;true&quot;,
-    &quot;spring.configuration.checksum&quot;: &quot;d515da1eed3ff84916893d4b97ec75e2&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "Docker.docker-compose.yaml.db: Compose Deployment.executor": "Run",
+    "Docker.docker-compose.yaml.doctorstaff-ms: Compose Deployment.executor": "Run",
+    "Docker.docker-compose.yaml.frontend: Compose Deployment.executor": "Run",
+    "Docker.docker-compose.yaml.patient-ms: Compose Deployment.executor": "Run",
+    "Docker.docker-compose.yaml.user-ms: Compose Deployment.executor": "Run",
+    "Docker.docker-compose.yaml: Compose Deployment.executor": "Run",
+    "RequestMappingsPanelOrder0": "0",
+    "RequestMappingsPanelOrder1": "1",
+    "RequestMappingsPanelWidth0": "75",
+    "RequestMappingsPanelWidth1": "75",
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "Spring Boot.UserMsApplication.executor": "Run",
+    "WebServerToolWindowFactoryState": "false",
+    "git-widget-placeholder": "frontend",
+    "jdk.selected.JAVA_MODULE": "17",
+    "kotlin-language-version-configured": "true",
+    "last_opened_file_path": "C:/Users/LoweL/OneDrive/Dokument/Skolkurser/FullStack24/frontend",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "project.structure.last.edited": "Modules",
+    "project.structure.proportion": "0.15",
+    "project.structure.side.proportion": "0.2",
+    "run.configurations.included.in.services": "true",
+    "spring.configuration.checksum": "d515da1eed3ff84916893d4b97ec75e2",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
+}]]></component>
   <component name="RunDashboard">
     <option name="configurationTypes">
       <set>
@@ -113,7 +135,7 @@
       </set>
     </option>
   </component>
-  <component name="RunManager" selected="Docker.docker-compose.yaml: Compose Deployment">
+  <component name="RunManager" selected="Docker.docker-compose.yaml.doctorstaff-ms: Compose Deployment">
     <configuration name="DoctorstaffMsApplication (1)" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
       <module name="doctorstaff-ms" />
       <option name="SPRING_BOOT_MAIN_CLASS" value="com.fullstackdevops.doctorstaffms.DoctorstaffMsApplication" />
@@ -122,7 +144,7 @@
       </method>
     </configuration>
     <configuration name="DoctorstaffMsApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
-      <module name="doctorstaff-ms.main" />
+      <module name="doctorstaff-ms" />
       <option name="SPRING_BOOT_MAIN_CLASS" value="com.fullstackdevops.doctorstaffms.DoctorstaffMsApplication" />
       <method v="2">
         <option name="Make" enabled="true" />
@@ -156,11 +178,9 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="docker-compose.yaml: Compose Deployment" type="docker-deploy" factoryName="docker-compose.yml" temporary="true" server-name="Docker">
+    <configuration default="true" type="docker-deploy" factoryName="docker-compose.yml" temporary="true">
       <deployment type="docker-compose.yml">
-        <settings>
-          <option name="sourceFilePath" value="docker-compose.yaml" />
-        </settings>
+        <settings />
       </deployment>
       <method v="2" />
     </configuration>
@@ -177,9 +197,64 @@
       </deployment>
       <method v="2" />
     </configuration>
+    <configuration name="docker-compose.yaml.doctorstaff-ms: Compose Deployment" type="docker-deploy" factoryName="docker-compose.yml" temporary="true" server-name="Docker">
+      <deployment type="docker-compose.yml">
+        <settings>
+          <option name="services">
+            <list>
+              <option value="doctorstaff-ms" />
+            </list>
+          </option>
+          <option name="sourceFilePath" value="docker-compose.yaml" />
+        </settings>
+      </deployment>
+      <method v="2" />
+    </configuration>
+    <configuration name="docker-compose.yaml.frontend: Compose Deployment" type="docker-deploy" factoryName="docker-compose.yml" temporary="true" server-name="Docker">
+      <deployment type="docker-compose.yml">
+        <settings>
+          <option name="services">
+            <list>
+              <option value="frontend" />
+            </list>
+          </option>
+          <option name="sourceFilePath" value="docker-compose.yaml" />
+        </settings>
+      </deployment>
+      <method v="2" />
+    </configuration>
+    <configuration name="docker-compose.yaml.patient-ms: Compose Deployment" type="docker-deploy" factoryName="docker-compose.yml" temporary="true" server-name="Docker">
+      <deployment type="docker-compose.yml">
+        <settings>
+          <option name="services">
+            <list>
+              <option value="patient-ms" />
+            </list>
+          </option>
+          <option name="sourceFilePath" value="docker-compose.yaml" />
+        </settings>
+      </deployment>
+      <method v="2" />
+    </configuration>
+    <configuration name="docker-compose.yaml.user-ms: Compose Deployment" type="docker-deploy" factoryName="docker-compose.yml" temporary="true" server-name="Docker">
+      <deployment type="docker-compose.yml">
+        <settings>
+          <option name="services">
+            <list>
+              <option value="user-ms" />
+            </list>
+          </option>
+          <option name="sourceFilePath" value="docker-compose.yaml" />
+        </settings>
+      </deployment>
+      <method v="2" />
+    </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Docker.docker-compose.yaml: Compose Deployment" />
+        <item itemvalue="Docker.docker-compose.yaml.doctorstaff-ms: Compose Deployment" />
+        <item itemvalue="Docker.docker-compose.yaml.patient-ms: Compose Deployment" />
+        <item itemvalue="Docker.docker-compose.yaml.frontend: Compose Deployment" />
+        <item itemvalue="Docker.docker-compose.yaml.user-ms: Compose Deployment" />
         <item itemvalue="Docker.docker-compose.yaml.db: Compose Deployment" />
       </list>
     </recent_temporary>
@@ -207,6 +282,8 @@
       <workItem from="1730976042681" duration="12692000" />
       <workItem from="1731450385920" duration="2614000" />
       <workItem from="1731589366130" duration="587000" />
+      <workItem from="1731591469203" duration="4662000" />
+      <workItem from="1731782421324" duration="6136000" />
     </task>
     <task id="LOCAL-00001" summary="#2">
       <created>1730889193106</created>
