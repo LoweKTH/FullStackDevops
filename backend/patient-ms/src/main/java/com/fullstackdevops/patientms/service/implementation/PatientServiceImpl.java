@@ -60,13 +60,29 @@ public class PatientServiceImpl implements PatientService{
 
 
 
-    @Override
     @Transactional
-    public NoteDto addNoteToPatient(Long patientId, NoteDto noteDto) {
+    @Override
+    public NoteDto addNoteToPatientAsDoctor(Long patientId, NoteDto noteDto, Long doctorId) {
         Patient patient = patientRepository.findByUserId(patientId)
                 .orElseThrow(() -> new PatientNotFoundException("Patient with specified ID not found"));
 
         Note note = NoteMapper.toEntity(noteDto, patient);
+
+        note.setDoctorId(doctorId);
+        note = noteRepository.save(note);
+
+        return NoteMapper.toDto(note);
+    }
+
+    @Transactional
+    @Override
+    public NoteDto addNoteToPatientAsStaff(Long patientId, NoteDto noteDto, Long staffId) {
+        Patient patient = patientRepository.findByUserId(patientId)
+                .orElseThrow(() -> new PatientNotFoundException("Patient with specified ID not found"));
+
+        Note note = NoteMapper.toEntity(noteDto, patient);
+
+        note.setStaffId(staffId);
         note = noteRepository.save(note);
 
         return NoteMapper.toDto(note);

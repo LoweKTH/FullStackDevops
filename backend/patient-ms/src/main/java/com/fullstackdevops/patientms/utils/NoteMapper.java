@@ -12,7 +12,6 @@ public class NoteMapper {
         dto.setContent(note.getContent());
         dto.setCreatedAt(note.getCreatedAt());
         dto.setDoctorId(note.getDoctorId());
-
         dto.setStaffId(note.getStaffId());
         return dto;
     }
