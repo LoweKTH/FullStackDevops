@@ -12,13 +12,17 @@ public class NoteMapper {
         dto.setContent(note.getContent());
         dto.setCreatedAt(note.getCreatedAt());
         dto.setDoctorId(note.getDoctorId());
+
+        dto.setStaffId(note.getStaffId());
         return dto;
     }
 
-    public static Note toEntity(NoteDto noteDto, Patient patient, Long doctorId) {
+    public static Note toEntity(NoteDto noteDto, Patient patient) {
         Note note = new Note();
         note.setContent(noteDto.getContent());
-        note.setDoctorId(doctorId);
+        note.setDoctorId(noteDto.getDoctorId());
+
+        note.setStaffId(noteDto.getStaffId());
         note.setPatient(patient);
         return note;
     }

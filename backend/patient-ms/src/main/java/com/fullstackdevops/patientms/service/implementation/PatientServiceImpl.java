@@ -1,14 +1,11 @@
 package com.fullstackdevops.patientms.service.implementation;
 
-import com.fullstackdevops.patientms.dto.DiagnosisDto;
-import com.fullstackdevops.patientms.dto.DoctorDto;
-import com.fullstackdevops.patientms.dto.NoteDto;
+import com.fullstackdevops.patientms.dto.*;
 import com.fullstackdevops.patientms.model.Diagnosis;
 import com.fullstackdevops.patientms.model.Note;
 import com.fullstackdevops.patientms.repository.DiagnosisRepository;
 import com.fullstackdevops.patientms.repository.NoteRepository;
 import com.fullstackdevops.patientms.repository.PatientRepository;
-import com.fullstackdevops.patientms.dto.PatientDto;
 import com.fullstackdevops.patientms.model.Patient;
 import com.fullstackdevops.patientms.service.PatientService;
 import com.fullstackdevops.patientms.utils.DiagnosisMapper;
@@ -65,15 +62,16 @@ public class PatientServiceImpl implements PatientService{
 
     @Override
     @Transactional
-    public NoteDto addNoteToPatient(Long patientId, NoteDto noteDto, Long doctorId) {
+    public NoteDto addNoteToPatient(Long patientId, NoteDto noteDto) {
         Patient patient = patientRepository.findByUserId(patientId)
                 .orElseThrow(() -> new PatientNotFoundException("Patient with specified ID not found"));
 
-        Note note = NoteMapper.toEntity(noteDto, patient, doctorId);
+        Note note = NoteMapper.toEntity(noteDto, patient);
         note = noteRepository.save(note);
 
         return NoteMapper.toDto(note);
     }
+
 
     @Override
     @Transactional
@@ -98,9 +96,26 @@ public class PatientServiceImpl implements PatientService{
         return doctorDtos;
 
     }
+
+    @Override
+    public List<StaffDto> getStaffsForPatient(Long patientId){
+        List<Long>  staffIds = noteRepository.findDistinctStaffsByPatientId(patientId);
+        List<StaffDto> staffDtos = new ArrayList<>();
+
+        for (Long staffId : staffIds){
+            StaffDto staff = restTemplate.getForObject("http://doctorstaff-ms:8080/api/staff/" +staffId,StaffDto.class);
+            staffDtos.add(staff);
+        }
+        return staffDtos;
+    }
     @Override
     public List<Long> getPatientsByDoctorId(Long doctorId) {
         List<Long>  patientIds = noteRepository.findDistinctPatientsByDoctorId(doctorId);
+        return patientIds;
+    }
+    @Override
+    public List<Long> getPatientsByStaffId(Long staffId) {
+        List<Long>  patientIds = noteRepository.findDistinctPatientsByStaffId(staffId);
         return patientIds;
     }
 
