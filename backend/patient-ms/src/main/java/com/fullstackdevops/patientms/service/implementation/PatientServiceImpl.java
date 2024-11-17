@@ -66,6 +66,7 @@ public class PatientServiceImpl implements PatientService{
     @Override
     @Transactional
     public NoteDto addNoteToPatient(Long patientId, NoteDto noteDto, Long doctorId) {
+        System.out.println("Received patientId: " + patientId);
         Patient patient = patientRepository.findByUserId(patientId)
                 .orElseThrow(() -> new PatientNotFoundException("Patient with specified ID not found"));
 

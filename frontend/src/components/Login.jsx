@@ -22,6 +22,7 @@ function Login() {
             console.log(response.data);
 
             localStorage.setItem("role", response.data.role);
+            localStorage.setItem("userId", response.data.id);
             navigate('/dashboard');
         } catch (error){
             setError('Wrong username or password')

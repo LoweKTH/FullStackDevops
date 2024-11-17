@@ -9,3 +9,7 @@ const api = axios.create({
 export const fetchPatients = async () => {
     return api.get('/');
 };
+
+export const createNote = async (userId, noteData) =>{
+    return await api.post(`/${userId}/notes`, noteData);
+};

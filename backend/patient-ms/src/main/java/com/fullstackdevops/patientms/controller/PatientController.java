@@ -35,6 +35,7 @@ public class PatientController {
 
     @PostMapping("/{patientId}/notes")
     public ResponseEntity<NoteDto> addNoteToPatient(@PathVariable Long patientId, @RequestBody NoteDto noteDto) {
+        System.out.println("Received patientId: " + patientId);
         Long doctorId = noteDto.getDoctorId();
         NoteDto createdNote = patientService.addNoteToPatient(patientId, noteDto, doctorId);
         return new ResponseEntity<>(createdNote, HttpStatus.CREATED);
