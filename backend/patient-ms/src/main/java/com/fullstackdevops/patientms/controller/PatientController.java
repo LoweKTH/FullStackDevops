@@ -31,13 +31,15 @@ public class PatientController {
 
 
     @PostMapping("/{patientId}/doctornotes")
-    public ResponseEntity<NoteDto> addNoteToPatientAsDoctor(@PathVariable Long patientId, @RequestBody NoteDto noteDto, @RequestParam Long doctorId) {
+    public ResponseEntity<NoteDto> addNoteToPatientAsDoctor(@PathVariable Long patientId, @RequestBody NoteDto noteDto) {
+        Long doctorId= noteDto.getDoctorId();
         NoteDto createdNote = patientService.addNoteToPatientAsDoctor(patientId, noteDto ,doctorId);
         return new ResponseEntity<>(createdNote, HttpStatus.CREATED);
     }
 
     @PostMapping("/{patientId}/staffnotes")
-    public ResponseEntity<NoteDto> addNoteToPatientAsStaff(@PathVariable Long patientId, @RequestBody NoteDto noteDto, @RequestParam Long staffId) {
+    public ResponseEntity<NoteDto> addNoteToPatientAsStaff(@PathVariable Long patientId, @RequestBody NoteDto noteDto) {
+        Long staffId = noteDto.getStaffId();
         NoteDto createdNote = patientService.addNoteToPatientAsStaff(patientId, noteDto ,staffId);
         return new ResponseEntity<>(createdNote, HttpStatus.CREATED);
     }
