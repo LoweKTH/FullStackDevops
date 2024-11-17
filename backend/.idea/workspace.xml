@@ -5,21 +5,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="09d6a3b5-9b2e-4587-b1b1-5156eb6a8f42" name="Changes" comment="#5">
-      <change afterPath="$PROJECT_DIR$/../.idea/FullStack24.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../.idea/misc.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../.idea/modules.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../frontend/src/components/Dashboard.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docker-compose.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/docker-compose.yaml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../frontend/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../frontend/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../frontend/src/App.js" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/src/App.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../frontend/src/Dockerfile" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/Dockerfile" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../frontend/src/api/Patient-ms-api.js" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/src/api/Patient-ms-api.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../frontend/src/components/Login.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/src/components/Login.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../frontend/src/components/PatientList.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/src/components/PatientList.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../frontend/src/components/Register.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/src/components/Register.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/patient-ms/src/main/java/com/fullstackdevops/patientms/repository/PatientRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/patient-ms/src/main/java/com/fullstackdevops/patientms/repository/PatientRepository.java" afterDir="false" />
     </list>
     <list id="79177b7e-e8af-49c6-aa54-aba545e8c75b" name="Changes by benny" comment="Changes by benny" />
     <option name="SHOW_DIALOG" value="false" />
@@ -283,7 +270,7 @@
       <workItem from="1731450385920" duration="2614000" />
       <workItem from="1731589366130" duration="587000" />
       <workItem from="1731591469203" duration="4662000" />
-      <workItem from="1731782421324" duration="6136000" />
+      <workItem from="1731782421324" duration="8081000" />
     </task>
     <task id="LOCAL-00001" summary="#2">
       <created>1730889193106</created>
