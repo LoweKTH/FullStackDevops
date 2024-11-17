@@ -1,12 +1,17 @@
 package com.fullstackdevops.patientms.service.implementation;
 
+import com.fullstackdevops.patientms.dto.DiagnosisDto;
+import com.fullstackdevops.patientms.dto.DoctorDto;
 import com.fullstackdevops.patientms.dto.NoteDto;
+import com.fullstackdevops.patientms.model.Diagnosis;
 import com.fullstackdevops.patientms.model.Note;
+import com.fullstackdevops.patientms.repository.DiagnosisRepository;
 import com.fullstackdevops.patientms.repository.NoteRepository;
 import com.fullstackdevops.patientms.repository.PatientRepository;
 import com.fullstackdevops.patientms.dto.PatientDto;
 import com.fullstackdevops.patientms.model.Patient;
 import com.fullstackdevops.patientms.service.PatientService;
+import com.fullstackdevops.patientms.utils.DiagnosisMapper;
 import com.fullstackdevops.patientms.utils.NoteMapper;
 import com.fullstackdevops.patientms.utils.PatientMapper;
 
@@ -14,6 +19,7 @@ import com.fullstackdevops.patientms.utils.PatientNotFoundException;
 import jakarta.transaction.Transactional;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.web.client.RestTemplate;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -23,6 +29,9 @@ import java.util.List;
 public class PatientServiceImpl implements PatientService{
     private final PatientRepository patientRepository;
     private final NoteRepository noteRepository;
+    private final DiagnosisRepository diagnosisRepository;
+    private final RestTemplate restTemplate;
+
 
     @Override
     public PatientDto createPatient(PatientDto patientDto) {
@@ -52,20 +61,48 @@ public class PatientServiceImpl implements PatientService{
         return PatientMapper.toDto(patient);
     }
 
+
+
     @Override
     @Transactional
     public NoteDto addNoteToPatient(Long patientId, NoteDto noteDto, Long doctorId) {
-        Patient patient = patientRepository.findById(patientId)
+        Patient patient = patientRepository.findByUserId(patientId)
                 .orElseThrow(() -> new PatientNotFoundException("Patient with specified ID not found"));
 
-        Note note = new Note();
-        note.setContent(noteDto.getContent());
-        note.setDoctorId(doctorId);
-        note.setPatient(patient);
-
+        Note note = NoteMapper.toEntity(noteDto, patient, doctorId);
         note = noteRepository.save(note);
 
         return NoteMapper.toDto(note);
     }
+
+    @Override
+    @Transactional
+    public DiagnosisDto addDiagnosisToPatient(Long patientId, DiagnosisDto diagnosisDto, Long doctorId) {
+        Patient patient = patientRepository.findByUserId(patientId)
+                .orElseThrow(() -> new PatientNotFoundException("Patient with specified ID not found"));
+
+        Diagnosis diagnosis = DiagnosisMapper.toEntity(diagnosisDto,patient);
+        diagnosis = diagnosisRepository.save(diagnosis);
+        return DiagnosisMapper.toDto(diagnosis);
+    }
+
+    @Override
+    public List<DoctorDto> getDoctorsForPatient(Long patientId){
+        List<Long>  doctorIds = noteRepository.findDistinctDoctorsByPatientId(patientId);
+        List<DoctorDto> doctorDtos = new ArrayList<>();
+
+        for (Long doctorId : doctorIds){
+            DoctorDto doctor = restTemplate.getForObject("http://doctorstaff-ms:8080/api/doctors/" +doctorId,DoctorDto.class);
+            doctorDtos.add(doctor);
+        }
+        return doctorDtos;
+
+    }
+    @Override
+    public List<Long> getPatientsByDoctorId(Long doctorId) {
+        List<Long>  patientIds = noteRepository.findDistinctPatientsByDoctorId(doctorId);
+        return patientIds;
+    }
+
 
 }

@@ -1,4 +1,8 @@
 package com.fullstackdevops.patientms.repository;
 
-public interface DiagnosisRepository {
+import com.fullstackdevops.patientms.model.Diagnosis;
+import org.springframework.data.jpa.repository.JpaRepository;
+
+public interface DiagnosisRepository extends JpaRepository<Diagnosis, Long> {
+
 }
