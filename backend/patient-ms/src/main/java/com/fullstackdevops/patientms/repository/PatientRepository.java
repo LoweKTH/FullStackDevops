@@ -3,7 +3,7 @@ package com.fullstackdevops.patientms.repository;
 import com.fullstackdevops.patientms.model.Patient;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
-import org.springframework.data.repository.query.*;
+import org.springframework.data.repository.query.Param;
 
 import java.util.Optional;
 

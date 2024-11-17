@@ -1,9 +1,6 @@
 package com.fullstackdevops.patientms.controller;
 
-import com.fullstackdevops.patientms.dto.DiagnosisDto;
-import com.fullstackdevops.patientms.dto.DoctorDto;
-import com.fullstackdevops.patientms.dto.NoteDto;
-import com.fullstackdevops.patientms.dto.PatientDto;
+import com.fullstackdevops.patientms.dto.*;
 import com.fullstackdevops.patientms.service.PatientService;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -35,9 +32,7 @@ public class PatientController {
 
     @PostMapping("/{patientId}/notes")
     public ResponseEntity<NoteDto> addNoteToPatient(@PathVariable Long patientId, @RequestBody NoteDto noteDto) {
-        System.out.println("Received patientId: " + patientId);
-        Long doctorId = noteDto.getDoctorId();
-        NoteDto createdNote = patientService.addNoteToPatient(patientId, noteDto, doctorId);
+        NoteDto createdNote = patientService.addNoteToPatient(patientId, noteDto);
         return new ResponseEntity<>(createdNote, HttpStatus.CREATED);
     }
 
@@ -59,9 +54,21 @@ public class PatientController {
         return ResponseEntity.ok(doctors);
     }
 
-    @GetMapping("/{doctorId}/getpatients")
+    @GetMapping("/{patientId}/staffs")
+    public ResponseEntity<List<StaffDto>> getStaffsForPatient(@PathVariable Long patientId){
+        List<StaffDto> staffs = patientService.getStaffsForPatient(patientId);
+        return ResponseEntity.ok(staffs);
+    }
+
+    @GetMapping("/{doctorId}/doctorgetpatients")
     public ResponseEntity<List<Long>> getPatientsByDoctorId(@PathVariable Long doctorId) {
         List<Long> patientIds = patientService.getPatientsByDoctorId(doctorId);
+        return ResponseEntity.ok(patientIds);
+    }
+
+    @GetMapping("/{staffId}/staffgetpatients")
+    public ResponseEntity<List<Long>> getPatientsByStaffId(@PathVariable Long staffId) {
+        List<Long> patientIds = patientService.getPatientsByStaffId(staffId);
         return ResponseEntity.ok(patientIds);
     }
 

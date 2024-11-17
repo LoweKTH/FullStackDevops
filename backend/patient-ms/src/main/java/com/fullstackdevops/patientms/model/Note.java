@@ -21,6 +21,7 @@ public class Note {
     @Temporal(TemporalType.TIMESTAMP)
     private Date createdAt = new Date();
     private Long doctorId;
+    private Long staffId;
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "patient_id", nullable = false)
     private Patient patient;

@@ -10,4 +10,5 @@ public class NoteDto {
     private String content;
     private Date createdAt;
     private Long doctorId;
+    private Long staffId;
 }
