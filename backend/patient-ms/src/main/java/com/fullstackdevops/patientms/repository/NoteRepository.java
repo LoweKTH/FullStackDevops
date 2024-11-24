@@ -15,6 +15,8 @@ public interface NoteRepository extends JpaRepository<Note, Long> {
     List<Long> findDistinctDoctorstaffByPatientId(@Param("patientId") Long patientId);
 
 
+
+
     @Query("SELECT DISTINCT n.patientId FROM Note n WHERE n.doctorstaffId = :doctorstaffId")
     List<Long> findDistinctPatientsByDoctorstaffId(@Param("doctorstaffId") Long doctorstaffId);
 

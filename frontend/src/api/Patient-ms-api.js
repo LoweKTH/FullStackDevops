@@ -26,5 +26,9 @@ export const fetchDiagnosesForPatient = async (patientId) => {
     return await api.get(`/${patientId}/getdiagnoses`);
 };
 
+export const fetchAssignedDoctorStaff = async (patientId) => {
+    return await api.get(`/${patientId}/doctorstaff`);
+};
+
 
 

@@ -9,8 +9,8 @@ function Dashboard() {
         navigate("/patients");
     };
 
-    const handleAssignedPatients = () => {
-        navigate("/assigned");
+    const handleCheckDoctorStaff = () => {
+        navigate("/doctorstaff");
     };
 
     return (
@@ -21,6 +21,11 @@ function Dashboard() {
                     <button onClick={handleCheckPatients}>Check Patients</button>
                 </>
 
+            )}
+            {role === "Patient" && (
+                <>
+                    <button onClick={handleCheckDoctorStaff}>Check Doctor/Staff</button>
+                </>
             )}
         </div>
     );

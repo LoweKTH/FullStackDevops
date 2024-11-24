@@ -17,7 +17,7 @@ function PatientList() {
     const [selectedNote, setSelectedNote] = useState(null); // Add state for selected note to display more info
     const navigate = useNavigate();
     const userId = Number(localStorage.getItem("userId"));
-    const role = localStorage.getItem("role"); // Assume role is stored in localStorage ("doctor" or "staff")
+    const role = localStorage.getItem("role");
     const [showModal, setShowModal] = useState(false);
     const [selectedPatientId, setSelectedPatientId] = useState(null);
 
@@ -25,7 +25,7 @@ function PatientList() {
         const getPatients = async () => {
             try {
                 const response = await fetchPatients();
-                console.log("Patients fetched:", response.data); // Log the fetched data
+                console.log("Patients fetched:", response.data);
                 setPatients(response.data);
             } catch (error) {
                 setError("Failed to fetch patients.");
@@ -55,7 +55,7 @@ function PatientList() {
     }, [userId]);
 
     const handleCreateNote = (userId) => {
-        console.log("Creating note for patient with userId:", userId); // Log userId
+        console.log("Creating note for patient with userId:", userId);
         const doctorstaffId = localStorage.getItem("userId");
 
         navigate("/create-note", {
@@ -78,10 +78,11 @@ function PatientList() {
     };
 
     const handleSubmitDiagnosis = async (diagnosisName, description) => {
+        const doctorstaffId = userId;
         const diagnosisData = {
             diagnosisName,
             description,
-            userId,
+            doctorstaffId,
         };
 
         try {
@@ -96,7 +97,7 @@ function PatientList() {
     };
 
     const handleMessageClick = async (patientId) => {
-        console.log("Conversation with patient ID: ", patientId); // Log userId
+        console.log("Conversation with patient ID: ", patientId);
 
         try {
             patientId = Number(patientId);

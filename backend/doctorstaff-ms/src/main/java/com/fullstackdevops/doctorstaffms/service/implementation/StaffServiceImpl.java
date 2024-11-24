@@ -33,7 +33,8 @@ public class StaffServiceImpl implements StaffService {
 
     @Override
     public StaffDto getStaffById(Long staffId) {
-        Staff staff = staffRepository.findByUserId(staffId).orElseThrow(() -> new StaffNotFoundException("Staff with id"+staffId +"not fond"));
+        Staff staff = staffRepository.findByUserId(staffId).orElse(null);
+
         return StaffMapper.toDto(staff);
     }
 

@@ -26,11 +26,14 @@ public class MessagingServiceImpl implements MessagingService {
 
     @Override
     public Conversation createOrGetConversation(Long senderId, Long recipientId) {
-        return conversationRepository.findBySenderIdAndRecipientId(senderId, recipientId)
+        Long normalizedSenderId = Math.min(senderId, recipientId);
+        Long normalizedRecipientId = Math.max(senderId, recipientId);
+
+        return conversationRepository.findBySenderIdAndRecipientId(normalizedSenderId, normalizedRecipientId)
                 .orElseGet(() -> {
                     Conversation conversation = new Conversation();
-                    conversation.setSenderId(senderId);
-                    conversation.setRecipientId(recipientId);
+                    conversation.setSenderId(normalizedSenderId);
+                    conversation.setRecipientId(normalizedRecipientId);
                     return conversationRepository.save(conversation);
                 });
     }

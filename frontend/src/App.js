@@ -7,6 +7,7 @@ import Dashboard from "./components/Dashboard";
 import PatientList from "./components/PatientList";
 import Note from "./components/Note";
 import Messaging from "./components/Messaging";
+import DoctorStaffList from "./components/DoctorStaffList";
 
 function App() {
     return (
@@ -21,6 +22,7 @@ function App() {
                         <Route path="/patients" element={<PatientList />} />
                         <Route path="/create-note" element={<Note />} />
                         <Route path="/messaging" element={<Messaging />} />
+                        <Route path="/doctorstaff" element={<DoctorStaffList />} />
                     </Routes>
                 </div>
             </div>

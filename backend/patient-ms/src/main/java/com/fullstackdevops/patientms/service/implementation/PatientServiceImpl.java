@@ -83,7 +83,7 @@ public class PatientServiceImpl implements PatientService{
         List<NoteDto> noteDtos = new ArrayList<>();
         for (Note note : notes) {
 
-            UserDto user = restTemplate.getForObject("http://user-ms:8080/api/user/"+note.getDoctorstaffId() , UserDto.class);
+                UserDto user = restTemplate.getForObject("http://user-ms:8080/api/user/"+note.getDoctorstaffId() , UserDto.class);
             NoteDto noteDto = NoteMapper.toDto(note);
 
             noteDto.setDoctorstaffName(user.getUsername());
@@ -127,18 +127,24 @@ public class PatientServiceImpl implements PatientService{
 
     @Override
     public DoctorStaffDto getDoctorstaffForPatient(Long patientId) {
-        List<Long> doctorIds = noteRepository.findDistinctDoctorstaffByPatientId(patientId);
+        Set<Long> doctorstaffIdsSet = new HashSet<>();
+        List<Long> noteDoctorStaffIds = noteRepository.findDistinctDoctorstaffByPatientId(patientId);
+        List<Long> diagnosisDoctorStaffIds = diagnosisRepository.findDistinctDoctorstaffByPatientId(patientId);
+        doctorstaffIdsSet.addAll(noteDoctorStaffIds);
+        doctorstaffIdsSet.addAll(diagnosisDoctorStaffIds);
+
+        List<Long> doctorstaffIds = new ArrayList<>(doctorstaffIdsSet);
 
         List<DoctorDto> doctorDtos = new ArrayList<>();
         List<StaffDto> staffDtos = new ArrayList<>();
 
-        for (Long doctorId : doctorIds) {
-            DoctorDto doctor = restTemplate.getForObject("http://doctorstaff-ms:8080/api/doctors/" + doctorId, DoctorDto.class);
+        for (Long doctorstaffId : doctorstaffIds) {
+            DoctorDto doctor = restTemplate.getForObject("http://doctorstaff-ms:8080/api/doctors/" + doctorstaffId, DoctorDto.class);
             if (doctor != null) {
                 doctorDtos.add(doctor);
             }
 
-            StaffDto staff = restTemplate.getForObject("http://doctorstaff-ms:8080/api/staffs/" + doctorId, StaffDto.class);
+            StaffDto staff = restTemplate.getForObject("http://doctorstaff-ms:8080/api/staff/" + doctorstaffId, StaffDto.class);
             if (staff != null) {
                 staffDtos.add(staff);
             }

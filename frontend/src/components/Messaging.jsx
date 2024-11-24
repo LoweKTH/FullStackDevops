@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
-import { useLocation, useParams } from "react-router-dom"; // To get the conversationId from the URL
-import { fetchMessages, sendMessage } from "../api/Message-ms-api"; // Import the necessary functions
+import { useLocation, useParams } from "react-router-dom";
+import { fetchMessages, sendMessage } from "../api/Message-ms-api";
 
 function Messaging() {
     const { state } = useLocation();
