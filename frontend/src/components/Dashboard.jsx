@@ -13,6 +13,10 @@ function Dashboard() {
         navigate("/doctorstaff");
     };
 
+    const handleMyProfile = () => {
+        navigate("/profile");
+    }
+
     return (
         <div className="dashboard">
             <h2>Welcome to the Dashboard</h2>
@@ -25,6 +29,7 @@ function Dashboard() {
             {role === "Patient" && (
                 <>
                     <button onClick={handleCheckDoctorStaff}>Check Doctor/Staff</button>
+                    <button onClick={handleMyProfile}>My Profile</button>
                 </>
             )}
         </div>
