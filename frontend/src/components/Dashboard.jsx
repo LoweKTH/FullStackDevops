@@ -4,6 +4,8 @@ import { useNavigate } from "react-router-dom";
 function Dashboard() {
     const role = localStorage.getItem("role");
     const navigate = useNavigate();
+    const userId = localStorage.getItem("userId");
+
 
     const handleCheckPatients = () => {
         navigate("/patients");
@@ -14,7 +16,11 @@ function Dashboard() {
     };
 
     const handleMyProfile = () => {
-        navigate("/profile");
+        navigate("/profile", {
+            state: {
+                userId
+            },
+        });
     }
 
     return (

@@ -1,12 +1,15 @@
 import React, { useState, useEffect } from "react";
 import "../styles/Profile.css";
 import { fetchUserProfile } from "../api/Patient-ms-api";
+import {useLocation} from "react-router-dom";
 
 function Profile() {
     const [profileData, setProfileData] = useState(null);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState("");
-    const userId = Number(localStorage.getItem("userId"));
+    const location = useLocation();
+    const { userId } = location.state;
+
 
     useEffect(() => {
         const getProfile = async () => {
