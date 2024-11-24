@@ -11,8 +11,7 @@ public class DiagnosisMapper {
         dto.setDiagnosisName(diagnosis.getName());
         dto.setDescription(diagnosis.getDescription());
         dto.setDiagnosisDate(diagnosis.getDiagnosisDate());
-        dto.setPatientId(diagnosis.getPatient().getId());
-        dto.setDoctorId(diagnosis.getDoctorId());
+        dto.setDoctorstaffId(diagnosis.getDoctorstaffId());
         return dto;
     }
 
@@ -20,8 +19,8 @@ public class DiagnosisMapper {
         Diagnosis diagnosis = new Diagnosis();
         diagnosis.setName(dto.getDiagnosisName());
         diagnosis.setDescription(dto.getDescription());
-        diagnosis.setPatient(patient);
-        diagnosis.setDoctorId(dto.getDoctorId());
+        diagnosis.setPatientId(patient.getUserId());
+        diagnosis.setDoctorstaffId(dto.getDoctorstaffId());
         return diagnosis;
     }
 }

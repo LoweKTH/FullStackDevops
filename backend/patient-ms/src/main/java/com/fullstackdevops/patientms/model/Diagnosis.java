@@ -25,10 +25,11 @@ public class Diagnosis {
     private Date diagnosisDate = new Date();
 
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    /*@ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "patient_id", nullable = false)
-    private Patient patient;
+    private Patient patient;*/
 
-    private Long doctorId;
+    private Long doctorstaffId;
+    private Long patientId;
 
 }

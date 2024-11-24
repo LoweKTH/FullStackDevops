@@ -1,0 +1,59 @@
+
+.doctor-staff-list {
+    margin: 20px;
+    padding: 10px;
+}
+
+.doctor-staff-list h2,
+.doctor-staff-list h3 {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 0 auto;
+    font-size: 16px;
+}
+
+th, td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: left;
+}
+
+th {
+    background-color: #f4f4f4;
+}
+
+tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+tr:hover {
+    background-color: #f1f1f1;
+}
+
+.message-btn {
+    background-color: #28a745;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    cursor: pointer;
+    border-radius: 4px;
+}
+
+.message-btn:hover {
+    background-color: #218838;
+}
+
+.my-doctors, .my-staff {
+    margin-top: 20px;
+}
+
+.my-doctors h3, .my-staff h3 {
+    color: #007bff;
+    font-size: 18px;
+    margin-bottom: 10px;
+}

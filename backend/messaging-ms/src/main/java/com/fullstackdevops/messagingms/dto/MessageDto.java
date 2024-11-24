@@ -18,6 +18,7 @@ public class MessageDto {
     private Long id;
     private Long conversationId;
     private Long senderId;
+    private String senderName;
     private String content;
     private Date timestamp = new Date();
 }

@@ -11,18 +11,15 @@ public class NoteMapper {
         dto.setId(note.getId());
         dto.setContent(note.getContent());
         dto.setCreatedAt(note.getCreatedAt());
-        dto.setDoctorId(note.getDoctorId());
-        dto.setStaffId(note.getStaffId());
+        dto.setDoctorstaffId(note.getDoctorstaffId());
         return dto;
     }
 
     public static Note toEntity(NoteDto noteDto, Patient patient) {
         Note note = new Note();
         note.setContent(noteDto.getContent());
-        note.setDoctorId(noteDto.getDoctorId());
-
-        note.setStaffId(noteDto.getStaffId());
-        note.setPatient(patient);
+        note.setDoctorstaffId(noteDto.getDoctorstaffId());
+        note.setPatientId(patient.getUserId());
         return note;
     }
 }

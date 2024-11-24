@@ -11,16 +11,16 @@ import java.util.List;
 @Repository
 public interface NoteRepository extends JpaRepository<Note, Long> {
 
-    @Query("SELECT DISTINCT n.doctorId FROM Note n WHERE n.patient.id = :patientId AND n.staffId IS NULL")
-    List<Long> findDistinctDoctorsByPatientId(@Param("patientId") Long patientId);
+    @Query("SELECT DISTINCT n.doctorstaffId FROM Note n WHERE n.patientId = :patientId")
+    List<Long> findDistinctDoctorstaffByPatientId(@Param("patientId") Long patientId);
 
-    @Query("SELECT DISTINCT n.staffId FROM Note n WHERE n.patient.id = :patientId AND n.doctorId IS NULL")
-    List<Long> findDistinctStaffsByPatientId(@Param("patientId") Long patientId);
 
-    @Query("SELECT DISTINCT n.patient.id FROM Note n WHERE n.doctorId = :doctorId")
-    List<Long> findDistinctPatientsByDoctorId(@Param("doctorId") Long doctorId);
 
-    @Query("SELECT DISTINCT n.patient.id FROM Note n WHERE n.staffId = :staffId")
-    List<Long> findDistinctPatientsByStaffId(@Param("staffId") Long staffId);
+
+    @Query("SELECT DISTINCT n.patientId FROM Note n WHERE n.doctorstaffId = :doctorstaffId")
+    List<Long> findDistinctPatientsByDoctorstaffId(@Param("doctorstaffId") Long doctorstaffId);
+
+    List<Note> findByPatientId(Long patientId);
+
 
 }

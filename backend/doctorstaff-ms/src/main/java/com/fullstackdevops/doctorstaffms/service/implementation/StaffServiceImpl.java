@@ -33,14 +33,15 @@ public class StaffServiceImpl implements StaffService {
 
     @Override
     public StaffDto getStaffById(Long staffId) {
-        Staff staff = staffRepository.findByUserId(staffId).orElseThrow(() -> new StaffNotFoundException("Staff with id"+staffId +"not fond"));
+        Staff staff = staffRepository.findByUserId(staffId).orElse(null);
+
         return StaffMapper.toDto(staff);
     }
 
     @Override
     public List<PatientDto> getPatientsForStaff(Long staffId) {
 
-        String url = "http://patient-ms:8080/api/patients/" + staffId + "/staffgetpatients";
+        String url = "http://patient-ms:8080/api/patients/" + staffId + "/doctorstaffgetpatients";
         ResponseEntity<List<Long>> response = restTemplate.exchange(
                 url,
                 HttpMethod.GET,

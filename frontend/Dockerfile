@@ -11,7 +11,7 @@ COPY package.json package-lock.json ./
 RUN npm install
 
 # Copy the rest of the application code
-COPY . .
+COPY . ./
 
 # Expose the port React uses in development mode
 EXPOSE 3000

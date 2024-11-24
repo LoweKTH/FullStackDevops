@@ -11,7 +11,7 @@ const Note = () => {
     const location = useLocation();
 
 
-    const { doctorId, userId } = location.state;
+    const { doctorstaffId, userId } = location.state;
 
     if (!userId) {
         console.error("Error: patientUserId is undefined in Note.jsx.");
@@ -24,7 +24,7 @@ const Note = () => {
 
         const noteData = {
             content: noteContent,
-            doctorId,
+            doctorstaffId,
         };
 
         try {
@@ -41,7 +41,7 @@ const Note = () => {
 
     return (
         <div className="note-container">
-            <h2>Create Note for Patient</h2>
+            <h2>Create Note for Patienteee</h2>
             {error && <p className="error-message">{error}</p>}
             {success && <p className="success-message">{success}</p>}
             <form onSubmit={handleNoteSubmit} className="note-form">
