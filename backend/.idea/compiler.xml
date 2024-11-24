@@ -9,7 +9,6 @@
         <outputRelativeToContentRoot value="true" />
         <module name="messaging-ms" />
         <module name="user-ms" />
-        <module name="encounter-ms" />
         <module name="patient-ms" />
         <module name="doctorstaff-ms" />
       </profile>
@@ -21,6 +20,9 @@
         <module name="doctorstaff-ms.main" />
       </profile>
     </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="encounter-ms" target="17" />
+    </bytecodeTargetLevel>
   </component>
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
