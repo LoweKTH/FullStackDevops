@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
-import "../styles/Profile.css"; // Optional: Add a CSS file for styling
-import { fetchUserProfile } from "../api/Patient-ms-api"; // Replace with your actual API path
+import "../styles/Profile.css";
+import { fetchUserProfile } from "../api/Patient-ms-api";
 
 function Profile() {
     const [profileData, setProfileData] = useState(null);
