@@ -19,7 +19,9 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @Service
 @AllArgsConstructor
@@ -51,7 +53,7 @@ public class PatientServiceImpl implements PatientService{
 
     @Override
     public PatientDto getPatientById(Long id){
-        Patient patient = patientRepository.findById(id)
+        Patient patient = patientRepository.findByUserId(id)
                 .orElseThrow(() ->
                         new PatientNotFoundException("Patient with specified ID not found"));
 
@@ -62,31 +64,54 @@ public class PatientServiceImpl implements PatientService{
 
     @Transactional
     @Override
-    public NoteDto addNoteToPatientAsDoctor(Long patientId, NoteDto noteDto, Long doctorId) {
+    public NoteDto addNoteToPatient(Long patientId, NoteDto noteDto, Long doctorstaffId) {
         Patient patient = patientRepository.findByUserId(patientId)
                 .orElseThrow(() -> new PatientNotFoundException("Patient with specified ID not found"));
 
         Note note = NoteMapper.toEntity(noteDto, patient);
 
-        note.setDoctorId(doctorId);
+        note.setDoctorstaffId(doctorstaffId);
         note = noteRepository.save(note);
 
         return NoteMapper.toDto(note);
     }
 
-    @Transactional
     @Override
-    public NoteDto addNoteToPatientAsStaff(Long patientId, NoteDto noteDto, Long staffId) {
-        Patient patient = patientRepository.findByUserId(patientId)
-                .orElseThrow(() -> new PatientNotFoundException("Patient with specified ID not found"));
+    public List<NoteDto> getNotesForPatient(Long patientId) {
+        List<Note> notes = noteRepository.findByPatientId(patientId);
 
-        Note note = NoteMapper.toEntity(noteDto, patient);
+        List<NoteDto> noteDtos = new ArrayList<>();
+        for (Note note : notes) {
 
-        note.setStaffId(staffId);
-        note = noteRepository.save(note);
+            UserDto user = restTemplate.getForObject("http://user-ms:8080/api/user/"+note.getDoctorstaffId() , UserDto.class);
+            NoteDto noteDto = NoteMapper.toDto(note);
 
-        return NoteMapper.toDto(note);
+            noteDto.setDoctorstaffName(user.getUsername());
+            noteDto.setRole(user.getRole());
+
+            noteDtos.add(noteDto);
+        }
+        return noteDtos;
     }
+
+    @Override
+    public List<DiagnosisDto> getDiagnosesForPatient(Long patientId) {
+        List<Diagnosis> diagnoses = diagnosisRepository.findByPatientId(patientId);
+        List<DiagnosisDto> diagnosisDtos = new ArrayList<>();
+
+        for (Diagnosis diagnosis : diagnoses) {
+            UserDto user = restTemplate.getForObject("http://user-ms:8080/api/user/"+diagnosis.getDoctorstaffId() , UserDto.class);
+            DiagnosisDto diagnosisDto = DiagnosisMapper.toDto(diagnosis);
+
+            diagnosisDto.setDoctorstaffName(user.getUsername());
+            diagnosisDto.setRole(user.getRole());
+
+            diagnosisDtos.add(diagnosisDto);
+        }
+
+        return diagnosisDtos;
+    }
+
 
 
     @Override
@@ -101,38 +126,42 @@ public class PatientServiceImpl implements PatientService{
     }
 
     @Override
-    public List<DoctorDto> getDoctorsForPatient(Long patientId){
-        List<Long>  doctorIds = noteRepository.findDistinctDoctorsByPatientId(patientId);
+    public DoctorStaffDto getDoctorstaffForPatient(Long patientId) {
+        List<Long> doctorIds = noteRepository.findDistinctDoctorstaffByPatientId(patientId);
+
         List<DoctorDto> doctorDtos = new ArrayList<>();
-
-        for (Long doctorId : doctorIds){
-            DoctorDto doctor = restTemplate.getForObject("http://doctorstaff-ms:8080/api/doctors/" +doctorId,DoctorDto.class);
-            doctorDtos.add(doctor);
-        }
-        return doctorDtos;
-
-    }
-
-    @Override
-    public List<StaffDto> getStaffsForPatient(Long patientId){
-        List<Long>  staffIds = noteRepository.findDistinctStaffsByPatientId(patientId);
         List<StaffDto> staffDtos = new ArrayList<>();
 
-        for (Long staffId : staffIds){
-            StaffDto staff = restTemplate.getForObject("http://doctorstaff-ms:8080/api/staff/" +staffId,StaffDto.class);
-            staffDtos.add(staff);
+        for (Long doctorId : doctorIds) {
+            DoctorDto doctor = restTemplate.getForObject("http://doctorstaff-ms:8080/api/doctors/" + doctorId, DoctorDto.class);
+            if (doctor != null) {
+                doctorDtos.add(doctor);
+            }
+
+            StaffDto staff = restTemplate.getForObject("http://doctorstaff-ms:8080/api/staffs/" + doctorId, StaffDto.class);
+            if (staff != null) {
+                staffDtos.add(staff);
+            }
         }
-        return staffDtos;
+
+        return new DoctorStaffDto(doctorDtos, staffDtos);
     }
+
+
+
     @Override
-    public List<Long> getPatientsByDoctorId(Long doctorId) {
-        List<Long>  patientIds = noteRepository.findDistinctPatientsByDoctorId(doctorId);
-        return patientIds;
-    }
-    @Override
-    public List<Long> getPatientsByStaffId(Long staffId) {
-        List<Long>  patientIds = noteRepository.findDistinctPatientsByStaffId(staffId);
-        return patientIds;
+    public List<Long> getPatientsByDoctorstaffId(Long doctorstaffId) {
+
+        Set<Long> patientIdsSet = new HashSet<>();
+
+        List<Long>  notePatientIds = noteRepository.findDistinctPatientsByDoctorstaffId(doctorstaffId);
+        List<Long> diagnosisPatientIds = diagnosisRepository.findDistinctPatientsByDoctorstaffId(doctorstaffId);
+        patientIdsSet.addAll(notePatientIds);
+        patientIdsSet.addAll(diagnosisPatientIds);
+
+        List<Long> patientIdsList = new ArrayList<>(patientIdsSet);
+
+        return patientIdsList;
     }
 
 

@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <annotationProcessing>
+      <profile name="Maven default annotation processors profile" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <module name="messaging-ms" />
+        <module name="user-ms" />
+        <module name="patient-ms" />
+        <module name="doctorstaff-ms" />
+      </profile>
+    </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="doctorstaffms" target="17" />
+    </bytecodeTargetLevel>
+  </component>
+  <component name="JavacSettings">
+    <option name="ADDITIONAL_OPTIONS_OVERRIDE">
+      <module name="doctorstaff-ms" options="-parameters" />
+      <module name="doctorstaffms" options="-parameters" />
+      <module name="messaging-ms" options="-parameters" />
+      <module name="patient-ms" options="-parameters" />
+      <module name="user-ms" options="-parameters" />
+    </option>
+  </component>
+</project>

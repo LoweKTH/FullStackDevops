@@ -29,9 +29,9 @@ public class Patient {
     private String gender;
     private String email;
     private String phoneNumber;
-    @OneToMany(mappedBy = "patient", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Note> notes;
-    @OneToMany(mappedBy = "patient", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Diagnosis> diagnoses;
 
     /*private List<Encounter> encounters;*/

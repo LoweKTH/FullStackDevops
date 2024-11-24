@@ -6,6 +6,7 @@ import Register from "./components/Register";
 import Dashboard from "./components/Dashboard";
 import PatientList from "./components/PatientList";
 import Note from "./components/Note";
+import Messaging from "./components/Messaging";
 
 function App() {
     return (
@@ -19,6 +20,7 @@ function App() {
                         <Route path="/dashboard" element={<Dashboard />} />
                         <Route path="/patients" element={<PatientList />} />
                         <Route path="/create-note" element={<Note />} />
+                        <Route path="/messaging" element={<Messaging />} />
                     </Routes>
                 </div>
             </div>

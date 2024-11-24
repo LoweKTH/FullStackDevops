@@ -13,3 +13,18 @@ export const fetchPatients = async () => {
 export const createNote = async (userId, noteData) =>{
     return await api.post(`/${userId}/notes`, noteData);
 };
+
+export const addDiagnosis = async (patientId, diagnosisData) => {
+    return await api.post(`/${patientId}/diagnosis`, diagnosisData);
+};
+
+export const fetchNotesForPatient = async (patientId) => {
+    return await api.get(`/${patientId}/getnotes`);
+};
+
+export const fetchDiagnosesForPatient = async (patientId) => {
+    return await api.get(`/${patientId}/getdiagnoses`);
+};
+
+
+

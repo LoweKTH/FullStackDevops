@@ -12,16 +12,21 @@ public interface PatientService {
     PatientDto getPatientById(Long id);
     PatientDto createPatient(PatientDto patientDto);
 
-    NoteDto addNoteToPatientAsDoctor(Long patientId, NoteDto noteDto, Long doctorId);
+    NoteDto addNoteToPatient(Long patientId, NoteDto noteDto, Long doctorstaffId);
 
-    NoteDto addNoteToPatientAsStaff(Long patientId, NoteDto noteDto, Long staffId);
+    List<NoteDto> getNotesForPatient(Long patientId);
 
-    DiagnosisDto addDiagnosisToPatient(Long patientId, DiagnosisDto diagnosisDto, Long doctorId);
-    List<DoctorDto> getDoctorsForPatient(Long patientId);
 
-    List<StaffDto> getStaffsForPatient(Long patientId);
+    List<DiagnosisDto> getDiagnosesForPatient(Long patientId);
 
-    List<Long> getPatientsByDoctorId(Long doctorId);
+    @Transactional
 
-    List<Long> getPatientsByStaffId(Long staffId);
+    DiagnosisDto addDiagnosisToPatient(Long patientId, DiagnosisDto diagnosisDto, Long doctorstaffId);
+
+
+
+
+    DoctorStaffDto getDoctorstaffForPatient(Long patientId);
+
+    List<Long> getPatientsByDoctorstaffId(Long doctorId);
 }

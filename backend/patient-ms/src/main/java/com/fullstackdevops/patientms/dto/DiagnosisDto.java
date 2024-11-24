@@ -1,6 +1,6 @@
 package com.fullstackdevops.patientms.dto;
 
-import lombok.Data;
+import lombok.*;
 
 import java.util.Date;
 
@@ -11,5 +11,7 @@ public class DiagnosisDto {
     private String description;
     private Date diagnosisDate;
     private Long patientId;
-    private Long doctorId;
+    private Long doctorstaffId;
+    private String doctorstaffName;
+    private String role;
 }

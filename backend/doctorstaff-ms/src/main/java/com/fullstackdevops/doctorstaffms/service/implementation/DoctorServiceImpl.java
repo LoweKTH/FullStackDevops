@@ -41,7 +41,7 @@ public class DoctorServiceImpl implements DoctorService {
     @Override
     public List<PatientDto> getPatientsForDoctor(Long doctorId) {
 
-        String url = "http://patient-ms:8080/api/patients/" + doctorId + "/doctorgetpatients";
+        String url = "http://patient-ms:8080/api/patients/" + doctorId + "/doctorstaffgetpatients";
         ResponseEntity<List<Long>> response = restTemplate.exchange(
                 url,
                 HttpMethod.GET,

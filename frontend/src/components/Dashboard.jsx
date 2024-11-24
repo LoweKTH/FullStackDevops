@@ -9,11 +9,18 @@ function Dashboard() {
         navigate("/patients");
     };
 
+    const handleAssignedPatients = () => {
+        navigate("/assigned");
+    };
+
     return (
         <div className="dashboard">
             <h2>Welcome to the Dashboard</h2>
-            {role === "Doctor" && (
-                <button onClick={handleCheckPatients}>Check Patients</button>
+            {(role === "doctor" || role === "staff") && (
+                <>
+                    <button onClick={handleCheckPatients}>Check Patients</button>
+                </>
+
             )}
         </div>
     );

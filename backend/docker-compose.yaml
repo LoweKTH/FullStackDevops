@@ -15,12 +15,15 @@ services:
 
 
 
-#  frontend:
-#    build:
-#      context: ../labb-frontend
-#      dockerfile: Dockerfile
-#    ports:
-#      - "80:80"
+  frontend:
+    build:
+      context: ../frontend
+      dockerfile: Dockerfile
+
+    volumes:
+      - ../frontend:/app
+    ports:
+      - "3000:3000"
 
   messaging-ms:
     build: ./messaging-ms
