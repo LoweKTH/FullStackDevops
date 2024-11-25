@@ -30,5 +30,9 @@ export const fetchAssignedDoctorStaff = async (patientId) => {
     return await api.get(`/${patientId}/doctorstaff`);
 };
 
+export const fetchUserProfile = async (userId) => {
+    return await api.get(`/${userId}`);
+}
+
 
 
