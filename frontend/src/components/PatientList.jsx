@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { fetchPatients } from "../api/Patient-ms-api";
+import {fetchPatients, fetchUserProfile} from "../api/Patient-ms-api";
 import { fetchNotesForPatient } from "../api/Patient-ms-api";
 import "../styles/PatientList.css";
 import "../styles/AddDiagnosisModal.css";
@@ -65,10 +65,10 @@ function PatientList() {
         });
     };
 
-    const handleMoreInfo = async (patientId) => {
-        const response = await fetchNotesForPatient(patientId);
-        console.log("Notes for patient:", response.data);
-       // setSelectedNote(note); // Set selected note to display its details
+    const handleMoreInfo = (patient) => {
+        navigate("/patient-details", {
+            state: { patient },
+        });
     };
 
     const handleAddDiagnosis = (userId) => {
@@ -166,7 +166,7 @@ function PatientList() {
                                 </button>
 
                                 <button
-                                    onClick={() => handleMoreInfo(patient.userId)}
+                                    onClick={() => handleMoreInfo(patient)}
                                     className="more-info-btn"
                                 >
                                     More Info

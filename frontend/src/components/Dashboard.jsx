@@ -26,7 +26,7 @@ function Dashboard() {
     return (
         <div className="dashboard">
             <h2>Welcome to the Dashboard</h2>
-            {(role === "doctor" || role === "staff") && (
+            {(role === "Doctor" || role === "Staff") && (
                 <>
                     <button onClick={handleCheckPatients}>Check Patients</button>
                 </>

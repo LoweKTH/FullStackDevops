@@ -5,24 +5,59 @@ import "../styles/Navbar.css";
 const Navbar = () => {
     const navigate = useNavigate();
 
+    const role = localStorage.getItem("role");
+    const isLoggedIn = !!role;
+
     const handleLogout = () => {
-        // Clear the local storage to log out the user
         localStorage.clear();
-        navigate("/login"); // Redirect to the login page
+        navigate("/login");
+    };
+
+    const getDashboardTitle = () => {
+        switch (role) {
+            case "Doctor":
+                return "Doctor Dashboard";
+            case "Patient":
+                return "Patient Dashboard";
+            case "Staff":
+                return "Staff Dashboard";
+            default:
+                return "Dashboard";
+        }
+    };
+
+    const renderLinks = () => {
+        if (!isLoggedIn) {
+            return (
+                <div className="navbar-links">
+                    <button onClick={() => navigate("/login")} className="nav-button">
+                        Login
+                    </button>
+                    <button onClick={() => navigate("/register")} className="nav-button">
+                        Register
+                    </button>
+                </div>
+            );
+        }
+
+        // If a user is logged in
+        return (
+            <div className="navbar-links">
+                <button onClick={() => navigate("/dashboard")} className="nav-button">
+                    Dashboard
+                </button>
+                <button onClick={handleLogout} className="nav-button">
+                    Logout
+                </button>
+            </div>
+        );
     };
 
     return (
         <nav className="navbar">
             <div className="navbar-container">
-                <h2>Doctor Dashboard</h2>
-                <div className="navbar-links">
-                    <button onClick={() => navigate("/dashboard")} className="nav-button">
-                        Dashboard
-                    </button>
-                    <button onClick={handleLogout} className="nav-button">
-                        Logout
-                    </button>
-                </div>
+                <h2>{isLoggedIn ? getDashboardTitle() : "Patient System"}</h2>
+                {renderLinks()}
             </div>
         </nav>
     );

@@ -9,6 +9,7 @@ import Note from "./components/Note";
 import Messaging from "./components/Messaging";
 import DoctorStaffList from "./components/DoctorStaffList";
 import Profile from "./components/Profile";
+import PatientDetails from "./components/PatientDetails";
 
 function App() {
     return (
@@ -25,6 +26,7 @@ function App() {
                         <Route path="/messaging" element={<Messaging />} />
                         <Route path="/doctorstaff" element={<DoctorStaffList />} />
                         <Route path="/profile" element={<Profile />} />
+                        <Route path="/patient-details" element={<PatientDetails />} />
                     </Routes>
                 </div>
             </div>
