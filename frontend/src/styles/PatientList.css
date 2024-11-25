@@ -45,3 +45,30 @@ tr:hover {
 .create-note-btn:hover {
     background-color: #0056b3;
 }
+
+.add-diagnosis-btn {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    cursor: pointer;
+    border-radius: 4px;
+}
+
+.add-diagnosis-btn:hover {
+    background-color: #0056b3;
+}
+
+.more-info-btn {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    cursor: pointer;
+    border-radius: 4px;
+}
+
+.more-info-btn:hover {
+    background-color: #0056b3;
+}
+

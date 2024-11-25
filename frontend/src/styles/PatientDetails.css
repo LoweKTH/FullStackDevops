@@ -1,4 +1,4 @@
-.profile {
+.patient-details-container {
     max-width: 600px;
     margin: 0 auto;
     padding: 20px;
@@ -7,26 +7,40 @@
     background-color: #f9f9f9;
 }
 
-.profile h2 {
+.patient-details-container h2 {
     text-align: center;
     margin-bottom: 20px;
     color: #333;
 }
 
-.profile-details p {
+.patient-details p {
     margin: 10px 0;
     line-height: 1.5;
 }
 
-.profile-details strong {
+.patient-details strong {
     color: #555;
 }
 
-.error-message {
-    color: red;
-    text-align: center;
+.actions {
+    margin-top: 20px;
+    display: flex;
+    justify-content: space-between;
 }
 
+
+.back-btn {
+    margin-top: 20px;
+    width: 100%;
+    text-align: center;
+    background-color: #6c757d;
+}
+
+.back-btn:hover {
+    background-color: #5a6268;
+}
+
+/* Modal styles */
 .modal {
     position: fixed;
     top: 0;
@@ -73,4 +87,3 @@
 .close-btn:hover {
     background: #ff3b3b;
 }
-

@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
-import {fetchPatients, fetchUserProfile} from "../api/Patient-ms-api";
-import { fetchNotesForPatient } from "../api/Patient-ms-api";
+import {fetchPatients} from "../api/Patient-ms-api";
 import "../styles/PatientList.css";
 import "../styles/AddDiagnosisModal.css";
 import { useNavigate } from "react-router-dom";
@@ -13,8 +12,6 @@ function PatientList() {
     const [patients, setPatients] = useState([]);
     const [assignedPatients, setAssignedPatients] = useState([]);
     const [error, setError] = useState("");
-    const [notes, setNotes] = useState([]); // Add state for storing notes
-    const [selectedNote, setSelectedNote] = useState(null); // Add state for selected note to display more info
     const navigate = useNavigate();
     const userId = Number(localStorage.getItem("userId"));
     const role = localStorage.getItem("role");
@@ -124,15 +121,7 @@ function PatientList() {
                     <tr>
                         <th>First Name</th>
                         <th>Last Name</th>
-                        {role === "doctor" && (
-                            <>
-                                <th>Social Security Number</th>
-                                <th>Phone Number</th>
-                                <th>Address</th>
-                                <th>Gender</th>
-                                <th>Date of Birth</th>
-                            </>
-                        )}
+
                         <th>Actions</th>
                     </tr>
                     </thead>
@@ -141,15 +130,6 @@ function PatientList() {
                         <tr key={patient.userId}>
                             <td>{patient.firstname}</td>
                             <td>{patient.lastname}</td>
-                            {role === "doctor" && (
-                                <>
-                                    <td>{patient.socialSecurityNumber}</td>
-                                    <td>{patient.phoneNumber}</td>
-                                    <td>{patient.address}</td>
-                                    <td>{patient.gender}</td>
-                                    <td>{patient.dateOfBirth}</td>
-                                </>
-                            )}
                             <td>
                                 <button
                                     onClick={() => handleCreateNote(patient.userId)}
@@ -165,12 +145,14 @@ function PatientList() {
                                     Add Diagnosis
                                 </button>
 
-                                <button
-                                    onClick={() => handleMoreInfo(patient)}
-                                    className="more-info-btn"
-                                >
-                                    More Info
-                                </button>
+                                {role === "Doctor" && (
+                                    <button
+                                        onClick={() => handleMoreInfo(patient)}
+                                        className="more-info-btn"
+                                    >
+                                        More Info
+                                    </button>
+                                )}
                             </td>
                         </tr>
                     ))}
@@ -188,15 +170,7 @@ function PatientList() {
                         <tr>
                             <th>First Name</th>
                             <th>Last Name</th>
-                            {role === "doctor" && (
-                                <>
-                                    <th>Social Security Number</th>
-                                    <th>Phone Number</th>
-                                    <th>Address</th>
-                                    <th>Gender</th>
-                                    <th>Date of Birth</th>
-                                </>
-                            )}
+
                             <th>Actions</th>
                         </tr>
                         </thead>
@@ -205,15 +179,7 @@ function PatientList() {
                             <tr key={patient.userId}>
                                 <td>{patient.firstname}</td>
                                 <td>{patient.lastname}</td>
-                                {role === "doctor" && (
-                                    <>
-                                        <td>{patient.socialSecurityNumber}</td>
-                                        <td>{patient.phoneNumber}</td>
-                                        <td>{patient.address}</td>
-                                        <td>{patient.gender}</td>
-                                        <td>{patient.dateOfBirth}</td>
-                                    </>
-                                )}
+
                                 <td>
                                     <button
                                         onClick={() => handleMessageClick(patient.userId)}
@@ -236,16 +202,7 @@ function PatientList() {
                 onSubmit={handleSubmitDiagnosis}
             />
 
-            {/* Display More Info modal or section */}
-            {selectedNote && (
-                <div className="note-details">
-                    <h3>Note Details</h3>
-                    <p><strong>Content:</strong> {selectedNote.content}</p>
-                    <p><strong>Doctor/Staff:</strong> {selectedNote.doctorstaffName}</p>
-                    <p><strong>Role:</strong> {selectedNote.role}</p>
-                    <p><strong>Created At:</strong> {selectedNote.createdAt}</p>
-                </div>
-            )}
+
         </div>
     );
 }
