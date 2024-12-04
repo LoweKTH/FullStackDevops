@@ -29,6 +29,7 @@ function Dashboard() {
             {(role === "Doctor" || role === "Staff") && (
                 <>
                     <button onClick={handleCheckPatients}>Check Patients</button>
+
                 </>
 
             )}

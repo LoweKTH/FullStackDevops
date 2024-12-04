@@ -67,6 +67,20 @@ services:
     networks:
       - backend-network
 
+
+  image-ms:
+    build: image-ms
+    ports:
+      - "3002:3002"
+    networks:
+      - backend-network
+    depends_on:
+      - db
+    volumes:
+      - ./image-ms/uploads:/app/uploads
+      - ./image-ms:/app
+
+
   db:
     image: mysql:8.0
     environment:

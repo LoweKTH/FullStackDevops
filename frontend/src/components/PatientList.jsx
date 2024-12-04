@@ -74,6 +74,13 @@ function PatientList() {
         setShowModal(true);
     };
 
+
+    const handleImageUpload = (userId) => {
+        navigate("/image-upload", {
+            state: { userId },
+        });
+    };
+
     const handleSubmitDiagnosis = async (diagnosisName, description) => {
         const doctorstaffId = userId;
         const diagnosisData = {
@@ -83,7 +90,7 @@ function PatientList() {
         };
 
         try {
-            await addDiagnosis(selectedPatientId, diagnosisData); // Call the API
+            await addDiagnosis(selectedPatientId, diagnosisData);
             console.log("Diagnosis added successfully");
             alert("Diagnosis added successfully!");
             setShowModal(false); // Close the modal
@@ -187,6 +194,13 @@ function PatientList() {
                                     >
                                         Message
                                     </button>
+                                    {role === "Doctor" && (
+                                        <button
+                                          onClick={() =>handleImageUpload(patient.userId)}
+                                        >
+                                        Upload Image
+                                    </button>
+                                    )}
                                 </td>
                             </tr>
                         ))}

@@ -1,17 +1,19 @@
 import React, { useState, useEffect } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { fetchNotesForPatient, fetchDiagnosesForPatient } from "../api/Patient-ms-api";
+import { retrieveImagesByUserId } from "../api/Image-ms-api";
 import "../styles/PatientDetails.css";
 
 const PatientDetails = () => {
     const location = useLocation();
     const navigate = useNavigate();
-    const { patient } = location.state; // Retrieve patient data passed through navigation state
+    const { patient } = location.state;
 
     const [notes, setNotes] = useState([]);
     const [diagnoses, setDiagnoses] = useState([]);
-    const [modalData, setModalData] = useState(null); // Data to display in modal
-    const [modalTitle, setModalTitle] = useState(""); // Title for the modal
+    const [images, setImages] = useState([]);
+    const [modalData, setModalData] = useState(null);
+    const [modalTitle, setModalTitle] = useState("");
     const [isModalOpen, setIsModalOpen] = useState(false);
 
     useEffect(() => {
@@ -37,6 +39,24 @@ const PatientDetails = () => {
         getDiagnoses();
     }, [patient.userId]);
 
+
+    const getImages = async () => {
+        try {
+            const response = await retrieveImagesByUserId(patient.userId);
+
+            const imagesWithFullPath = response.map(image => {
+                image.imagePath = `http://localhost:3002${image.imagePath}`;
+                return image;
+            });
+
+            setImages(imagesWithFullPath);
+            setModalTitle("Patient Images");
+            setIsModalOpen(true);
+        } catch (err) {
+            console.error("Error fetching images:", err);
+        }
+    };
+
     const openModal = (data, title) => {
         setModalData(data);
         setModalTitle(title);
@@ -49,6 +69,12 @@ const PatientDetails = () => {
         setModalTitle("");
     };
 
+
+    const handleEditClick = (imageId) => {
+        //navigate("/image-upload", {
+        //    state: { userId },
+        //});
+    };
     return (
         <div className="patient-details-container">
             <h2>Patient Details</h2>
@@ -65,6 +91,7 @@ const PatientDetails = () => {
             <div className="actions">
                 <button onClick={() => openModal(notes, "Patient Notes")}>View Notes</button>
                 <button onClick={() => openModal(diagnoses, "Patient Diagnoses")}>View Diagnoses</button>
+                <button onClick={getImages}>View Images</button>
             </div>
             <button
                 onClick={() => navigate("/patients")}
@@ -79,7 +106,35 @@ const PatientDetails = () => {
                         <h3>{modalTitle}</h3>
                         <button className="close-btn" onClick={closeModal}>Close</button>
                         <div className="modal-body">
-                            {modalData && modalData.length > 0 ? (
+                            {modalTitle === "Patient Images" ? (
+                                <div className="image-gallery">
+                                    {images.length > 0 ? (
+                                        images.map((image, index) => (
+                                            <div key={index} className="image-item">
+                                                <img
+                                                    src={image.imagePath}
+                                                    alt={`Patient Image ${index + 1}`}
+                                                    className="patient-image"
+                                                />
+                                                <div className="image-details">
+                                                    <h4>{image.title}</h4>
+                                                    <p><strong>Description:</strong> {image.description}</p>
+                                                    <p><strong>Uploaded
+                                                        At:</strong> {new Date(image.uploadedAt).toLocaleString()}</p>
+                                                    <button
+                                                        onClick={() => handleEditClick(image.id)}
+                                                      //  className="message-btn"
+                                                    >
+                                                        Edit
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        ))
+                                    ) : (
+                                        <p>No images found for this patient.</p>
+                                    )}
+                                </div>
+                            ) : modalData && modalData.length > 0 ? (
                                 <ul>
                                     {modalData.map((item) => (
                                         <li key={item.id}>
