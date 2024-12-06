@@ -70,10 +70,10 @@ const PatientDetails = () => {
     };
 
 
-    const handleEditClick = (imageId) => {
-        //navigate("/image-upload", {
-        //    state: { userId },
-        //});
+    const handleEditClick = (imagePath,imageId) => {
+        navigate("/image-edit", {
+            state: { imagePath,imageId },
+        });
     };
     return (
         <div className="patient-details-container">
@@ -122,7 +122,7 @@ const PatientDetails = () => {
                                                     <p><strong>Uploaded
                                                         At:</strong> {new Date(image.uploadedAt).toLocaleString()}</p>
                                                     <button
-                                                        onClick={() => handleEditClick(image.id)}
+                                                        onClick={() => handleEditClick(image.imagePath,image.id)}
                                                       //  className="message-btn"
                                                     >
                                                         Edit

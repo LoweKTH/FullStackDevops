@@ -1,0 +1,85 @@
+.image-edit-container {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f9;
+    padding: 20px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+}
+
+.canvas-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+    position: relative;
+}
+
+.color-buttons {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    position: absolute;
+    left: -80px;
+}
+
+.color-btn {
+    width: 50px;
+    height: 50px;
+    border: none;
+    border-radius: 50%;
+    cursor: pointer;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s;
+}
+
+.color-btn:hover {
+    transform: scale(1.1);
+}
+
+.color-btn.red {
+    background-color: #ff0000;
+}
+
+.color-btn.green {
+    background-color: #00ff00;
+}
+
+.color-btn.blue {
+    background-color: #0000ff;
+}
+
+.title {
+    color: #333;
+    margin-bottom: 20px;
+}
+
+.image-edit-canvas {
+    display: block;
+    margin: 0 auto;
+    border: 2px solid #ccc;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.controls {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 20px;
+}
+
+@media (max-width: 768px) {
+    .image-edit-canvas {
+        width: 90%;
+        height: auto;
+    }
+
+    button {
+        font-size: 14px;
+        padding: 8px 12px;
+    }
+}

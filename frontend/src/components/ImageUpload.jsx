@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
 import { uploadImage } from "../api/Image-ms-api";
 import "../styles/ImageUpload.css";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 
 const ImageUpload = () => {
     const [image, setImage] = useState(null);
-    const [uploadedImage, setUploadedImage] = useState(null);
+    const navigate = useNavigate();
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState(null);
     const [imagePreview, setImagePreview] = useState(null);
@@ -62,6 +62,7 @@ const ImageUpload = () => {
             console.error(err);
         } finally {
             setLoading(false);
+            navigate(-1);
         }
     };
 
@@ -69,7 +70,7 @@ const ImageUpload = () => {
         <div className="image-upload-container">
             <h2>Upload an Image</h2>
             <form onSubmit={handleSubmit}>
-                {/* Title row */}
+
                 <div className="form-row">
                     <label htmlFor="title">Title:</label>
                     <input
@@ -81,7 +82,6 @@ const ImageUpload = () => {
                     />
                 </div>
 
-                {/* Description row */}
                 <div className="form-row">
                     <label htmlFor="description">Description:</label>
                     <textarea
@@ -92,7 +92,7 @@ const ImageUpload = () => {
                     />
                 </div>
 
-                {/* File input row */}
+
                 <div className="form-row">
                     <label htmlFor="image">Choose File:</label>
                     <input
@@ -109,7 +109,7 @@ const ImageUpload = () => {
 
             {error && <p className="error-message">{error}</p>}
 
-            {/* Preview the selected image */}
+
             {imagePreview && (
                 <div className="image-preview">
                     <h3>Image Preview</h3>

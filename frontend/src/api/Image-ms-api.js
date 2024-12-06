@@ -21,3 +21,10 @@ export const retrieveImagesByUserId = async (userId) => {
         throw new Error("Error retrieving images.");
     }
 };
+
+export const updateImage = async (formData) => {
+    return api.post("/edit", formData, {
+        headers: { "Content-Type": "multipart/form-data" },
+    }).then(response => response.data.path)
+        .catch(() => { throw new Error("Error uploading image."); });
+};

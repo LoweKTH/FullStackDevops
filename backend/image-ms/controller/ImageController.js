@@ -2,6 +2,7 @@ const express = require('express');
 const multer = require('multer');
 const { uploadImage } = require('../service/ImageService');
 const { retrieveImagesByUserId } = require('../service/ImageService');
+const { editImage } = require('../service/ImageService');
 
 const upload = multer({ dest: 'uploads/' });
 
@@ -18,6 +19,24 @@ router.post('/upload', upload.single('image'), async (req, res) => {
 
     try {
         const imagePath = await uploadImage(uploadedFile, userId, title, description);
+        res.status(200).json({ message: 'Image uploaded successfully', path: imagePath });
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ message: 'Error uploading image.' });
+    }
+});
+
+router.post('/edit', upload.none(),async (req, res) => {
+    const { imageData, imageId } = req.body;
+
+    if (!imageData || !imageId) {
+        return res.status(400).json({ message: 'No image data or image ID provided.' });
+    }
+
+    //const imagePath = await editImage(imageData,imageId);
+
+    try {
+        const imagePath = await editImage(imageData,imageId);
         res.status(200).json({ message: 'Image uploaded successfully', path: imagePath });
     } catch (error) {
         console.error(error);

@@ -40,6 +40,30 @@ const uploadImage = async (uploadedFile, userId, title, description) => {
     }
 };
 
+const editImage = async (imageData, imageId) => {
+    try {
+
+        const base64Data = imageData.split(',')[1];
+        const imageBuffer = Buffer.from(base64Data, 'base64');
+
+
+        const filePath = path.join(__dirname, '../uploads', `${imageId}.png`);
+
+        fs.writeFileSync(filePath, imageBuffer);
+
+        // Update the image record in the database
+        const updatedImage = await Image.update(
+            { imagePath: `/uploads/${imageId}.png` },
+            { where: { id: imageId } }
+        );
+        
+        return `/uploads/${imageId}.png`;
+    } catch (error) {
+        console.error('Error during image editing:', error);
+        throw new Error('Error editing image');
+    }
+};
+
 const retrieveImagesByUserId = async (userId) => {
     try {
         const images = await Image.findAll({
@@ -65,4 +89,4 @@ const retrieveImagesByUserId = async (userId) => {
     }
 };
 
-module.exports = { uploadImage, retrieveImagesByUserId };
+module.exports = { uploadImage, retrieveImagesByUserId, editImage };
