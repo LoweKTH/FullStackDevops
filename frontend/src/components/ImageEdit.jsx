@@ -110,20 +110,25 @@ const ImageEdit = () => {
             return;
         }
 
-
         const dataURL = canvas.toDataURL({
             format: "png",
             quality: 1,
         });
+        // Convert the dataURL to a Blob (this is similar to the process of converting to a file)
+        const blob = await fetch(dataURL)
+            .then(res => res.blob())
+            .catch(err => console.error("Error converting to Blob:", err));
+
+        // Create a file from the Blob
+        const file = new File([blob], "edited-image.png", { type: "image/png" });
 
         const formData = new FormData();
-        formData.append("imageData", dataURL);
+        formData.append("image", file);
         formData.append("imageId", imageId);
 
+
         try {
-
             await updateImage(formData);
-
 
             alert("Image updated successfully!");
             navigate(-1);
