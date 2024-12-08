@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const api = axios.create({
-    baseURL: "http://localhost:3002/api/image",
+    baseURL: "http://localhost:30004/api/image",
 });
 
 export const uploadImage = async (formData) => {

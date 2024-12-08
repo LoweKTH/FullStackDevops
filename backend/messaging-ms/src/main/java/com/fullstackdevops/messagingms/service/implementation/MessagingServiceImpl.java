@@ -57,7 +57,7 @@ public class MessagingServiceImpl implements MessagingService {
 
 
         for (Message message : messages) {
-            UserDto user = restTemplate.getForObject("http://user-ms:8080/api/user/"+message.getSenderId() , UserDto.class);
+            UserDto user = restTemplate.getForObject("http://user-ms:80/api/user/"+message.getSenderId() , UserDto.class);
             String senderName =user.getUsername();
 
             MessageDto messageDto = MessageMapper.toDto(message);

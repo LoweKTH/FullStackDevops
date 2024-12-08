@@ -41,7 +41,7 @@ public class StaffServiceImpl implements StaffService {
     @Override
     public List<PatientDto> getPatientsForStaff(Long staffId) {
 
-        String url = "http://patient-ms:8080/api/patients/" + staffId + "/doctorstaffgetpatients";
+        String url = "http://patient-ms:80/api/patients/" + staffId + "/doctorstaffgetpatients";
         ResponseEntity<List<Long>> response = restTemplate.exchange(
                 url,
                 HttpMethod.GET,
@@ -52,7 +52,7 @@ public class StaffServiceImpl implements StaffService {
 
         List<PatientDto> patientDtos = new ArrayList<>();
         for (Long patientId : patientIds) {
-            PatientDto patient = restTemplate.getForObject("http://patient-ms:8080/api/patients/" + patientId, PatientDto.class);
+            PatientDto patient = restTemplate.getForObject("http://patient-ms:80/api/patients/" + patientId, PatientDto.class);
             patientDtos.add(patient);
         }
         return patientDtos;

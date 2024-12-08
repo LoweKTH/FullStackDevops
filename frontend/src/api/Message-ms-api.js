@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const messagingBaseURL = 'http://localhost:8084/api/messages'; // Update this to your messaging API URL
+const messagingBaseURL = 'http://localhost:30003/api/messages'; // Update this to your messaging API URL
 
 const api = axios.create({
     baseURL: messagingBaseURL,

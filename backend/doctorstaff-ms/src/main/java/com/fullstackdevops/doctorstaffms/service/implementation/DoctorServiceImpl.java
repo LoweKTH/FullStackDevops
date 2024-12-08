@@ -45,7 +45,7 @@ public class DoctorServiceImpl implements DoctorService {
     @Override
     public List<PatientDto> getPatientsForDoctor(Long doctorId) {
 
-        String url = "http://patient-ms:8080/api/patients/" + doctorId + "/doctorstaffgetpatients";
+        String url = "http://patient-ms:80/api/patients/" + doctorId + "/doctorstaffgetpatients";
         ResponseEntity<List<Long>> response = restTemplate.exchange(
                 url,
                 HttpMethod.GET,
@@ -56,7 +56,7 @@ public class DoctorServiceImpl implements DoctorService {
 
         List<PatientDto> patientDtos = new ArrayList<>();
         for (Long patientId : patientIds) {
-            PatientDto patient = restTemplate.getForObject("http://patient-ms:8080/api/patients/" + patientId, PatientDto.class);
+            PatientDto patient = restTemplate.getForObject("http://patient-ms:80/api/patients/" + patientId, PatientDto.class);
             patientDtos.add(patient);
         }
         return patientDtos;

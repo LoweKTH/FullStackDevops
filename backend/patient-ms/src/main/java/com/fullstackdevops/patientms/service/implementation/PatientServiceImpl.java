@@ -83,7 +83,7 @@ public class PatientServiceImpl implements PatientService{
         List<NoteDto> noteDtos = new ArrayList<>();
         for (Note note : notes) {
 
-                UserDto user = restTemplate.getForObject("http://user-ms:8080/api/user/"+note.getDoctorstaffId() , UserDto.class);
+                UserDto user = restTemplate.getForObject("http://user-ms:80/api/user/"+note.getDoctorstaffId() , UserDto.class);
             NoteDto noteDto = NoteMapper.toDto(note);
 
             noteDto.setDoctorstaffName(user.getUsername());
@@ -100,7 +100,7 @@ public class PatientServiceImpl implements PatientService{
         List<DiagnosisDto> diagnosisDtos = new ArrayList<>();
 
         for (Diagnosis diagnosis : diagnoses) {
-            UserDto user = restTemplate.getForObject("http://user-ms:8080/api/user/"+diagnosis.getDoctorstaffId() , UserDto.class);
+            UserDto user = restTemplate.getForObject("http://user-ms:80/api/user/"+diagnosis.getDoctorstaffId() , UserDto.class);
             DiagnosisDto diagnosisDto = DiagnosisMapper.toDto(diagnosis);
 
             diagnosisDto.setDoctorstaffName(user.getUsername());
@@ -139,12 +139,12 @@ public class PatientServiceImpl implements PatientService{
         List<StaffDto> staffDtos = new ArrayList<>();
 
         for (Long doctorstaffId : doctorstaffIds) {
-            DoctorDto doctor = restTemplate.getForObject("http://doctorstaff-ms:8080/api/doctors/" + doctorstaffId, DoctorDto.class);
+            DoctorDto doctor = restTemplate.getForObject("http://doctorstaff-ms:80/api/doctors/" + doctorstaffId, DoctorDto.class);
             if (doctor != null) {
                 doctorDtos.add(doctor);
             }
 
-            StaffDto staff = restTemplate.getForObject("http://doctorstaff-ms:8080/api/staff/" + doctorstaffId, StaffDto.class);
+            StaffDto staff = restTemplate.getForObject("http://doctorstaff-ms:80/api/staff/" + doctorstaffId, StaffDto.class);
             if (staff != null) {
                 staffDtos.add(staff);
             }

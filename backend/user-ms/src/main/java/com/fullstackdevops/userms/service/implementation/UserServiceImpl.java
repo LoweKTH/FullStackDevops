@@ -91,7 +91,7 @@ public class UserServiceImpl implements UserService {
 
         switch (role) {
             case "patient":
-                serviceEndpoint = "http://patient-ms:8080/api/patients/addPatient";
+                serviceEndpoint = "http://patient-ms:80/api/patients/addPatient";
                 PatientDto patientDto = new PatientDto();
                 patientDto.setUserId(userDto.getId());
                 patientDto.setEmail(userDto.getEmail());
@@ -110,7 +110,7 @@ public class UserServiceImpl implements UserService {
 
                 break;
             case "doctor":
-                serviceEndpoint = "http://doctorstaff-ms:8080/api/doctors/addDoctor";
+                serviceEndpoint = "http://doctorstaff-ms:80/api/doctors/addDoctor";
 
                 DoctorDto doctorDto = new DoctorDto();
                 doctorDto.setSocialSecurityNumber(additionalInfoDto.getSocialSecurityNumber());
@@ -127,7 +127,7 @@ public class UserServiceImpl implements UserService {
                 }
                 break;
             case "staff":
-                serviceEndpoint = "http://doctorstaff-ms:8080/api/staff/addStaff";
+                serviceEndpoint = "http://doctorstaff-ms:80/api/staff/addStaff";
                 StaffDto staffDto = new StaffDto();
                 staffDto.setSocialSecurityNumber(additionalInfoDto.getSocialSecurityNumber());
                 staffDto.setUserId(userDto.getId());
