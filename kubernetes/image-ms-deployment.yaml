@@ -12,6 +12,10 @@ spec:
       labels:
         app: image-ms
     spec:
+      initContainers:
+        - name: wait-for-db
+          image: busybox
+          command: [ 'sh', '-c', 'until nc -zv db 3306; do echo "Waiting for db"; sleep 2; done;' ]
       containers:
         - name: image-ms
           image: backend-image-ms:latest

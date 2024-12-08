@@ -38,6 +38,5 @@ spec:
             failureThreshold: 3
       volumes:
         - name: db-data
-          hostPath:
-            path: /var/lib/docker/volumes/backend_db-data/_data
-            type: Directory
+          persistentVolumeClaim:
+            claimName: db-pvc

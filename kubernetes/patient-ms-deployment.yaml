@@ -15,6 +15,10 @@ spec:
       labels:
         app: patient-ms
     spec:
+      initContainers:
+        - name: wait-for-db
+          image: busybox
+          command: [ 'sh', '-c', 'until nc -zv db 3306; do echo "Waiting for db"; sleep 2; done;' ]
       containers:
         - name: patient-ms
           image: backend-patient-ms:latest
