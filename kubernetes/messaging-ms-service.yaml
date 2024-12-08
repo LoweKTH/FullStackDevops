@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: messaging-ms
+spec:
+  selector:
+    app: messaging-ms
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 8080
+      nodePort: 30003
+  type: NodePort
+  

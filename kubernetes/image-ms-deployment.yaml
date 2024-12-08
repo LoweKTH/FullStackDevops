@@ -1,0 +1,38 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: image-ms
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: image-ms
+  template:
+    metadata:
+      labels:
+        app: image-ms
+    spec:
+      containers:
+        - name: image-ms
+          image: backend-image-ms:latest
+          imagePullPolicy: IfNotPresent
+          ports:
+            - containerPort: 3002
+          env:
+            - name: MYSQL_HOST
+              value: db
+            - name: MYSQL_PORT
+              value: "3306"
+            - name: MYSQL_DATABASE
+              value: fullstack24
+            - name: MYSQL_USER
+              value: user
+            - name: MYSQL_PASSWORD
+              value: password
+          volumeMounts:
+            - name: image-storage
+              mountPath: /app/uploads
+      volumes:
+        - name: image-storage
+          persistentVolumeClaim:
+            claimName: image-ms-pvc
