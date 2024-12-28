@@ -6,24 +6,47 @@ on:
       - main
 
 jobs:
-  backend-build:
-    name: Build Backend
+  user-ms-build:
+    name: Build and Test User Microservice
     runs-on: ubuntu-latest
 
     steps:
       - name: Checkout Code
         uses: actions/checkout@v3
 
-      # Ensure Docker Compose is available
-      - name: Set up Docker Compose
+      # Set up Docker (Docker is pre-installed on ubuntu-latest runner)
+      - name: Set up Docker
         run: |
           sudo apt-get update
-          sudo apt-get install -y docker-compose
+          sudo apt-get install -y docker.io
+
+      # Build User Microservice Docker Image using Dockerfile
+      - name: Build User Microservice Docker Image
+        working-directory: backend/user-ms
+        run: docker build -t user-ms:latest .
+
+      # Run User Microservice Tests (using Maven)
+      - name: Run User Microservice Tests
+        working-directory: backend/user-ms
+        run: mvn test
+  #backend-build:
+   # name: Build Backend
+  #  runs-on: ubuntu-latest
+
+   # steps:
+     # - name: Checkout Code
+     #   uses: actions/checkout@v3
+
+      # Ensure Docker Compose is available
+    #  - name: Set up Docker Compose
+     #   run: |
+         # sudo apt-get update
+         # sudo apt-get install -y docker-compose
 
       # Build Docker images using Docker Compose
-      - name: Build Backend Docker Compose Services
-        working-directory: backend
-        run: docker-compose build
+     # - name: Build Backend Docker Compose Services
+      #  working-directory: backend
+      #  run: docker-compose build
 
       # Optionally, you can also push images to a registry (if needed)
       # - name: Push Backend Docker Images
