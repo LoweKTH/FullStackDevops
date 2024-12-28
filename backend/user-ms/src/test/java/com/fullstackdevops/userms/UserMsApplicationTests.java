@@ -2,6 +2,7 @@ package com.fullstackdevops.userms;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fullstackdevops.userms.controller.UserController;
+import com.fullstackdevops.userms.dto.LoginDto;
 import com.fullstackdevops.userms.dto.UserDto;
 import com.fullstackdevops.userms.service.UserService;
 import org.junit.jupiter.api.BeforeEach;
@@ -17,6 +18,7 @@ import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
 import static org.mockito.Mockito.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
@@ -57,5 +59,29 @@ public class UserMsApplicationTests {
 
 		// Verify that the service method was called once
 		verify(userService, times(1)).getUserById(userId);
+	}
+
+	@Test
+	void testLogin() throws Exception {
+		// Arrange
+		String username = "testuser";
+		String password = "password";
+		LoginDto loginDto = new LoginDto(username, password);
+
+		// Mock the service call
+		UserDto userDto = new UserDto(1L, "test@example.com", "testuser", "password", "ROLE_USER");
+		when(userService.login(username, password)).thenReturn(userDto);
+
+		// Act & Assert
+		mockMvc.perform(post("/api/user/login")
+						.contentType("application/json")
+						.content("{\"username\":\"testuser\",\"password\":\"password\"}")) // Perform POST request with LoginDto
+				.andExpect(status().isOk()) // Expect 200 OK status
+				.andExpect(jsonPath("$.id").value(1L)) // Check if the ID in the response matches
+				.andExpect(jsonPath("$.username").value("testuser")) // Check if the username in the response matches
+				.andExpect(jsonPath("$.email").value("test@example.com")); // Check if the email in the response matches
+
+		// Verify that the service method was called once
+		verify(userService, times(1)).login(username, password);
 	}
 }
