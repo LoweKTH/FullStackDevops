@@ -5,7 +5,6 @@ import { createConversation } from "../api/Message-ms-api";
 import { useNavigate } from "react-router-dom";
 
 function DoctorStaffList( ) {
-    const [doctorStaff, setDoctorStaff] = useState([]);
     const [error, setError] = useState("");
     const [loading, setLoading] = useState(true);
 

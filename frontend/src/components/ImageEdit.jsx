@@ -33,29 +33,24 @@ const ImageEdit = () => {
 
         window.addEventListener('keydown', handleKeyDown);
 
-        if (imagePath) {
-            console.log("Loading image:", imagePath);
-
-
+        if (fabricCanvas && imagePath) {
             Image.fromURL(imagePath, {
                 crossOrigin: "anonymous",
             })
                 .then((img) => {
-                    if (!img) {
-                        console.error("Image is null or undefined.");
-                        alert("Failed to load image.");
-                        return;
+                    if(img) {
+                        console.log("Image loaded successfully:", img);
+                        fabricCanvas.add(img);
+                        fabricCanvas.setDimensions({width: img.width, height: img.height});
+                        img.selectable = false;
                     }
-                    console.log("Image loaded successfully:", img);
-                    img.scaleToWidth(fabricCanvas.width);
-                    fabricCanvas.add(img);
-                    fabricCanvas.setActiveObject(img);
                 })
                 .catch((error) => {
                     console.error("Error loading image:", error);
-                    alert("Failed to load image.");
+
                 });
         }
+
 
 
         return () => {

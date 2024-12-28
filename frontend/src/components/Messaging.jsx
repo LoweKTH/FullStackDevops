@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from "react";
-import { useLocation, useParams } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 import { fetchMessages, sendMessage } from "../api/Message-ms-api";
 
 function Messaging() {
     const { state } = useLocation();
-    const { conversationId, userId, patientId } = state || {};
+    const { conversationId, userId } = state || {};
 
     const [messages, setMessages] = useState([]);
     const [newMessage, setNewMessage] = useState("");

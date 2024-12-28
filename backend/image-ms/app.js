@@ -9,7 +9,7 @@ const Image = require('./model/Image');
 
 
 app.use(cors({
-    origin: 'http://localhost:30000',
+    origin: '*',
     methods: ['GET', 'POST'],
     allowedHeaders: ['Content-Type'],
 }));

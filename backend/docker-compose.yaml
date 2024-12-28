@@ -25,7 +25,6 @@ services:
     networks:
       - backend-network
 
-
   doctorstaff-ms:
     build: ./doctorstaff-ms
     environment:
@@ -38,7 +37,7 @@ services:
       - db
     networks:
       - backend-network
-
+  
 
   patient-ms:
     build: ./patient-ms
@@ -52,6 +51,7 @@ services:
       - db
     networks:
       - backend-network
+
 
 
   user-ms:

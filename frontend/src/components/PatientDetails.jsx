@@ -113,7 +113,7 @@ const PatientDetails = () => {
                                             <div key={index} className="image-item">
                                                 <img
                                                     src={image.imagePath}
-                                                    alt={`Patient Image ${index + 1}`}
+                                                    alt=""
                                                     className="patient-image"
                                                 />
                                                 <div className="image-details">
