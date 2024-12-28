@@ -21,67 +21,28 @@ public class UserServiceImpl implements UserService {
     private final BCryptPasswordEncoder passwordEncoder;
     private final RestTemplate restTemplate;
 
-
     @Override
-    public UserDto createUser(RegistrationDto registrationDto){
-
+    public UserDto createUser(RegistrationDto registrationDto) {
         UserDto userDto = registrationDto.getUserDetails();
         AdditionalInfoDto additionalInfoDto = registrationDto.getAdditionalInfoDetails();
-        System.out.println(additionalInfoDto.toString());
 
-        if(userRepository.existsByUsername(userDto.getUsername()) || userRepository.existsByEmail(userDto.getEmail())){
+
+        if (userRepository.existsByUsername(userDto.getUsername()) || userRepository.existsByEmail(userDto.getEmail())) {
             throw new UserExistsException("This username or email is already taken");
         }
 
-        String encodedPassword = passwordEncoder.encode(userDto.getPassword());
-        userDto.setPassword(encodedPassword);
 
+        userDto.setPassword(passwordEncoder.encode(userDto.getPassword()));
         User user = UserMapper.toEntity(userDto);
         userRepository.save(user);
         userDto = UserMapper.toDto(user);
 
-        if(userDto.getRole().equalsIgnoreCase("patient")){
-            String patientServiceEndpoint = "http://patient-ms:8080/api/patients/addPatient";
 
-            PatientDto patientDto = new PatientDto();
-            patientDto.setUserId(userDto.getId());
-            patientDto.setEmail(userDto.getEmail());
-            patientDto.setSocialSecurityNumber(additionalInfoDto.getSocialSecurityNumber());
-            patientDto.setFirstname(additionalInfoDto.getFirstname());
-            patientDto.setLastname(additionalInfoDto.getLastname());
-            patientDto.setPhoneNumber(additionalInfoDto.getPhoneNumber());
-            patientDto.setAddress(additionalInfoDto.getAddress());
-            patientDto.setGender(additionalInfoDto.getGender());
-            patientDto.setDateOfBirth(additionalInfoDto.getDateOfBirth());
-
-            try {
-                restTemplate.postForEntity(patientServiceEndpoint, patientDto, PatientDto.class);
-            } catch (Exception e) {
-                System.out.println("Failed to create patient in Patient MS: " + e.getMessage());
-            }
-        }else if(userDto.getRole().equalsIgnoreCase("doctor")){
-            String doctorServiceEndpoint = "http://doctorstaff-ms:8080/api/doctors/addDoctor";
-
-            DoctorDto doctorDto = new DoctorDto();
-            doctorDto.setSocialSecurityNumber(additionalInfoDto.getSocialSecurityNumber());
-            doctorDto.setUserId(userDto.getId());
-            doctorDto.setEmail(userDto.getEmail());
-            doctorDto.setFirstname(additionalInfoDto.getFirstname());
-            doctorDto.setLastname(additionalInfoDto.getLastname());
-            doctorDto.setSpecialty(additionalInfoDto.getSpecialty());
-            doctorDto.setPhoneNumber(additionalInfoDto.getPhoneNumber());
-
-
-            try {
-                restTemplate.postForEntity(doctorServiceEndpoint, doctorDto, DoctorDto.class);
-            } catch (Exception e) {
-                System.out.println("Failed to create doctor in Doctor MS: " + e.getMessage());
-            }
-        }
-
+        handleRoleSpecificLogic(userDto, additionalInfoDto);
 
         return userDto;
     }
+
 
     @Override
     @Transactional
@@ -119,6 +80,71 @@ public class UserServiceImpl implements UserService {
         }
 
         return UserMapper.toDto(user);
+
+    }
+
+
+    private void handleRoleSpecificLogic(UserDto userDto, AdditionalInfoDto additionalInfoDto) {
+        String role = userDto.getRole().toLowerCase();
+
+        String serviceEndpoint = null;
+
+        switch (role) {
+            case "patient":
+                serviceEndpoint = "http://patient-ms:80/api/patients/addPatient";
+                PatientDto patientDto = new PatientDto();
+                patientDto.setUserId(userDto.getId());
+                patientDto.setEmail(userDto.getEmail());
+                patientDto.setSocialSecurityNumber(additionalInfoDto.getSocialSecurityNumber());
+                patientDto.setFirstname(additionalInfoDto.getFirstname());
+                patientDto.setLastname(additionalInfoDto.getLastname());
+                patientDto.setPhoneNumber(additionalInfoDto.getPhoneNumber());
+                patientDto.setAddress(additionalInfoDto.getAddress());
+                patientDto.setGender(additionalInfoDto.getGender());
+                patientDto.setDateOfBirth(additionalInfoDto.getDateOfBirth());
+                try {
+                    restTemplate.postForEntity(serviceEndpoint, patientDto, PatientDto.class);
+                } catch (Exception e) {
+                    System.out.println("Failed to create patient in Patient MS: " + e.getMessage());
+                }
+
+                break;
+            case "doctor":
+                serviceEndpoint = "http://doctorstaff-ms:80/api/doctors/addDoctor";
+
+                DoctorDto doctorDto = new DoctorDto();
+                doctorDto.setSocialSecurityNumber(additionalInfoDto.getSocialSecurityNumber());
+                doctorDto.setUserId(userDto.getId());
+                doctorDto.setEmail(userDto.getEmail());
+                doctorDto.setFirstname(additionalInfoDto.getFirstname());
+                doctorDto.setLastname(additionalInfoDto.getLastname());
+                doctorDto.setSpecialty(additionalInfoDto.getSpecialty());
+                doctorDto.setPhoneNumber(additionalInfoDto.getPhoneNumber());
+                try {
+                    restTemplate.postForEntity(serviceEndpoint, doctorDto, DoctorDto.class);
+                } catch (Exception e) {
+                    System.out.println("Failed to create doctor in Doctorstaff MS: " + e.getMessage());
+                }
+                break;
+            case "staff":
+                serviceEndpoint = "http://doctorstaff-ms:80/api/staff/addStaff";
+                StaffDto staffDto = new StaffDto();
+                staffDto.setSocialSecurityNumber(additionalInfoDto.getSocialSecurityNumber());
+                staffDto.setUserId(userDto.getId());
+                staffDto.setEmail(userDto.getEmail());
+                staffDto.setFirstname(additionalInfoDto.getFirstname());
+                staffDto.setLastname(additionalInfoDto.getLastname());
+                staffDto.setDescription(additionalInfoDto.getDescription());
+                staffDto.setPhoneNumber(additionalInfoDto.getPhoneNumber());
+                try {
+                    restTemplate.postForEntity(serviceEndpoint, staffDto, StaffDto.class);
+                } catch (Exception e) {
+                    System.out.println("Failed to create staff in Doctorstaff MS: " + e.getMessage());
+                }
+                break;
+            default:
+                throw new IllegalArgumentException("Invalid role: " + role);
+        }
 
     }
 

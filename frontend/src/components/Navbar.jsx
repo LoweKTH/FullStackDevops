@@ -1,28 +1,66 @@
-import React from 'react';
-import { useNavigate } from 'react-router-dom';
-import './Navbar.css';
+import React from "react";
+import { useNavigate } from "react-router-dom";
+import "../styles/Navbar.css";
 
-function Navbar() {
-
+const Navbar = () => {
     const navigate = useNavigate();
 
-    const handleLoginClick = () => {
-        navigate('/login');
+    const role = localStorage.getItem("role");
+    const isLoggedIn = !!role;
+
+    const handleLogout = () => {
+        localStorage.clear();
+        navigate("/login");
     };
 
-    const handlePatientClick = () => {
-        navigate('/patients');
+    const getDashboardTitle = () => {
+        switch (role) {
+            case "Doctor":
+                return "Doctor Dashboard";
+            case "Patient":
+                return "Patient Dashboard";
+            case "Staff":
+                return "Staff Dashboard";
+            default:
+                return "Dashboard";
+        }
+    };
+
+    const renderLinks = () => {
+        if (!isLoggedIn) {
+            return (
+                <div className="navbar-links">
+                    <button onClick={() => navigate("/login")} className="nav-button">
+                        Login
+                    </button>
+                    <button onClick={() => navigate("/register")} className="nav-button">
+                        Register
+                    </button>
+                </div>
+            );
+        }
+
+        // If a user is logged in
+        return (
+            <div className="navbar-links">
+                <button onClick={() => navigate("/dashboard")} className="nav-button">
+                    Dashboard
+                </button>
+                <button onClick={handleLogout} className="nav-button">
+                    Logout
+                </button>
+            </div>
+        );
     };
 
     return (
         <nav className="navbar">
-            <h2>App name</h2>
-            <div className="navbar-buttons">
-                <button onClick={handlePatientClick}>Patients</button>
-                <button onClick={handleLoginClick}>Login</button>
+            <div className="navbar-container">
+                <h2>{isLoggedIn ? getDashboardTitle() : "Patient System"}</h2>
+                {renderLinks()}
             </div>
         </nav>
     );
-}
+};
 
 export default Navbar;

@@ -2,6 +2,7 @@ package com.fullstackdevops.patientms.utils;
 
 import com.fullstackdevops.patientms.dto.NoteDto;
 import com.fullstackdevops.patientms.model.Note;
+import com.fullstackdevops.patientms.model.Patient;
 
 public class NoteMapper {
 
@@ -10,14 +11,15 @@ public class NoteMapper {
         dto.setId(note.getId());
         dto.setContent(note.getContent());
         dto.setCreatedAt(note.getCreatedAt());
-        dto.setDoctorId(note.getDoctorId());
+        dto.setDoctorstaffId(note.getDoctorstaffId());
         return dto;
     }
 
-    public static Note toEntity(NoteDto dto) {
+    public static Note toEntity(NoteDto noteDto, Patient patient) {
         Note note = new Note();
-        note.setContent(dto.getContent());
-        note.setDoctorId(dto.getDoctorId());
+        note.setContent(noteDto.getContent());
+        note.setDoctorstaffId(noteDto.getDoctorstaffId());
+        note.setPatientId(patient.getUserId());
         return note;
     }
 }

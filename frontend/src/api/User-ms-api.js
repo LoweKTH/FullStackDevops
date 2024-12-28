@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const usermsBaseURL = 'http://localhost:8081/api/user';
+const usermsBaseURL = 'http://localhost:30001/api/user';
 
 const api = axios.create({
     baseURL: usermsBaseURL,

@@ -10,16 +10,16 @@ public class DoctorMapper {
             return null;
         }
 
-        DoctorDto doctorDto = new DoctorDto();
-        doctorDto.setSocialSecurityNumber(doctor.getSocialSecurityNumber());
-        doctorDto.setUserId(doctor.getUserId());
-        doctorDto.setFirstname(doctor.getFirstname());
-        doctorDto.setLastname(doctor.getLastname());
-        doctorDto.setEmail(doctor.getEmail());
-        doctorDto.setPhoneNumber(doctor.getPhoneNumber());
-        doctorDto.setSpecialty(doctor.getSpecialty());
+        DoctorDto dto = new DoctorDto();
+        dto.setSocialSecurityNumber(doctor.getSocialSecurityNumber());
+        dto.setUserId(doctor.getUserId());
+        dto.setFirstname(doctor.getFirstname());
+        dto.setLastname(doctor.getLastname());
+        dto.setEmail(doctor.getEmail());
+        dto.setPhoneNumber(doctor.getPhoneNumber());
+        dto.setSpecialty(doctor.getSpecialty());
 
-        return doctorDto;
+        return dto;
     }
 
     public static Doctor toEntity(DoctorDto doctorDto) {

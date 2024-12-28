@@ -1,0 +1,37 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: patient-ms
+  labels:
+    app: patient-ms
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: patient-ms
+  template:
+    metadata:
+      name: patient-ms
+      labels:
+        app: patient-ms
+    spec:
+      initContainers:
+        - name: wait-for-db
+          image: busybox
+          command: [ 'sh', '-c', 'until nc -zv db 3306; do echo "Waiting for db"; sleep 2; done;' ]
+      containers:
+        - name: patient-ms
+          image: backend-patient-ms:latest
+          imagePullPolicy: IfNotPresent
+          ports:
+            - containerPort: 8080
+              protocol: TCP
+          env:
+            - name: SPRING_DATASOURCE_URL
+              value: jdbc:mysql://db:3306/fullstack24
+            - name: SPRING_DATASOURCE_USERNAME
+              value: user
+            - name: SPRING_DATASOURCE_PASSWORD
+              value: password
+      restartPolicy: Always
+      

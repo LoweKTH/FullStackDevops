@@ -26,5 +26,8 @@ public class AdditionalInfoDto {
     // Doctor specific
     private String specialty;
 
+    // Staff specific
+    private String description;
+
 
 }

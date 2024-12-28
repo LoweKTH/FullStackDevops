@@ -1,0 +1,40 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: frontend
+  labels:
+    app: frontend
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: frontend
+  template:
+    metadata:
+      labels:
+        app: frontend
+    spec:
+      containers:
+        - name: frontend
+          image: backend-frontend:latest
+          imagePullPolicy: IfNotPresent
+          ports:
+            - containerPort: 3000
+              protocol: TCP
+          env:
+            - name: CHOKIDAR_USEPOLLING
+              value: "true"
+            - name: PUBLIC_URL
+              value: "http://localhost:30000"
+            - name: REACT_APP_WEB_SOCKET_URL
+              value: "ws://localhost:30000"  # WebSocket URL for hot reloading
+
+          volumeMounts:
+            - mountPath: /frontend/src/app
+              name: app-source
+      volumes:
+        - name: app-source
+          hostPath:
+            path: /run/desktop/mnt/host/c/Users/benny/IdeaProjects/FullStackDevops/frontend
+            type: Directory
+      restartPolicy: Always

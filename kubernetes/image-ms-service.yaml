@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: image-ms
+spec:
+  selector:
+    app: image-ms
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 3002
+      nodePort: 30004
+  type: NodePort
+  
