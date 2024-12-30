@@ -6,6 +6,24 @@ on:
       - main
 
 jobs:
+  patient-ms-build:
+    name: Build and Test Patient Microservice
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v3
+
+      # Build Patient Microservice Docker Image using Dockerfile
+      - name: Build Patient Microservice Docker Image
+        working-directory: backend/patient-ms
+        run: docker build -t patient-ms:latest .
+
+      # Run Patient Microservice Tests (using Maven)
+      - name: Run Patient Microservice Tests
+        working-directory: backend/patient-ms
+        run: mvn test
+
   user-ms-build:
     name: Build and Test User Microservice
     runs-on: ubuntu-latest
