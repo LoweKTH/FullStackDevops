@@ -14,9 +14,9 @@ jobs:
       - name: Checkout Code
         uses: actions/checkout@v3
 
-      - name: Build Doctorstaff Microservice
-        working-directory: backend/doctorstaff-ms  # assuming it's located in backend/messaging-ms
-        run: mvn clean install -DskipTests
+      #- name: Build Doctorstaff Microservice
+       # working-directory: backend/doctorstaff-ms  # assuming it's located in backend/messaging-ms
+        #run: mvn clean install -DskipTests
 
       - name: Run Doctorstaff Microservice Tests
         working-directory: backend/doctorstaff-ms
