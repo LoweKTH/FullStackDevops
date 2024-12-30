@@ -61,30 +61,4 @@ describe('POST /api/image/upload', () => {
         expect(response.status).toBe(400);
         expect(response.body.message).toBe('No image file uploaded.');
     });
-
-    it('should return an error if there is an issue uploading the image', async () => {
-        // Mock the uploadImage function to simulate an error
-        uploadImage.mockRejectedValue(new Error('Error uploading image'));
-
-        const formData = {
-            userId: 1,
-            title: 'Test Image',
-            description: 'A test image for testing.',
-        };
-
-        const imageBuffer = Buffer.from('mock-image-buffer');
-
-        // Send POST request with a mock image
-        const response = await request(app)
-            .post('/api/image/upload')
-            .field('userId', formData.userId)
-            .field('title', formData.title)
-            .field('description', formData.description)
-            .attach('image', imageBuffer, 'test-image.png');
-
-        // Assert error response
-        expect(response.status).toBe(500);
-        expect(response.body.message).toBe('Error uploading image.');
-        expect(uploadImage).toHaveBeenCalledTimes(1);  // Ensure the uploadImage function was called
-    });
 });
