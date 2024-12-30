@@ -31,7 +31,7 @@ jobs:
   image-ms-build:
     name: Build and Test Image Microservice
     runs-on: ubuntu-latest
-    #needs: doctorstaff-ms-build
+    needs: doctorstaff-ms-build
 
     steps:
       - name: Checkout Code
@@ -64,7 +64,7 @@ jobs:
   messaging-ms-build:
     name: Build and Test Messaging Microservice
     runs-on: ubuntu-latest
-    #needs: image-ms-build
+    needs: image-ms-build
 
     steps:
       - name: Checkout Code
@@ -88,7 +88,7 @@ jobs:
   patient-ms-build:
     name: Build and Test Patient Microservice
     runs-on: ubuntu-latest
-   # needs: messaging-ms-build
+    needs: messaging-ms-build
 
     steps:
       - name: Checkout Code
@@ -111,7 +111,7 @@ jobs:
   user-ms-build:
     name: Build and Test User Microservice
     runs-on: ubuntu-latest
-    #needs: patient-ms-build
+    needs: patient-ms-build
 
     steps:
       - name: Checkout Code
@@ -156,7 +156,7 @@ jobs:
   frontend-build:
     name: Build Frontend
     runs-on: ubuntu-latest
-    #needs: user-ms-build
+    needs: user-ms-build
     steps:
       - name: Checkout Code
         uses: actions/checkout@v3
