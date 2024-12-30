@@ -6,9 +6,28 @@ on:
       - main
 
 jobs:
+  doctorstaff-ms-build:
+    name: Build and Test Doctorstaff Microservice
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v3
+
+      - name: Run Doctorstaff Microservice Tests
+        working-directory: backend/doctorstaff-ms
+        run: mvn test
+
+      # Build Messaging Microservice Docker Image only if tests succeed
+      - name: Build Doctorstaff Microservice Docker Image
+        working-directory: backend/doctorstaff-ms
+        if: success()  # Only run if the previous step (tests) succeeded
+        run: docker build -t doctorstaff-ms:latest .
+
   image-ms-build:
     name: Build and Test Image Microservice
     runs-on: ubuntu-latest
+    needs: doctorstaff-ms-build
 
     steps:
       - name: Checkout Code
@@ -41,6 +60,7 @@ jobs:
   messaging-ms-build:
     name: Build and Test Messaging Microservice
     runs-on: ubuntu-latest
+    needs: image-ms-build
 
     steps:
       - name: Checkout Code
@@ -60,6 +80,7 @@ jobs:
   patient-ms-build:
     name: Build and Test Patient Microservice
     runs-on: ubuntu-latest
+    needs: messaging-ms-build
 
     steps:
       - name: Checkout Code
@@ -78,6 +99,7 @@ jobs:
   user-ms-build:
     name: Build and Test User Microservice
     runs-on: ubuntu-latest
+    needs: patient-ms-build
 
     steps:
       - name: Checkout Code
@@ -118,7 +140,7 @@ jobs:
   frontend-build:
     name: Build Frontend
     runs-on: ubuntu-latest
-    needs: [messaging-ms-build, patient-ms-build, user-ms-build, image-ms-build]
+    needs: user-ms-build
     steps:
       - name: Checkout Code
         uses: actions/checkout@v3
