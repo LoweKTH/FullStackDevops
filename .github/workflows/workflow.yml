@@ -20,6 +20,9 @@ jobs:
         with:
           node-version: '22'  # Use the version of Node.js that your project requires
 
+      - name: Ensure Jest has executable permissions
+        working-directory: backend/image-ms
+        run: chmod +x node_modules/.bin/jest
 
       - name: Install Dependencies for Image Microservice
         working-directory: backend/image-ms
