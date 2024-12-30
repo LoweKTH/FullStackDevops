@@ -3,8 +3,9 @@
   "version": "1.0.0",
   "main": "app.js",
   "scripts": {
-    "test": "jest"
+    "test": "node_modules/.bin/jest"
   },
+
   "keywords": [],
   "author": "",
   "license": "ISC",
