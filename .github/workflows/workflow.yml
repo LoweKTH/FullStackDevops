@@ -14,6 +14,10 @@ jobs:
       - name: Checkout Code
         uses: actions/checkout@v3
 
+      - name: Build Doctorstaff Microservice
+        working-directory: backend/doctorstaff-ms  # assuming it's located in backend/messaging-ms
+        run: mvn clean install -DskipTests
+
       - name: Run Doctorstaff Microservice Tests
         working-directory: backend/doctorstaff-ms
         run: mvn test
@@ -66,6 +70,10 @@ jobs:
       - name: Checkout Code
         uses: actions/checkout@v3
 
+      - name: Build Messaging Microservice
+        working-directory: backend/messaging-ms  # assuming it's located in backend/messaging-ms
+        run: mvn clean install -DskipTests
+
       - name: Run Messaging Microservice Tests
         working-directory: backend/messaging-ms
         run: mvn test
@@ -86,6 +94,10 @@ jobs:
       - name: Checkout Code
         uses: actions/checkout@v3
 
+      - name: Build Patient Microservice
+        working-directory: backend/patient-ms  # assuming it's located in backend/messaging-ms
+        run: mvn clean install -DskipTests
+
       - name: Run Patient Microservice Tests
         working-directory: backend/patient-ms
         run: mvn test
@@ -104,6 +116,10 @@ jobs:
     steps:
       - name: Checkout Code
         uses: actions/checkout@v3
+
+      - name: Build User Microservice
+        working-directory: backend/user-ms  # assuming it's located in backend/messaging-ms
+        run: mvn clean install -DskipTests
 
       - name: Run User Microservice Tests
         working-directory: backend/user-ms
