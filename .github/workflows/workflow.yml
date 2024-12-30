@@ -6,6 +6,25 @@ on:
       - main
 
 jobs:
+  messaging-ms-build:
+    name: Build and Test Messaging Microservice
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v3
+
+      # Build Messaging Microservice Docker Image using Dockerfile
+      - name: Build Messaging Microservice Docker Image
+        working-directory: backend/messaging-ms
+        run: docker build -t messaging-ms:latest .
+
+      # Run Messaging Microservice Tests (using Maven)
+      - name: Run Messaging Microservice Tests
+        working-directory: backend/messaging-ms
+        run: mvn test
+
+
   patient-ms-build:
     name: Build and Test Patient Microservice
     runs-on: ubuntu-latest
