@@ -6,14 +6,24 @@ on:
       - main
 
 jobs:
-  doctorstaff-ms-build:
-    name: Build and Test Doctorstaff Microservice
+  build:
+    name: Build, Test and Push Microservices
     runs-on: ubuntu-latest
 
     steps:
       - name: Checkout Code
         uses: actions/checkout@v3
 
+      - name: Set up Docker Compose
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y docker-compose
+
+      - name: Build and start services with Docker Compose
+        run: |
+          docker-compose -f docker-compose.yml up -d  
+
+      # Doctorstaff Microservice
       - name: Build Doctorstaff Microservice
         working-directory: backend/doctorstaff-ms
         run: mvn clean install -DskipTests
@@ -22,37 +32,8 @@ jobs:
         working-directory: backend/doctorstaff-ms
         run: mvn test
 
-      - name: Login to Docker Hub
-        uses: docker/login-action@v3
-        with:
-          registry: registry.cloud.cbh.kth.se
-          username: ${{ secrets.DOCKER_USERNAME }}
-          password: ${{ secrets.DOCKER_PASSWORD }}
-      - name: Build and push
-        uses: docker/build-push-action@v5
-        with:
-          push: true
-          tags: ${{ secrets.DOCKER_TAG }}
-
-  image-ms-build:
-    name: Build and Test Image Microservice
-    runs-on: ubuntu-latest
-
-    steps:
-      - name: Checkout Code
-        uses: actions/checkout@v3
-
-      # Setup Node.js
-      - name: Set up Node.js
-        uses: actions/setup-node@v3
-        with:
-          node-version: '22'  # Use the version of Node.js that your project requires
-
-      - name: Ensure Jest has executable permissions
-        working-directory: backend/image-ms
-        run: chmod +x node_modules/.bin/jest
-
-      - name: Install Dependencies for Image Microservice
+      # Image Microservice
+      - name: Build Image Microservice
         working-directory: backend/image-ms
         run: npm install
 
@@ -60,113 +41,36 @@ jobs:
         working-directory: backend/image-ms
         run: npm test
 
-      - name: Login to Docker Hub
-        uses: docker/login-action@v3
-        with:
-          registry: registry.cloud.cbh.kth.se
-          username: ${{ secrets.DOCKER_USERNAME }}
-          password: ${{ secrets.DOCKER_PASSWORD }}
-      - name: Build and push
-        uses: docker/build-push-action@v5
-        with:
-          push: true
-          tags: ${{ secrets.DOCKER_TAG }}
-
-  messaging-ms-build:
-    name: Build and Test Messaging Microservice
-    runs-on: ubuntu-latest
-
-    steps:
-      - name: Checkout Code
-        uses: actions/checkout@v3
-
+      # Messaging Microservice
       - name: Build Messaging Microservice
-        working-directory: backend/messaging-ms  # assuming it's located in backend/messaging-ms
+        working-directory: backend/messaging-ms
         run: mvn clean install -DskipTests
 
       - name: Run Messaging Microservice Tests
         working-directory: backend/messaging-ms
         run: mvn test
 
-      # Build Messaging Microservice Docker Image only if tests succeed
-      - name: Login to Docker Hub
-        uses: docker/login-action@v3
-        with:
-          registry: registry.cloud.cbh.kth.se
-          username: ${{ secrets.DOCKER_USERNAME }}
-          password: ${{ secrets.DOCKER_PASSWORD }}
-      - name: Build and push
-        uses: docker/build-push-action@v5
-        with:
-          push: true
-          tags: ${{ secrets.DOCKER_TAG }}
-
-
-  patient-ms-build:
-    name: Build and Test Patient Microservice
-    runs-on: ubuntu-latest
-
-    steps:
-      - name: Checkout Code
-        uses: actions/checkout@v3
-
+      # Patient Microservice
       - name: Build Patient Microservice
-        working-directory: backend/patient-ms  # assuming it's located in backend/messaging-ms
+        working-directory: backend/patient-ms
         run: mvn clean install -DskipTests
 
       - name: Run Patient Microservice Tests
         working-directory: backend/patient-ms
         run: mvn test
 
-      # Build Patient Microservice Docker Image only if tests succeed
-      - name: Login to Docker Hub
-        uses: docker/login-action@v3
-        with:
-          registry: registry.cloud.cbh.kth.se
-          username: ${{ secrets.DOCKER_USERNAME }}
-          password: ${{ secrets.DOCKER_PASSWORD }}
-      - name: Build and push
-        uses: docker/build-push-action@v5
-        with:
-          push: true
-          tags: ${{ secrets.DOCKER_TAG }}
-
-  user-ms-build:
-    name: Build and Test User Microservice
-    runs-on: ubuntu-latest
-
-    steps:
-      - name: Checkout Code
-        uses: actions/checkout@v3
-
+      # User Microservice
       - name: Build User Microservice
-        working-directory: backend/user-ms  # assuming it's located in backend/messaging-ms
+        working-directory: backend/user-ms
         run: mvn clean install -DskipTests
 
       - name: Run User Microservice Tests
         working-directory: backend/user-ms
         run: mvn test
 
-      # Build User Microservice Docker Image only if tests succeed
-      - name: Login to Docker Hub
-        uses: docker/login-action@v3
-        with:
-          registry: registry.cloud.cbh.kth.se
-          username: ${{ secrets.DOCKER_USERNAME }}
-          password: ${{ secrets.DOCKER_PASSWORD }}
-      - name: Build and push
-        uses: docker/build-push-action@v5
-        with:
-          push: true
-          tags: ${{ secrets.DOCKER_TAG }}
-
-  frontend-build:
-    name: Build Frontend
-    runs-on: ubuntu-latest
-
-    steps:
-      - name: Checkout Code
-        uses: actions/checkout@v3
+      # Shutdown Docker Compose
+      - name: Shut down Docker Compose
+        run: docker-compose -f docker-compose.yml down
 
       - name: Login to Docker Hub
         uses: docker/login-action@v3
@@ -174,7 +78,8 @@ jobs:
           registry: registry.cloud.cbh.kth.se
           username: ${{ secrets.DOCKER_USERNAME }}
           password: ${{ secrets.DOCKER_PASSWORD }}
-      - name: Build and push
+
+      - name: Build and push microservice images
         uses: docker/build-push-action@v5
         with:
           push: true
