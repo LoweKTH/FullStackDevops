@@ -31,8 +31,11 @@ jobs:
       - name: Build and push
         uses: docker/build-push-action@v5
         with:
+          context: ./backend/doctorstaff-ms
+          file: ./backend/doctorstaff-ms/Dockerfile
           push: true
           tags: ${{ secrets.DOCKER_TAG }}
+
 
   image-ms-build:
     name: Build and Test Image Microservice
@@ -69,6 +72,8 @@ jobs:
       - name: Build and push
         uses: docker/build-push-action@v5
         with:
+          context: ./backend/image-ms
+          file: ./backend/image-ms/Dockerfile
           push: true
           tags: ${{ secrets.DOCKER_TAG }}
 
@@ -98,6 +103,8 @@ jobs:
       - name: Build and push
         uses: docker/build-push-action@v5
         with:
+          context: ./backend/messaging-ms  # Path to the folder containing the Dockerfile
+          file: ./backend/messaging-ms/Dockerfile
           push: true
           tags: ${{ secrets.DOCKER_TAG }}
 
@@ -128,6 +135,8 @@ jobs:
       - name: Build and push
         uses: docker/build-push-action@v5
         with:
+          context: ./backend/patient-ms
+          file: ./backend/patient-ms/Dockerfile
           push: true
           tags: ${{ secrets.DOCKER_TAG }}
 
@@ -157,6 +166,8 @@ jobs:
       - name: Build and push
         uses: docker/build-push-action@v5
         with:
+          context: ./backend/user-ms  # Path to the folder containing the Dockerfile
+          file: ./backend/user-ms/Dockerfile
           push: true
           tags: ${{ secrets.DOCKER_TAG }}
 
@@ -177,5 +188,7 @@ jobs:
       - name: Build and push
         uses: docker/build-push-action@v5
         with:
+          context: ./frontend
+          file: ./frontend/Dockerfile
           push: true
           tags: ${{ secrets.DOCKER_TAG }}
