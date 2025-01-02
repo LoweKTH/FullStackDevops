@@ -39,7 +39,8 @@ jobs:
       # Build the Docker Compose services
       - name: Build and start Docker Compose services
         run: |
-          docker-compose -f ./backend/docker-compose.yaml build
+          docker-compose -f ./backend/docker-compose.yaml up -d
+
 
       # Run tests for messaging-ms (this is done during the build step)
       - name: Run tests for messaging-ms
