@@ -6,7 +6,6 @@ RUN mvn clean package -DskipTests
 
 # Use an OpenJDK image to run the application
 FROM openjdk:17-jdk-slim
-RUN apt-get update && apt-get install -y maven
 WORKDIR /app
 COPY --from=build /app/target/messaging-ms-0.0.1-SNAPSHOT.jar messaging-ms-0.0.1-SNAPSHOT.jar
 ENTRYPOINT ["java", "-jar", "messaging-ms-0.0.1-SNAPSHOT.jar"]

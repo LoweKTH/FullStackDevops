@@ -50,27 +50,30 @@ jobs:
           done
           echo "MySQL is ready!"
 
-      # Run tests for each microservice
-
+      # Run tests for messaging-ms (this is done during the build step)
       - name: Run tests for messaging-ms
         run: |
-          docker exec backend-messaging-ms-1 mvn test
+          docker-compose -f ./backend/docker-compose.yaml run --rm messaging-ms mvn test
 
+      # Run tests for doctorstaff-ms
       - name: Run tests for doctorstaff-ms
         run: |
-          docker exec backend-doctorstaff-ms-1 mvn test
+          docker-compose -f ./backend/docker-compose.yaml run --rm doctorstaff-ms mvn test
 
+      # Run tests for patient-ms
       - name: Run tests for patient-ms
         run: |
-          docker exec backend-patient-ms-1 mvn test
+          docker-compose -f ./backend/docker-compose.yaml run --rm patient-ms mvn test
 
+      # Run tests for user-ms
       - name: Run tests for user-ms
         run: |
-          docker exec backend-user-ms-1 mvn test
+          docker-compose -f ./backend/docker-compose.yaml run --rm user-ms mvn test
 
+      # Run tests for image-ms (using npm for testing)
       - name: Run tests for image-ms
         run: |
-          docker exec backend-image-ms-1 npm test
+          docker-compose -f ./backend/docker-compose.yaml run --rm image-ms npm test
 
       # Optionally, build and push Docker images to a registry (if needed)
       - name: Build and push
