@@ -28,9 +28,9 @@ jobs:
       - name: Checkout Code
         uses: actions/checkout@v3
 
-      - name: Set up Docker Compose
-        run: |
-          sudo apt-get install -y docker-compose
+      - name: Build Doctorstaff Microservice
+        working-directory: backend/doctorstaff-ms
+        run: mvn clean install -DskipTests
 
       - name: Run Tests for Doctorstaff Microservice
         env:
@@ -78,9 +78,9 @@ jobs:
       - name: Checkout Code
         uses: actions/checkout@v3
 
-      - name: Set up Docker Compose
-        run: |
-          sudo apt-get install -y docker-compose
+      - name: Build Image Microservice
+        working-directory: backend/image-ms
+        run: mvn clean install -DskipTests
 
 
       - name: Run Tests for image Microservice
@@ -129,9 +129,9 @@ jobs:
       - name: Checkout Code
         uses: actions/checkout@v3
 
-      - name: Set up Docker Compose
-        run: |
-          sudo apt-get install -y docker-compose
+      - name: Build messaging Microservice
+        working-directory: backend/messaging-ms
+        run: mvn clean install -DskipTests
 
       - name: Run Tests for messaging Microservice
         env:
@@ -179,9 +179,9 @@ jobs:
       - name: Checkout Code
         uses: actions/checkout@v3
 
-      - name: Set up Docker Compose
-        run: |
-          sudo apt-get install -y docker-compose
+      - name: Build Patient Microservice
+        working-directory: backend/patient-ms
+        run: mvn clean install -DskipTests
 
       - name: Run Tests for patient Microservice
         env:
@@ -229,9 +229,9 @@ jobs:
       - name: Checkout Code
         uses: actions/checkout@v3
 
-      - name: Set up Docker Compose
-        run: |
-          sudo apt-get install -y docker-compose
+      - name: Build user Microservice
+        working-directory: backend/user-ms
+        run: mvn clean install -DskipTests
 
       - name: Run Tests for user Microservice
         env:
