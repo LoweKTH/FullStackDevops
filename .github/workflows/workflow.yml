@@ -39,7 +39,7 @@ jobs:
       # Build the Docker Compose services
       - name: Build and start Docker Compose services
         run: |
-          docker-compose -f ./backend/docker-compose.yaml up -d
+          docker-compose -f ./backend/docker-compose.yaml up -d --build
 
       # Wait for MySQL to be ready
       - name: Wait for MySQL to be ready
@@ -53,27 +53,27 @@ jobs:
       # Run tests for messaging-ms (this is done during the build step)
       - name: Run tests for messaging-ms
         run: |
-          docker-compose -f ./backend/docker-compose.yaml exec messaging-ms mvn test
+          docker-compose -f ./backend/docker-compose.yaml exec backend-messaging-ms-1 mvn test
 
       # Run tests for doctorstaff-ms
       - name: Run tests for doctorstaff-ms
         run: |
-          docker-compose -f ./backend/docker-compose.yaml exec doctorstaff-ms mvn test
+          docker-compose -f ./backend/docker-compose.yaml exec backend-doctorstaff-ms-1 mvn test
 
       # Run tests for patient-ms
       - name: Run tests for patient-ms
         run: |
-          docker-compose -f ./backend/docker-compose.yaml exec patient-ms mvn test
+          docker-compose -f ./backend/docker-compose.yaml exec backend-patient-ms-1 mvn test
 
       # Run tests for user-ms
       - name: Run tests for user-ms
         run: |
-          docker-compose -f ./backend/docker-compose.yaml exec user-ms mvn test
+          docker-compose -f ./backend/docker-compose.yaml exec backend-user-ms-1 mvn test
 
       # Run tests for image-ms (using npm for testing)
       - name: Run tests for image-ms
         run: |
-          docker-compose -f ./backend/docker-compose.yaml exec image-ms npm test
+          docker-compose -f ./backend/docker-compose.yaml exec backend-image-ms-1 npm test
 
       # Optionally, build and push Docker images to a registry (if needed)
       - name: Build and push
