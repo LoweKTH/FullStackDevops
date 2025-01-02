@@ -6,205 +6,57 @@ on:
       - main
 
 jobs:
-  db-init:
-    name: Initialize Database
-    runs-on: ubuntu-latest
-
-    steps:
-      - name: Checkout Code
-        uses: actions/checkout@v3
-
-      - name: Set up Docker Compose
-        run: |
-          sudo apt-get install -y docker-compose
-
-      - name: Start MySQL Database and Services
-        run: |
-          docker-compose -f ./backend/docker-compose.yaml up -d
-          sleep 30  # Wait for DB to initialize and services to start
-
   doctorstaff-ms-build:
-    name: Build and Test Doctorstaff Microservice
-    runs-on: ubuntu-latest
-    needs: db-init
-
-    steps:
-      - name: Checkout Code
-        uses: actions/checkout@v3
-
-      - name: Set up Docker Compose
-        run: |
-          sudo apt-get install -y docker-compose
-
-      - name: Run Tests for Doctorstaff Microservice
-        run: |
-          docker-compose --version
-          docker-compose exec doctorstaff-ms mvn test
-
-      - name: Login to Docker Hub
-        uses: docker/login-action@v3
-        with:
-          registry: registry.cloud.cbh.kth.se
-          username: ${{ secrets.DOCKER_USERNAME }}
-          password: ${{ secrets.DOCKER_PASSWORD }}
-
-      - name: Build and push Doctorstaff Microservice
-        uses: docker/build-push-action@v5
-        with:
-          context: ./backend/doctorstaff-ms
-          file: ./backend/doctorstaff-ms/Dockerfile
-          push: true
-          tags: ${{ secrets.DOCKER_TAG }}
+    name: Build, Test, and Push Doctorstaff Microservice
+    uses: ./.github/workflows/setup-mysql.yml
+    with:
+      working-directory: backend/doctorstaff-ms
+      build-command: mvn clean install -DskipTests
+      test-command: mvn test
+      docker-context: ./backend/doctorstaff-ms
+      dockerfile: ./backend/doctorstaff-ms/Dockerfile
+      docker-tags: ${{ secrets.DOCKER_TAG }}
 
   image-ms-build:
-    name: Build and Test Image Microservice
-    runs-on: ubuntu-latest
-    needs: db-init
-
-    steps:
-      - name: Checkout Code
-        uses: actions/checkout@v3
-
-      - name: Set up Docker Compose
-        run: |
-          sudo apt-get install -y docker-compose
-
-
-      - name: Run Tests for Image Microservice
-        run: |
-          docker-compose exec image-ms npm test
-
-      - name: Login to Docker Hub
-        uses: docker/login-action@v3
-        with:
-          registry: registry.cloud.cbh.kth.se
-          username: ${{ secrets.DOCKER_USERNAME }}
-          password: ${{ secrets.DOCKER_PASSWORD }}
-
-      - name: Build and push Image Microservice
-        uses: docker/build-push-action@v5
-        with:
-          context: ./backend/image-ms
-          file: ./backend/image-ms/Dockerfile
-          push: true
-          tags: ${{ secrets.DOCKER_TAG }}
+    name: Build, Test, and Push Image Microservice
+    uses: ./.github/workflows/setup-mysql.yml
+    with:
+      working-directory: backend/image-ms
+      build-command: npm install
+      test-command: npm test
+      docker-context: ./backend/image-ms
+      dockerfile: ./backend/image-ms/Dockerfile
+      docker-tags: ${{ secrets.DOCKER_TAG }}
 
   messaging-ms-build:
-    name: Build and Test Messaging Microservice
-    runs-on: ubuntu-latest
-    needs: db-init
-
-    steps:
-      - name: Checkout Code
-        uses: actions/checkout@v3
-
-      - name: Set up Docker Compose
-        run: |
-          sudo apt-get install -y docker-compose
-
-      - name: Run Tests for Messaging Microservice
-        run: |
-          docker-compose exec messaging-ms mvn test
-
-      - name: Login to Docker Hub
-        uses: docker/login-action@v3
-        with:
-          registry: registry.cloud.cbh.kth.se
-          username: ${{ secrets.DOCKER_USERNAME }}
-          password: ${{ secrets.DOCKER_PASSWORD }}
-
-      - name: Build and push Messaging Microservice
-        uses: docker/build-push-action@v5
-        with:
-          context: ./backend/messaging-ms
-          file: ./backend/messaging-ms/Dockerfile
-          push: true
-          tags: ${{ secrets.DOCKER_TAG }}
+    name: Build, Test, and Push Messaging Microservice
+    uses: ./.github/workflows/setup-mysql.yml
+    with:
+      working-directory: backend/messaging-ms
+      build-command: mvn clean install -DskipTests
+      test-command: mvn test
+      docker-context: ./backend/messaging-ms
+      dockerfile: ./backend/messaging-ms/Dockerfile
+      docker-tags: ${{ secrets.DOCKER_TAG }}
 
   patient-ms-build:
-    name: Build and Test Patient Microservice
-    runs-on: ubuntu-latest
-    needs: db-init
-
-    steps:
-      - name: Checkout Code
-        uses: actions/checkout@v3
-
-      - name: Set up Docker Compose
-        run: |
-          sudo apt-get install -y docker-compose
-
-      - name: Run Tests for Patient Microservice
-        run: |
-          docker-compose exec patient-ms mvn test
-
-      - name: Login to Docker Hub
-        uses: docker/login-action@v3
-        with:
-          registry: registry.cloud.cbh.kth.se
-          username: ${{ secrets.DOCKER_USERNAME }}
-          password: ${{ secrets.DOCKER_PASSWORD }}
-
-      - name: Build and push Patient Microservice
-        uses: docker/build-push-action@v5
-        with:
-          context: ./backend/patient-ms
-          file: ./backend/patient-ms/Dockerfile
-          push: true
-          tags: ${{ secrets.DOCKER_TAG }}
+    name: Build, Test, and Push Patient Microservice
+    uses: ./.github/workflows/setup-mysql.yml
+    with:
+      working-directory: backend/patient-ms
+      build-command: mvn clean install -DskipTests
+      test-command: mvn test
+      docker-context: ./backend/patient-ms
+      dockerfile: ./backend/patient-ms/Dockerfile
+      docker-tags: ${{ secrets.DOCKER_TAG }}
 
   user-ms-build:
-    name: Build and Test User Microservice
-    runs-on: ubuntu-latest
-    needs: db-init
-
-    steps:
-      - name: Checkout Code
-        uses: actions/checkout@v3
-
-      - name: Set up Docker Compose
-        run: |
-          sudo apt-get install -y docker-compose
-
-      - name: Run Tests for User Microservice
-        run: |
-          docker-compose exec user-ms mvn test
-
-      - name: Login to Docker Hub
-        uses: docker/login-action@v3
-        with:
-          registry: registry.cloud.cbh.kth.se
-          username: ${{ secrets.DOCKER_USERNAME }}
-          password: ${{ secrets.DOCKER_PASSWORD }}
-
-      - name: Build and push User Microservice
-        uses: docker/build-push-action@v5
-        with:
-          context: ./backend/user-ms
-          file: ./backend/user-ms/Dockerfile
-          push: true
-          tags: ${{ secrets.DOCKER_TAG }}
-
-  frontend-build:
-    name: Build Frontend
-    runs-on: ubuntu-latest
-    needs: db-init
-
-    steps:
-      - name: Checkout Code
-        uses: actions/checkout@v3
-
-      - name: Login to Docker Hub
-        uses: docker/login-action@v3
-        with:
-          registry: registry.cloud.cbh.kth.se
-          username: ${{ secrets.DOCKER_USERNAME }}
-          password: ${{ secrets.DOCKER_PASSWORD }}
-
-      - name: Build and push Frontend
-        uses: docker/build-push-action@v5
-        with:
-          context: ./frontend
-          file: ./frontend/Dockerfile
-          push: true
-          tags: ${{ secrets.DOCKER_TAG }}
+    name: Build, Test, and Push User Microservice
+    uses: ./.github/workflows/setup-mysql.yml
+    with:
+      working-directory: backend/user-ms
+      build-command: mvn clean install -DskipTests
+      test-command: mvn test
+      docker-context: ./backend/user-ms
+      dockerfile: ./backend/user-ms/Dockerfile
+      docker-tags: ${{ secrets.DOCKER_TAG }}
