@@ -51,7 +51,7 @@ jobs:
       # Build the Docker Compose services
       - name: Build and start Docker Compose services
         run: |
-          docker-compose -f ./backend/docker-compose.yml up -d
+          docker-compose -f ./backend/docker-compose.yaml up -d
 
       # Wait for MySQL to be ready
       - name: Wait for MySQL to be ready
