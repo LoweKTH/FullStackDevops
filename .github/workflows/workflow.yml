@@ -1,250 +1,86 @@
-name: CI/CD Pipeline
+name: CI with Docker Compose
 
 on:
   push:
     branches:
-      - main
+      - main  # Trigger on push to the main branch
+  pull_request:
+    branches:
+      - main  # Trigger on pull requests to the main branch
 
 jobs:
-
-  doctorstaff-ms-build:
-    name: Build and Test Doctorstaff Microservice
+  build-and-test:
     runs-on: ubuntu-latest
+
     services:
-      mysql:
+      db:
         image: mysql:8.0
+        ports:
+          - 3306:3306
         env:
-          MYSQL_ROOT_PASSWORD: password
           MYSQL_DATABASE: fullstack24
           MYSQL_USER: user
           MYSQL_PASSWORD: password
-        ports:
-          - 3306:3306
-
-    steps:
-      - name: Checkout Code
-        uses: actions/checkout@v3
-
-      - name: Build Doctorstaff Microservice
-        working-directory: backend/doctorstaff-ms
-        run: mvn clean install -DskipTests
-
-      - name: Run Doctorstaff Microservice Tests
-        working-directory: backend/doctorstaff-ms
-        run: mvn test
-
-      - name: Login to Docker Hub
-        uses: docker/login-action@v3
-        with:
-          registry: registry.cloud.cbh.kth.se
-          username: ${{ secrets.DOCKER_USERNAME }}
-          password: ${{ secrets.DOCKER_PASSWORD }}
-
-      - name: Build and push Doctorstaff Microservice
-        uses: docker/build-push-action@v5
-        with:
-          context: ./backend/doctorstaff-ms
-          file: ./backend/doctorstaff-ms/Dockerfile
-          push: true
-          tags: ${{ secrets.DOCKER_TAG }}
-
-  image-ms-build:
-    name: Build and Test Image Microservice
-    runs-on: ubuntu-latest
-    services:
-      mysql:
-        image: mysql:8.0
-        env:
           MYSQL_ROOT_PASSWORD: password
-          MYSQL_DATABASE: fullstack24
-          MYSQL_USER: user
-          MYSQL_PASSWORD: password
-        ports:
-          - 3306:3306
-
+        options: --health-cmd="mysqladmin ping --silent" --health-interval=10s --health-timeout=5s --health-retries=3
 
     steps:
-      - name: Checkout Code
+      # Checkout the code from the repository
+      - name: Checkout code
         uses: actions/checkout@v3
 
-          # Setup Node.js
-      - name: Set up Node.js
-        uses: actions/setup-node@v3
-        with:
-          node-version: '22'  # Use the version of Node.js that your project requires
+      # Set up Docker Buildx
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
 
-      - name: Ensure Jest has executable permissions
-        working-directory: backend/image-ms
-        run: chmod +x node_modules/.bin/jest
-
-      - name: Install Dependencies for Image Microservice
-        working-directory: backend/image-ms
-        run: npm install
-
-      - name: Run Image Microservice Tests
-        working-directory: backend/image-ms
-        run: npm test
-
+      # Log in to DockerHub (if you're using private images or need DockerHub authentication)
       - name: Login to Docker Hub
         uses: docker/login-action@v3
         with:
-          registry: registry.cloud.cbh.kth.se
           username: ${{ secrets.DOCKER_USERNAME }}
           password: ${{ secrets.DOCKER_PASSWORD }}
 
-      - name: Build and push Image Microservice
+      # Set up Docker Compose
+      - name: Set up Docker Compose
+        uses: docker/setup-buildx-action@v3
+        with:
+          version: latest
+
+      # Build the Docker Compose services
+      - name: Build and start Docker Compose services
+        run: |
+          docker-compose -f docker-compose.yml up -d
+
+      # Run tests for each microservice
+
+      - name: Run tests for messaging-ms
+        run: |
+          docker exec messaging-ms mvn test
+
+      - name: Run tests for doctorstaff-ms
+        run: |
+          docker exec doctorstaff-ms mvn test
+
+      - name: Run tests for patient-ms
+        run: |
+          docker exec patient-ms mvn test
+
+      - name: Run tests for user-ms
+        run: |
+          docker exec user-ms mvn test
+
+      - name: Run tests for image-ms
+        run: |
+          docker exec image-ms npm test
+
+      # Shut down the containers after tests
+      - name: Shutdown Docker Compose services
+        run: |
+          docker-compose -f docker-compose.yml down
+
+      # Optionally, build and push Docker images to a registry (if needed)
+      - name: Build and push
         uses: docker/build-push-action@v5
         with:
-          context: ./backend/image-ms
-          file: ./backend/image-ms/Dockerfile
-          push: true
-          tags: ${{ secrets.DOCKER_TAG }}
-
-  messaging-ms-build:
-    name: Build and Test Messaging Microservice
-    runs-on: ubuntu-latest
-    services:
-      mysql:
-        image: mysql:8.0
-        env:
-          MYSQL_ROOT_PASSWORD: password
-          MYSQL_DATABASE: fullstack24
-          MYSQL_USER: user
-          MYSQL_PASSWORD: password
-        ports:
-          - 3306:3306
-
-
-    steps:
-      - name: Checkout Code
-        uses: actions/checkout@v3
-
-      - name: Build Messaging Microservice
-        working-directory: backend/messaging-ms  # assuming it's located in backend/messaging-ms
-        run: mvn clean install -DskipTests
-
-      - name: Run Messaging Microservice Tests
-        working-directory: backend/messaging-ms
-        run: mvn test
-
-      - name: Login to Docker Hub
-        uses: docker/login-action@v3
-        with:
-          registry: registry.cloud.cbh.kth.se
-          username: ${{ secrets.DOCKER_USERNAME }}
-          password: ${{ secrets.DOCKER_PASSWORD }}
-
-      - name: Build and push Messaging Microservice
-        uses: docker/build-push-action@v5
-        with:
-          context: ./backend/messaging-ms
-          file: ./backend/messaging-ms/Dockerfile
-          push: true
-          tags: ${{ secrets.DOCKER_TAG }}
-
-  patient-ms-build:
-    name: Build and Test Patient Microservice
-    runs-on: ubuntu-latest
-    services:
-      mysql:
-        image: mysql:8.0
-        env:
-          MYSQL_ROOT_PASSWORD: password
-          MYSQL_DATABASE: fullstack24
-          MYSQL_USER: user
-          MYSQL_PASSWORD: password
-        ports:
-          - 3306:3306
-
-
-    steps:
-      - name: Checkout Code
-        uses: actions/checkout@v3
-
-      - name: Build Patient Microservice
-        working-directory: backend/patient-ms  # assuming it's located in backend/messaging-ms
-        run: mvn clean install -DskipTests
-
-      - name: Run Patient Microservice Tests
-        working-directory: backend/patient-ms
-        run: mvn test
-
-      - name: Login to Docker Hub
-        uses: docker/login-action@v3
-        with:
-          registry: registry.cloud.cbh.kth.se
-          username: ${{ secrets.DOCKER_USERNAME }}
-          password: ${{ secrets.DOCKER_PASSWORD }}
-
-      - name: Build and push Patient Microservice
-        uses: docker/build-push-action@v5
-        with:
-          context: ./backend/patient-ms
-          file: ./backend/patient-ms/Dockerfile
-          push: true
-          tags: ${{ secrets.DOCKER_TAG }}
-
-  user-ms-build:
-    name: Build and Test User Microservice
-    runs-on: ubuntu-latest
-    services:
-      mysql:
-        image: mysql:8.0
-        env:
-          MYSQL_ROOT_PASSWORD: password
-          MYSQL_DATABASE: fullstack24
-          MYSQL_USER: user
-          MYSQL_PASSWORD: password
-        ports:
-          - 3306:3306
-
-
-    steps:
-      - name: Checkout Code
-        uses: actions/checkout@v3
-
-      - name: Build User Microservice
-        working-directory: backend/user-ms  # assuming it's located in backend/messaging-ms
-        run: mvn clean install -DskipTests
-
-      - name: Run User Microservice Tests
-        working-directory: backend/user-ms
-        run: mvn test
-
-      - name: Login to Docker Hub
-        uses: docker/login-action@v3
-        with:
-          registry: registry.cloud.cbh.kth.se
-          username: ${{ secrets.DOCKER_USERNAME }}
-          password: ${{ secrets.DOCKER_PASSWORD }}
-
-      - name: Build and push User Microservice
-        uses: docker/build-push-action@v5
-        with:
-          context: ./backend/user-ms
-          file: ./backend/user-ms/Dockerfile
-          push: true
-          tags: ${{ secrets.DOCKER_TAG }}
-
-  frontend-build:
-    name: Build Frontend
-    runs-on: ubuntu-latest
-
-    steps:
-      - name: Checkout Code
-        uses: actions/checkout@v3
-
-      - name: Login to Docker Hub
-        uses: docker/login-action@v3
-        with:
-          registry: registry.cloud.cbh.kth.se
-          username: ${{ secrets.DOCKER_USERNAME }}
-          password: ${{ secrets.DOCKER_PASSWORD }}
-
-      - name: Build and push Frontend
-        uses: docker/build-push-action@v5
-        with:
-          context: ./frontend
-          file: ./frontend/Dockerfile
           push: true
           tags: ${{ secrets.DOCKER_TAG }}
