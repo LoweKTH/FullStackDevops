@@ -14,18 +14,10 @@ jobs:
       - name: Checkout Code
         uses: actions/checkout@v3
 
-      - name: Set up Docker Compose
-        run: |
-          sudo apt-get update
-          sudo apt-get install -y docker.io
-          sudo curl -L "https://github.com/docker/compose/releases/download/v2.18.1/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
-          sudo chmod +x /usr/local/bin/docker-compose
-          docker-compose --version  # Verify the installation
-
-      - name: Start MySQL Database and Services
-        run: |
-          docker-compose -f ./backend/docker-compose.yaml up -d
-          sleep 30  # Wait for DB to initialize and services to start
+      - name: Run docker-compose
+        uses: hoverkraft-tech/compose-action@v2.0.1
+        with:
+          compose-file: "./backend/docker-compose.yaml"
 
   doctorstaff-ms-build:
     name: Build and Test Doctorstaff Microservice
