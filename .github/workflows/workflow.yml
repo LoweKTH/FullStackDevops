@@ -20,7 +20,7 @@ jobs:
 
       - name: Start MySQL Database and Services
         run: |
-          docker-compose -f backend/docker-compose.yml up -d
+          docker-compose -f ./backend/docker-compose.yaml up -d
           sleep 30  # Wait for DB to initialize and services to start
 
   doctorstaff-ms-build:
