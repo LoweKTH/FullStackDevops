@@ -10,6 +10,16 @@ jobs:
   doctorstaff-ms-build:
     name: Build and Test Doctorstaff Microservice
     runs-on: ubuntu-latest
+    services:
+      mysql:
+        image: mysql:8.0
+        env:
+          MYSQL_ROOT_PASSWORD: password
+          MYSQL_DATABASE: fullstack24
+          MYSQL_USER: user
+          MYSQL_PASSWORD: password
+        ports:
+          - 3306:3306
 
     steps:
       - name: Checkout Code
@@ -41,6 +51,17 @@ jobs:
   image-ms-build:
     name: Build and Test Image Microservice
     runs-on: ubuntu-latest
+    services:
+      mysql:
+        image: mysql:8.0
+        env:
+          MYSQL_ROOT_PASSWORD: password
+          MYSQL_DATABASE: fullstack24
+          MYSQL_USER: user
+          MYSQL_PASSWORD: password
+        ports:
+          - 3306:3306
+
 
     steps:
       - name: Checkout Code
@@ -82,6 +103,17 @@ jobs:
   messaging-ms-build:
     name: Build and Test Messaging Microservice
     runs-on: ubuntu-latest
+    services:
+      mysql:
+        image: mysql:8.0
+        env:
+          MYSQL_ROOT_PASSWORD: password
+          MYSQL_DATABASE: fullstack24
+          MYSQL_USER: user
+          MYSQL_PASSWORD: password
+        ports:
+          - 3306:3306
+
 
     steps:
       - name: Checkout Code
@@ -113,6 +145,17 @@ jobs:
   patient-ms-build:
     name: Build and Test Patient Microservice
     runs-on: ubuntu-latest
+    services:
+      mysql:
+        image: mysql:8.0
+        env:
+          MYSQL_ROOT_PASSWORD: password
+          MYSQL_DATABASE: fullstack24
+          MYSQL_USER: user
+          MYSQL_PASSWORD: password
+        ports:
+          - 3306:3306
+
 
     steps:
       - name: Checkout Code
@@ -144,6 +187,17 @@ jobs:
   user-ms-build:
     name: Build and Test User Microservice
     runs-on: ubuntu-latest
+    services:
+      mysql:
+        image: mysql:8.0
+        env:
+          MYSQL_ROOT_PASSWORD: password
+          MYSQL_DATABASE: fullstack24
+          MYSQL_USER: user
+          MYSQL_PASSWORD: password
+        ports:
+          - 3306:3306
+
 
     steps:
       - name: Checkout Code
