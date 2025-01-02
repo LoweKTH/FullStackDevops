@@ -8,55 +8,139 @@ on:
 jobs:
   doctorstaff-ms-build:
     name: Build, Test, and Push Doctorstaff Microservice
-    uses: ./.github/workflows/setup-mysql.yml
-    with:
-      working-directory: backend/doctorstaff-ms
-      build-command: mvn clean install -DskipTests
-      test-command: mvn test
-      docker-context: ./backend/doctorstaff-ms
-      dockerfile: ./backend/doctorstaff-ms/Dockerfile
-      docker-tags: ${{ secrets.DOCKER_TAG }}
+    runs-on: ubuntu-latest
+
+    steps:
+      # Initialize MySQL service using the reusable workflow
+      - name: Setup MySQL Service
+        uses: ./.github/workflows/setup-mysql.yml
+        with:
+          working-directory: backend/doctorstaff-ms
+
+      # Checkout code
+      - name: Checkout Code
+        uses: actions/checkout@v3
+
+      # Build Doctorstaff Microservice
+      - name: Build Doctorstaff Microservice
+        working-directory: backend/doctorstaff-ms
+        run: mvn clean install -DskipTests
+
+      # Run Tests for Doctorstaff Microservice
+      - name: Run Doctorstaff Microservice Tests
+        working-directory: backend/doctorstaff-ms
+        run: mvn test
+
+      # Docker login
+      - name: Login to Docker Hub
+        uses: docker/login-action@v3
+        with:
+          registry: registry.cloud.cbh.kth.se
+          username: ${{ secrets.DOCKER_USERNAME }}
+          password: ${{ secrets.DOCKER_PASSWORD }}
+
+      # Build and push Docker image for Doctorstaff Microservice
+      - name: Build and Push Doctorstaff Microservice
+        uses: docker/build-push-action@v5
+        with:
+          context: ./backend/doctorstaff-ms
+          file: ./backend/doctorstaff-ms/Dockerfile
+          push: true
+          tags: ${{ secrets.DOCKER_TAG }}
 
   image-ms-build:
     name: Build, Test, and Push Image Microservice
-    uses: ./.github/workflows/setup-mysql.yml
-    with:
-      working-directory: backend/image-ms
-      build-command: npm install
-      test-command: npm test
-      docker-context: ./backend/image-ms
-      dockerfile: ./backend/image-ms/Dockerfile
-      docker-tags: ${{ secrets.DOCKER_TAG }}
+    runs-on: ubuntu-latest
+
+    steps:
+      # Initialize MySQL service using the reusable workflow
+      - name: Setup MySQL Service
+        uses: ./.github/workflows/setup-mysql.yml
+        with:
+          working-directory: backend/image-ms
+
+      # Checkout code
+      - name: Checkout Code
+        uses: actions/checkout@v3
+
+      # Setup Node.js for Image Microservice
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '22'
+
+      # Ensure Jest has executable permissions
+      - name: Ensure Jest has executable permissions
+        working-directory: backend/image-ms
+        run: chmod +x node_modules/.bin/jest
+
+      # Install dependencies for Image Microservice
+      - name: Install Dependencies for Image Microservice
+        working-directory: backend/image-ms
+        run: npm install
+
+      # Run Tests for Image Microservice
+      - name: Run Image Microservice Tests
+        working-directory: backend/image-ms
+        run: npm test
+
+      # Docker login
+      - name: Login to Docker Hub
+        uses: docker/login-action@v3
+        with:
+          registry: registry.cloud.cbh.kth.se
+          username: ${{ secrets.DOCKER_USERNAME }}
+          password: ${{ secrets.DOCKER_PASSWORD }}
+
+      # Build and push Docker image for Image Microservice
+      - name: Build and Push Image Microservice
+        uses: docker/build-push-action@v5
+        with:
+          context: ./backend/image-ms
+          file: ./backend/image-ms/Dockerfile
+          push: true
+          tags: ${{ secrets.DOCKER_TAG }}
 
   messaging-ms-build:
     name: Build, Test, and Push Messaging Microservice
-    uses: ./.github/workflows/setup-mysql.yml
-    with:
-      working-directory: backend/messaging-ms
-      build-command: mvn clean install -DskipTests
-      test-command: mvn test
-      docker-context: ./backend/messaging-ms
-      dockerfile: ./backend/messaging-ms/Dockerfile
-      docker-tags: ${{ secrets.DOCKER_TAG }}
+    runs-on: ubuntu-latest
 
-  patient-ms-build:
-    name: Build, Test, and Push Patient Microservice
-    uses: ./.github/workflows/setup-mysql.yml
-    with:
-      working-directory: backend/patient-ms
-      build-command: mvn clean install -DskipTests
-      test-command: mvn test
-      docker-context: ./backend/patient-ms
-      dockerfile: ./backend/patient-ms/Dockerfile
-      docker-tags: ${{ secrets.DOCKER_TAG }}
+    steps:
+      # Initialize MySQL service using the reusable workflow
+      - name: Setup MySQL Service
+        uses: ./.github/workflows/setup-mysql.yml
+        with:
+          working-directory: backend/messaging-ms
 
-  user-ms-build:
-    name: Build, Test, and Push User Microservice
-    uses: ./.github/workflows/setup-mysql.yml
-    with:
-      working-directory: backend/user-ms
-      build-command: mvn clean install -DskipTests
-      test-command: mvn test
-      docker-context: ./backend/user-ms
-      dockerfile: ./backend/user-ms/Dockerfile
-      docker-tags: ${{ secrets.DOCKER_TAG }}
+      # Checkout code
+      - name: Checkout Code
+        uses: actions/checkout@v3
+
+      # Build Messaging Microservice
+      - name: Build Messaging Microservice
+        working-directory: backend/messaging-ms
+        run: mvn clean install -DskipTests
+
+      # Run Messaging Microservice Tests
+      - name: Run Messaging Microservice Tests
+        working-directory: backend/messaging-ms
+        run: mvn test
+
+      # Docker login
+      - name: Login to Docker Hub
+        uses: docker/login-action@v3
+        with:
+          registry: registry.cloud.cbh.kth.se
+          username: ${{ secrets.DOCKER_USERNAME }}
+          password: ${{ secrets.DOCKER_PASSWORD }}
+
+      # Build and push Docker image for Messaging Microservice
+      - name: Build and Push Messaging Microservice
+        uses: docker/build-push-action@v5
+        with:
+          context: ./backend/messaging-ms
+          file: ./backend/messaging-ms/Dockerfile
+          push: true
+          tags: ${{ secrets.DOCKER_TAG }}
+
+  # You can add similar steps for other microservices (patient-ms-build, user-ms-build)...
