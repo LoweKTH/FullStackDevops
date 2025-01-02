@@ -6,32 +6,10 @@ on:
       - main
 
 jobs:
-  db-init:
-    name: Initialize Database
-    runs-on: ubuntu-latest
-
-    services:
-      mysql:
-        image: mysql:8.0
-        options: --env MYSQL_ROOT_PASSWORD=password --env MYSQL_DATABASE=fullstack24 --env MYSQL_USER=user --env MYSQL_PASSWORD=password
-        ports:
-          - 3306:3306
-
-    steps:
-      - name: Checkout Code
-        uses: actions/checkout@v3
-
-      - name: Wait for MySQL to be ready
-        run: |
-          until mysql -h mysql -u root -ppassword -e "SELECT 1"; do
-            echo "Waiting for MySQL to be ready..."
-            sleep 5
-          done
 
   doctorstaff-ms-build:
     name: Build and Test Doctorstaff Microservice
     runs-on: ubuntu-latest
-    needs: db-init
 
     steps:
       - name: Checkout Code
@@ -63,7 +41,6 @@ jobs:
   image-ms-build:
     name: Build and Test Image Microservice
     runs-on: ubuntu-latest
-    needs: db-init
 
     steps:
       - name: Checkout Code
@@ -105,7 +82,6 @@ jobs:
   messaging-ms-build:
     name: Build and Test Messaging Microservice
     runs-on: ubuntu-latest
-    needs: db-init
 
     steps:
       - name: Checkout Code
@@ -137,7 +113,6 @@ jobs:
   patient-ms-build:
     name: Build and Test Patient Microservice
     runs-on: ubuntu-latest
-    needs: db-init
 
     steps:
       - name: Checkout Code
@@ -169,7 +144,6 @@ jobs:
   user-ms-build:
     name: Build and Test User Microservice
     runs-on: ubuntu-latest
-    needs: db-init
 
     steps:
       - name: Checkout Code
@@ -201,7 +175,6 @@ jobs:
   frontend-build:
     name: Build Frontend
     runs-on: ubuntu-latest
-    needs: db-init
 
     steps:
       - name: Checkout Code
