@@ -17,16 +17,15 @@ jobs:
         ports:
           - 3306:3306
 
-
     steps:
       - name: Checkout Code
         uses: actions/checkout@v3
 
       - name: Wait for MySQL to be ready
         run: |
-          until mysql -h 127.0.0.1 -u root -prootpassword -e "SELECT 1"; do
+          until mysql -h mysql -u root -ppassword -e "SELECT 1"; do
             echo "Waiting for MySQL to be ready..."
-            sleep 2
+            sleep 5
           done
 
   doctorstaff-ms-build:
