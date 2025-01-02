@@ -32,6 +32,10 @@ jobs:
       - name: Checkout Code
         uses: actions/checkout@v3
 
+      - name: Set up Docker Compose
+        run: |
+          sudo apt-get install -y docker-compose
+
       - name: Run Tests for Doctorstaff Microservice
         run: |
           docker-compose --version
@@ -61,6 +65,11 @@ jobs:
       - name: Checkout Code
         uses: actions/checkout@v3
 
+      - name: Set up Docker Compose
+        run: |
+          sudo apt-get install -y docker-compose
+
+
       - name: Run Tests for Image Microservice
         run: |
           docker-compose exec image-ms npm test
@@ -88,6 +97,10 @@ jobs:
     steps:
       - name: Checkout Code
         uses: actions/checkout@v3
+
+      - name: Set up Docker Compose
+        run: |
+          sudo apt-get install -y docker-compose
 
       - name: Run Tests for Messaging Microservice
         run: |
@@ -117,6 +130,10 @@ jobs:
       - name: Checkout Code
         uses: actions/checkout@v3
 
+      - name: Set up Docker Compose
+        run: |
+          sudo apt-get install -y docker-compose
+
       - name: Run Tests for Patient Microservice
         run: |
           docker-compose exec patient-ms mvn test
@@ -144,6 +161,10 @@ jobs:
     steps:
       - name: Checkout Code
         uses: actions/checkout@v3
+
+      - name: Set up Docker Compose
+        run: |
+          sudo apt-get install -y docker-compose
 
       - name: Run Tests for User Microservice
         run: |
