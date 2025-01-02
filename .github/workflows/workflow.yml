@@ -10,18 +10,24 @@ jobs:
     name: Initialize Database
     runs-on: ubuntu-latest
 
+    services:
+      mysql:
+        image: mysql:8.0
+        options: --env MYSQL_ROOT_PASSWORD=password --env MYSQL_DATABASE=fullstack24 --env MYSQL_USER=user --env MYSQL_PASSWORD=password
+        ports:
+          - 3306:3306
+
+
     steps:
       - name: Checkout Code
         uses: actions/checkout@v3
 
-      - name: Set up Docker Compose
+      - name: Wait for MySQL to be ready
         run: |
-          sudo apt-get install -y docker-compose
-
-      - name: Start MySQL Database and Services
-        run: |
-          docker-compose -f ./backend/docker-compose.yaml up -d
-          sleep 30  # Wait for DB to initialize and services to start
+          until mysql -h 127.0.0.1 -u root -prootpassword -e "SELECT 1"; do
+            echo "Waiting for MySQL to be ready..."
+            sleep 2
+          done
 
   doctorstaff-ms-build:
     name: Build and Test Doctorstaff Microservice
@@ -32,14 +38,13 @@ jobs:
       - name: Checkout Code
         uses: actions/checkout@v3
 
-      - name: Set up Docker Compose
-        run: |
-          sudo apt-get install -y docker-compose
+      - name: Build Doctorstaff Microservice
+        working-directory: backend/doctorstaff-ms
+        run: mvn clean install -DskipTests
 
-      - name: Run Tests for Doctorstaff Microservice
-        run: |
-          docker-compose --version
-          docker-compose exec doctorstaff-ms mvn test
+      - name: Run Doctorstaff Microservice Tests
+        working-directory: backend/doctorstaff-ms
+        run: mvn test
 
       - name: Login to Docker Hub
         uses: docker/login-action@v3
@@ -65,14 +70,23 @@ jobs:
       - name: Checkout Code
         uses: actions/checkout@v3
 
-      - name: Set up Docker Compose
-        run: |
-          sudo apt-get install -y docker-compose
+          # Setup Node.js
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '22'  # Use the version of Node.js that your project requires
 
+      - name: Ensure Jest has executable permissions
+        working-directory: backend/image-ms
+        run: chmod +x node_modules/.bin/jest
 
-      - name: Run Tests for Image Microservice
-        run: |
-          docker-compose exec image-ms npm test
+      - name: Install Dependencies for Image Microservice
+        working-directory: backend/image-ms
+        run: npm install
+
+      - name: Run Image Microservice Tests
+        working-directory: backend/image-ms
+        run: npm test
 
       - name: Login to Docker Hub
         uses: docker/login-action@v3
@@ -98,13 +112,13 @@ jobs:
       - name: Checkout Code
         uses: actions/checkout@v3
 
-      - name: Set up Docker Compose
-        run: |
-          sudo apt-get install -y docker-compose
+      - name: Build Messaging Microservice
+        working-directory: backend/messaging-ms  # assuming it's located in backend/messaging-ms
+        run: mvn clean install -DskipTests
 
-      - name: Run Tests for Messaging Microservice
-        run: |
-          docker-compose exec messaging-ms mvn test
+      - name: Run Messaging Microservice Tests
+        working-directory: backend/messaging-ms
+        run: mvn test
 
       - name: Login to Docker Hub
         uses: docker/login-action@v3
@@ -130,13 +144,13 @@ jobs:
       - name: Checkout Code
         uses: actions/checkout@v3
 
-      - name: Set up Docker Compose
-        run: |
-          sudo apt-get install -y docker-compose
+      - name: Build Patient Microservice
+        working-directory: backend/patient-ms  # assuming it's located in backend/messaging-ms
+        run: mvn clean install -DskipTests
 
-      - name: Run Tests for Patient Microservice
-        run: |
-          docker-compose exec patient-ms mvn test
+      - name: Run Patient Microservice Tests
+        working-directory: backend/patient-ms
+        run: mvn test
 
       - name: Login to Docker Hub
         uses: docker/login-action@v3
@@ -162,13 +176,13 @@ jobs:
       - name: Checkout Code
         uses: actions/checkout@v3
 
-      - name: Set up Docker Compose
-        run: |
-          sudo apt-get install -y docker-compose
+      - name: Build User Microservice
+        working-directory: backend/user-ms  # assuming it's located in backend/messaging-ms
+        run: mvn clean install -DskipTests
 
-      - name: Run Tests for User Microservice
-        run: |
-          docker-compose exec user-ms mvn test
+      - name: Run User Microservice Tests
+        working-directory: backend/user-ms
+        run: mvn test
 
       - name: Login to Docker Hub
         uses: docker/login-action@v3
