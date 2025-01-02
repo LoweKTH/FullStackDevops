@@ -56,7 +56,7 @@ jobs:
       # Build the Docker Compose services
       - name: Build and start Docker Compose services
         run: |
-          docker-compose -f docker-compose.yml up -d
+          docker-compose -f docker-compose.yaml up -d
 
       # Run tests for each microservice
 
@@ -80,10 +80,7 @@ jobs:
         run: |
           docker exec image-ms npm test
 
-      # Shut down the containers after tests
-      - name: Shutdown Docker Compose services
-        run: |
-          docker-compose -f docker-compose.yml down
+      
 
       # Optionally, build and push Docker images to a registry (if needed)
       - name: Build and push
@@ -91,3 +88,9 @@ jobs:
         with:
           push: true
           tags: ${{ secrets.DOCKER_TAG }}
+
+
+      # Shut down the containers after tests
+      - name: Shutdown Docker Compose services
+        run: |
+          docker-compose -f docker-compose.yml down
