@@ -2,14 +2,10 @@ package com.fullstackdevops.doctorstaffms.service.implementation;
 
 import com.fullstackdevops.doctorstaffms.dto.DoctorDto;
 import com.fullstackdevops.doctorstaffms.dto.PatientDto;
-import com.fullstackdevops.doctorstaffms.dto.StaffDto;
 import com.fullstackdevops.doctorstaffms.model.Doctor;
-import com.fullstackdevops.doctorstaffms.model.Staff;
 import com.fullstackdevops.doctorstaffms.repository.DoctorRepository;
 import com.fullstackdevops.doctorstaffms.service.DoctorService;
 import com.fullstackdevops.doctorstaffms.utils.DoctorMapper;
-import com.fullstackdevops.doctorstaffms.utils.DoctorNotFoundException;
-import com.fullstackdevops.doctorstaffms.utils.StaffMapper;
 import lombok.AllArgsConstructor;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.HttpMethod;

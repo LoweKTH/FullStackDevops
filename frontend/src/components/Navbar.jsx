@@ -46,6 +46,13 @@ const Navbar = () => {
                 <button onClick={() => navigate("/dashboard")} className="nav-button">
                     Dashboard
                 </button>
+                <button
+                    onClick={() => navigate("/search")}
+                    className="nav-button"
+                    style={{display: ["Doctor", "Staff"].includes(localStorage.getItem("role")) ? "inline-block" : "none"}}
+                >
+                    Search
+                </button>
                 <button onClick={handleLogout} className="nav-button">
                     Logout
                 </button>

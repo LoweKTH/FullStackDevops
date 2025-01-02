@@ -1,6 +1,9 @@
 package com.fullstackdevops.patientms.service;
 
-import com.fullstackdevops.patientms.dto.*;
+import com.fullstackdevops.patientms.dto.DiagnosisDto;
+import com.fullstackdevops.patientms.dto.DoctorStaffDto;
+import com.fullstackdevops.patientms.dto.NoteDto;
+import com.fullstackdevops.patientms.dto.PatientDto;
 import jakarta.transaction.Transactional;
 
 import java.util.List;
@@ -29,4 +32,5 @@ public interface PatientService {
     DoctorStaffDto getDoctorstaffForPatient(Long patientId);
 
     List<Long> getPatientsByDoctorstaffId(Long doctorId);
+
 }

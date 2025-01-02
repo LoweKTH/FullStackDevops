@@ -1,0 +1,38 @@
+.search-page {
+    margin: 20px;
+    padding: 20px;
+}
+
+.search-form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+.filter-dropdown,
+.search-input,
+.search-button {
+    padding: 10px;
+    font-size: 16px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+}
+
+.results-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+.results-table th,
+.results-table td {
+    border: 1px solid #ddd;
+    padding: 10px;
+    text-align: left;
+}
+
+.error-message {
+    color: red;
+    margin-top: 10px;
+}

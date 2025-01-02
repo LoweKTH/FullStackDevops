@@ -1,6 +1,5 @@
 package com.fullstackdevops.messagingms.dto;
 
-import com.fullstackdevops.messagingms.model.Conversation;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;

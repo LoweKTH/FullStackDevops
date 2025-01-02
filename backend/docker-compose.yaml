@@ -80,6 +80,17 @@ services:
       - ./image-ms/uploads:/app/uploads
       - ./image-ms:/app
 
+  search-ms:
+    build:
+      context: ./search-ms
+      dockerfile: src/main/docker/Dockerfile
+    ports:
+      - "8085:8080"
+    depends_on:
+      - patient-ms
+    networks:
+      - backend-network
+
 
   db:
     image: mysql:8.0

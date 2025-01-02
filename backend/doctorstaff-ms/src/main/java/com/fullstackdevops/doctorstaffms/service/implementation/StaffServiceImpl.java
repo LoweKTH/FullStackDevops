@@ -6,7 +6,6 @@ import com.fullstackdevops.doctorstaffms.model.Staff;
 import com.fullstackdevops.doctorstaffms.repository.StaffRepository;
 import com.fullstackdevops.doctorstaffms.service.StaffService;
 import com.fullstackdevops.doctorstaffms.utils.StaffMapper;
-import com.fullstackdevops.doctorstaffms.utils.StaffNotFoundException;
 import lombok.AllArgsConstructor;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.HttpMethod;

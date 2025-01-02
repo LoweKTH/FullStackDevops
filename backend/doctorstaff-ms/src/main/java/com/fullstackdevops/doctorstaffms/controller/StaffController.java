@@ -1,6 +1,5 @@
 package com.fullstackdevops.doctorstaffms.controller;
 
-import com.fullstackdevops.doctorstaffms.dto.DoctorDto;
 import com.fullstackdevops.doctorstaffms.dto.PatientDto;
 import com.fullstackdevops.doctorstaffms.dto.StaffDto;
 import com.fullstackdevops.doctorstaffms.service.StaffService;

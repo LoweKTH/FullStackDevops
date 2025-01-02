@@ -1,0 +1,55 @@
+Index: ../frontend/src/styles/PatientDetails.css
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/../frontend/src/styles/PatientDetails.css b/../frontend/src/styles/PatientDetails.css
+new file mode 100644
+--- /dev/null	(date 1732500912026)
++++ b/../frontend/src/styles/PatientDetails.css	(date 1732500912026)
+@@ -0,0 +1,45 @@
++.patient-details-container {
++    max-width: 600px;
++    margin: 0 auto;
++    padding: 20px;
++    border: 1px solid #ccc;
++    border-radius: 8px;
++    background-color: #f9f9f9;
++}
++
++.patient-info p,
++.diagnoses-list li {
++    margin: 8px 0;
++}
++
++.diagnoses-list {
++    list-style: none;
++    padding: 0;
++}
++
++.diagnoses-list li {
++    margin-bottom: 16px;
++    padding: 10px;
++    border: 1px solid #ddd;
++    border-radius: 6px;
++    background-color: #fff;
++}
++
++.error-message {
++    color: red;
++    font-weight: bold;
++}
++
++.back-button {
++    margin-top: 20px;
++    padding: 10px 15px;
++    border: none;
++    background-color: #007bff;
++    color: white;
++    border-radius: 4px;
++    cursor: pointer;
++}
++
++.back-button:hover {
++    background-color: #0056b3;
++}

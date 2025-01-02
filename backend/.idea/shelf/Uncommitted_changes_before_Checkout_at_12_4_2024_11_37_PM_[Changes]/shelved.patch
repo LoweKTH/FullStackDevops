@@ -1,0 +1,126 @@
+Index: .idea/workspace.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n<project version=\"4\">\r\n  <component name=\"AutoImportSettings\">\r\n    <option name=\"autoReloadType\" value=\"SELECTIVE\" />\r\n  </component>\r\n  <component name=\"ChangeListManager\">\r\n    <list default=\"true\" id=\"09d6a3b5-9b2e-4587-b1b1-5156eb6a8f42\" name=\"Changes\" comment=\"#5\">\r\n      <change beforePath=\"$PROJECT_DIR$/.idea/compiler.xml\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/.idea/compiler.xml\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/.idea/encodings.xml\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/.idea/encodings.xml\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_11_12_2024_12_10_AM_[Changes]/shelved.patch\" beforeDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_11_12_2024_12_10_AM_[Changes_by_benny]/shelved.patch\" beforeDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_11_12_2024_12_10_AM__Changes_.xml\" beforeDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_11_12_2024_12_10_AM__Changes_by_benny_.xml\" beforeDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/.idea/workspace.xml\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/.idea/workspace.xml\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/docker-compose.yaml\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/docker-compose.yaml\" afterDir=\"false\" />\r\n    </list>\r\n    <list id=\"79177b7e-e8af-49c6-aa54-aba545e8c75b\" name=\"Changes by benny\" comment=\"Changes by benny\" />\r\n    <option name=\"SHOW_DIALOG\" value=\"false\" />\r\n    <option name=\"HIGHLIGHT_CONFLICTS\" value=\"true\" />\r\n    <option name=\"HIGHLIGHT_NON_ACTIVE_CHANGELIST\" value=\"false\" />\r\n    <option name=\"LAST_RESOLUTION\" value=\"IGNORE\" />\r\n  </component>\r\n  <component name=\"ExternalProjectsData\">\r\n    <projectState path=\"$PROJECT_DIR$/doctorstaff-ms\">\r\n      <ProjectState />\r\n    </projectState>\r\n  </component>\r\n  <component name=\"ExternalProjectsManager\">\r\n    <system id=\"GRADLE\">\r\n      <state>\r\n        <projects_view>\r\n          <tree_state>\r\n            <expand>\r\n              <path>\r\n                <item name=\"\" type=\"6a2764b6:ExternalProjectsStructure$RootNode\" />\r\n                <item name=\"doctorstaff-ms\" type=\"f1a62948:ProjectNode\" />\r\n              </path>\r\n            </expand>\r\n            <select />\r\n          </tree_state>\r\n        </projects_view>\r\n      </state>\r\n    </system>\r\n  </component>\r\n  <component name=\"FileTemplateManagerImpl\">\r\n    <option name=\"RECENT_TEMPLATES\">\r\n      <list>\r\n        <option value=\"Interface\" />\r\n        <option value=\"Class\" />\r\n        <option value=\"Exception\" />\r\n      </list>\r\n    </option>\r\n  </component>\r\n  <component name=\"Git.Settings\">\r\n    <option name=\"RECENT_GIT_ROOT_PATH\" value=\"$PROJECT_DIR$/..\" />\r\n  </component>\r\n  <component name=\"GitHubPullRequestSearchHistory\">{\r\n  &quot;lastFilter&quot;: {\r\n    &quot;state&quot;: &quot;OPEN&quot;,\r\n    &quot;assignee&quot;: &quot;LoweKTH&quot;\r\n  }\r\n}</component>\r\n  <component name=\"GithubPullRequestsUISettings\"><![CDATA[{\r\n  \"selectedUrlAndAccountId\": {\r\n    \"url\": \"https://github.com/LoweKTH/FullStackDevops\",\r\n    \"accountId\": \"efe60eb1-5111-4245-91a9-57d0a59d0e09\"\r\n  }\r\n}]]></component>\r\n  <component name=\"KubernetesApiPersistence\">{}</component>\r\n  <component name=\"KubernetesApiProvider\">{\r\n  &quot;isMigrated&quot;: true\r\n}</component>\r\n  <component name=\"MarkdownSettingsMigration\">\r\n    <option name=\"stateVersion\" value=\"1\" />\r\n  </component>\r\n  <component name=\"ProjectColorInfo\">{\r\n  &quot;associatedIndex&quot;: 5\r\n}</component>\r\n  <component name=\"ProjectId\" id=\"2oTJKeAsA53QvRlF29dJo1a9oZd\" />\r\n  <component name=\"ProjectLevelVcsManager\" settingsEditedManually=\"true\">\r\n    <ConfirmationsSetting value=\"2\" id=\"Add\" />\r\n  </component>\r\n  <component name=\"ProjectViewState\">\r\n    <option name=\"hideEmptyMiddlePackages\" value=\"true\" />\r\n    <option name=\"showLibraryContents\" value=\"true\" />\r\n  </component>\r\n  <component name=\"PropertiesComponent\"><![CDATA[{\r\n  \"keyToString\": {\r\n    \"Docker.docker-compose.yaml: Compose Deployment.executor\": \"Run\",\r\n    \"RequestMappingsPanelOrder0\": \"0\",\r\n    \"RequestMappingsPanelOrder1\": \"1\",\r\n    \"RequestMappingsPanelWidth0\": \"75\",\r\n    \"RequestMappingsPanelWidth1\": \"75\",\r\n    \"RunOnceActivity.OpenProjectViewOnStart\": \"true\",\r\n    \"RunOnceActivity.ShowReadmeOnStart\": \"true\",\r\n    \"Spring Boot.UserMsApplication.executor\": \"Run\",\r\n    \"WebServerToolWindowFactoryState\": \"false\",\r\n    \"git-widget-placeholder\": \"frontend\",\r\n    \"jdk.selected.JAVA_MODULE\": \"17\",\r\n    \"kotlin-language-version-configured\": \"true\",\r\n    \"last_opened_file_path\": \"C:/Users/LoweL/OneDrive/Dokument/Skolkurser/FullStack24/backend\",\r\n    \"node.js.detected.package.eslint\": \"true\",\r\n    \"node.js.detected.package.tslint\": \"true\",\r\n    \"node.js.selected.package.eslint\": \"(autodetect)\",\r\n    \"node.js.selected.package.tslint\": \"(autodetect)\",\r\n    \"nodejs_package_manager_path\": \"npm\",\r\n    \"project.structure.last.edited\": \"Modules\",\r\n    \"project.structure.proportion\": \"0.15\",\r\n    \"project.structure.side.proportion\": \"0.2\",\r\n    \"run.configurations.included.in.services\": \"true\",\r\n    \"spring.configuration.checksum\": \"d515da1eed3ff84916893d4b97ec75e2\",\r\n    \"vue.rearranger.settings.migration\": \"true\"\r\n  }\r\n}]]></component>\r\n  <component name=\"RunDashboard\">\r\n    <option name=\"configurationTypes\">\r\n      <set>\r\n        <option value=\"KtorApplicationConfigurationType\" />\r\n        <option value=\"MicronautRunConfigurationType\" />\r\n        <option value=\"QuarkusRunConfigurationType\" />\r\n        <option value=\"SpringBootApplicationConfigurationType\" />\r\n      </set>\r\n    </option>\r\n  </component>\r\n  <component name=\"RunManager\" selected=\"Docker.docker-compose.yaml: Compose Deployment\">\r\n    <configuration name=\"DoctorstaffMsApplication (1)\" type=\"SpringBootApplicationConfigurationType\" factoryName=\"Spring Boot\" nameIsGenerated=\"true\">\r\n      <module name=\"doctorstaff-ms\" />\r\n      <option name=\"SPRING_BOOT_MAIN_CLASS\" value=\"com.fullstackdevops.doctorstaffms.DoctorstaffMsApplication\" />\r\n      <method v=\"2\">\r\n        <option name=\"Make\" enabled=\"true\" />\r\n      </method>\r\n    </configuration>\r\n    <configuration name=\"DoctorstaffMsApplication\" type=\"SpringBootApplicationConfigurationType\" factoryName=\"Spring Boot\" nameIsGenerated=\"true\">\r\n      <module name=\"doctorstaff-ms\" />\r\n      <option name=\"SPRING_BOOT_MAIN_CLASS\" value=\"com.fullstackdevops.doctorstaffms.DoctorstaffMsApplication\" />\r\n      <method v=\"2\">\r\n        <option name=\"Make\" enabled=\"true\" />\r\n      </method>\r\n    </configuration>\r\n    <configuration name=\"EncounterMsApplication\" type=\"SpringBootApplicationConfigurationType\" factoryName=\"Spring Boot\" nameIsGenerated=\"true\">\r\n      <module name=\"encounter-ms\" />\r\n      <option name=\"SPRING_BOOT_MAIN_CLASS\" value=\"com.fullstackdevops.encounterms.EncounterMsApplication\" />\r\n      <method v=\"2\">\r\n        <option name=\"Make\" enabled=\"true\" />\r\n      </method>\r\n    </configuration>\r\n    <configuration name=\"MessagingMsApplication\" type=\"SpringBootApplicationConfigurationType\" factoryName=\"Spring Boot\">\r\n      <module name=\"messaging-ms\" />\r\n      <option name=\"SPRING_BOOT_MAIN_CLASS\" value=\"com.fullstackdevops.messagingms.MessagingMsApplication\" />\r\n      <method v=\"2\">\r\n        <option name=\"Make\" enabled=\"true\" />\r\n      </method>\r\n    </configuration>\r\n    <configuration name=\"PatientMsApplication\" type=\"SpringBootApplicationConfigurationType\" factoryName=\"Spring Boot\">\r\n      <module name=\"patient-ms\" />\r\n      <option name=\"SPRING_BOOT_MAIN_CLASS\" value=\"com.fullstackdevops.patientms.PatientMsApplication\" />\r\n      <method v=\"2\">\r\n        <option name=\"Make\" enabled=\"true\" />\r\n      </method>\r\n    </configuration>\r\n    <configuration name=\"UserMsApplication\" type=\"SpringBootApplicationConfigurationType\" factoryName=\"Spring Boot\">\r\n      <module name=\"user-ms\" />\r\n      <option name=\"SPRING_BOOT_MAIN_CLASS\" value=\"com.fullstackdevops.userms.UserMsApplication\" />\r\n      <method v=\"2\">\r\n        <option name=\"Make\" enabled=\"true\" />\r\n      </method>\r\n    </configuration>\r\n    <configuration name=\"docker-compose.yaml: Compose Deployment\" type=\"docker-deploy\" factoryName=\"docker-compose.yml\" temporary=\"true\" server-name=\"Docker\">\r\n      <deployment type=\"docker-compose.yml\">\r\n        <settings>\r\n          <option name=\"sourceFilePath\" value=\"docker-compose.yaml\" />\r\n        </settings>\r\n      </deployment>\r\n      <method v=\"2\" />\r\n    </configuration>\r\n    <configuration name=\"docker-compose.yaml.db: Compose Deployment\" type=\"docker-deploy\" factoryName=\"docker-compose.yml\" temporary=\"true\" server-name=\"Docker\">\r\n      <deployment type=\"docker-compose.yml\">\r\n        <settings>\r\n          <option name=\"services\">\r\n            <list>\r\n              <option value=\"db\" />\r\n            </list>\r\n          </option>\r\n          <option name=\"sourceFilePath\" value=\"docker-compose.yaml\" />\r\n        </settings>\r\n      </deployment>\r\n      <method v=\"2\" />\r\n    </configuration>\r\n    <recent_temporary>\r\n      <list>\r\n        <item itemvalue=\"Docker.docker-compose.yaml: Compose Deployment\" />\r\n        <item itemvalue=\"Docker.docker-compose.yaml.db: Compose Deployment\" />\r\n      </list>\r\n    </recent_temporary>\r\n  </component>\r\n  <component name=\"SharedIndexes\">\r\n    <attachedChunks>\r\n      <set>\r\n        <option value=\"bundled-jdk-9823dce3aa75-28b599e66164-intellij.indexing.shared.core-IU-242.23726.103\" />\r\n        <option value=\"bundled-js-predefined-d6986cc7102b-5c90d61e3bab-JavaScript-IU-242.23726.103\" />\r\n      </set>\r\n    </attachedChunks>\r\n  </component>\r\n  <component name=\"SpellCheckerSettings\" RuntimeDictionaries=\"0\" Folders=\"0\" CustomDictionaries=\"0\" DefaultDictionary=\"application-level\" UseSingleDictionary=\"true\" transferred=\"true\" />\r\n  <component name=\"TaskManager\">\r\n    <task active=\"true\" id=\"Default\" summary=\"Default task\">\r\n      <changelist id=\"09d6a3b5-9b2e-4587-b1b1-5156eb6a8f42\" name=\"Changes\" comment=\"\" />\r\n      <created>1730887569294</created>\r\n      <option name=\"number\" value=\"Default\" />\r\n      <option name=\"presentableId\" value=\"Default\" />\r\n      <updated>1730887569294</updated>\r\n      <workItem from=\"1730887570619\" duration=\"5237000\" />\r\n      <workItem from=\"1730893100808\" duration=\"155000\" />\r\n      <workItem from=\"1730893382306\" duration=\"255000\" />\r\n      <workItem from=\"1730894032504\" duration=\"8321000\" />\r\n      <workItem from=\"1730976042681\" duration=\"12692000\" />\r\n      <workItem from=\"1731450385920\" duration=\"1000000\" />\r\n      <workItem from=\"1732454036962\" duration=\"1921000\" />\r\n    </task>\r\n    <task id=\"LOCAL-00001\" summary=\"#2\">\r\n      <created>1730889193106</created>\r\n      <option name=\"number\" value=\"00001\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00001\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1730889193106</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00002\" summary=\"#3\">\r\n      <created>1730892315200</created>\r\n      <option name=\"number\" value=\"00002\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00002\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1730892315200</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00003\" summary=\"#4\">\r\n      <option name=\"closed\" value=\"true\" />\r\n      <created>1730897607573</created>\r\n      <option name=\"number\" value=\"00003\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00003\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1730897607573</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00004\" summary=\"#5\">\r\n      <option name=\"closed\" value=\"true\" />\r\n      <created>1730981771930</created>\r\n      <option name=\"number\" value=\"00004\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00004\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1730981771930</updated>\r\n    </task>\r\n    <option name=\"localTasksCounter\" value=\"5\" />\r\n    <servers />\r\n  </component>\r\n  <component name=\"TypeScriptGeneratedFilesManager\">\r\n    <option name=\"version\" value=\"3\" />\r\n  </component>\r\n  <component name=\"Vcs.Log.Tabs.Properties\">\r\n    <option name=\"TAB_STATES\">\r\n      <map>\r\n        <entry key=\"MAIN\">\r\n          <value>\r\n            <State />\r\n          </value>\r\n        </entry>\r\n      </map>\r\n    </option>\r\n  </component>\r\n  <component name=\"VcsManagerConfiguration\">\r\n    <MESSAGE value=\"#2\" />\r\n    <MESSAGE value=\"#3\" />\r\n    <MESSAGE value=\"#4\" />\r\n    <MESSAGE value=\"#5\" />\r\n    <MESSAGE value=\"Changes by benny\" />\r\n    <option name=\"LAST_COMMIT_MESSAGE\" value=\"Changes by benny\" />\r\n  </component>\r\n</project>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.idea/workspace.xml b/.idea/workspace.xml
+--- a/.idea/workspace.xml	(revision 9ae1296896e6edde0e281f7d887ee80b820d7661)
++++ b/.idea/workspace.xml	(date 1732533675740)
+@@ -5,14 +5,9 @@
+   </component>
+   <component name="ChangeListManager">
+     <list default="true" id="09d6a3b5-9b2e-4587-b1b1-5156eb6a8f42" name="Changes" comment="#5">
+-      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/.idea/encodings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_11_12_2024_12_10_AM_[Changes]/shelved.patch" beforeDir="false" />
+-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_11_12_2024_12_10_AM_[Changes_by_benny]/shelved.patch" beforeDir="false" />
+-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_11_12_2024_12_10_AM__Changes_.xml" beforeDir="false" />
+-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_11_12_2024_12_10_AM__Changes_by_benny_.xml" beforeDir="false" />
++      <change afterPath="$PROJECT_DIR$/../frontend/src/styles/PatientDetails.css" afterDir="false" />
+       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/docker-compose.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/docker-compose.yaml" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/../frontend/src/components/PatientDetails.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/src/components/PatientDetails.jsx" afterDir="false" />
+     </list>
+     <list id="79177b7e-e8af-49c6-aa54-aba545e8c75b" name="Changes by benny" comment="Changes by benny" />
+     <option name="SHOW_DIALOG" value="false" />
+@@ -215,7 +210,7 @@
+       <workItem from="1730894032504" duration="8321000" />
+       <workItem from="1730976042681" duration="12692000" />
+       <workItem from="1731450385920" duration="1000000" />
+-      <workItem from="1732454036962" duration="1921000" />
++      <workItem from="1732454036962" duration="9620000" />
+     </task>
+     <task id="LOCAL-00001" summary="#2">
+       <created>1730889193106</created>
+@@ -247,7 +242,15 @@
+       <option name="project" value="LOCAL" />
+       <updated>1730981771930</updated>
+     </task>
+-    <option name="localTasksCounter" value="5" />
++    <task id="LOCAL-00005" summary="#5">
++      <option name="closed" value="true" />
++      <created>1732483963990</created>
++      <option name="number" value="00005" />
++      <option name="presentableId" value="LOCAL-00005" />
++      <option name="project" value="LOCAL" />
++      <updated>1732483963990</updated>
++    </task>
++    <option name="localTasksCounter" value="6" />
+     <servers />
+   </component>
+   <component name="TypeScriptGeneratedFilesManager">
+@@ -268,8 +271,8 @@
+     <MESSAGE value="#2" />
+     <MESSAGE value="#3" />
+     <MESSAGE value="#4" />
+-    <MESSAGE value="#5" />
+     <MESSAGE value="Changes by benny" />
+-    <option name="LAST_COMMIT_MESSAGE" value="Changes by benny" />
++    <MESSAGE value="#5" />
++    <option name="LAST_COMMIT_MESSAGE" value="#5" />
+   </component>
+ </project>
+\ No newline at end of file
+Index: ../frontend/src/components/PatientDetails.jsx
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>import React from \"react\";\r\nimport { useLocation, useNavigate } from \"react-router-dom\";\r\n\r\nconst PatientDetails = () => {\r\n    const location = useLocation();\r\n    const navigate = useNavigate();\r\n    const { patient } = location.state; // Retrieve patient data passed through navigation state\r\n\r\n    return (\r\n        <div className=\"patient-details-container\">\r\n            <h2>Patient Details</h2>\r\n            <div className=\"patient-details\">\r\n                <p><strong>First Name:</strong> {patient.firstname}</p>\r\n                <p><strong>Last Name:</strong> {patient.lastname}</p>\r\n                <p><strong>Social Security Number:</strong> {patient.socialSecurityNumber}</p>\r\n                <p><strong>Phone Number:</strong> {patient.phoneNumber}</p>\r\n                <p><strong>Address:</strong> {patient.address}</p>\r\n                <p><strong>Gender:</strong> {patient.gender}</p>\r\n                <p><strong>Date of Birth:</strong> {patient.dateOfBirth}</p>\r\n                <p><strong>Email:</strong> {patient.email}</p>\r\n            </div>\r\n            <button\r\n                onClick={() => navigate(\"/patients\")}\r\n                className=\"back-btn\"\r\n            >\r\n                Back to Patient List\r\n            </button>\r\n        </div>\r\n    );\r\n};\r\n\r\nexport default PatientDetails;\r\n
+===================================================================
+diff --git a/../frontend/src/components/PatientDetails.jsx b/../frontend/src/components/PatientDetails.jsx
+--- a/../frontend/src/components/PatientDetails.jsx	(revision 9ae1296896e6edde0e281f7d887ee80b820d7661)
++++ b/../frontend/src/components/PatientDetails.jsx	(date 1732500951903)
+@@ -1,10 +1,28 @@
+-import React from "react";
++import React, {useEffect, useState} from "react";
+ import { useLocation, useNavigate } from "react-router-dom";
++import {fetchDiagnosesForPatient} from "../api/Patient-ms-api";
++import "../styles/PatientDetails.css";
++
+ 
+ const PatientDetails = () => {
+     const location = useLocation();
+     const navigate = useNavigate();
+-    const { patient } = location.state; // Retrieve patient data passed through navigation state
++    const { patient } = location.state;
++    const [diagnoses, setDiagnoses] = useState([]);
++    const [error, setError] = useState("");
++
++    useEffect(() => {
++        const getDiagnoses = async () =>{
++            try{
++                const response = await fetchDiagnosesForPatient(patient.userId);
++                setDiagnoses(response.data);
++            }catch(err){
++                console.error("Error fetching diagnoses:", err);
++                setError("Failed to fetch diagnoses");
++            }
++        }
++        getDiagnoses();
++    }, [patient.userId]);
+ 
+     return (
+         <div className="patient-details-container">
+@@ -19,6 +37,21 @@
+                 <p><strong>Date of Birth:</strong> {patient.dateOfBirth}</p>
+                 <p><strong>Email:</strong> {patient.email}</p>
+             </div>
++            <h3>Diagnoses</h3>
++            {error && <p className="error-message">{error}</p>}
++            {diagnoses.length > 0 ? (
++                <ul className="diagnoses-list">
++                    {diagnoses.map((diagnosis) => (
++                        <li key={diagnosis.id}>
++                            <p><strong>Description:</strong> {diagnosis.description}</p>
++                            <p><strong>Created By:</strong> {diagnosis.doctorstaffId}</p>
++                            <p><strong>Created At:</strong> {diagnosis.diagnosisDate}</p>
++                        </li>
++                    ))}
++                </ul>
++            ) : (
++                <p>No diagnoses available for this patient.</p>
++            )}
+             <button
+                 onClick={() => navigate("/patients")}
+                 className="back-btn"

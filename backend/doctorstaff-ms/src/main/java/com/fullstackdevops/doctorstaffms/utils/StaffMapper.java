@@ -1,8 +1,6 @@
 package com.fullstackdevops.doctorstaffms.utils;
 
 import com.fullstackdevops.doctorstaffms.dto.StaffDto;
-import com.fullstackdevops.doctorstaffms.model.Doctor;
-import com.fullstackdevops.doctorstaffms.dto.DoctorDto;
 import com.fullstackdevops.doctorstaffms.model.Staff;
 
 public class StaffMapper {

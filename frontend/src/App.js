@@ -12,6 +12,7 @@ import Profile from "./components/Profile";
 import PatientDetails from "./components/PatientDetails";
 import ImageUpload from "./components/ImageUpload";
 import ImageEdit from "./components/ImageEdit";
+import SearchPage from "./components/SearchPage";
 
 function App() {
     return (
@@ -31,6 +32,7 @@ function App() {
                         <Route path="/patient-details" element={<PatientDetails />} />
                         <Route path="/image-upload" element={<ImageUpload />} />
                         <Route path="/image-edit" element={<ImageEdit />} />
+                        <Route path="/search" element={<SearchPage />} />
                     </Routes>
                 </div>
             </div>

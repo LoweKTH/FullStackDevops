@@ -5,7 +5,6 @@ import com.fullstackdevops.userms.dto.LoginDto;
 import com.fullstackdevops.userms.dto.RegistrationDto;
 import com.fullstackdevops.userms.dto.UserDto;
 import com.fullstackdevops.userms.service.UserService;
-import com.fullstackdevops.userms.utils.UserNotFoundException;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

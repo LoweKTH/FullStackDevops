@@ -1,11 +1,13 @@
 package com.fullstackdevops.patientms.controller;
 
-import com.fullstackdevops.patientms.dto.*;
+import com.fullstackdevops.patientms.dto.DiagnosisDto;
+import com.fullstackdevops.patientms.dto.DoctorStaffDto;
+import com.fullstackdevops.patientms.dto.NoteDto;
+import com.fullstackdevops.patientms.dto.PatientDto;
 import com.fullstackdevops.patientms.service.PatientService;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -23,11 +25,14 @@ public class PatientController {
         return new ResponseEntity<>(patientService.createPatient(patientDto), HttpStatus.CREATED);
     }
 
+
     @GetMapping("/{id}")
     public ResponseEntity<PatientDto> getPatientById(@PathVariable Long id) {
             PatientDto patientDto = patientService.getPatientById(id);
             return ResponseEntity.ok(patientDto);
     }
+
+    @GetMapping()
 
 
     @PostMapping("/{patientId}/notes")
@@ -49,12 +54,6 @@ public class PatientController {
         return new ResponseEntity<>(diagnoses, HttpStatus.CREATED);
     }
 
-    /*@PostMapping("/{patientId}/staffnotes")
-    public ResponseEntity<NoteDto> addNoteToPatientAsStaff(@PathVariable Long patientId, @RequestBody NoteDto noteDto) {
-        Long staffId = noteDto.getStaffId();
-        NoteDto createdNote = patientService.addNoteToPatientAsStaff(patientId, noteDto ,staffId);
-        return new ResponseEntity<>(createdNote, HttpStatus.CREATED);
-    }*/
 
     @GetMapping("/")
     public ResponseEntity<List<PatientDto>> getAllPatients() {
@@ -73,12 +72,6 @@ public class PatientController {
         DoctorStaffDto doctors = patientService.getDoctorstaffForPatient(patientId);
         return ResponseEntity.ok(doctors);
     }
-
-    /*@GetMapping("/{patientId}/staffs")
-    public ResponseEntity<List<StaffDto>> getStaffsForPatient(@PathVariable Long patientId){
-        List<StaffDto> staffs = patientService.getStaffsForPatient(patientId);
-        return ResponseEntity.ok(staffs);
-    }*/
 
     @GetMapping("/{doctorstaffId}/doctorstaffgetpatients")
     public ResponseEntity<List<Long>> getPatientsByDoctorstaffId(@PathVariable Long doctorstaffId) {

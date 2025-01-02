@@ -9,6 +9,7 @@
         <option value="$PROJECT_DIR$/messaging-ms/pom.xml" />
         <option value="$PROJECT_DIR$/doctorstaff-ms/pom.xml" />
         <option value="$PROJECT_DIR$/encounter-ms/pom.xml" />
+        <option value="$PROJECT_DIR$/search-ms/pom.xml" />
       </list>
     </option>
   </component>

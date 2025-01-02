@@ -1,7 +1,7 @@
 package com.fullstackdevops.patientms.repository;
 
 import com.fullstackdevops.patientms.model.Diagnosis;
-import com.fullstackdevops.patientms.model.Note;
+import com.fullstackdevops.patientms.model.Patient;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
@@ -18,5 +18,8 @@ public interface DiagnosisRepository extends JpaRepository<Diagnosis, Long> {
     List<Long> findDistinctDoctorstaffByPatientId(@Param("patientId") Long patientId);
 
     List<Diagnosis> findByPatientId(Long patientId);
+
+
+}
 
 }
