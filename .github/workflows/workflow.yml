@@ -41,6 +41,14 @@ jobs:
         run: |
           docker-compose -f ./backend/docker-compose.yaml up -d
 
+      # Wait for MySQL to be ready
+      - name: Wait for MySQL to be ready
+        run: |
+          while ! docker exec backend-db-1 mysqladmin ping --silent; do
+            echo "Waiting for MySQL to be ready..."
+            sleep 5
+          done
+          echo "MySQL is ready!"
 
       # Run tests for messaging-ms (this is done during the build step)
       - name: Run tests for messaging-ms
