@@ -27,6 +27,8 @@ services:
 
   doctorstaff-ms:
     build: ./doctorstaff-ms
+    volumes:
+      - ./backend:/app
     environment:
       SPRING_DATASOURCE_URL: jdbc:mysql://db:3306/fullstack24
       SPRING_DATASOURCE_USERNAME: user
@@ -41,6 +43,8 @@ services:
 
   patient-ms:
     build: ./patient-ms
+    volumes:
+      - ./backend:/app
     environment:
       SPRING_DATASOURCE_URL: jdbc:mysql://db:3306/fullstack24
       SPRING_DATASOURCE_USERNAME: user
@@ -56,6 +60,8 @@ services:
 
   user-ms:
     build: ./user-ms
+    volumes:
+      - ./backend:/app
     environment:
       SPRING_DATASOURCE_URL: jdbc:mysql://db:3306/fullstack24
       SPRING_DATASOURCE_USERNAME: user
