@@ -56,7 +56,7 @@ jobs:
       # Build the Docker Compose services
       - name: Build and start Docker Compose services
         run: |
-          docker-compose -f docker-compose.yaml up -d
+          docker-compose -f ./backend/docker-compose.yaml up -d
 
       # Run tests for each microservice
 
