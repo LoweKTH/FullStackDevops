@@ -33,6 +33,15 @@ jobs:
         run: mvn test
 
       # Image Microservice
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '22'  # Use the version of Node.js that your project requires
+
+      - name: Ensure Jest has executable permissions
+        working-directory: backend/image-ms
+        run: chmod +x node_modules/.bin/jest
+
       - name: Build Image Microservice
         working-directory: backend/image-ms
         run: npm install
