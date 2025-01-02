@@ -79,7 +79,7 @@ jobs:
 
       # Shutdown Docker Compose
       - name: Shut down Docker Compose
-        run: docker-compose -f docker-compose.yml down
+        run: docker-compose -f ./backend/docker-compose.yaml down
 
       - name: Login to Docker Hub
         uses: docker/login-action@v3
