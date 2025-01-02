@@ -8,5 +8,4 @@ RUN mvn clean package -DskipTests
 FROM openjdk:17-jdk-slim
 WORKDIR /app
 COPY --from=build /app/target/doctorstaff-ms-0.0.1-SNAPSHOT.jar doctorstaff-ms-0.0.1-SNAPSHOT.jar
-RUN apt-get update && apt-get install -y maven
 ENTRYPOINT ["java", "-jar", "doctorstaff-ms-0.0.1-SNAPSHOT.jar"]
