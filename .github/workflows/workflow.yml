@@ -53,6 +53,7 @@ jobs:
       # Run tests for messaging-ms (this is done during the build step)
       - name: Run tests for messaging-ms
         run: |
+          docker ps
           docker-compose -f ./backend/docker-compose.yaml exec backend-messaging-ms-1 mvn test
 
       # Run tests for doctorstaff-ms
