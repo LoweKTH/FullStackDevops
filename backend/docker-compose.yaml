@@ -2,28 +2,28 @@ version: '3.8'
 services:
 
 
-  frontend:
-    build:
-      context: ../frontend
-      dockerfile: Dockerfile
+ # frontend:
+   # build:
+   #   context: ../frontend
+   #   dockerfile: Dockerfile
+#
+   # volumes:
+   #   - ../frontend:/app
+  #  ports:
+  #    - "3000:3000"
 
-    volumes:
-      - ../frontend:/app
-    ports:
-      - "3000:3000"
-
-  messaging-ms:
-    build: ./messaging-ms
-    environment:
-      SPRING_DATASOURCE_URL: jdbc:mysql://db:3306/fullstack24
-      SPRING_DATASOURCE_USERNAME: user
-      SPRING_DATASOURCE_PASSWORD: password
-    ports:
-      - "8084:8080"
-    depends_on:
-      - db
-    networks:
-      - backend-network
+ # messaging-ms:
+  #  build: ./messaging-ms
+  #  environment:
+  #    SPRING_DATASOURCE_URL: jdbc:mysql://db:3306/fullstack24
+   #   SPRING_DATASOURCE_USERNAME: user
+  #    SPRING_DATASOURCE_PASSWORD: password
+  #  ports:
+  #    - "8084:8080"
+  #  depends_on:
+  #    - db
+ #   networks:
+ #     - backend-network
 
   doctorstaff-ms:
     build: ./doctorstaff-ms
@@ -39,46 +39,46 @@ services:
       - backend-network
   
 
-  patient-ms:
-    build: ./patient-ms
-    environment:
-      SPRING_DATASOURCE_URL: jdbc:mysql://db:3306/fullstack24
-      SPRING_DATASOURCE_USERNAME: user
-      SPRING_DATASOURCE_PASSWORD: password
-    ports:
-      - "8082:8080"
-    depends_on:
-      - db
-    networks:
-      - backend-network
+  #patient-ms:
+    #build: ./patient-ms
+    #environment:
+    #  SPRING_DATASOURCE_URL: jdbc:mysql://db:3306/fullstack24
+    #  SPRING_DATASOURCE_USERNAME: user
+    #  SPRING_DATASOURCE_PASSWORD: password
+    #ports:
+    #  - "8082:8080"
+   # depends_on:
+   #   - db
+   # networks:
+   #   - backend-network
 
 
 
-  user-ms:
-    build: ./user-ms
-    environment:
-      SPRING_DATASOURCE_URL: jdbc:mysql://db:3306/fullstack24
-      SPRING_DATASOURCE_USERNAME: user
-      SPRING_DATASOURCE_PASSWORD: password
-    ports:
-      - "8081:8080"
-    depends_on:
-      - db
-    networks:
-      - backend-network
+  #user-ms:
+  #  build: ./user-ms
+  #  environment:
+  #    SPRING_DATASOURCE_URL: jdbc:mysql://db:3306/fullstack24
+  #    SPRING_DATASOURCE_USERNAME: user
+ #    SPRING_DATASOURCE_PASSWORD: password
+  #  ports:
+  #    - "8081:8080"
+  #  depends_on:
+   #   - db
+   # networks:
+   #   - backend-network
 
 
-  image-ms:
-    build: image-ms
-    ports:
-      - "3002:3002"
-    networks:
-      - backend-network
-    depends_on:
-      - db
-    volumes:
-      - ./image-ms/uploads:/app/uploads
-      - ./image-ms:/app
+  #image-ms:
+  #  build: image-ms
+  #  ports:
+  #    - "3002:3002"
+  #  networks:
+  #    - backend-network
+  #  depends_on:
+  #    - db
+  #  volumes:
+  #    - ./image-ms/uploads:/app/uploads
+  #    - ./image-ms:/app
 
 
   db:

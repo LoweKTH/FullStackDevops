@@ -12,37 +12,23 @@ jobs:
     name: Build and Test Doctorstaff Microservice
     runs-on: ubuntu-latest
 
-    services:
-      mysql:
-        image: mysql:8.0
-        env:
-          MYSQL_ROOT_PASSWORD: password
-          MYSQL_DATABASE: db
-        ports:
-          - 3306:3306
-        options: >-
-          --health-cmd="mysqladmin ping --silent"
-          --health-interval=10s
-          --health-timeout=5s
-          --health-retries=3
+
     steps:
       - name: Checkout Code
         uses: actions/checkout@v3
 
-      - name: Build Doctorstaff Microservice
-        working-directory: backend/doctorstaff-ms
-        run: mvn clean install -DskipTests
+      - name: Install Docker Compose
+        run: |
+          sudo curl -L "https://github.com/docker/compose/releases/download/$(curl -s https://api.github.com/repos/docker/compose/releases/latest | jq -r .tag_name)/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
+          sudo chmod +x /usr/local/bin/docker-compose
+          docker-compose --version  # Verify installation
 
-      - name: Run Tests for Doctorstaff Microservice
-        working-directory: backend/doctorstaff-ms
-        env:
-          DB_HOST: localhost
-          DB_PORT: 3306
-          DB_USER: user
-          DB_PASSWORD: password
-          DB_NAME: fullstack24
-        run: mvn test
+      - name: Build the docker-compose stack
+        run: |
+          docker-compose -f ./backend/docker-compose.yaml up -d --build
 
+      - name: Check running containers
+        run: docker ps
 
       - name: Login to Docker Hub
         uses: docker/login-action@v3
@@ -52,18 +38,9 @@ jobs:
           password: ${{ secrets.DOCKER_PASSWORD }}
 
 
-      - name: Pull and push MySQL Image
+      - name: Push image to DO Container Registry
         run: |
-          docker pull mysql:8.0
-          docker tag mysql:8.0 ${{ secrets.DOCKER_TAG }}
-          docker push ${{ secrets.DOCKER_TAG }}
+          docker-compose -f ./backend/docker-compose.yaml push
 
-      - name: Build and push Doctorstaff Microservice
-        uses: docker/build-push-action@v5
-        with:
-          context: ./backend/doctorstaff-ms
-          file: ./backend/doctorstaff-ms/Dockerfile
-          push: true
-          tags: ${{ secrets.DOCKER_TAG }}
-
+      
 
