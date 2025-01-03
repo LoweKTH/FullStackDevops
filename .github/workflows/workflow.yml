@@ -36,4 +36,4 @@ jobs:
       - name: Build and Push Images with Buildx Bake
         run: |
           docker buildx bake --file ./backend/docker-compose.yaml --push
-        working-directory: ./backend
+          
