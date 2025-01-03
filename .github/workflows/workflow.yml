@@ -7,7 +7,6 @@ on:
 
 jobs:
 
-
   doctorstaff-ms-build:
     name: Build and Test Doctorstaff Microservice
     runs-on: ubuntu-latest
@@ -15,16 +14,10 @@ jobs:
       mysql:
         image: mysql:8.0
         env:
-          # The MySQL docker container requires these environment variables to be set
-          # so we can create and migrate the test database.
-          # See: https://hub.docker.com/_/mysql
           MYSQL_DATABASE: fullstack24
           MYSQL_ROOT_PASSWORD: password
         ports:
-          # Opens port 3306 on service container and host
-          # https://docs.github.com/en/actions/using-containerized-services/about-service-containers
           - 3306:3306
-          # Before continuing, verify the mysql container is reachable from the ubuntu host
         options: --health-cmd="mysqladmin ping" --health-interval=10s --health-timeout=5s --health-retries=3
 
     steps:
@@ -60,3 +53,185 @@ jobs:
           push: true
           tags: ${{ secrets.DOCKER_TAG }}
 
+
+
+  image-ms-build:
+    name: Build and Test Image Microservice
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v3
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '22'  # Use the version of Node.js that your project requires
+
+      - name: Ensure Jest has executable permissions
+        working-directory: backend/image-ms
+        run: chmod +x node_modules/.bin/jest
+
+      - name: Install Dependencies for Image Microservice
+        working-directory: backend/image-ms
+        run: npm install
+
+      - name: Run Tests for image Microservice
+        working-directory: backend/image-ms
+        env:
+          DB_HOST: localhost
+          DB_PORT: 3306
+          DB_USER: user
+          DB_PASSWORD: password
+          DB_NAME: fullstack24
+        run: npm test
+
+      - name: Login to Docker Hub
+        uses: docker/login-action@v3
+        with:
+          registry: registry.cloud.cbh.kth.se
+          username: ${{ secrets.DOCKER_USERNAME }}
+          password: ${{ secrets.DOCKER_PASSWORD }}
+
+      - name: Build and push Image Microservice
+        uses: docker/build-push-action@v5
+        with:
+          context: ./backend/image-ms
+          file: ./backend/image-ms/Dockerfile
+          push: true
+          tags: ${{ secrets.DOCKER_TAG }}
+
+  messaging-ms-build:
+    name: Build and Test Messaging Microservice
+    runs-on: ubuntu-latest
+
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v3
+
+      - name: Build messaging Microservice
+        working-directory: backend/messaging-ms
+        run: mvn clean install -DskipTests
+
+      - name: Run Tests for messaging Microservice
+        working-directory: backend/messaging-ms
+        env:
+          DB_HOST: localhost
+          DB_PORT: 3306
+          DB_USER: user
+          DB_PASSWORD: password
+          DB_NAME: fullstack24
+        run: mvn test
+
+      - name: Login to Docker Hub
+        uses: docker/login-action@v3
+        with:
+          registry: registry.cloud.cbh.kth.se
+          username: ${{ secrets.DOCKER_USERNAME }}
+          password: ${{ secrets.DOCKER_PASSWORD }}
+
+      - name: Build and push Messaging Microservice
+        uses: docker/build-push-action@v5
+        with:
+          context: ./backend/messaging-ms
+          file: ./backend/messaging-ms/Dockerfile
+          push: true
+          tags: ${{ secrets.DOCKER_TAG }}
+
+  patient-ms-build:
+    name: Build and Test Patient Microservice
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v3
+
+      - name: Build Patient Microservice
+        working-directory: backend/patient-ms
+        run: mvn clean install -DskipTests
+
+      - name: Run Tests for patient Microservice
+        working-directory: backend/patient-ms
+        env:
+          DB_HOST: localhost
+          DB_PORT: 3306
+          DB_USER: user
+          DB_PASSWORD: password
+          DB_NAME: fullstack24
+        run: mvn test
+
+      - name: Login to Docker Hub
+        uses: docker/login-action@v3
+        with:
+          registry: registry.cloud.cbh.kth.se
+          username: ${{ secrets.DOCKER_USERNAME }}
+          password: ${{ secrets.DOCKER_PASSWORD }}
+
+      - name: Build and push Patient Microservice
+        uses: docker/build-push-action@v5
+        with:
+          context: ./backend/patient-ms
+          file: ./backend/patient-ms/Dockerfile
+          push: true
+          tags: ${{ secrets.DOCKER_TAG }}
+
+  user-ms-build:
+    name: Build and Test User Microservice
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v3
+
+      - name: Build user Microservice
+        working-directory: backend/user-ms
+        run: mvn clean install -DskipTests
+
+      - name: Run Tests for user Microservice
+        working-directory: backend/user-ms
+        env:
+          DB_HOST: localhost
+          DB_PORT: 3306
+          DB_USER: user
+          DB_PASSWORD: password
+          DB_NAME: fullstack24
+        run: mvn test
+
+      - name: Login to Docker Hub
+        uses: docker/login-action@v3
+        with:
+          registry: registry.cloud.cbh.kth.se
+          username: ${{ secrets.DOCKER_USERNAME }}
+          password: ${{ secrets.DOCKER_PASSWORD }}
+
+      - name: Build and push User Microservice
+        uses: docker/build-push-action@v5
+        with:
+          context: ./backend/user-ms
+          file: ./backend/user-ms/Dockerfile
+          push: true
+          tags: ${{ secrets.DOCKER_TAG }}
+
+  frontend-build:
+    name: Build Frontend
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v3
+
+      - name: Login to Docker Hub
+        uses: docker/login-action@v3
+        with:
+          registry: registry.cloud.cbh.kth.se
+          username: ${{ secrets.DOCKER_USERNAME }}
+          password: ${{ secrets.DOCKER_PASSWORD }}
+
+      - name: Build and push Frontend
+        uses: docker/build-push-action@v5
+        with:
+          context: ./frontend
+          file: ./frontend/Dockerfile
+          push: true
+          tags: ${{ secrets.DOCKER_TAG }}
