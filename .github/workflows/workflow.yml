@@ -11,6 +11,21 @@ on:
 jobs:
   build-and-test:
     runs-on: ubuntu-latest
+    services:
+      mysql:
+        image: mysql:8.0
+        env:
+          # The MySQL docker container requires these environment variables to be set
+          # so we can create and migrate the test database.
+          # See: https://hub.docker.com/_/mysql
+          MYSQL_DATABASE: fullstack24
+          MYSQL_ROOT_PASSWORD: password
+        ports:
+          # Opens port 3306 on service container and host
+          # https://docs.github.com/en/actions/using-containerized-services/about-service-containers
+          - 3306:3306
+          # Before continuing, verify the mysql container is reachable from the ubuntu host
+        options: --health-cmd="mysqladmin ping" --health-interval=10s --health-timeout=5s --health-retries=3
 
     steps:
       # Checkout the code from the repository
@@ -35,7 +50,7 @@ jobs:
       # Build the Docker Compose services
       - name: Build and start Docker Compose services
         run: |
-          docker-compose -f ./backend/docker-compose.yaml up -d --build
+          docker-compose -f ./backend/docker-compose.yaml up -d --build doctorstaff-ms
 
       # Wait for MySQL to be ready
       - name: Wait for MySQL to be ready
@@ -82,37 +97,37 @@ jobs:
           push: true
           tags: ${{ secrets.DOCKER_TAG }}
 
-      - name: Build and push Image Microservice
-        uses: docker/build-push-action@v5
-        with:
-          context: ./backend/image-ms
-          file: ./backend/image-ms/Dockerfile
-          push: true
-          tags: ${{ secrets.DOCKER_TAG }}
+      #- name: Build and push Image Microservice
+      #  uses: docker/build-push-action@v5
+      #  with:
+       #   context: ./backend/image-ms
+        #  file: ./backend/image-ms/Dockerfile
+         # push: true
+          #tags: ${{ secrets.DOCKER_TAG }}
 
-      - name: Build and push Messaging Microservice
-        uses: docker/build-push-action@v5
-        with:
-          context: ./backend/messaging-ms
-          file: ./backend/messaging-ms/Dockerfile
-          push: true
-          tags: ${{ secrets.DOCKER_TAG }}
+ #     - name: Build and push Messaging Microservice
+  #      uses: docker/build-push-action@v5
+   #     with:
+    #      context: ./backend/messaging-ms
+     #     file: ./backend/messaging-ms/Dockerfile
+      #    push: true
+       #   tags: ${{ secrets.DOCKER_TAG }}
 
-      - name: Build and push Patient Microservice
-        uses: docker/build-push-action@v5
-        with:
-          context: ./backend/patient-ms
-          file: ./backend/patient-ms/Dockerfile
-          push: true
-          tags: ${{ secrets.DOCKER_TAG }}
+#      - name: Build and push Patient Microservice
+ #       uses: docker/build-push-action@v5
+  #      with:
+   #       context: ./backend/patient-ms
+    #      file: ./backend/patient-ms/Dockerfile
+     #     push: true
+      #    tags: ${{ secrets.DOCKER_TAG }}
 
-      - name: Build and push User Microservice
-        uses: docker/build-push-action@v5
-        with:
-          context: ./backend/user-ms
-          file: ./backend/user-ms/Dockerfile
-          push: true
-          tags: ${{ secrets.DOCKER_TAG }}
+#      - name: Build and push User Microservice
+ #       uses: docker/build-push-action@v5
+  #      with:
+   #       context: ./backend/user-ms
+    #      file: ./backend/user-ms/Dockerfile
+     #     push: true
+      #    tags: ${{ secrets.DOCKER_TAG }}
 
       - name: Build and push
         uses: docker/build-push-action@v5
