@@ -40,7 +40,7 @@ jobs:
       # Wait for MySQL to be ready
       - name: Wait for MySQL to be ready
         run: |
-          while ! docker exec backend-db-1 mysqladmin ping --silent; do
+          while ! docker exec $(docker-compose -f ./backend/docker-compose.yaml ps -q db) mysqladmin ping --silent; do
             echo "Waiting for MySQL to be ready..."
             sleep 5
           done
@@ -114,7 +114,15 @@ jobs:
           push: true
           tags: ${{ secrets.DOCKER_TAG }}
 
+      - name: Build and push
+        uses: docker/build-push-action@v5
+        with:
+          context: ./frontend
+          file: ./frontend/Dockerfile
+          push: true
+          tags: ${{ secrets.DOCKER_TAG }}
+
       # Shut down the containers after tests
       - name: Shutdown Docker Compose services
         run: |
-          docker-compose -f ./backend/docker-compose.yml down
+          docker-compose -f ./backend/docker-compose.yaml down
