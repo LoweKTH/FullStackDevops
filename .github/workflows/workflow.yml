@@ -89,13 +89,13 @@ jobs:
       #    docker-compose -f ./backend/docker-compose.yaml run --rm image-ms npm test
 
       # Optionally, build and push Docker images to a registry (if needed)
-      - name: Build and push Doctorstaff Microservice
-        uses: docker/build-push-action@v5
-        with:
-          context: ./backend/doctorstaff-ms
-          file: ./backend/doctorstaff-ms/Dockerfile
-          push: true
-          tags: ${{ secrets.DOCKER_TAG }}
+      #- name: Build and push Doctorstaff Microservice
+     #   uses: docker/build-push-action@v5
+      #  with:
+      #    context: ./backend/doctorstaff-ms
+      #    file: ./backend/doctorstaff-ms/Dockerfile
+      #    push: true
+      #    tags: ${{ secrets.DOCKER_TAG }}
 
       #- name: Build and push Image Microservice
       #  uses: docker/build-push-action@v5
@@ -135,13 +135,13 @@ jobs:
           docker push ${{ secrets.DOCKER_TAG }}
       
 
-      - name: Build and push
-        uses: docker/build-push-action@v5
-        with:
-          context: ./frontend
-          file: ./frontend/Dockerfile
-          push: true
-          tags: ${{ secrets.DOCKER_TAG }}
+      #- name: Build and push
+      #  uses: docker/build-push-action@v5
+      #  with:
+      #    context: ./frontend
+      #    file: ./frontend/Dockerfile
+      #    push: true
+       #   tags: ${{ secrets.DOCKER_TAG }}
 
       # Shut down the containers after tests
     #  - name: Shutdown Docker Compose services
