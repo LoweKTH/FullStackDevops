@@ -128,6 +128,12 @@ jobs:
     #      file: ./backend/user-ms/Dockerfile
      #     push: true
       #    tags: ${{ secrets.DOCKER_TAG }}
+      - name: Pull and push MySQL Image
+        run: |
+          docker pull mysql:8.0
+          docker tag mysql:8.0 ${{ secrets.DOCKER_TAG }}
+          docker push ${{ secrets.DOCKER_TAG }}
+      
 
       - name: Build and push
         uses: docker/build-push-action@v5
