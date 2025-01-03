@@ -26,7 +26,6 @@ services:
 
   doctorstaff-ms:
     build: ./doctorstaff-ms
-    image: registry.cloud.cbh.kth.se/deploy-b23849a9-d97a-4b9e-bd06-a4bf766b28e1/fullstackdevops/doctorstaff-ms
     environment:
       SPRING_DATASOURCE_URL: jdbc:mysql://db:3306/fullstack24
       SPRING_DATASOURCE_USERNAME: user
@@ -82,7 +81,7 @@ services:
 
 
   db:
-    image: registry.cloud.cbh.kth.se/deploy-b23849a9-d97a-4b9e-bd06-a4bf766b28e1/fullstackdevops/mysql:8.0
+    image: mysql:8.0
     environment:
       MYSQL_DATABASE: fullstack24
       MYSQL_USER: user

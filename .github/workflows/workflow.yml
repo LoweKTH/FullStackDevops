@@ -30,16 +30,7 @@ jobs:
           username: ${{ secrets.DOCKER_USERNAME }}
           password: ${{ secrets.DOCKER_PASSWORD }}
 
-      - name: Build the docker-compose stack
+      - name: Build and Push Images with Buildx Bake
         run: |
-          docker-compose -f ./backend/docker-compose.yaml up -d --build
-
-
-      
-
-
-
-      - name: Build and Push Images Using Docker Compose
-        run: |
-          docker compose -f ./backend/docker-compose.yaml build
-          docker compose -f ./backend/docker-compose.yaml push
+          TAG=${{ secrets.DOCKER_TAG }} 
+          docker buildx bake --file ./backend/docker-compose.yaml --push
