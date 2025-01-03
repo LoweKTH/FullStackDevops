@@ -33,6 +33,7 @@ jobs:
         run: mvn clean install -DskipTests
 
       - name: Run Tests for Doctorstaff Microservice
+        working-directory: backend/doctorstaff-ms
         env:
           DB_HOST: localhost
           DB_PORT: 3306
@@ -92,6 +93,7 @@ jobs:
         run: npm install
 
       - name: Run Tests for image Microservice
+        working-directory: backend/image-ms
         env:
           DB_HOST: localhost
           DB_PORT: 3306
@@ -141,6 +143,7 @@ jobs:
         run: mvn clean install -DskipTests
 
       - name: Run Tests for messaging Microservice
+        working-directory: backend/messaging-ms
         env:
           DB_HOST: localhost
           DB_PORT: 3306
@@ -190,6 +193,7 @@ jobs:
         run: mvn clean install -DskipTests
 
       - name: Run Tests for patient Microservice
+        working-directory: backend/patient-ms
         env:
           DB_HOST: localhost
           DB_PORT: 3306
@@ -239,6 +243,7 @@ jobs:
         run: mvn clean install -DskipTests
 
       - name: Run Tests for user Microservice
+        working-directory: backend/user-ms
         env:
           DB_HOST: localhost
           DB_PORT: 3306
