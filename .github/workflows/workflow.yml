@@ -35,5 +35,4 @@ jobs:
 
       - name: Build and Push Images with Buildx Bake
         run: |
-          export TAG=${{ secrets.DOCKER_TAG }} 
           docker buildx bake --file ./backend/docker-compose.yaml --push
