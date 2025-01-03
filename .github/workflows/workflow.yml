@@ -35,7 +35,7 @@ jobs:
   doctorstaff-ms-build:
     name: Build and Test Doctorstaff Microservice
     runs-on: ubuntu-latest
-
+    needs: start-database
 
     steps:
       - name: Checkout Code
@@ -74,7 +74,7 @@ jobs:
   image-ms-build:
     name: Build and Test Image Microservice
     runs-on: ubuntu-latest
-
+    needs: start-database
 
     steps:
       - name: Checkout Code
@@ -121,7 +121,7 @@ jobs:
   messaging-ms-build:
     name: Build and Test Messaging Microservice
     runs-on: ubuntu-latest
-
+    needs: start-database
 
     steps:
       - name: Checkout Code
@@ -159,6 +159,7 @@ jobs:
   patient-ms-build:
     name: Build and Test Patient Microservice
     runs-on: ubuntu-latest
+    needs: start-database
 
     steps:
       - name: Checkout Code
@@ -196,6 +197,7 @@ jobs:
   user-ms-build:
     name: Build and Test User Microservice
     runs-on: ubuntu-latest
+    needs: start-database
 
     steps:
       - name: Checkout Code
