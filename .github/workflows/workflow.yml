@@ -25,7 +25,7 @@ jobs:
         uses: actions/checkout@v3
 
       - name: Build doctorstaff Microservice
-        working-directory: backend/doctortstaff-ms
+        working-directory: backend/doctorstaff-ms
         run: mvn clean install -DskipTests
 
       - name: Run Tests for doctorstaff Microservice
