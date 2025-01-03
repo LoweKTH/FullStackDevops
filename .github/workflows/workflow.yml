@@ -63,6 +63,7 @@ jobs:
           username: ${{ secrets.DOCKER_USERNAME }}
           password: ${{ secrets.DOCKER_PASSWORD }}
 
+
       - name: Build and push Doctorstaff Microservice
         uses: docker/build-push-action@v5
         with:
@@ -70,4 +71,9 @@ jobs:
           file: ./backend/doctorstaff-ms/Dockerfile
           push: true
           tags: ${{ secrets.DOCKER_TAG }}
+          build-args: |
+            MYSQL_DATABASE=fullstack24
+            MYSQL_ROOT_PASSWORD=password
+            MYSQL_HOST=mysql
+            MYSQL_PORT=3306
 
