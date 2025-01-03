@@ -26,7 +26,6 @@ services:
 
   doctorstaff-ms:
     build: ./backend/doctorstaff-ms
-    image:  registry.cloud.cbh.kth.se/deploy-b23849a9-d97a-4b9e-bd06-a4bf766b28e1/fullstackdevops/doctorstaff-ms:latest
     environment:
       SPRING_DATASOURCE_URL: jdbc:mysql://db:3306/fullstack24
       SPRING_DATASOURCE_USERNAME: user
