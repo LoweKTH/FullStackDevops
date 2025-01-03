@@ -50,3 +50,6 @@ jobs:
           push: true
           tags: ${{ secrets.DOCKER_TAG }}
 
+      - name: Verify MySQL connection (optional)
+        run: |
+          docker exec mysql mysql -u root -ppassword -e "SHOW DATABASES;"
