@@ -138,6 +138,6 @@ jobs:
           tags: ${{ secrets.DOCKER_TAG }}
 
       # Shut down the containers after tests
-      - name: Shutdown Docker Compose services
-        run: |
-          docker-compose -f ./backend/docker-compose.yaml down
+    #  - name: Shutdown Docker Compose services
+    #    run: |
+    #      docker-compose -f ./backend/docker-compose.yaml down
