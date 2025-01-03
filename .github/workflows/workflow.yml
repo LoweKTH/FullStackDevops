@@ -40,5 +40,5 @@ jobs:
           push: true
           pull: true
           files: |
-            ./docker-compose.yaml
+            ./backend/docker-compose.yaml
             ${{ secrets.DOCKER_TAG }}
