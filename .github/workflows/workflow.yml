@@ -36,15 +36,8 @@ jobs:
           password: ${{ secrets.DOCKER_PASSWORD }}
 
 
-      - name: Build and push MySQL Image (db)
-        run: |
-          docker tag mysql:8.0 ${{ secrets.DOCKER_TAG }}
-          docker push ${{ secrets.DOCKER_TAG }}
 
-      - name: Build and push Doctorstaff Microservice
-        uses: docker/build-push-action@v5
-        with:
-          context: ./backend/doctorstaff-ms
-          file: ./backend/doctorstaff-ms/Dockerfile
-          push: true
-          tags: ${{ secrets.DOCKER_TAG }}
+      - name: Build and Push Images Using Docker Compose
+        run: |
+          docker compose -f ./backend/docker-compose.yaml build
+          docker compose -f ./backend/docker-compose.yaml push
