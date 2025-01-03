@@ -37,6 +37,8 @@ jobs:
           username: ${{ secrets.DOCKER_USERNAME }}
           password: ${{ secrets.DOCKER_PASSWORD }}
 
+      - name: Check running containers
+        run: docker ps
 
       - name: Build and push Doctorstaff Microservice
         uses: docker/build-push-action@v5
