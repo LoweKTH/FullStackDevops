@@ -37,18 +37,11 @@ jobs:
           username: ${{ secrets.DOCKER_USERNAME }}
           password: ${{ secrets.DOCKER_PASSWORD }}
 
-      - name: Push image to DO Container Registry
-        run: |
-          docker tag mysql:8.0 ${{ secrets.DOCKER_TAG }}/mysql:8.0
-          docker push ${{ secrets.DOCKER_TAG }}/mysql:8.0
 
-      - name: Sleep
-        uses: jakejarvis/wait-action@master
+      - name: Build and push Doctorstaff Microservice
+        uses: docker/build-push-action@v5
         with:
-          time: '30s'
-
-      - name: Push image to DO Container Registry
-        run: |
-          docker tag backend-doctorstaff-ms ${{ secrets.DOCKER_TAG }}/backend-doctorstaff-ms:latest
-          docker push ${{ secrets.DOCKER_TAG }}/backend-doctorstaff-ms:latest
-
+          context: ./backend/doctorstaff-ms
+          file: ./backend/doctorstaff-ms/Dockerfile
+          push: true
+          tags: ${{ secrets.DOCKER_TAG }}
