@@ -74,9 +74,43 @@ jobs:
       #    docker-compose -f ./backend/docker-compose.yaml run --rm image-ms npm test
 
       # Optionally, build and push Docker images to a registry (if needed)
-      - name: Build and push
+      - name: Build and push Doctorstaff Microservice
         uses: docker/build-push-action@v5
         with:
+          context: ./backend/doctorstaff-ms
+          file: ./backend/doctorstaff-ms/Dockerfile
+          push: true
+          tags: ${{ secrets.DOCKER_TAG }}
+
+      - name: Build and push Image Microservice
+        uses: docker/build-push-action@v5
+        with:
+          context: ./backend/image-ms
+          file: ./backend/image-ms/Dockerfile
+          push: true
+          tags: ${{ secrets.DOCKER_TAG }}
+
+      - name: Build and push Messaging Microservice
+        uses: docker/build-push-action@v5
+        with:
+          context: ./backend/messaging-ms
+          file: ./backend/messaging-ms/Dockerfile
+          push: true
+          tags: ${{ secrets.DOCKER_TAG }}
+
+      - name: Build and push Patient Microservice
+        uses: docker/build-push-action@v5
+        with:
+          context: ./backend/patient-ms
+          file: ./backend/patient-ms/Dockerfile
+          push: true
+          tags: ${{ secrets.DOCKER_TAG }}
+
+      - name: Build and push User Microservice
+        uses: docker/build-push-action@v5
+        with:
+          context: ./backend/user-ms
+          file: ./backend/user-ms/Dockerfile
           push: true
           tags: ${{ secrets.DOCKER_TAG }}
 
