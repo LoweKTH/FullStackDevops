@@ -47,3 +47,6 @@ jobs:
           file: ./backend/doctorstaff-ms/Dockerfile
           push: true
           tags: ${{ secrets.DOCKER_TAG }}
+
+      - name: Check running containers
+        run: docker ps
