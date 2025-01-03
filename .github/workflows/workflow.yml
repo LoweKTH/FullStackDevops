@@ -33,7 +33,12 @@ jobs:
           username: ${{ secrets.DOCKER_USERNAME }}
           password: ${{ secrets.DOCKER_PASSWORD }}
 
-      - name: Build and Push Images with Buildx Bake
-        run: |
-          docker buildx bake --file ./backend/docker-compose.yaml --push
-          
+      - name: Build & Push Docker image with Github Bake Action
+        uses: docker/bake-action@v4
+        with:
+          source: .
+          push: true
+          pull: true
+          files: |
+            ./docker-compose.yaml
+            ${{ secrets.DOCKER_TAG }}
