@@ -41,6 +41,5 @@ jobs:
       - name: Push image to DO Container Registry
         run: |
           docker tag backend-doctorstaff-ms ${{ secrets.DOCKER_TAG }}
-          docker tag mysql:8.0 ${{ secrets.DOCKER_TAG }}
           docker push ${{ secrets.DOCKER_TAG }}
 
