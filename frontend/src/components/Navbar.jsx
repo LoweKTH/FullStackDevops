@@ -1,15 +1,14 @@
 import React, {useEffect, useState} from "react";
 import { useNavigate } from "react-router-dom";
 import "../styles/Navbar.css";
-import keycloak from "../keycloak"; // Assuming keycloak is initialized here
-
-
+import keycloak from "../keycloak";
+import { addPatient } from "../api/Patient-ms-api";
+import {jwtDecode} from "jwt-decode";
 
 const Navbar = () => {
     const navigate = useNavigate();
     const [roles, setRoles] = useState([]);
 
-    // Get user roles from the token after login
     useEffect(() => {
         if (keycloak && keycloak.authenticated) {
             const userRoles = getUserRoles();
@@ -19,27 +18,24 @@ const Navbar = () => {
 
     const handleLogin = () => {
         keycloak.login({
-
-            redirectUri: window.location.origin + "/dashboard", // Redirect to /dashboard after successful login
+            redirectUri: window.location.origin + "/dashboard"
         });
     };
 
     const handleRegister = () => {
         keycloak.register({
-
-            redirectUri: window.location.origin + "/dashboard", // Redirect to /dashboard after successful login
+            redirectUri: window.location.origin + "/post-registration", // Redirect here after registration
         });
-
     };
+
 
     const handleLogout = () => {
         if (keycloak) {
             keycloak.logout({
-                redirectUri: window.location.href, // Redirect the user to the current page after logout
+                redirectUri: window.location.href
             }).then(() => {
                 setRoles([]);
                 localStorage.removeItem("token");
-               // localStorage.removeItem("refresh_token");
             });
         }
     };
@@ -57,9 +53,7 @@ const Navbar = () => {
 
     const getUserRoles = () => {
         if (keycloak && keycloak.tokenParsed) {
-            // Keycloak tokenParsed contains decoded JWT claims
             const roles = keycloak.tokenParsed?.realm_access?.roles || [];
-            console.log("User roles:", roles);
             return roles;
         }
         return [];
@@ -79,7 +73,6 @@ const Navbar = () => {
             );
         }
 
-        // If a user is logged in
         return (
             <div className="navbar-links">
                 <button onClick={() => navigate("/dashboard")} className="nav-button">
@@ -91,7 +84,6 @@ const Navbar = () => {
             </div>
         );
     };
-
 
     return (
         <nav className="navbar">

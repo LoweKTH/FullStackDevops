@@ -7,8 +7,8 @@ import org.springframework.data.repository.query.Param;
 
 import java.util.Optional;
 
-public interface PatientRepository extends JpaRepository<Patient, Long> {
+public interface PatientRepository extends JpaRepository<Patient, String> {
     @Query("SELECT p FROM Patient p WHERE p.userId = :userId")
-    Optional<Patient> findByUserId(@Param("userId")Long userId);
+    Optional<Patient> findByUserId(@Param("userId")String userId);
 
 }

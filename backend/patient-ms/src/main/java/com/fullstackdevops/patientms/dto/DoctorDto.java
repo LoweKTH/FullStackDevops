@@ -15,7 +15,7 @@ import java.util.Date;
 public class DoctorDto {
 
     private Long socialSecurityNumber;
-    private Long userId;
+    private String userId;
     private String firstname;
     private String lastname;
     private String email;

@@ -52,7 +52,7 @@ public class PatientServiceImpl implements PatientService{
     }
 
     @Override
-    public PatientDto getPatientById(Long id){
+    public PatientDto getPatientById(String id){
         Patient patient = patientRepository.findByUserId(id)
                 .orElseThrow(() ->
                         new PatientNotFoundException("Patient with specified ID not found"));
@@ -64,7 +64,7 @@ public class PatientServiceImpl implements PatientService{
 
     @Transactional
     @Override
-    public NoteDto addNoteToPatient(Long patientId, NoteDto noteDto, Long doctorstaffId) {
+    public NoteDto addNoteToPatient(String patientId, NoteDto noteDto, String doctorstaffId) {
         Patient patient = patientRepository.findByUserId(patientId)
                 .orElseThrow(() -> new PatientNotFoundException("Patient with specified ID not found"));
 
@@ -77,7 +77,7 @@ public class PatientServiceImpl implements PatientService{
     }
 
     @Override
-    public List<NoteDto> getNotesForPatient(Long patientId) {
+    public List<NoteDto> getNotesForPatient(String patientId) {
         List<Note> notes = noteRepository.findByPatientId(patientId);
 
         List<NoteDto> noteDtos = new ArrayList<>();
@@ -95,7 +95,7 @@ public class PatientServiceImpl implements PatientService{
     }
 
     @Override
-    public List<DiagnosisDto> getDiagnosesForPatient(Long patientId) {
+    public List<DiagnosisDto> getDiagnosesForPatient(String patientId) {
         List<Diagnosis> diagnoses = diagnosisRepository.findByPatientId(patientId);
         List<DiagnosisDto> diagnosisDtos = new ArrayList<>();
 
@@ -116,7 +116,7 @@ public class PatientServiceImpl implements PatientService{
 
     @Override
     @Transactional
-    public DiagnosisDto addDiagnosisToPatient(Long patientId, DiagnosisDto diagnosisDto, Long doctorId) {
+    public DiagnosisDto addDiagnosisToPatient(String patientId, DiagnosisDto diagnosisDto, String doctorId) {
         Patient patient = patientRepository.findByUserId(patientId)
                 .orElseThrow(() -> new PatientNotFoundException("Patient with specified ID not found"));
 
@@ -126,19 +126,19 @@ public class PatientServiceImpl implements PatientService{
     }
 
     @Override
-    public DoctorStaffDto getDoctorstaffForPatient(Long patientId) {
-        Set<Long> doctorstaffIdsSet = new HashSet<>();
-        List<Long> noteDoctorStaffIds = noteRepository.findDistinctDoctorstaffByPatientId(patientId);
-        List<Long> diagnosisDoctorStaffIds = diagnosisRepository.findDistinctDoctorstaffByPatientId(patientId);
+    public DoctorStaffDto getDoctorstaffForPatient(String patientId) {
+        Set<String> doctorstaffIdsSet = new HashSet<>();
+        List<String> noteDoctorStaffIds = noteRepository.findDistinctDoctorstaffByPatientId(patientId);
+        List<String> diagnosisDoctorStaffIds = diagnosisRepository.findDistinctDoctorstaffByPatientId(patientId);
         doctorstaffIdsSet.addAll(noteDoctorStaffIds);
         doctorstaffIdsSet.addAll(diagnosisDoctorStaffIds);
 
-        List<Long> doctorstaffIds = new ArrayList<>(doctorstaffIdsSet);
+        List<String> doctorstaffIds = new ArrayList<>(doctorstaffIdsSet);
 
         List<DoctorDto> doctorDtos = new ArrayList<>();
         List<StaffDto> staffDtos = new ArrayList<>();
 
-        for (Long doctorstaffId : doctorstaffIds) {
+        for (String doctorstaffId : doctorstaffIds) {
             DoctorDto doctor = restTemplate.getForObject("http://doctorstaff-ms:80/api/doctors/" + doctorstaffId, DoctorDto.class);
             if (doctor != null) {
                 doctorDtos.add(doctor);
@@ -156,16 +156,16 @@ public class PatientServiceImpl implements PatientService{
 
 
     @Override
-    public List<Long> getPatientsByDoctorstaffId(Long doctorstaffId) {
+    public List<String> getPatientsByDoctorstaffId(String doctorstaffId) {
 
-        Set<Long> patientIdsSet = new HashSet<>();
+        Set<String> patientIdsSet = new HashSet<>();
 
-        List<Long>  notePatientIds = noteRepository.findDistinctPatientsByDoctorstaffId(doctorstaffId);
-        List<Long> diagnosisPatientIds = diagnosisRepository.findDistinctPatientsByDoctorstaffId(doctorstaffId);
+        List<String>  notePatientIds = noteRepository.findDistinctPatientsByDoctorstaffId(doctorstaffId);
+        List<String> diagnosisPatientIds = diagnosisRepository.findDistinctPatientsByDoctorstaffId(doctorstaffId);
         patientIdsSet.addAll(notePatientIds);
         patientIdsSet.addAll(diagnosisPatientIds);
 
-        List<Long> patientIdsList = new ArrayList<>(patientIdsSet);
+        List<String> patientIdsList = new ArrayList<>(patientIdsSet);
 
         return patientIdsList;
     }

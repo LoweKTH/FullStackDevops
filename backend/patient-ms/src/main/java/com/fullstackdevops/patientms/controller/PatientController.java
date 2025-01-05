@@ -25,27 +25,27 @@ public class PatientController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<PatientDto> getPatientById(@PathVariable Long id) {
+    public ResponseEntity<PatientDto> getPatientById(@PathVariable String id) {
             PatientDto patientDto = patientService.getPatientById(id);
             return ResponseEntity.ok(patientDto);
     }
 
 
     @PostMapping("/{patientId}/notes")
-    public ResponseEntity<NoteDto> addNoteToPatient(@PathVariable Long patientId, @RequestBody NoteDto noteDto) {
-        Long doctorstaffId= noteDto.getDoctorstaffId();
+    public ResponseEntity<NoteDto> addNoteToPatient(@PathVariable String patientId, @RequestBody NoteDto noteDto) {
+        String doctorstaffId= noteDto.getDoctorstaffId();
         NoteDto createdNote = patientService.addNoteToPatient(patientId, noteDto ,doctorstaffId);
         return new ResponseEntity<>(createdNote, HttpStatus.CREATED);
     }
 
     @GetMapping("/{patientId}/getnotes")
-    public ResponseEntity<List<NoteDto>> getNotesForPatient(@PathVariable Long patientId) {
+    public ResponseEntity<List<NoteDto>> getNotesForPatient(@PathVariable String patientId) {
         List<NoteDto> notes = patientService.getNotesForPatient(patientId);
         return new ResponseEntity<>(notes, HttpStatus.CREATED);
     }
 
     @GetMapping("/{patientId}/getdiagnoses")
-    public ResponseEntity<List<DiagnosisDto>> getDiagnosesForPatient(@PathVariable Long patientId) {
+    public ResponseEntity<List<DiagnosisDto>> getDiagnosesForPatient(@PathVariable String patientId) {
         List<DiagnosisDto> diagnoses = patientService.getDiagnosesForPatient(patientId);
         return new ResponseEntity<>(diagnoses, HttpStatus.CREATED);
     }
@@ -64,13 +64,13 @@ public class PatientController {
     }
 
     @PostMapping("/{patientId}/diagnosis")
-    public DiagnosisDto addDiagnosis(@PathVariable Long patientId, @RequestBody DiagnosisDto diagnosisDto) {
-        Long doctorstaffId = diagnosisDto.getDoctorstaffId();
+    public DiagnosisDto addDiagnosis(@PathVariable String patientId, @RequestBody DiagnosisDto diagnosisDto) {
+        String doctorstaffId = diagnosisDto.getDoctorstaffId();
         return patientService.addDiagnosisToPatient(patientId, diagnosisDto, doctorstaffId);
     }
 
     @GetMapping("/{patientId}/doctorstaff")
-    public ResponseEntity<DoctorStaffDto> getDoctorsForPatient(@PathVariable Long patientId){
+    public ResponseEntity<DoctorStaffDto> getDoctorsForPatient(@PathVariable String patientId){
         DoctorStaffDto doctors = patientService.getDoctorstaffForPatient(patientId);
         return ResponseEntity.ok(doctors);
     }
@@ -82,8 +82,8 @@ public class PatientController {
     }*/
 
     @GetMapping("/{doctorstaffId}/doctorstaffgetpatients")
-    public ResponseEntity<List<Long>> getPatientsByDoctorstaffId(@PathVariable Long doctorstaffId) {
-        List<Long> patientIds = patientService.getPatientsByDoctorstaffId(doctorstaffId);
+    public ResponseEntity<List<String>> getPatientsByDoctorstaffId(@PathVariable String doctorstaffId) {
+        List<String> patientIds = patientService.getPatientsByDoctorstaffId(doctorstaffId);
         return ResponseEntity.ok(patientIds);
     }
 

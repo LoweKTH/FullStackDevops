@@ -10,8 +10,8 @@ public class DiagnosisDto {
     private String diagnosisName;
     private String description;
     private Date diagnosisDate;
-    private Long patientId;
-    private Long doctorstaffId;
+    private String patientId;
+    private String doctorstaffId;
     private String doctorstaffName;
     private String role;
 }

@@ -29,7 +29,7 @@ public class Diagnosis {
     @JoinColumn(name = "patient_id", nullable = false)
     private Patient patient;*/
 
-    private Long doctorstaffId;
-    private Long patientId;
+    private String doctorstaffId;
+    private String patientId;
 
 }

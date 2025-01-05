@@ -11,7 +11,7 @@ import lombok.Setter;
 @NoArgsConstructor
 public class StaffDto {
     private Long socialSecurityNumber;
-    private Long userId;
+    private String userId;
     private String firstname;
     private String lastname;
     private String email;

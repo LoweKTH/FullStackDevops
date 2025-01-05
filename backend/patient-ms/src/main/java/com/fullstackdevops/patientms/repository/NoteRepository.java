@@ -9,18 +9,18 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository
-public interface NoteRepository extends JpaRepository<Note, Long> {
+public interface NoteRepository extends JpaRepository<Note, String> {
 
     @Query("SELECT DISTINCT n.doctorstaffId FROM Note n WHERE n.patientId = :patientId")
-    List<Long> findDistinctDoctorstaffByPatientId(@Param("patientId") Long patientId);
+    List<String> findDistinctDoctorstaffByPatientId(@Param("patientId") String patientId);
 
 
 
 
     @Query("SELECT DISTINCT n.patientId FROM Note n WHERE n.doctorstaffId = :doctorstaffId")
-    List<Long> findDistinctPatientsByDoctorstaffId(@Param("doctorstaffId") Long doctorstaffId);
+    List<String> findDistinctPatientsByDoctorstaffId(@Param("doctorstaffId") String doctorstaffId);
 
-    List<Note> findByPatientId(Long patientId);
+    List<Note> findByPatientId(String patientId);
 
 
 }

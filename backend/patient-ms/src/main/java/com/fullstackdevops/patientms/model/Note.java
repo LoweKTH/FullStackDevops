@@ -20,9 +20,9 @@ public class Note {
     private String content;
     @Temporal(TemporalType.TIMESTAMP)
     private Date createdAt = new Date();
-    private Long doctorstaffId;
-    private Long staffId;
-    private Long patientId;
+    private String doctorstaffId;
+    private String staffId;
+    private String patientId;
     /*@ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "patient_id", nullable = false)
     private Patient patient;*/

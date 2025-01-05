@@ -8,15 +8,15 @@ import org.springframework.data.repository.query.Param;
 
 import java.util.List;
 
-public interface DiagnosisRepository extends JpaRepository<Diagnosis, Long> {
+public interface DiagnosisRepository extends JpaRepository<Diagnosis, String> {
 
 
     @Query("SELECT DISTINCT d.patientId FROM Diagnosis d WHERE d.doctorstaffId = :doctorstaffId")
-    List<Long> findDistinctPatientsByDoctorstaffId(@Param("doctorstaffId") Long doctorstaffId);
+    List<String> findDistinctPatientsByDoctorstaffId(@Param("doctorstaffId") String doctorstaffId);
 
     @Query("SELECT DISTINCT d.doctorstaffId FROM Diagnosis d WHERE d.patientId = :patientId")
-    List<Long> findDistinctDoctorstaffByPatientId(@Param("patientId") Long patientId);
+    List<String> findDistinctDoctorstaffByPatientId(@Param("patientId") String patientId);
 
-    List<Diagnosis> findByPatientId(Long patientId);
+    List<Diagnosis> findByPatientId(String patientId);
 
 }

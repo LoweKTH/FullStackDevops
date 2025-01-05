@@ -41,7 +41,7 @@ class PatientMsApplicationTests {
 		// Initialize a mock patient object
 
 		mockPatient = new PatientDto();
-		mockPatient.setUserId(1L);
+		mockPatient.setUserId("321423543rrefr");
 		mockPatient.setFirstname("John");
 		mockPatient.setLastname("Doe");
 		mockPatient.setEmail("john.doe@example.com");

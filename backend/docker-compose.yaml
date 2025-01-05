@@ -11,6 +11,24 @@ services:
     ports:
       - "3000:3000"
 
+  keycloak:
+    image: quay.io/keycloak/keycloak:latest
+    environment:
+      - KEYCLOAK_ADMIN=admin
+      - KEYCLOAK_ADMIN_PASSWORD=admin
+      - KC_DB=mysql
+      - KC_DB_URL=jdbc:mysql://db:3306/fullstack24
+      - KC_DB_USERNAME=user
+      - KC_DB_PASSWORD=password
+    ports:
+      - "8085:8080"
+    command:
+      start-dev
+    depends_on:
+      - db
+    networks:
+      - backend-network
+
   messaging-ms:
     build: ./messaging-ms
     environment:
