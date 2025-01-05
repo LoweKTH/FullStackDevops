@@ -1,39 +1,78 @@
-import React from "react";
+import React, {useEffect, useState} from "react";
 import { useNavigate } from "react-router-dom";
 import "../styles/Navbar.css";
+import keycloak from "../keycloak"; // Assuming keycloak is initialized here
+
+
 
 const Navbar = () => {
     const navigate = useNavigate();
+    const [roles, setRoles] = useState([]);
 
-    const role = localStorage.getItem("role");
-    const isLoggedIn = !!role;
+    // Get user roles from the token after login
+    useEffect(() => {
+        if (keycloak && keycloak.authenticated) {
+            const userRoles = getUserRoles();
+            setRoles(userRoles);
+        }
+    }, [keycloak?.authenticated, keycloak?.tokenParsed]);
 
-    const handleLogout = () => {
-        localStorage.clear();
-        navigate("/login");
+    const handleLogin = () => {
+        keycloak.login({
+
+            redirectUri: window.location.origin + "/dashboard", // Redirect to /dashboard after successful login
+        });
     };
 
-    const getDashboardTitle = () => {
-        switch (role) {
-            case "Doctor":
-                return "Doctor Dashboard";
-            case "Patient":
-                return "Patient Dashboard";
-            case "Staff":
-                return "Staff Dashboard";
-            default:
-                return "Dashboard";
+    const handleRegister = () => {
+        keycloak.register({
+
+            redirectUri: window.location.origin + "/dashboard", // Redirect to /dashboard after successful login
+        });
+
+    };
+
+    const handleLogout = () => {
+        if (keycloak) {
+            keycloak.logout({
+                redirectUri: window.location.href, // Redirect the user to the current page after logout
+            }).then(() => {
+                setRoles([]);
+                localStorage.removeItem("token");
+               // localStorage.removeItem("refresh_token");
+            });
         }
     };
 
+    const getDashboardTitle = () => {
+        if (roles.includes("DOCTOR")) {
+            return "Doctor Dashboard";
+        } else if (roles.includes("PATIENT")) {
+            return "Patient Dashboard";
+        } else if (roles.includes("STAFF")) {
+            return "Staff Dashboard";
+        }
+        return "Dashboard";
+    };
+
+    const getUserRoles = () => {
+        if (keycloak && keycloak.tokenParsed) {
+            // Keycloak tokenParsed contains decoded JWT claims
+            const roles = keycloak.tokenParsed?.realm_access?.roles || [];
+            console.log("User roles:", roles);
+            return roles;
+        }
+        return [];
+    };
+
     const renderLinks = () => {
-        if (!isLoggedIn) {
+        if (!keycloak.authenticated) {
             return (
                 <div className="navbar-links">
-                    <button onClick={() => navigate("/login")} className="nav-button">
+                    <button onClick={handleLogin} className="nav-button">
                         Login
                     </button>
-                    <button onClick={() => navigate("/register")} className="nav-button">
+                    <button onClick={handleRegister} className="nav-button">
                         Register
                     </button>
                 </div>
@@ -53,10 +92,11 @@ const Navbar = () => {
         );
     };
 
+
     return (
         <nav className="navbar">
             <div className="navbar-container">
-                <h2>{isLoggedIn ? getDashboardTitle() : "Patient System"}</h2>
+                <h2>{keycloak.authenticated ? getDashboardTitle() : "Patient System"}</h2>
                 {renderLinks()}
             </div>
         </nav>
