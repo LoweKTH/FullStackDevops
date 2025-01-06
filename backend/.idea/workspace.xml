@@ -5,58 +5,41 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="09d6a3b5-9b2e-4587-b1b1-5156eb6a8f42" name="Changes" comment="#5">
-      <change afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_12_7_2024_2_45_PM__Changes_.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_12_7_2024_3_44_PM__Changes_.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/image-ms/.idea/.gitignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/image-ms/.idea/image-ms.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/image-ms/.idea/misc.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/image-ms/.idea/modules.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/search-ms/src/main/docker/Dockerfile" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/search-ms/src/main/java/com/fullstackdevops/searchms/config/PatientServiceRestClient.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/search-ms/src/main/java/com/fullstackdevops/searchms/controller/SearchController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/search-ms/src/main/java/com/fullstackdevops/searchms/dto/DiagnosisDto.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/search-ms/src/main/java/com/fullstackdevops/searchms/dto/NoteDto.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/search-ms/src/main/java/com/fullstackdevops/searchms/dto/PatientDto.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/search-ms/src/main/java/com/fullstackdevops/searchms/service/PatientSearchService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../frontend/src/api/Search-ms-api.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../frontend/src/components/SearchPage.jsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../frontend/src/components/SearchPatients.jsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../frontend/src/styles/SearchPage.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/search-ms/src/main/java/com/fullstackdevops/searchms/config/DoctorMSClient.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/search-ms/src/main/java/com/fullstackdevops/searchms/config/PatientMsClient.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/search-ms/src/main/java/com/fullstackdevops/searchms/dto/DoctorDto.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/search-ms/src/main/java/com/fullstackdevops/searchms/dto/DoctorStaffDto.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/search-ms/src/main/java/com/fullstackdevops/searchms/dto/StaffDto.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/search-ms/src/main/java/com/fullstackdevops/searchms/service/SearchService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../frontend/src/components/SearchCompForDoctors.jsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../frontend/src/components/SearchCompForPatients.jsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../frontend/src/styles/SearchCompForDoctors.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../frontend/src/styles/SearchCompForPatients.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/encodings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_12_7_2024_2_45_PM__Changes_.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_12_7_2024_3_44_PM__Changes_.xml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/docker-compose.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/docker-compose.yaml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/doctorstaff-ms/src/main/java/com/fullstackdevops/doctorstaffms/controller/StaffController.java" beforeDir="false" afterPath="$PROJECT_DIR$/doctorstaff-ms/src/main/java/com/fullstackdevops/doctorstaffms/controller/StaffController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/doctorstaff-ms/src/main/java/com/fullstackdevops/doctorstaffms/repository/StaffRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/doctorstaff-ms/src/main/java/com/fullstackdevops/doctorstaffms/repository/StaffRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/doctorstaff-ms/src/main/java/com/fullstackdevops/doctorstaffms/service/DoctorService.java" beforeDir="false" afterPath="$PROJECT_DIR$/doctorstaff-ms/src/main/java/com/fullstackdevops/doctorstaffms/service/DoctorService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/doctorstaff-ms/src/main/java/com/fullstackdevops/doctorstaffms/service/implementation/DoctorServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/doctorstaff-ms/src/main/java/com/fullstackdevops/doctorstaffms/service/implementation/DoctorServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/doctorstaff-ms/src/main/java/com/fullstackdevops/doctorstaffms/service/implementation/StaffServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/doctorstaff-ms/src/main/java/com/fullstackdevops/doctorstaffms/service/implementation/StaffServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/doctorstaff-ms/src/main/java/com/fullstackdevops/doctorstaffms/utils/StaffMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/doctorstaff-ms/src/main/java/com/fullstackdevops/doctorstaffms/utils/StaffMapper.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/doctorstaff-ms/src/test/java/com/fullstackdevops/doctorstaffms/DoctorstaffMsApplicationTests.java" beforeDir="false" afterPath="$PROJECT_DIR$/doctorstaff-ms/src/test/java/com/fullstackdevops/searchms/doctorstaffms/DoctorstaffMsApplicationTests.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/image-ms/Dockerfile" beforeDir="false" afterPath="$PROJECT_DIR$/image-ms/Dockerfile" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/image-ms/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/image-ms/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/messaging-ms/src/main/java/com/fullstackdevops/messagingms/controller/MessagingController.java" beforeDir="false" afterPath="$PROJECT_DIR$/messaging-ms/src/main/java/com/fullstackdevops/messagingms/controller/MessagingController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/messaging-ms/src/main/java/com/fullstackdevops/messagingms/dto/MessageDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/messaging-ms/src/main/java/com/fullstackdevops/messagingms/dto/MessageDto.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/messaging-ms/src/main/java/com/fullstackdevops/messagingms/service/implementation/MessagingServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/messaging-ms/src/main/java/com/fullstackdevops/messagingms/service/implementation/MessagingServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/messaging-ms/src/test/java/com/fullstackdevops/messagingms/MessagingMsApplicationTests.java" beforeDir="false" afterPath="$PROJECT_DIR$/messaging-ms/src/test/java/com/fullstackdevops/searchms/messagingms/MessagingMsApplicationTests.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/patient-ms/src/main/java/com/fullstackdevops/patientms/controller/PatientController.java" beforeDir="false" afterPath="$PROJECT_DIR$/patient-ms/src/main/java/com/fullstackdevops/patientms/controller/PatientController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/patient-ms/src/main/java/com/fullstackdevops/patientms/dto/DoctorDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/patient-ms/src/main/java/com/fullstackdevops/patientms/dto/DoctorDto.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/patient-ms/src/main/java/com/fullstackdevops/patientms/model/Note.java" beforeDir="false" afterPath="$PROJECT_DIR$/patient-ms/src/main/java/com/fullstackdevops/patientms/model/Note.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/patient-ms/src/main/java/com/fullstackdevops/patientms/dto/DoctorStaffDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/patient-ms/src/main/java/com/fullstackdevops/patientms/dto/DoctorStaffDto.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/patient-ms/src/main/java/com/fullstackdevops/patientms/dto/PatientDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/patient-ms/src/main/java/com/fullstackdevops/patientms/dto/PatientDto.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/patient-ms/src/main/java/com/fullstackdevops/patientms/repository/DiagnosisRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/patient-ms/src/main/java/com/fullstackdevops/patientms/repository/DiagnosisRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/patient-ms/src/main/java/com/fullstackdevops/patientms/repository/PatientRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/patient-ms/src/main/java/com/fullstackdevops/patientms/repository/PatientRepository.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/patient-ms/src/main/java/com/fullstackdevops/patientms/service/PatientService.java" beforeDir="false" afterPath="$PROJECT_DIR$/patient-ms/src/main/java/com/fullstackdevops/patientms/service/PatientService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/patient-ms/src/main/java/com/fullstackdevops/patientms/service/implementation/PatientServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/patient-ms/src/main/java/com/fullstackdevops/patientms/service/implementation/PatientServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/patient-ms/src/main/java/com/fullstackdevops/patientms/utils/SecurityConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/patient-ms/src/main/java/com/fullstackdevops/patientms/utils/SecurityConfig.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/patient-ms/src/test/java/com/fullstackdevops/patientms/PatientMsApplicationTests.java" beforeDir="false" afterPath="$PROJECT_DIR$/patient-ms/src/test/java/com/fullstackdevops/searchms/patientms/PatientMsApplicationTests.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/user-ms/src/main/java/com/fullstackdevops/userms/UserMsApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/user-ms/src/main/java/com/fullstackdevops/userms/UserMsApplication.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/user-ms/src/main/java/com/fullstackdevops/userms/controller/UserController.java" beforeDir="false" afterPath="$PROJECT_DIR$/user-ms/src/main/java/com/fullstackdevops/userms/controller/UserController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/user-ms/src/main/java/com/fullstackdevops/userms/dto/DoctorDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/user-ms/src/main/java/com/fullstackdevops/userms/dto/DoctorDto.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/user-ms/src/test/java/com/fullstackdevops/userms/UserMsApplicationTests.java" beforeDir="false" afterPath="$PROJECT_DIR$/user-ms/src/test/java/com/fullstackdevops/searchms/userms/UserMsApplicationTests.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/patient-ms/src/main/java/com/fullstackdevops/patientms/utils/PatientMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/patient-ms/src/main/java/com/fullstackdevops/patientms/utils/PatientMapper.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/search-ms/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/search-ms/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/search-ms/src/main/java/com/fullstackdevops/searchms/config/PatientServiceRestClient.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/search-ms/src/main/java/com/fullstackdevops/searchms/controller/SearchController.java" beforeDir="false" afterPath="$PROJECT_DIR$/search-ms/src/main/java/com/fullstackdevops/searchms/controller/SearchController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/search-ms/src/main/java/com/fullstackdevops/searchms/dto/PatientDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/search-ms/src/main/java/com/fullstackdevops/searchms/dto/PatientDto.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/search-ms/src/main/java/com/fullstackdevops/searchms/service/PatientSearchService.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/search-ms/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/search-ms/src/main/resources/application.properties" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../frontend/src/App.js" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/src/App.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../frontend/src/components/ImageEdit.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/src/components/ImageEdit.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../frontend/src/components/Navbar.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/src/components/Navbar.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../frontend/src/api/Search-ms-api.js" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/src/api/Search-ms-api.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../frontend/src/components/Dashboard.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/src/components/Dashboard.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../frontend/src/components/DoctorStaffList.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/src/components/DoctorStaffList.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../frontend/src/components/SearchPage.jsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../frontend/src/components/SearchPatients.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/src/components/PatientSearch.jsx" afterDir="false" />
     </list>
     <list id="79177b7e-e8af-49c6-aa54-aba545e8c75b" name="Changes by benny" comment="Changes by benny" />
     <option name="SHOW_DIALOG" value="false" />
@@ -89,16 +72,16 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
+        <option value="Exception" />
         <option value="Interface" />
         <option value="Class" />
-        <option value="Exception" />
       </list>
     </option>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$/.." value="backend" />
+        <entry key="$PROJECT_DIR$/.." value="main" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
@@ -187,7 +170,7 @@
       </set>
     </option>
   </component>
-  <component name="RunManager" selected="Docker.docker-compose.yaml.search-ms: Compose Deployment">
+  <component name="RunManager" selected="Docker.docker-compose.yaml.patient-ms: Compose Deployment">
     <configuration name="search-ms" type="QuarkusRunConfigurationType" factoryName="Quarkus" nameIsGenerated="true">
       <module name="search-ms" />
       <QsMavenRunConfiguration>
@@ -323,12 +306,12 @@
       </deployment>
       <method v="2" />
     </configuration>
-    <configuration name="docker-compose.yaml.image-ms: Compose Deployment" type="docker-deploy" factoryName="docker-compose.yml" temporary="true" server-name="Docker">
+    <configuration name="docker-compose.yaml.messaging-ms: Compose Deployment" type="docker-deploy" factoryName="docker-compose.yml" temporary="true" server-name="Docker">
       <deployment type="docker-compose.yml">
         <settings>
           <option name="services">
             <list>
-              <option value="image-ms" />
+              <option value="messaging-ms" />
             </list>
           </option>
           <option name="sourceFilePath" value="docker-compose.yaml" />
@@ -336,12 +319,12 @@
       </deployment>
       <method v="2" />
     </configuration>
-    <configuration name="docker-compose.yaml.messaging-ms: Compose Deployment" type="docker-deploy" factoryName="docker-compose.yml" temporary="true" server-name="Docker">
+    <configuration name="docker-compose.yaml.patient-ms: Compose Deployment" type="docker-deploy" factoryName="docker-compose.yml" temporary="true" server-name="Docker">
       <deployment type="docker-compose.yml">
         <settings>
           <option name="services">
             <list>
-              <option value="messaging-ms" />
+              <option value="patient-ms" />
             </list>
           </option>
           <option name="sourceFilePath" value="docker-compose.yaml" />
@@ -364,10 +347,10 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Docker.docker-compose.yaml.search-ms: Compose Deployment" />
-        <item itemvalue="Docker.docker-compose.yaml.image-ms: Compose Deployment" />
-        <item itemvalue="Docker.docker-compose.yaml: Compose Deployment" />
+        <item itemvalue="Docker.docker-compose.yaml.patient-ms: Compose Deployment" />
         <item itemvalue="Docker.docker-compose.yaml.db: Compose Deployment" />
+        <item itemvalue="Docker.docker-compose.yaml: Compose Deployment" />
+        <item itemvalue="Docker.docker-compose.yaml.search-ms: Compose Deployment" />
         <item itemvalue="Docker.docker-compose.yaml.messaging-ms: Compose Deployment" />
       </list>
     </recent_temporary>
@@ -400,6 +383,7 @@
       <workItem from="1733683804682" duration="3930000" />
       <workItem from="1733691024902" duration="1664000" />
       <workItem from="1733693345762" duration="5192000" />
+      <workItem from="1736010646905" duration="40844000" />
     </task>
     <task id="LOCAL-00001" summary="#2">
       <created>1730889193106</created>

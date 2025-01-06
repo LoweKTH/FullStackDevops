@@ -19,7 +19,8 @@ public interface DiagnosisRepository extends JpaRepository<Diagnosis, Long> {
 
     List<Diagnosis> findByPatientId(Long patientId);
 
+    @Query("SELECT DISTINCT d.patientId FROM Diagnosis d WHERE LOWER(d.name) LIKE LOWER(CONCAT('%', :name, '%'))")
+    List<Long> findPatientIdsByDiagnosisName(@Param("name") String name);
 
-}
 
 }

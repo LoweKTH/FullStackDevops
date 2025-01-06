@@ -33,4 +33,7 @@ public interface PatientService {
 
     List<Long> getPatientsByDoctorstaffId(Long doctorId);
 
+    List<DoctorStaffDto> getAllDoctorsForPatient(Long patientId);
+    List<PatientDto> getPatientsByDiagnosisName(String diagnosisName);
+
 }

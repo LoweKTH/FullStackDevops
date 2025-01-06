@@ -1,20 +1,35 @@
 package com.fullstackdevops.searchms.dto;
 
+import jakarta.json.bind.annotation.JsonbProperty;
+
 import java.util.Date;
 import java.util.List;
 
 public class PatientDto {
+    @JsonbProperty("id")
     private Long id; // Patient ID
+    @JsonbProperty("socialSecurityNumber")
     private Long socialSecurityNumber;
+    @JsonbProperty("userId")
     private Long userId; // User ID associated with the patient
+    @JsonbProperty("firstname")
     private String firstname;
+    @JsonbProperty("lastname")
     private String lastname;
+    @JsonbProperty("dateOfBirth")
     private Date dateOfBirth;
+    @JsonbProperty("address")
     private String address;
+    @JsonbProperty("gender")
     private String gender;
+    @JsonbProperty("email")
     private String email;
+    @JsonbProperty("phoneNumber")
     private String phoneNumber;
+
+    @JsonbProperty("notes")
     private List<NoteDto> notes; // Notes associated with the patient
+    @JsonbProperty("diagnoses")
     private List<DiagnosisDto> diagnoses; // Diagnoses associated with the patient
 
     // Getters and Setters

@@ -171,9 +171,16 @@ public class PatientServiceImpl implements PatientService{
         return patientIdsList;
     }
 
+    @Override
+    public List<DoctorStaffDto> getAllDoctorsForPatient(Long patientId) {
+        return List.of();
+    }
 
+    @Override
+    public List<PatientDto> getPatientsByDiagnosisName(String diagnosisName) {
+        List<Long> patientIds = diagnosisRepository.findPatientIdsByDiagnosisName(diagnosisName);
+        List<Patient> patients = patientRepository.findAllById(patientIds);
 
-
-
-
+        return PatientMapper.toDtoList(patients);
+    }
 }

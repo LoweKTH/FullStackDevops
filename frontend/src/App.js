@@ -12,7 +12,8 @@ import Profile from "./components/Profile";
 import PatientDetails from "./components/PatientDetails";
 import ImageUpload from "./components/ImageUpload";
 import ImageEdit from "./components/ImageEdit";
-import SearchPage from "./components/SearchPage";
+import SearchCompForPatients from "./components/SearchCompForPatients";
+import SearchCompForDoctors from "./components/SearchCompForDoctors";
 
 function App() {
     return (
@@ -32,7 +33,8 @@ function App() {
                         <Route path="/patient-details" element={<PatientDetails />} />
                         <Route path="/image-upload" element={<ImageUpload />} />
                         <Route path="/image-edit" element={<ImageEdit />} />
-                        <Route path="/search" element={<SearchPage />} />
+                        <Route path="/patientsearch" element={<SearchCompForPatients />} />
+                        <Route path="/doctorsearch" element={<SearchCompForDoctors />} />
                     </Routes>
                 </div>
             </div>

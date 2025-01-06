@@ -1,15 +1,26 @@
 import axios from "axios";
 
-const searchmsBaseURL = "http://localhost:8085/api/search";
+const searchMsBaseURL = "http://localhost:8085/api/search";
 
 const api = axios.create({
-    baseURL: searchmsBaseURL,
+    baseURL: searchMsBaseURL,
 });
 
-export const searchPatients = async ({ query, filterType }) => {
-    return await api.get(`/patients`, {
-        params: { query, filter: filterType },
+    export const searchDoctorsForPatient = async (patientId, doctorName) => {
+    const response = await api.get(`/${patientId}`, {
+        params: { name: doctorName },
     });
-};
+    return response.data;
+    };
 
-export default api;
+    export const fetchPatientsByDiagnosis = async (diagnosis) => {
+    try {
+        const response = await api.get(`/patients`, {
+            params: { diagnosis },
+        });
+        return response.data;
+    } catch (err) {
+        console.error("Error searching patients by diagnosis:", err);
+        throw err;
+    }
+};

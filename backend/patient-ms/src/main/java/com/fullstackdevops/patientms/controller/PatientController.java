@@ -70,6 +70,7 @@ public class PatientController {
     @GetMapping("/{patientId}/doctorstaff")
     public ResponseEntity<DoctorStaffDto> getDoctorsForPatient(@PathVariable Long patientId){
         DoctorStaffDto doctors = patientService.getDoctorstaffForPatient(patientId);
+        System.out.println(doctors.toString());
         return ResponseEntity.ok(doctors);
     }
 
@@ -78,6 +79,17 @@ public class PatientController {
         List<Long> patientIds = patientService.getPatientsByDoctorstaffId(doctorstaffId);
         return ResponseEntity.ok(patientIds);
     }
+
+    @GetMapping("/diagnosis")
+    public ResponseEntity<List<PatientDto>> getPatientsByDiagnosisName(@RequestParam String name) {
+        List<PatientDto> patients = patientService.getPatientsByDiagnosisName(name);
+        System.out.println("PRINT TEST!!!");
+        for(int i = 0; i < patients.size(); i++){
+            System.out.println(patients.get(i).toString());
+        }
+        return new ResponseEntity<>(patients, HttpStatus.OK);
+    }
+
 
 
 

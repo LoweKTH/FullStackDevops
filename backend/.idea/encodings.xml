@@ -2,6 +2,7 @@
 <project version="4">
   <component name="Encoding">
     <file url="file://$PROJECT_DIR$/doctorstaff-ms/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/encounter-ms/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/messaging-ms/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/messaging-ms/src/main/resources" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/patient-ms/src/main/java" charset="UTF-8" />

@@ -14,4 +14,12 @@ import java.util.List;
 public class DoctorStaffDto {
     private List<DoctorDto> doctors;
     private List<StaffDto> staffs;
+
+    @Override
+    public String toString() {
+        return "DoctorStaffDto{" +
+                "doctors=" + doctors +
+                ", staffs=" + staffs +
+                '}';
+    }
 }

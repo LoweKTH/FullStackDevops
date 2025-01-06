@@ -23,4 +23,19 @@ public class PatientDto {
     private String gender;
     private String email;
     private String phoneNumber;
+
+    @Override
+    public String toString() {
+        return "PatientDto{" +
+                "socialSecurityNumber=" + socialSecurityNumber +
+                ", userId=" + userId +
+                ", firstname='" + firstname + '\'' +
+                ", lastname='" + lastname + '\'' +
+                ", dateOfBirth=" + dateOfBirth +
+                ", address='" + address + '\'' +
+                ", gender='" + gender + '\'' +
+                ", email='" + email + '\'' +
+                ", phoneNumber='" + phoneNumber + '\'' +
+                '}';
+    }
 }

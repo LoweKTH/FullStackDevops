@@ -8,7 +8,6 @@ function DoctorStaffList( ) {
     const [doctorStaff, setDoctorStaff] = useState([]);
     const [error, setError] = useState("");
     const [loading, setLoading] = useState(true);
-
     const [doctors, setDoctors] = useState([]);
     const [staff, setStaff] = useState([]);
     const navigate = useNavigate();
