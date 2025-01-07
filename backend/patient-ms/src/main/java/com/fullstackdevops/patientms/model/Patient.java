@@ -34,6 +34,24 @@ public class Patient {
     @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Diagnosis> diagnoses;
 
+    @Override
+    public String toString() {
+        return "Patient{" +
+                "id=" + id +
+                ", socialSecurityNumber=" + socialSecurityNumber +
+                ", userId=" + userId +
+                ", firstname='" + firstname + '\'' +
+                ", lastname='" + lastname + '\'' +
+                ", dateOfBirth=" + dateOfBirth +
+                ", address='" + address + '\'' +
+                ", gender='" + gender + '\'' +
+                ", email='" + email + '\'' +
+                ", phoneNumber='" + phoneNumber + '\'' +
+                ", notes=" + notes +
+                ", diagnoses=" + diagnoses +
+                '}';
+    }
+
     /*private List<Encounter> encounters;*/
 
 }

@@ -1,67 +1,78 @@
 import React, { useState } from "react";
-import { fetchPatientsByDiagnosis } from "../api/Search-ms-api";
+import { searchPatientsByDiagnosis } from "../api/Search-ms-api";
 
-function SearchCompForDoctors() {
-    const [query, setQuery] = useState("");
-    const [results, setResults] = useState([]);
+const SearchCompForDoctors = () => {
+    const [patients, setPatients] = useState([]);
+    const [searchTerm, setSearchTerm] = useState("");
+    const [loading, setLoading] = useState(false);
     const [error, setError] = useState("");
 
     const handleSearch = async () => {
-        try {
-            const data = await fetchPatientsByDiagnosis(query);
-
-            // Ensure data is an array
-            if (Array.isArray(data)) {
-                setResults(data);
-            } else {
-                throw new Error("Unexpected response format");
-            }
-        } catch (err) {
-            console.error("Search error:", err);
-            setError("Failed to fetch patients");
-            setResults([]);
+        if (!searchTerm.trim()) {
+            setError("Please enter a diagnosis to search.");
+            return;
         }
+        setError("");
+        try {
+            setLoading(true);
+            const response = await searchPatientsByDiagnosis(searchTerm);
+            console.log("API Response:", response?.data); // Debug API response
+            setPatients(response.data);
+        } catch (error) {
+            console.error("Error fetching patients:", error);
+            setError("Failed to fetch patients. Please try again.");
+        } finally {
+            setLoading(false);
+        }
+    };
+
+    const handleInputChange = (e) => {
+        setSearchTerm(e.target.value);
     };
 
     return (
         <div>
-            <h1>Search Patients by Diagnosis</h1>
-            <input
-                type="text"
-                value={query}
-                onChange={(e) => setQuery(e.target.value)}
-                placeholder="Enter diagnosis..."
-            />
-            <button onClick={handleSearch}>Search</button>
-
-            {error && <p style={{ color: "red" }}>{error}</p>}
-
+            <h2>Search Patients by Diagnosis</h2>
             <div>
-                {results.length > 0 ? (
-                    <table>
-                        <thead>
-                        <tr>
-                            <th>First Name</th>
-                            <th>Last Name</th>
-                            <th>Email</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        {results.map((patient) => (
-                            <tr key={patient.id}>
-                                <td>{patient.firstname}</td>
-                                <td>{patient.lastname}</td>
-                                <td>{patient.email}</td>
-                            </tr>
-                        ))}
-                        </tbody>
-                    </table>
-                ) : (
-                    !error && <p>No patients found.</p>
-                )}
+                <input
+                    type="text"
+                    placeholder="Enter diagnosis"
+                    value={searchTerm}
+                    onChange={handleInputChange}
+                />
+                <button onClick={handleSearch}>Search</button>
             </div>
+
+            {loading && <p>Loading patients...</p>}
+
+            {error && <p className="error-message">{error}</p>}
+
+            {patients.length > 0 ? (
+                <table>
+                    <thead>
+                    <tr>
+                        <th>First Name</th>
+                        <th>Last Name</th>
+                        <th>Email</th>
+                        <th>Phone Number</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {patients.map((patient) => (
+                        <tr key={patient.userId}>
+                            <td>{patient.firstname}</td>
+                            <td>{patient.lastname}</td>
+                            <td>{patient.email}</td>
+                            <td>{patient.phoneNumber}</td>
+                        </tr>
+                    ))}
+                    </tbody>
+                </table>
+            ) : (
+                !loading && !error && <p>No patients found.</p>
+            )}
         </div>
     );
-}
+};
 
 export default SearchCompForDoctors;

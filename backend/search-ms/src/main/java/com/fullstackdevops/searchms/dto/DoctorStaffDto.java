@@ -1,12 +1,10 @@
 package com.fullstackdevops.searchms.dto;
 
-import com.fasterxml.jackson.annotation.JsonInclude;
 import jakarta.json.bind.annotation.JsonbProperty;
 
 import java.util.List;
 
 
-@JsonInclude(JsonInclude.Include.NON_NULL)
 public class DoctorStaffDto {
     @JsonbProperty("doctors")
     private List<DoctorDto> doctors;

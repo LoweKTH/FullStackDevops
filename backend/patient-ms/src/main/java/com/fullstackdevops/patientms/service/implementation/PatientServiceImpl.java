@@ -18,10 +18,7 @@ import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 import java.util.stream.Collectors;
 
 @Service
@@ -179,7 +176,17 @@ public class PatientServiceImpl implements PatientService{
     @Override
     public List<PatientDto> getPatientsByDiagnosisName(String diagnosisName) {
         List<Long> patientIds = diagnosisRepository.findPatientIdsByDiagnosisName(diagnosisName);
-        List<Patient> patients = patientRepository.findAllById(patientIds);
+        System.out.println("PATIENTMS SERVICE #1" + patientIds.toString());
+
+        List<Patient> patients = new ArrayList<>();
+        for (Long patientId : patientIds) {
+            Patient patient = patientRepository.findByUserId(patientId).orElseThrow(()
+                    -> new PatientNotFoundException("Patient with specified ID not found"));
+            patients.add(patient);
+        }
+
+        System.out.println("PATIENTS SERVICE #2" + patients);
+
 
         return PatientMapper.toDtoList(patients);
     }

@@ -13,7 +13,7 @@ const api = axios.create({
     return response.data;
     };
 
-    export const fetchPatientsByDiagnosis = async (diagnosis) => {
+    export const searchPatientsByDiagnosis = async (diagnosis) => {
     try {
         const response = await api.get(`/patients`, {
             params: { diagnosis },

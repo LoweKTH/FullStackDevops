@@ -1,36 +1,56 @@
 package com.fullstackdevops.searchms.dto;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+import io.quarkus.runtime.annotations.RegisterForReflection;
 import jakarta.json.bind.annotation.JsonbProperty;
 
 import java.util.Date;
 import java.util.List;
 
+@RegisterForReflection
 public class PatientDto {
-    @JsonbProperty("id")
+    @JsonProperty("id")
     private Long id; // Patient ID
-    @JsonbProperty("socialSecurityNumber")
+    @JsonProperty("socialSecurityNumber")
     private Long socialSecurityNumber;
-    @JsonbProperty("userId")
+    @JsonProperty("userId")
     private Long userId; // User ID associated with the patient
-    @JsonbProperty("firstname")
+    @JsonProperty("firstname")
     private String firstname;
-    @JsonbProperty("lastname")
+    @JsonProperty("lastname")
     private String lastname;
-    @JsonbProperty("dateOfBirth")
+    @JsonProperty("dateOfBirth")
     private Date dateOfBirth;
-    @JsonbProperty("address")
+    @JsonProperty("address")
     private String address;
-    @JsonbProperty("gender")
+    @JsonProperty("gender")
     private String gender;
-    @JsonbProperty("email")
+    @JsonProperty("email")
     private String email;
-    @JsonbProperty("phoneNumber")
+    @JsonProperty("phoneNumber")
     private String phoneNumber;
 
-    @JsonbProperty("notes")
+    @JsonProperty("notes")
     private List<NoteDto> notes; // Notes associated with the patient
-    @JsonbProperty("diagnoses")
+    @JsonProperty("diagnoses")
     private List<DiagnosisDto> diagnoses; // Diagnoses associated with the patient
+
+
+    public PatientDto() {}
+    public PatientDto(Long id, Long socialSecurityNumber, Long userId, String firstname, String lastname, Date dateOfBirth, String address, String gender, String email, String phoneNumber, List<NoteDto> notes, List<DiagnosisDto> diagnoses) {
+        this.id = id;
+        this.socialSecurityNumber = socialSecurityNumber;
+        this.userId = userId;
+        this.firstname = firstname;
+        this.lastname = lastname;
+        this.dateOfBirth = dateOfBirth;
+        this.address = address;
+        this.gender = gender;
+        this.email = email;
+        this.phoneNumber = phoneNumber;
+        this.notes = notes;
+        this.diagnoses = diagnoses;
+    }
 
     // Getters and Setters
     public Long getId() {
@@ -127,5 +147,20 @@ public class PatientDto {
 
     public void setDiagnoses(List<DiagnosisDto> diagnoses) {
         this.diagnoses = diagnoses;
+    }
+
+    @Override
+    public String toString() {
+        return "{" +
+                "socialSecurityNumber=" + socialSecurityNumber +
+                ", userId=" + userId +
+                ", firstname='" + firstname + '\'' +
+                ", lastname='" + lastname + '\'' +
+                ", dateOfBirth=" + " " +
+                ", address='" + address + '\'' +
+                ", gender='" + gender + '\'' +
+                ", email='" + email + '\'' +
+                ", phoneNumber='" + phoneNumber + '\'' +
+                '}';
     }
 }

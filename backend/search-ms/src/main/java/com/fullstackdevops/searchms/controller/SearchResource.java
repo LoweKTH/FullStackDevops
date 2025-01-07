@@ -3,6 +3,7 @@ package com.fullstackdevops.searchms.controller;
 import com.fullstackdevops.searchms.dto.DoctorStaffDto;
 import com.fullstackdevops.searchms.dto.PatientDto;
 import com.fullstackdevops.searchms.service.SearchService;
+import io.smallrye.mutiny.Uni;
 import jakarta.inject.Inject;
 import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.MediaType;
@@ -11,12 +12,13 @@ import jakarta.ws.rs.core.Response;
 import java.util.List;
 
 @Path("/api/search")
-@Produces(MediaType.APPLICATION_JSON)
-@Consumes(MediaType.APPLICATION_JSON)
-public class SearchController {
+public class SearchResource {
 
-    @Inject
-    SearchService searchService;
+    private final SearchService searchService;
+
+    public SearchResource(SearchService searchService) {this.searchService = searchService;}
+
+
 
     @GET
     @Path("/{patientId}")
@@ -37,14 +39,11 @@ public class SearchController {
 
     @GET
     @Path("/patients")
-    public Response searchPatientsByDiagnosis(@QueryParam("diagnosis") String diagnosis) {
-        try {
-            List<PatientDto> patients = searchService.searchPatientsByDiagnosis(diagnosis);
-            return Response.ok(patients).build();
-        } catch (Exception e) {
-            return Response.status(Response.Status.INTERNAL_SERVER_ERROR)
-                    .entity("Error occurred while searching for patients: " + e.getMessage())
-                    .build();
-        }
+    @Produces(MediaType.APPLICATION_JSON)
+    public Uni<Response> searchPatientsByDiagnosis(@QueryParam("diagnosis") String diagnosis) {
+        return searchService.searchPatientsByDiagnosis(diagnosis)
+                .onItem().invoke(patients -> System.out.println("Patients List: " + patients))
+                .map(patients -> Response.ok(patients).build());
     }
+
 }
