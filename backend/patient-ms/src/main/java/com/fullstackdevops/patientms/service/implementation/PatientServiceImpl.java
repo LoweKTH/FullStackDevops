@@ -15,6 +15,13 @@ import com.fullstackdevops.patientms.utils.PatientMapper;
 import com.fullstackdevops.patientms.utils.PatientNotFoundException;
 import jakarta.transaction.Transactional;
 import lombok.AllArgsConstructor;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpMethod;
+import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.oauth2.jwt.Jwt;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
@@ -56,7 +63,7 @@ public class PatientServiceImpl implements PatientService{
         Patient patient = patientRepository.findByUserId(id)
                 .orElseThrow(() ->
                         new PatientNotFoundException("Patient with specified ID not found"));
-
+        System.out.println(patient);
         return PatientMapper.toDto(patient);
     }
 
@@ -80,33 +87,123 @@ public class PatientServiceImpl implements PatientService{
     public List<NoteDto> getNotesForPatient(String patientId) {
         List<Note> notes = noteRepository.findByPatientId(patientId);
 
+        // Initialize the list of NoteDto objects
         List<NoteDto> noteDtos = new ArrayList<>();
+
+        // Get the JWT token from the security context
+        String token = getJwtTokenFromSecurityContext(); // Assumes this method retrieves the token
+        System.out.println("TOKEN:    "+token);
+        // Set the authorization header
+        HttpHeaders headers = new HttpHeaders();
+        headers.set("Authorization", "Bearer " + token);
+
+        // Create HttpEntity with headers
+        HttpEntity<String> entity = new HttpEntity<>(headers);
+        System.out.println(notes);
         for (Note note : notes) {
+            try {
+                // First, try to get the doctor details
+                ResponseEntity<DoctorDto> doctorResponse = restTemplate.exchange(
+                        "http://doctorstaff-ms:8080/api/doctors/" + note.getDoctorstaffId(),
+                        HttpMethod.GET,
+                        entity,
+                        DoctorDto.class
+                );
 
-                UserDto user = restTemplate.getForObject("http://user-ms:80/api/user/"+note.getDoctorstaffId() , UserDto.class);
-            NoteDto noteDto = NoteMapper.toDto(note);
+                if (doctorResponse.getStatusCode().is2xxSuccessful() && doctorResponse.getBody() != null) {
+                    DoctorDto doctor = doctorResponse.getBody();
+                    System.out.println(doctor);
+                    NoteDto noteDto = NoteMapper.toDto(note);
+                    noteDto.setDoctorstaffName(doctor.getFirstname() + " " + doctor.getLastname());
+                    noteDto.setRole("Doctor");
+                    noteDtos.add(noteDto);
+                }else{
+                    try {
+                        // If no doctor is found, fetch the staff details
+                        ResponseEntity<StaffDto> staffResponse = restTemplate.exchange(
+                                "http://doctorstaff-ms:8080/api/staff/" + note.getDoctorstaffId(),
+                                HttpMethod.GET,
+                                entity,
+                                StaffDto.class
+                        );
 
-            noteDto.setDoctorstaffName(user.getUsername());
-            noteDto.setRole(user.getRole());
+                        if (staffResponse.getStatusCode().is2xxSuccessful() && staffResponse.getBody() != null) {
+                            StaffDto staff = staffResponse.getBody();
+                            NoteDto noteDto = NoteMapper.toDto(note);
+                            noteDto.setDoctorstaffName(staff.getFirstname() + " " + staff.getLastname());
+                            noteDto.setRole("Staff");
+                            noteDtos.add(noteDto);
+                        }
+                    } catch (Exception ex) {
+                        // Log or handle the exception if needed
+                    }
 
-            noteDtos.add(noteDto);
+                }
+            } catch (Exception ex) {
+                // Log or handle the exception if needed
+            }
+
+
         }
+
         return noteDtos;
     }
+
 
     @Override
     public List<DiagnosisDto> getDiagnosesForPatient(String patientId) {
         List<Diagnosis> diagnoses = diagnosisRepository.findByPatientId(patientId);
         List<DiagnosisDto> diagnosisDtos = new ArrayList<>();
 
+        String token = getJwtTokenFromSecurityContext(); // Method from above
+
+        // Set the authorization header for the request
+        HttpHeaders headers = new HttpHeaders();
+        headers.set("Authorization", "Bearer " + token);
+
+        HttpEntity<String> entity = new HttpEntity<>(headers);
+
         for (Diagnosis diagnosis : diagnoses) {
-            UserDto user = restTemplate.getForObject("http://user-ms:80/api/user/"+diagnosis.getDoctorstaffId() , UserDto.class);
-            DiagnosisDto diagnosisDto = DiagnosisMapper.toDto(diagnosis);
+            try {
+                // First, try to get the doctor details
+                ResponseEntity<DoctorDto> doctorResponse = restTemplate.exchange(
+                        "http://doctorstaff-ms:8080/api/doctors/" + diagnosis.getDoctorstaffId(),
+                        HttpMethod.GET,
+                        entity,
+                        DoctorDto.class
+                );
 
-            diagnosisDto.setDoctorstaffName(user.getUsername());
-            diagnosisDto.setRole(user.getRole());
+                if (doctorResponse.getStatusCode().is2xxSuccessful() && doctorResponse.getBody() != null) {
+                    DoctorDto doctor = doctorResponse.getBody();
+                    DiagnosisDto diagnosisDto = DiagnosisMapper.toDto(diagnosis);
+                    diagnosisDto.setDoctorstaffName(doctor.getFirstname() + " " + doctor.getLastname());
+                    diagnosisDto.setRole("Doctor");
+                    diagnosisDtos.add(diagnosisDto);
+                    continue; // Skip to the next iteration if doctor is found
+                }
+            } catch (Exception ex) {
+                // Log or handle the exception if needed
+            }
 
-            diagnosisDtos.add(diagnosisDto);
+            try {
+                // If no doctor is found, fetch the staff details
+                ResponseEntity<StaffDto> staffResponse = restTemplate.exchange(
+                        "http://doctorstaff-ms:8080/api/staff/" + diagnosis.getDoctorstaffId(),
+                        HttpMethod.GET,
+                        entity,
+                        StaffDto.class
+                );
+
+                if (staffResponse.getStatusCode().is2xxSuccessful() && staffResponse.getBody() != null) {
+                    StaffDto staff = staffResponse.getBody();
+                    DiagnosisDto diagnosisDto = DiagnosisMapper.toDto(diagnosis);
+                    diagnosisDto.setDoctorstaffName(staff.getFirstname() + " " + staff.getLastname());
+                    diagnosisDto.setRole("Staff");
+                    diagnosisDtos.add(diagnosisDto);
+                }
+            } catch (Exception ex) {
+                // Log or handle the exception if needed
+            }
         }
 
         return diagnosisDtos;
@@ -127,6 +224,18 @@ public class PatientServiceImpl implements PatientService{
 
     @Override
     public DoctorStaffDto getDoctorstaffForPatient(String patientId) {
+
+        String token = getJwtTokenFromSecurityContext(); // Assumes this method retrieves the token
+        System.out.println("TOKEN:    " + token);
+
+        // Set the authorization header
+        HttpHeaders headers = new HttpHeaders();
+        headers.set("Authorization", "Bearer " + token);
+
+        // Create HttpEntity with headers
+        HttpEntity<String> entity = new HttpEntity<>(headers);
+
+
         Set<String> doctorstaffIdsSet = new HashSet<>();
         List<String> noteDoctorStaffIds = noteRepository.findDistinctDoctorstaffByPatientId(patientId);
         List<String> diagnosisDoctorStaffIds = diagnosisRepository.findDistinctDoctorstaffByPatientId(patientId);
@@ -139,14 +248,36 @@ public class PatientServiceImpl implements PatientService{
         List<StaffDto> staffDtos = new ArrayList<>();
 
         for (String doctorstaffId : doctorstaffIds) {
-            DoctorDto doctor = restTemplate.getForObject("http://doctorstaff-ms:80/api/doctors/" + doctorstaffId, DoctorDto.class);
-            if (doctor != null) {
-                doctorDtos.add(doctor);
+            // Fetch doctor information
+            String doctorUrl = "http://doctorstaff-ms:8080/api/doctors/" + doctorstaffId;
+            try {
+                ResponseEntity<DoctorDto> doctorResponse = restTemplate.exchange(
+                        doctorUrl,
+                        HttpMethod.GET,
+                        entity, // Pass the headers with token
+                        DoctorDto.class
+                );
+                if (doctorResponse.getBody() != null) {
+                    doctorDtos.add(doctorResponse.getBody());
+                }
+            } catch (Exception ex) {
+                System.err.println("Failed to fetch doctor info for ID: " + doctorstaffId + ", Error: " + ex.getMessage());
             }
 
-            StaffDto staff = restTemplate.getForObject("http://doctorstaff-ms:80/api/staff/" + doctorstaffId, StaffDto.class);
-            if (staff != null) {
-                staffDtos.add(staff);
+            // Fetch staff information
+            String staffUrl = "http://doctorstaff-ms:8080/api/staff/" + doctorstaffId;
+            try {
+                ResponseEntity<StaffDto> staffResponse = restTemplate.exchange(
+                        staffUrl,
+                        HttpMethod.GET,
+                        entity, // Pass the headers with token
+                        StaffDto.class
+                );
+                if (staffResponse.getBody() != null) {
+                    staffDtos.add(staffResponse.getBody());
+                }
+            } catch (Exception ex) {
+                System.err.println("Failed to fetch staff info for ID: " + doctorstaffId + ", Error: " + ex.getMessage());
             }
         }
 
@@ -170,5 +301,13 @@ public class PatientServiceImpl implements PatientService{
         return patientIdsList;
     }
 
+    private String getJwtTokenFromSecurityContext() {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        if (authentication != null && authentication.getPrincipal() instanceof Jwt) {
+            Jwt jwt = (Jwt) authentication.getPrincipal();
+            return jwt.getTokenValue();
+        }
+        return null;
+    }
 
 }

@@ -10,7 +10,7 @@ public interface StaffService {
 
     StaffDto createStaff(StaffDto staffDto);
 
-    StaffDto getStaffById(Long staffId);
+    StaffDto getStaffById(String staffId);
 
-    List<PatientDto> getPatientsForStaff(Long staffId);
+    List<PatientDto> getPatientsForStaff(String staffId);
 }

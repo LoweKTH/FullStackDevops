@@ -26,7 +26,7 @@ public class Message {
     @JoinColumn(name = "conversation_id", nullable = false)
     private Conversation conversation;
 
-    private Long senderId;
+    private String senderId;
 
     @Column(nullable = false)
     private String content;

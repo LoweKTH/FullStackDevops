@@ -41,7 +41,7 @@ class DoctorstaffMsApplicationTests {
     void setUp() {
         // Initialize a mock doctor object
         mockDoctor = new DoctorDto();
-        mockDoctor.setUserId(1L);
+        mockDoctor.setUserId("324234ewfafsdfda");
         mockDoctor.setFirstname("John");
         mockDoctor.setLastname("Doe");
         mockDoctor.setSpecialty("Cardiology");
@@ -71,7 +71,7 @@ class DoctorstaffMsApplicationTests {
     @Test
     void testGetDoctorById() throws Exception {
         // Mock the service behavior
-        when(doctorService.getDoctorById(1L)).thenReturn(mockDoctor);
+        when(doctorService.getDoctorById("324234ewfafsdfda")).thenReturn(mockDoctor);
 
         // Perform the GET request and verify the response
         mockMvc.perform(get("/api/doctors/1"))

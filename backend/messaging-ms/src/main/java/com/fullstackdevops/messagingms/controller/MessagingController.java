@@ -21,7 +21,7 @@ public class MessagingController {
     private final MessagingService messagingService;
 
     @PostMapping("/conversation")
-    public ResponseEntity<Conversation> createConversation(@RequestParam Long senderId, @RequestParam Long recipientId) {
+    public ResponseEntity<Conversation> createConversation(@RequestParam String senderId, @RequestParam String recipientId) {
 
         Conversation conversation = messagingService.createOrGetConversation(senderId, recipientId);
         return ResponseEntity.ok(conversation);
@@ -42,7 +42,7 @@ public class MessagingController {
     }
 
     @GetMapping("/getconversations")
-    public ResponseEntity<List<ConversationDto>> getUserConversations(@RequestParam Long userId) {
+    public ResponseEntity<List<ConversationDto>> getUserConversations(@RequestParam String userId) {
         List<ConversationDto> conversations = messagingService.getAllUserConversations(userId);
         return ResponseEntity.ok(conversations);
     }

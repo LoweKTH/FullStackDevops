@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import "../styles/Profile.css";
 import { fetchUserProfile, fetchNotesForPatient, fetchDiagnosesForPatient } from "../api/Patient-ms-api";
-import { useLocation } from "react-router-dom";
 
 function Profile() {
     const [profileData, setProfileData] = useState(null);
@@ -12,13 +11,15 @@ function Profile() {
     const [modalData, setModalData] = useState(null); // Data to display in modal
     const [modalTitle, setModalTitle] = useState(""); // Title for the modal
     const [isModalOpen, setIsModalOpen] = useState(false);
-    const location = useLocation();
-    const { userId } = location.state;
 
     useEffect(() => {
+
+        const userId = localStorage.getItem("userId");
+
         const getProfile = async () => {
             try {
                 setLoading(true);
+                console.log(userId);
                 const response = await fetchUserProfile(userId);
                 setProfileData(response.data);
             } catch (err) {
@@ -50,7 +51,7 @@ function Profile() {
         getProfile();
         getNotes();
         getDiagnoses();
-    }, [userId]);
+    }, []);
 
     const openModal = (data, title) => {
         setModalData(data);

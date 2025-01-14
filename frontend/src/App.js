@@ -13,6 +13,7 @@ import PatientDetails from "./components/PatientDetails";
 import ImageUpload from "./components/ImageUpload";
 import ImageEdit from "./components/ImageEdit";
 import PostRegistration from "./components/PostRegistration";
+import PostLogin from "./components/PostLogin";
 
 
 
@@ -36,6 +37,7 @@ function App() {
                 <Route path="/image-upload" element={<ImageUpload />} />
                 <Route path="/image-edit" element={<ImageEdit />} />
                 <Route path="/post-registration" element={<PostRegistration />} />
+                <Route path="/post-login" element={<PostLogin />} />
             </Routes>
         </Router>
     );

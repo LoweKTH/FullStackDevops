@@ -18,8 +18,8 @@ public class Conversation {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private Long senderId;
-    private Long recipientId;
+    private String senderId;
+    private String recipientId;
 
     @Temporal(TemporalType.TIMESTAMP)
     private Date createdAt = new Date();

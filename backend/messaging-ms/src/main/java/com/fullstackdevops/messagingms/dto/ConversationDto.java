@@ -13,7 +13,7 @@ import java.util.Date;
 @AllArgsConstructor
 public class ConversationDto {
     private Long id;
-    private Long senderId;
-    private Long recipientId;
+    private String senderId;
+    private String recipientId;
     private Date createdAt;
 }

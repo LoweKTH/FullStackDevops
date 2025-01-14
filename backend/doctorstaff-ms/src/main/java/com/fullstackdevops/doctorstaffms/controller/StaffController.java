@@ -25,13 +25,13 @@ public class StaffController {
     }
 
     @GetMapping("/{staffId}")
-    public ResponseEntity<StaffDto> getStaffById(@PathVariable Long staffId){
+    public ResponseEntity<StaffDto> getStaffById(@PathVariable String staffId){
         StaffDto staff = staffService.getStaffById(staffId);
         return ResponseEntity.ok(staff);
     }
 
     @GetMapping("/{staffId}/patients")
-    public ResponseEntity<List<PatientDto>> getPatientsForStaff(@PathVariable Long staffId){
+    public ResponseEntity<List<PatientDto>> getPatientsForStaff(@PathVariable String staffId){
         List<PatientDto> patients = staffService.getPatientsForStaff(staffId);
         return ResponseEntity.ok(patients);
     }

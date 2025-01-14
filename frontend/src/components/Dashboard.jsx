@@ -9,24 +9,23 @@ function Dashboard() {
     const userId = localStorage.getItem("userId");
 
     useEffect(() => {
-        const role = getRoleFromToken(); // Extract role from the token
+        const role = getInfoFromToken(); // Extract role from the token
         console.log(role);
         setRole(role); // Set the role state
     }, []);
 
 
-    const getRoleFromToken = () => {
+    const getInfoFromToken = () => {
         const token = localStorage.getItem("token"); // Retrieve token from localStorage
        // const token = keycloak.token;
         console.log("token:" +   token);
 
         if (token) {
             const decodedToken = jwtDecode(token);
-
-
             // For client-level roles
             const clientRoles = decodedToken.resource_access?.['user-ms']?.roles || [];
             const userId = decodedToken.sub;
+            localStorage.setItem("userId",userId);
             console.log('User ID:', userId);
             if(clientRoles.length>0){
                 return clientRoles[0];

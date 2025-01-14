@@ -9,8 +9,13 @@ import com.fullstackdevops.doctorstaffms.utils.StaffMapper;
 import com.fullstackdevops.doctorstaffms.utils.StaffNotFoundException;
 import lombok.AllArgsConstructor;
 import org.springframework.core.ParameterizedTypeReference;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.oauth2.jwt.Jwt;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
@@ -32,32 +37,58 @@ public class StaffServiceImpl implements StaffService {
     }
 
     @Override
-    public StaffDto getStaffById(Long staffId) {
+    public StaffDto getStaffById(String staffId) {
         Staff staff = staffRepository.findByUserId(staffId).orElse(null);
 
         return StaffMapper.toDto(staff);
     }
 
     @Override
-    public List<PatientDto> getPatientsForStaff(Long staffId) {
+    public List<PatientDto> getPatientsForStaff(String staffId) {
 
-        String url = "http://patient-ms:80/api/patients/" + staffId + "/doctorstaffgetpatients";
-        ResponseEntity<List<Long>> response = restTemplate.exchange(
+        String token = getJwtTokenFromSecurityContext(); // Assumes this method retrieves the token
+        System.out.println("TOKEN:    "+token);
+        // Set the authorization header
+        HttpHeaders headers = new HttpHeaders();
+        headers.set("Authorization", "Bearer " + token);
+
+        // Create HttpEntity with headers
+        HttpEntity<String> entity = new HttpEntity<>(headers);
+
+        String url = "http://patient-ms:8080/api/patients/" + staffId + "/doctorstaffgetpatients";
+        ResponseEntity<List<String>> response = restTemplate.exchange(
                 url,
                 HttpMethod.GET,
-                null,
-                new ParameterizedTypeReference<List<Long>>() {}
+                entity,
+                new ParameterizedTypeReference<List<String>>() {}
         );
-        List<Long> patientIds = response.getBody();
+        List<String> patientIds = response.getBody();
 
         List<PatientDto> patientDtos = new ArrayList<>();
-        for (Long patientId : patientIds) {
-            PatientDto patient = restTemplate.getForObject("http://patient-ms:80/api/patients/" + patientId, PatientDto.class);
-            patientDtos.add(patient);
+
+        for (String patientId : patientIds) {
+            String patientUrl = "http://patient-ms:8080/api/patients/" + patientId;
+
+            ResponseEntity<PatientDto> patientResponse = restTemplate.exchange(
+                    patientUrl,
+                    HttpMethod.GET,
+                    entity, // Pass the same headers with token
+                    PatientDto.class
+            );
+
+            patientDtos.add(patientResponse.getBody());
         }
         return patientDtos;
     }
 
 
+    private String getJwtTokenFromSecurityContext() {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        if (authentication != null && authentication.getPrincipal() instanceof Jwt) {
+            Jwt jwt = (Jwt) authentication.getPrincipal();
+            return jwt.getTokenValue();
+        }
+        return null;
+    }
 
 }

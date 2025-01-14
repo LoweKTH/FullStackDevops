@@ -20,8 +20,10 @@ services:
       - KC_DB_URL=jdbc:mysql://db:3306/fullstack24
       - KC_DB_USERNAME=user
       - KC_DB_PASSWORD=password
+      - KC_HOSTNAME=http://localhost:8080/
+      - KC_HOSTNAME_BACKCHANNEL_DYNAMIC=true
     ports:
-      - "8085:8080"
+      - "8080:8080"
     command:
       start-dev
     depends_on:
@@ -71,18 +73,18 @@ services:
 
 
 
-  user-ms:
-    build: ./user-ms
-    environment:
-      SPRING_DATASOURCE_URL: jdbc:mysql://db:3306/fullstack24
-      SPRING_DATASOURCE_USERNAME: user
-      SPRING_DATASOURCE_PASSWORD: password
-    ports:
-      - "8081:8080"
-    depends_on:
-      - db
-    networks:
-      - backend-network
+  #user-ms:
+  #  build: ./user-ms
+  #  environment:
+  #    SPRING_DATASOURCE_URL: jdbc:mysql://db:3306/fullstack24
+  #    SPRING_DATASOURCE_USERNAME: user
+  #    SPRING_DATASOURCE_PASSWORD: password
+  #  ports:
+  #    - "8081:8080"
+  #  depends_on:
+  #    - db
+  #  networks:
+  #    - backend-network
 
 
   image-ms:
@@ -116,3 +118,4 @@ volumes:
   db-data:
 networks:
   backend-network:
+    driver: bridge

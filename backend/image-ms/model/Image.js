@@ -8,7 +8,7 @@ const Image = sequelize.define('Image', {
         autoIncrement: true,
     },
     userId: {
-        type: DataTypes.INTEGER,
+        type: DataTypes.STRING,
         allowNull: false,
     },
     title: {

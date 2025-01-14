@@ -2,6 +2,8 @@ import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import keycloak from "../keycloak";
 import { addPatient } from "../api/Patient-ms-api";
+import {addDoctor} from "../api/Doctor-ms-api";
+import {addStaff} from "../api/Staff-ms-api";
 
 const PostRegistration = () => {
     const navigate = useNavigate();
@@ -26,27 +28,73 @@ const PostRegistration = () => {
 
         const userInfo = keycloak.tokenParsed;
         const userId = userInfo?.sub;
-        console.log(userInfo);
-        // Construct the PatientDto
-        const patientDto = {
-            firstname: userInfo.family_name,
-            lastname: userInfo.given_name,
-            email: userInfo.email,
-            socialSecurityNumber: userInfo.socialsecuritynumber,
-            phoneNumber: userInfo.phonenumber,
-            address: userInfo.address,
-            userId: userId,
-        };
-        console.log(patientDto);
-        // Send data to the backend
-        addPatient(patientDto, keycloak.token)
-            .then((response) => {
-                console.log("Patient added successfully:", response);
-                navigate("/dashboard"); // Redirect to the dashboard
-            })
-            .catch((error) => {
-                console.error("Error adding patient:", error);
-            });
+        const role = userInfo.role;
+        if(role==="PATIENT"){
+            console.log(userInfo);
+            // Construct the PatientDto
+            const patientDto = {
+                firstname: userInfo.family_name,
+                lastname: userInfo.given_name,
+                email: userInfo.email,
+                socialSecurityNumber: userInfo.socialsecuritynumber,
+                phoneNumber: userInfo.phonenumber,
+                address: userInfo.address,
+                userId: userId,
+            };
+            console.log(patientDto);
+            // Send data to the backend
+            addPatient(patientDto, keycloak.token)
+                .then((response) => {
+                    console.log("Patient added successfully:", response);
+                    navigate("/dashboard"); // Redirect to the dashboard
+                })
+                .catch((error) => {
+                    console.error("Error adding patient:", error);
+                });
+        }else if(role==="DOCTOR"){
+            console.log(userInfo);
+            // Construct the PatientDto
+            const doctorDto = {
+                firstname: userInfo.family_name,
+                lastname: userInfo.given_name,
+                email: userInfo.email,
+                socialSecurityNumber: userInfo.socialsecuritynumber,
+                phoneNumber: userInfo.phonenumber,
+                userId: userId,
+            };
+            console.log(doctorDto);
+            // Send data to the backend
+            addDoctor(doctorDto, keycloak.token)
+                .then((response) => {
+                    console.log("doctor added successfully:", response);
+                    navigate("/dashboard"); // Redirect to the dashboard
+                })
+                .catch((error) => {
+                    console.error("Error adding doctor:", error);
+                });
+        }else{
+            console.log(userInfo);
+            // Construct the PatientDto
+            const staffDto = {
+                firstname: userInfo.family_name,
+                lastname: userInfo.given_name,
+                email: userInfo.email,
+                socialSecurityNumber: userInfo.socialsecuritynumber,
+                phoneNumber: userInfo.phonenumber,
+                userId: userId,
+            };
+            console.log(staffDto);
+            // Send data to the backend
+            addStaff(staffDto, keycloak.token)
+                .then((response) => {
+                    console.log("staff added successfully:", response);
+                    navigate("/dashboard"); // Redirect to the dashboard
+                })
+                .catch((error) => {
+                    console.error("Error adding staff:", error);
+                });
+        }
+
     }, [isReady, navigate]);
 
     return (

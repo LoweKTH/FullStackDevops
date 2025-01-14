@@ -2,10 +2,9 @@ import Keycloak from "keycloak-js";
 
 // Initialize the Keycloak instance
 const keycloak = new Keycloak({
-    url: "http://localhost:8085", // Keycloak server URL
+    url: "http://localhost:8080", // Keycloak server URL
     realm: "PatientSystem",    // Keycloak realm name
     clientId: "user-ms", // Keycloak client ID
-    credentials: { secret: "rUBEOSf1G7rgCflAIaXVypNUA53zkhnX" },
 });
 
 keycloak

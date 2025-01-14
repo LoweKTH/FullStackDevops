@@ -1,37 +1,36 @@
-apiVersion: apps/v1
-kind: Deployment
-metadata:
-  name: user-ms
-  labels:
-    app: user-ms
-spec:
-  replicas: 1
-  selector:
-    matchLabels:
-      app: user-ms
-  template:
-    metadata:
-      name: user-ms
-      labels:
-        app: user-ms
-    spec:
-      initContainers:
-        - name: wait-for-db
-          image: busybox
-          command: [ 'sh', '-c', 'until nc -zv db 3306; do echo "Waiting for db"; sleep 2; done;' ]
-      containers:
-        - name: user-ms
-          image: backend-user-ms:latest
-          imagePullPolicy: IfNotPresent
-          ports:
-            - containerPort: 8080
-              protocol: TCP
-          env:
-            - name: SPRING_DATASOURCE_URL
-              value: jdbc:mysql://db:3306/fullstack24
-            - name: SPRING_DATASOURCE_USERNAME
-              value: user
-            - name: SPRING_DATASOURCE_PASSWORD
-              value: password
-      restartPolicy: Always
-      
+# apiVersion: apps/v1
+# kind: Deployment
+# metadata:
+#   name: user-ms
+#   labels:
+#     app: user-ms
+# spec:
+#   replicas: 1
+#   selector:
+#     matchLabels:
+#       app: user-ms
+#   template:
+#     metadata:
+#       name: user-ms
+#       labels:
+#         app: user-ms
+#     spec:
+#       initContainers:
+#         - name: wait-for-db
+#           image: busybox
+#           command: [ 'sh', '-c', 'until nc -zv db 3306; do echo "Waiting for db"; sleep 2; done;' ]
+#       containers:
+#         - name: user-ms
+#           image: backend-user-ms:latest
+#           imagePullPolicy: IfNotPresent
+#           ports:
+#             - containerPort: 8080
+#               protocol: TCP
+#           env:
+#             - name: SPRING_DATASOURCE_URL
+#               value: jdbc:mysql://db:3306/fullstack24
+#             - name: SPRING_DATASOURCE_USERNAME
+#               value: user
+#             - name: SPRING_DATASOURCE_PASSWORD
+#               value: password
+#       restartPolicy: Always

@@ -13,11 +13,10 @@ function PatientList() {
     const [assignedPatients, setAssignedPatients] = useState([]);
     const [error, setError] = useState("");
     const navigate = useNavigate();
-    const userId = Number(localStorage.getItem("userId"));
+    const userId = localStorage.getItem("userId");
     const role = localStorage.getItem("role");
     const [showModal, setShowModal] = useState(false);
     const [selectedPatientId, setSelectedPatientId] = useState(null);
-
     useEffect(() => {
         const getPatients = async () => {
             try {
@@ -104,7 +103,7 @@ function PatientList() {
         console.log("Conversation with patient ID: ", patientId);
 
         try {
-            patientId = Number(patientId);
+
             const response = await createConversation(userId, patientId);
             const conversationId = response.data.id;
 
@@ -152,7 +151,7 @@ function PatientList() {
                                     Add Diagnosis
                                 </button>
 
-                                {role === "Doctor" && (
+                                {role === "DOCTOR" && (
                                     <button
                                         onClick={() => handleMoreInfo(patient)}
                                         className="more-info-btn"
@@ -194,7 +193,7 @@ function PatientList() {
                                     >
                                         Message
                                     </button>
-                                    {role === "Doctor" && (
+                                    {role === "DOCTOR" && (
                                         <button
                                           onClick={() =>handleImageUpload(patient.userId)}
                                         >

@@ -11,7 +11,7 @@ function DoctorStaffList( ) {
     const [doctors, setDoctors] = useState([]);
     const [staff, setStaff] = useState([]);
     const navigate = useNavigate();
-    const userId = Number(localStorage.getItem("userId"));
+    const userId = localStorage.getItem("userId");
 
     useEffect(() => {
         const getAssignedDoctorStaff = async () => {
@@ -36,7 +36,6 @@ function DoctorStaffList( ) {
         console.log("Conversation with doctorstaff ID: ", doctorstaffId);
         console.log("test");
         try {
-            doctorstaffId = Number(doctorstaffId);
             const response = await createConversation(userId, doctorstaffId);
             const conversationId = response.data.id;
 

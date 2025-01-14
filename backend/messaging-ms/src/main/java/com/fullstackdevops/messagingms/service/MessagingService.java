@@ -7,8 +7,8 @@ import com.fullstackdevops.messagingms.model.Conversation;
 import java.util.List;
 
 public interface MessagingService {
-    Conversation createOrGetConversation(Long patientId, Long doctorId);
-    MessageDto sendMessage(Long conversationId, Long senderId, MessageDto messageDto);
+    Conversation createOrGetConversation(String patientId, String doctorId);
+    MessageDto sendMessage(Long conversationId, String senderId, MessageDto messageDto);
     List<MessageDto> getMessages(Long conversationId);
-    List<ConversationDto> getAllUserConversations(Long userId);
+    List<ConversationDto> getAllUserConversations(String userId);
 }

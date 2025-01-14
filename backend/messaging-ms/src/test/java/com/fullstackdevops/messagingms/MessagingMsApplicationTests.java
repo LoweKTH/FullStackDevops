@@ -38,14 +38,14 @@ public class MessagingMsApplicationTests {
 		// Mock data for the conversation
 		mockConversation = new Conversation();
 		mockConversation.setId(1L);
-		mockConversation.setSenderId(1L);
-		mockConversation.setRecipientId(2L);
+		mockConversation.setSenderId("feweuhfi1edasd");
+		mockConversation.setRecipientId("12eeih2eihde2i");
 	}
 
 	@Test
 	public void testCreateConversation() throws Exception {
 		// Mock the service to return the mockConversation
-		when(messagingService.createOrGetConversation(1L, 2L)).thenReturn(mockConversation);
+		when(messagingService.createOrGetConversation("feweuhfi1edasd", "12eeih2eihde2i")).thenReturn(mockConversation);
 
 		// Perform the POST request to create a conversation
 		mockMvc.perform(post("/api/messages/conversation")
