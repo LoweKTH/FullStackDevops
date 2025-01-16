@@ -1,8 +1,8 @@
 const { Sequelize } = require('sequelize');
 
 const sequelize = new Sequelize('fullstack24', 'user', 'password', {
-    host: 'db',
-    port: 3306,
+    host: 'fullstack24db',
+    port: 5432,
     dialect: 'mysql',
     logging: false,
 });

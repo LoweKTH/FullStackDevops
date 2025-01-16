@@ -3,22 +3,13 @@ name: CI/CD Pipeline
 on:
   push:
     branches:
-      - unittests
+      - kthcloudtest
 
 jobs:
 
   doctorstaff-ms-build:
     name: Build and Test Doctorstaff Microservice
     runs-on: ubuntu-latest
-    services:
-      mysql:
-        image: mysql:8.0
-        env:
-          MYSQL_DATABASE: fullstack24
-          MYSQL_ROOT_PASSWORD: password
-        ports:
-          - 3306:3306
-        options: --health-cmd="mysqladmin ping" --health-interval=10s --health-timeout=5s --health-retries=3
 
     steps:
       - name: Checkout Code
@@ -32,7 +23,7 @@ jobs:
         working-directory: backend/doctorstaff-ms
         env:
           DB_HOST: localhost
-          DB_PORT: 3306
+          DB_PORT: 5432
           DB_USER: user
           DB_PASSWORD: password
           DB_NAME: fullstack24
@@ -80,7 +71,7 @@ jobs:
         working-directory: backend/image-ms
         env:
           DB_HOST: localhost
-          DB_PORT: 3306
+          DB_PORT: 5432
           DB_USER: user
           DB_PASSWORD: password
           DB_NAME: fullstack24
@@ -118,7 +109,7 @@ jobs:
         working-directory: backend/messaging-ms
         env:
           DB_HOST: localhost
-          DB_PORT: 3306
+          DB_PORT: 5432
           DB_USER: user
           DB_PASSWORD: password
           DB_NAME: fullstack24
@@ -155,7 +146,7 @@ jobs:
         working-directory: backend/patient-ms
         env:
           DB_HOST: localhost
-          DB_PORT: 3306
+          DB_PORT: 5432
           DB_USER: user
           DB_PASSWORD: password
           DB_NAME: fullstack24
@@ -192,7 +183,7 @@ jobs:
         working-directory: backend/user-ms
         env:
           DB_HOST: localhost
-          DB_PORT: 3306
+          DB_PORT: 5432
           DB_USER: user
           DB_PASSWORD: password
           DB_NAME: fullstack24
