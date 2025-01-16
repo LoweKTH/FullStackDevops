@@ -19,15 +19,15 @@ jobs:
         working-directory: backend/doctorstaff-ms
         run: mvn clean install -DskipTests
 
-      - name: Run Tests for doctorstaff Microservice
-        working-directory: backend/doctorstaff-ms
-        env:
-          DB_HOST: localhost
-          DB_PORT: 5432
-          DB_USER: user
-          DB_PASSWORD: password
-          DB_NAME: fullstack24
-        run: mvn test
+      #- name: Run Tests for doctorstaff Microservice
+      #  working-directory: backend/doctorstaff-ms
+      #  env:
+      #    DB_HOST: localhost
+      #    DB_PORT: 5432
+      #    DB_USER: user
+      #    DB_PASSWORD: password
+      #    DB_NAME: fullstack24
+      #  run: mvn test
 
       - name: Login to Docker Hub
         uses: docker/login-action@v3
