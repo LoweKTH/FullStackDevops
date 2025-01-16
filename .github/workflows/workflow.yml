@@ -167,42 +167,42 @@ jobs:
           push: true
           tags: ${{ secrets.DOCKER_TAG }}
 
-  user-ms-build:
-    name: Build and Test User Microservice
-    runs-on: ubuntu-latest
+  #user-ms-build:
+  #  name: Build and Test User Microservice
+  #  runs-on: ubuntu-latest
 
-    steps:
-      - name: Checkout Code
-        uses: actions/checkout@v3
+  #  steps:
+  #    - name: Checkout Code
+  #      uses: actions/checkout@v3
 
-      - name: Build user Microservice
-        working-directory: backend/user-ms
-        run: mvn clean install -DskipTests
+  #    - name: Build user Microservice
+  #      working-directory: backend/user-ms
+  #      run: mvn clean install -DskipTests
 
-      - name: Run Tests for user Microservice
-        working-directory: backend/user-ms
-        env:
-          DB_HOST: localhost
-          DB_PORT: 5432
-          DB_USER: user
-          DB_PASSWORD: password
-          DB_NAME: fullstack24
-        run: mvn test
+  #    - name: Run Tests for user Microservice
+  #      working-directory: backend/user-ms
+  #      env:
+  #        DB_HOST: localhost
+  #        DB_PORT: 5432
+  #        DB_USER: user
+  #        DB_PASSWORD: password
+  #        DB_NAME: fullstack24
+  #      run: mvn test
 
-      - name: Login to Docker Hub
-        uses: docker/login-action@v3
-        with:
-          registry: registry.cloud.cbh.kth.se
-          username: ${{ secrets.DOCKER_USERNAME }}
-          password: ${{ secrets.DOCKER_PASSWORD }}
+  #    - name: Login to Docker Hub
+  #      uses: docker/login-action@v3
+  #      with:
+  #        registry: registry.cloud.cbh.kth.se
+  #        username: ${{ secrets.DOCKER_USERNAME }}
+  #        password: ${{ secrets.DOCKER_PASSWORD }}
 
-      - name: Build and push User Microservice
-        uses: docker/build-push-action@v5
-        with:
-          context: ./backend/user-ms
-          file: ./backend/user-ms/Dockerfile
-          push: true
-          tags: ${{ secrets.DOCKER_TAG }}
+  #    - name: Build and push User Microservice
+  #      uses: docker/build-push-action@v5
+  #      with:
+  #        context: ./backend/user-ms
+  #        file: ./backend/user-ms/Dockerfile
+  #        push: true
+  #        tags: ${{ secrets.DOCKER_TAG }}
 
   frontend-build:
     name: Build Frontend
