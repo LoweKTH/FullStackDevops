@@ -76,11 +76,11 @@ class DoctorstaffMsApplicationTests {
         when(doctorService.getDoctorById("324234ewfafsdfda")).thenReturn(mockDoctor);
 
         // Perform the GET request and verify the response
-        mockMvc.perform(get("/api/doctors/1")
+        mockMvc.perform(get("/api/doctors/324234ewfafsdfda")
                 .with(jwt())
                 .with(csrf()))
                 .andExpect(status().isOk())
-                .andExpect(jsonPath("$.userId").value(1L))
+                .andExpect(jsonPath("$.userId").value("324234ewfafsdfda"))
                 .andExpect(jsonPath("$.firstname").value("John"))
                 .andExpect(jsonPath("$.lastname").value("Doe"))
                 .andExpect(jsonPath("$.specialty").value("Cardiology"))
