@@ -76,7 +76,9 @@ class DoctorstaffMsApplicationTests {
         when(doctorService.getDoctorById("324234ewfafsdfda")).thenReturn(mockDoctor);
 
         // Perform the GET request and verify the response
-        mockMvc.perform(get("/api/doctors/1"))
+        mockMvc.perform(get("/api/doctors/1")
+                .with(jwt())
+                .with(csrf()))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.userId").value(1L))
                 .andExpect(jsonPath("$.firstname").value("John"))
