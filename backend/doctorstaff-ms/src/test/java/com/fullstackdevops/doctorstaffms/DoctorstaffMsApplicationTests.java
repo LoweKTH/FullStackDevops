@@ -62,7 +62,7 @@ class DoctorstaffMsApplicationTests {
                         .with(jwt())
                         .with(csrf()))
                 .andExpect(status().isCreated())
-                .andExpect(jsonPath("$.userId").value(1L))
+                .andExpect(jsonPath("$.userId").value("324234ewfafsdfda"))
                 .andExpect(jsonPath("$.firstname").value("John"))
                 .andExpect(jsonPath("$.lastname").value("Doe"))
                 .andExpect(jsonPath("$.specialty").value("Cardiology"))
