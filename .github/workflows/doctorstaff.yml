@@ -1,4 +1,4 @@
-name: Patient
+name: Doctorstaff
 
 on:
   push:
