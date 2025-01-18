@@ -17,6 +17,7 @@ import org.springframework.test.web.servlet.MockMvc;
 
 import static org.mockito.Mockito.when;
 import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.csrf;
+import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.jwt;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
@@ -49,13 +50,14 @@ public class MessagingMsApplicationTests {
 
 		// Perform the POST request to create a conversation
 		mockMvc.perform(post("/api/messages/conversation")
-						.param("senderId", "1")
-						.param("recipientId", "2")
+						.param("senderId", "feweuhfi1edasd")
+						.param("recipientId", "12eeih2eihde2i")
 						.contentType(MediaType.APPLICATION_JSON)
+						.with(jwt())
 						.with(csrf()))
 				.andExpect(status().isOk())  // Expect HTTP 200 OK
 				.andExpect(jsonPath("$.id").value(1L))  // Check the conversation ID
-				.andExpect(jsonPath("$.senderId").value(1L))  // Check senderId
-				.andExpect(jsonPath("$.recipientId").value(2L));  // Check recipientId
+				.andExpect(jsonPath("$.senderId").value("feweuhfi1edasd"))  // Check senderId
+				.andExpect(jsonPath("$.recipientId").value("12eeih2eihde2i"));  // Check recipientId
 	}
 }

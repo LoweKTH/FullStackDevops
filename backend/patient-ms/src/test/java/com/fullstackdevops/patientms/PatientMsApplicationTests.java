@@ -18,6 +18,7 @@ import org.springframework.test.web.servlet.MockMvc;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
 import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.csrf;
+import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.jwt;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
@@ -57,9 +58,10 @@ class PatientMsApplicationTests {
 		mockMvc.perform(post("/api/patients/addPatient")
 						.contentType(MediaType.APPLICATION_JSON)
 						.content(objectMapper.writeValueAsString(mockPatient))
+						.with(jwt())
 						.with(csrf()))
 				.andExpect(status().isCreated())
-				.andExpect(jsonPath("$.userId").value(1L))
+				.andExpect(jsonPath("$.userId").value("321423543rrefr"))
 				.andExpect(jsonPath("$.firstname").value("John"))
 				.andExpect(jsonPath("$.lastname").value("Doe"))
 				.andExpect(jsonPath("$.email").value("john.doe@example.com"))

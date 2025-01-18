@@ -1,0 +1,39 @@
+name: Doctorstaff
+
+on:
+  push:
+    branches:
+      - kthcloudtest
+
+jobs:
+
+  doctorstaff-ms-build:
+    name: Build and Test Doctorstaff Microservice
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v3
+
+      - name: Build doctorstaff Microservice
+        working-directory: backend/doctorstaff-ms
+        run: mvn clean install -DskipTests
+
+      - name: Run Tests for doctorstaff Microservice
+        working-directory: backend/doctorstaff-ms
+        run: mvn test
+
+      - name: Login to Docker Hub
+        uses: docker/login-action@v3
+        with:
+          registry: registry.cloud.cbh.kth.se
+          username: ${{ secrets.DOCKER_USERNAME_DOCTORSTAFF }}
+          password: ${{ secrets.DOCKER_PASSWORD_DOCTORSTAFF }}
+
+      - name: Build and push doctorstaff Microservice
+        uses: docker/build-push-action@v5
+        with:
+          context: ./backend/doctorstaff-ms
+          file: ./backend/doctorstaff-ms/Dockerfile
+          push: true
+          tags: ${{ secrets.DOCKER_TAG_DOCTORSTAFF }}
