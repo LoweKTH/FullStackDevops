@@ -7,20 +7,20 @@ on:
 
 jobs:
 
-  doctorstaff-ms-build:
-    name: Build and Test Doctorstaff Microservice
+  patient-ms-build:
+    name: Build and Test patient Microservice
     runs-on: ubuntu-latest
 
     steps:
       - name: Checkout Code
         uses: actions/checkout@v3
 
-      - name: Build doctorstaff Microservice
-        working-directory: backend/doctorstaff-ms
+      - name: Build patient Microservice
+        working-directory: backend/patient-ms
         run: mvn clean install -DskipTests
 
-      - name: Run Tests for doctorstaff Microservice
-        working-directory: backend/doctorstaff-ms
+      - name: Run Tests for patient Microservice
+        working-directory: backend/patient-ms
         run: mvn test
 
       - name: Login to Docker Hub
@@ -30,10 +30,10 @@ jobs:
           username: ${{ secrets.DOCKER_USERNAME_PATIENT }}
           password: ${{ secrets.DOCKER_PASSWORD_PATIENT }}
 
-      - name: Build and push doctorstaff Microservice
+      - name: Build and push patient Microservice
         uses: docker/build-push-action@v5
         with:
-          context: ./backend/doctorstaff-ms
-          file: ./backend/doctorstaff-ms/Dockerfile
+          context: ./backend/patient-ms
+          file: ./backend/patient-ms/Dockerfile
           push: true
           tags: ${{ secrets.DOCKER_TAG_PATIENT }}

@@ -7,20 +7,20 @@ on:
 
 jobs:
 
-  patient-ms-build:
-    name: Build and Test Patient Microservice
+  doctorstaff-ms-build:
+    name: Build and Test doctorstaff Microservice
     runs-on: ubuntu-latest
 
     steps:
       - name: Checkout Code
         uses: actions/checkout@v3
 
-      - name: Build Patient Microservice
-        working-directory: backend/patient-ms
+      - name: Build doctorstaff Microservice
+        working-directory: backend/doctorstaff-ms
         run: mvn clean install -DskipTests
 
-      - name: Run Tests for patient Microservice
-        working-directory: backend/patient-ms
+      - name: Run Tests for doctorstaff Microservice
+        working-directory: backend/doctorstaff-ms
         run: mvn test
 
       - name: Login to Docker Hub
@@ -29,14 +29,14 @@ jobs:
           registry: registry.cloud.cbh.kth.se
           username: robot$deploy-b23849a9-d97a-4b9e-bd06-a4bf766b28e1+fullstack24-doctorstaff
           password: 0IhVrkf9TZbEb70mhwwxB4ybOS8yX3wN
-          #username: ${{ secrets.DOCKER_USERNAME_PATIENT }}
-          #password: ${{ secrets.DOCKER_PASSWORD_PATIENT }}
+          #username: ${{ secrets.DOCKER_USERNAME_DOCTORSTAFF }}
+          #password: ${{ secrets.DOCKER_PASSWORD_DOCTORSTAFF }}
 
-      - name: Build and push Patient Microservice
+      - name: Build and push doctorstaff Microservice
         uses: docker/build-push-action@v5
         with:
-          context: ./backend/patient-ms
-          file: ./backend/patient-ms/Dockerfile
+          context: ./backend/doctorstaff-ms
+          file: ./backend/doctorstaff-ms/Dockerfile
           push: true
           tags: registry.cloud.cbh.kth.se/deploy-b23849a9-d97a-4b9e-bd06-a4bf766b28e1/fullstack24-doctorstaff
-          #tags: ${{ secrets.DOCKER_TAG_PATIENT }}
+          #tags: ${{ secrets.DOCKER_TAG_DOCTORSTAFF }}
