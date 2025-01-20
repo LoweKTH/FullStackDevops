@@ -69,11 +69,12 @@ async function verifyJWT(req, res, next) {
     });
 }
 
-// Enable CORS
 app.use(cors({
-    origin: '*',
-    methods: ['GET', 'POST'],
-    allowedHeaders: ['Content-Type', 'Authorization'],
+    origin: 'https://fullstack24-frontendnew.app.cloud.cbh.kth.se',
+    methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+    allowedHeaders: ['Authorization', 'Content-Type'],
+    exposedHeaders: ['Authorization'],
+    credentials: true
 }));
 
 // Serve static files

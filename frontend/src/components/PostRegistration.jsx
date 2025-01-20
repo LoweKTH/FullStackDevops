@@ -40,6 +40,7 @@ const PostRegistration = () => {
                 phoneNumber: userInfo.phonenumber,
                 address: userInfo.address,
                 userId: userId,
+                gender: userInfo.gender,
             };
             console.log(patientDto);
             // Send data to the backend
@@ -61,6 +62,7 @@ const PostRegistration = () => {
                 socialSecurityNumber: userInfo.socialsecuritynumber,
                 phoneNumber: userInfo.phonenumber,
                 userId: userId,
+                gender: userInfo.gender,
             };
             console.log(doctorDto);
             // Send data to the backend
@@ -82,6 +84,7 @@ const PostRegistration = () => {
                 socialSecurityNumber: userInfo.socialsecuritynumber,
                 phoneNumber: userInfo.phonenumber,
                 userId: userId,
+                gender: userInfo.gender,
             };
             console.log(staffDto);
             // Send data to the backend

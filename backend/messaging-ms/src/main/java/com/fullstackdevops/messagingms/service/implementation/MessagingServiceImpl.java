@@ -110,47 +110,24 @@ public class MessagingServiceImpl implements MessagingService {
         return conversationDtos;
     }
 
-
-
-    private String getJwtTokenFromSecurityContext() {
-        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        if (authentication != null && authentication.getPrincipal() instanceof Jwt) {
-            Jwt jwt = (Jwt) authentication.getPrincipal();
-            return jwt.getTokenValue();
-        }
-        return null;
-    }
-
-
-
-
-
-
-
     private String getAdminToken() {
         String url = "https://fullstackkc.app.cloud.cbh.kth.se/realms/PatientSystem/protocol/openid-connect/token";
 
-        // Create RestTemplate instance
         RestTemplate restTemplate = new RestTemplate();
 
-        // Prepare headers
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_FORM_URLENCODED);
 
-        // Prepare form data (MultiValueMap)
         MultiValueMap<String, String> formData = new LinkedMultiValueMap<>();
         formData.add("grant_type", "client_credentials");
         formData.add("client_id", "admin-cli");
-        formData.add("client_secret", "s7BbMv5X7wbjezYob7Bc9wV36X9DHFMP");
-        System.out.println(formData.get("client_secret"));
-        System.out.println(formData.toString());
-        // Create the request entity
+        formData.add("client_secret", "njx87Pe6ky6SWPMLLzGm4k9A2HVmCsxB");
+
         HttpEntity<MultiValueMap<String, String>> requestEntity = new HttpEntity<>(formData, headers);
 
-        // Send POST request
         ResponseEntity<Map> response = restTemplate.postForEntity(url, requestEntity, Map.class);
         System.out.println(response);
-        // Parse the response and return the token
+
         if (response.getStatusCode() == HttpStatus.OK && response.getBody() != null) {
             return (String) response.getBody().get("access_token");
         }
@@ -161,29 +138,29 @@ public class MessagingServiceImpl implements MessagingService {
     private String getUserUsername(String userId) {
         String url = "https://fullstackkc.app.cloud.cbh.kth.se/admin/realms/PatientSystem/users/" + userId;
 
-        // Create RestTemplate instance
+
         RestTemplate restTemplate = new RestTemplate();
 
-        // Prepare headers
+
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_JSON);
 
-        // Add the access token to the Authorization header
-        String accessToken = getAdminToken();  // Assuming getAdminToken() works fine
+
+        String accessToken = getAdminToken();
         headers.setBearerAuth(accessToken);
 
-        // Create the request entity
+
         HttpEntity<String> requestEntity = new HttpEntity<>(headers);
 
-        // Send GET request
+
         ResponseEntity<Map> response = restTemplate.exchange(url, HttpMethod.GET, requestEntity, Map.class);
 
         System.out.println(response);
 
-        // Parse the response and extract the username
+
         if (response.getStatusCode() == HttpStatus.OK && response.getBody() != null) {
             Map<String, Object> userData = response.getBody();
-            // Assuming 'username' is the key in the response JSON
+
             return (String) userData.get("username");
         }
 

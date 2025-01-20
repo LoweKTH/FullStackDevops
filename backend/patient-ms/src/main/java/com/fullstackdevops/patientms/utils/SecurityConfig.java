@@ -35,7 +35,7 @@ public class SecurityConfig {
                         .requestMatchers("/api/patients/**").authenticated() // Secure all endpoints under /api/patients
                         .anyRequest().permitAll()
                 )
-                .oauth2ResourceServer(oauth2 -> oauth2.jwt(Customizer.withDefaults())); // Use custom JWT decoder
+                .oauth2ResourceServer(oauth2 -> oauth2.jwt(Customizer.withDefaults()));
 
         return http.build();
     }
