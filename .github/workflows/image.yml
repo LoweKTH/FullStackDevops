@@ -42,8 +42,10 @@ jobs:
         uses: docker/login-action@v3
         with:
           registry: registry.cloud.cbh.kth.se
-          username: ${{ secrets.DOCKER_USERNAME_IMAGE }}
-          password: ${{ secrets.DOCKER_PASSWORD_IMAGE }}
+          username: robot$deploy-b23849a9-d97a-4b9e-bd06-a4bf766b28e1+fullstack24-imagenew
+          password: 78BPIPEFoOAPluTuqZUrfacUF6gWJke9
+          #username: ${{ secrets.DOCKER_USERNAME_IMAGE }}
+          #password: ${{ secrets.DOCKER_PASSWORD_IMAGE }}
 
       - name: Build and push Image Microservice
         uses: docker/build-push-action@v5
@@ -51,4 +53,5 @@ jobs:
           context: ./backend/image-ms
           file: ./backend/image-ms/Dockerfile
           push: true
-          tags: ${{ secrets.DOCKER_TAG_IMAGE }}
+          tags: registry.cloud.cbh.kth.se/deploy-b23849a9-d97a-4b9e-bd06-a4bf766b28e1/fullstack24-imagenew
+          #tags: ${{ secrets.DOCKER_TAG_IMAGE }}
