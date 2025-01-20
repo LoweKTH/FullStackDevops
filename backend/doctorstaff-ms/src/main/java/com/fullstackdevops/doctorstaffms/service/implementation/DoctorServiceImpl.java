@@ -50,7 +50,7 @@ public class DoctorServiceImpl implements DoctorService {
     @Override
     public List<PatientDto> getPatientsForDoctor(String doctorId) {
 
-        String token = getJwtTokenFromSecurityContext(); // Assumes this method retrieves the token
+        String token = getJwtTokenFromSecurityContext();
         System.out.println("TOKEN:    "+token);
         // Set the authorization header
         HttpHeaders headers = new HttpHeaders();
