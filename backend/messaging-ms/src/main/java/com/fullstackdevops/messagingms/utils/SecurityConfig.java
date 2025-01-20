@@ -35,42 +35,23 @@ public class SecurityConfig {
                         .requestMatchers("/api/messages/**").authenticated() // Secure all endpoints under /api/patients
                         .anyRequest().permitAll()
                 )
-                .oauth2ResourceServer(oauth2 -> oauth2.jwt(jwt -> jwt.decoder(customJwtDecoder()))); // Use custom JWT decoder
+                .oauth2ResourceServer(oauth2 -> oauth2.jwt(Customizer.withDefaults()));
 
         return http.build();
     }
 
     @Bean
-    public JwtDecoder customJwtDecoder() {
-        // JWK Set URL for Keycloak or your desired URL
-        String jwkSetUri = "http://keycloak:8080/realms/PatientSystem/protocol/openid-connect/certs";
+    CorsConfigurationSource corsConfigurationSource() {
+        CorsConfiguration configuration = new CorsConfiguration();
+        configuration.setAllowedOrigins(Arrays.asList("https://fullstack24-frontendnew.app.cloud.cbh.kth.se")); // Add your frontend URL
+        configuration.setAllowedMethods(Arrays.asList("GET", "POST", "PUT", "DELETE", "OPTIONS"));
+        configuration.setAllowedHeaders(Arrays.asList("Authorization", "Content-Type"));
+        configuration.setExposedHeaders(Arrays.asList("Authorization"));
+        configuration.setAllowCredentials(true);
 
-        // Configure the NimbusJwtDecoder with the JWK Set URI (or URL of your choice)
-        NimbusJwtDecoder jwtDecoder = NimbusJwtDecoder.withJwkSetUri(jwkSetUri).build();
-
-        // Add any custom logic to modify JWT claims (e.g., issuer claim)
-        return new JwtDecoder() {
-            @Override
-            public Jwt decode(String token) throws JwtException {
-                // Decode the JWT token using NimbusJwtDecoder first
-                Jwt jwt = jwtDecoder.decode(token);
-
-                // Custom logic for JWT validation or claims modification (e.g., checking the issuer)
-                if ("http://localhost:8080".equals(jwt.getIssuer())) {
-                    // Modify claims or handle issuer mismatch logic
-                    Map<String, Object> claims = jwt.getClaims();
-                    claims.put("iss", "http://keycloak:8080/realms/PatientSystem");
-
-                    // Return a new JWT with modified claims
-                    return Jwt.withTokenValue(token)
-                            .header("alg", "RS256")
-                            .claims(claimsMap -> claimsMap.putAll(claims))
-                            .build();
-                }
-
-                return jwt;
-            }
-        };
+        UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
+        source.registerCorsConfiguration("/**", configuration);
+        return source;
     }
 
 
