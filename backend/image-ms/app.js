@@ -53,6 +53,15 @@ async function verifyJWT(req, res, next) {
         next();
     });
 }
+
+// CORS setup with logging for debugging
+app.use((req, res, next) => {
+    console.log('Incoming Request:', req.method, req.url);
+    console.log('Request Headers:', req.headers); // Log incoming headers
+
+    next(); // Proceed to the next middleware
+});
+
 app.use(cors({
     origin: 'https://fullstack24-frontendnew.app.cloud.cbh.kth.se', // Set specific origin (not '*')
     methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
@@ -61,8 +70,24 @@ app.use(cors({
     credentials: true,  // Allow credentials (Authorization header, cookies)
 }));
 
-// Handle pre-flight OPTIONS requests
+// Log CORS-related headers on responses
+app.use((req, res, next) => {
+    const originalSend = res.send;
+
+    res.send = function (body) {
+        // Log the CORS headers being sent
+        console.log('Response Headers:', res.getHeaders());
+
+        // Call the original send method
+        return originalSend.call(this, body);
+    };
+
+    next();
+});
+
+// Handle pre-flight OPTIONS requests and log responses
 app.options('*', (req, res) => {
+    console.log('Handling OPTIONS request:', req.method, req.url);
     res.header('Access-Control-Allow-Origin', 'https://fullstack24-frontendnew.app.cloud.cbh.kth.se');
     res.header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
     res.header('Access-Control-Allow-Headers', 'Authorization, Content-Type');
@@ -70,13 +95,15 @@ app.options('*', (req, res) => {
     res.sendStatus(204); // No content
 });
 
-
-
+// Additional logging for OPTIONS pre-flight request
 app.use((req, res, next) => {
-    if (req.method === 'OPTIONS') return res.sendStatus(204);
+    if (req.method === 'OPTIONS') {
+        console.log('Pre-flight OPTIONS request received');
+    }
     next();
 });
 
+// Handle the rest of the routes
 app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 app.use('/api/image', verifyJWT, imageController);
 
