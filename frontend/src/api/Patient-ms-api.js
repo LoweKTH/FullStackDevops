@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const patientmsBaseURL = 'https://fullstack24-patient.app.cloud.cbh.kth.se';
+const patientmsBaseURL = 'https://fullstack24-patient.app.cloud.cbh.kth.se/api/patients';
 
 // Create an Axios instance
 const api = axios.create({
