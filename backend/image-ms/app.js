@@ -53,16 +53,15 @@ async function verifyJWT(req, res, next) {
         next();
     });
 }
-
 app.use(cors({
-    origin: 'https://fullstack24-frontendnew.app.cloud.cbh.kth.se',
+    origin: '*',  // Allow all origins
     methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
     allowedHeaders: ['Authorization', 'Content-Type'],
     exposedHeaders: ['Authorization'],
-    credentials: true
+    credentials: false  // Remove this or set to false for testing purposes
 }));
 
-app.options('*', cors());
+
 
 app.use((req, res, next) => {
     if (req.method === 'OPTIONS') return res.sendStatus(204);
