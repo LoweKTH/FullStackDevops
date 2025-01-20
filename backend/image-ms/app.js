@@ -54,12 +54,21 @@ async function verifyJWT(req, res, next) {
     });
 }
 app.use(cors({
-    origin: '*',  // Allow all origins
+    origin: 'https://fullstack24-frontendnew.app.cloud.cbh.kth.se', // Set specific origin (not '*')
     methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
     allowedHeaders: ['Authorization', 'Content-Type'],
     exposedHeaders: ['Authorization'],
-    credentials: false  // Remove this or set to false for testing purposes
+    credentials: true,  // Allow credentials (Authorization header, cookies)
 }));
+
+// Handle pre-flight OPTIONS requests
+app.options('*', (req, res) => {
+    res.header('Access-Control-Allow-Origin', 'https://fullstack24-frontendnew.app.cloud.cbh.kth.se');
+    res.header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
+    res.header('Access-Control-Allow-Headers', 'Authorization, Content-Type');
+    res.header('Access-Control-Allow-Credentials', 'true');  // Allow credentials
+    res.sendStatus(204); // No content
+});
 
 
 
