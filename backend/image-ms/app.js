@@ -46,18 +46,15 @@ async function verifyJWT(req, res, next) {
             return res.status(401).json({ message: 'Invalid or expired token', error: err.message });
         }
 
-        // Validate and adjust the issuer
-        const expectedIssuer = 'http://keycloak:8080/realms/PatientSystem';
-        if (decoded.iss === 'http://localhost:8080/realms/PatientSystem') {
-            decoded.iss = expectedIssuer;
-        }
-
+        // Validate the issuer
+        const expectedIssuer = 'https://fullstackkc.app.cloud.cbh.kth.se/realms/PatientSystem';
         if (decoded.iss !== expectedIssuer) {
             return res.status(401).json({
                 message: `Invalid token issuer. Expected: ${expectedIssuer}, Got: ${decoded.iss}`,
             });
         }
 
+        // Add custom claims or additional logic as needed
         const claims = {
             ...decoded,
             customClaim: 'Custom Value',
