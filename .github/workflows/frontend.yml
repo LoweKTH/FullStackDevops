@@ -19,8 +19,10 @@ jobs:
         uses: docker/login-action@v3
         with:
           registry: registry.cloud.cbh.kth.se
-          username: ${{ secrets.DOCKER_USERNAME_FRONTEND }}
-          password: ${{ secrets.DOCKER_PASSWORD_FRONTEND }}
+          username: robot$deploy-b23849a9-d97a-4b9e-bd06-a4bf766b28e1+fullstack24-frontendnew
+          password: e4fwBjwWVaiDLCigbQJGbgtJzxH7ykII
+          #username: ${{ secrets.DOCKER_USERNAME_FRONTEND }}
+          #password: ${{ secrets.DOCKER_PASSWORD_FRONTEND }}
 
       - name: Build and push Frontend
         uses: docker/build-push-action@v5
@@ -28,4 +30,5 @@ jobs:
           context: ./frontend
           file: ./frontend/Dockerfile
           push: true
-          tags: ${{ secrets.DOCKER_TAG_FRONTEND }}
+          tags: registry.cloud.cbh.kth.se/deploy-b23849a9-d97a-4b9e-bd06-a4bf766b28e1/fullstack24-frontendnew
+          #tags: ${{ secrets.DOCKER_TAG_FRONTEND }}
