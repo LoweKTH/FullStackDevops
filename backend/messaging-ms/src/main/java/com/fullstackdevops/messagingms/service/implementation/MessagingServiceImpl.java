@@ -128,7 +128,7 @@ public class MessagingServiceImpl implements MessagingService {
 
 
     private String getAdminToken() {
-        String url = "http://keycloak:8080/realms/PatientSystem/protocol/openid-connect/token";
+        String url = "https://fullstackkc.app.cloud.cbh.kth.se/realms/PatientSystem/protocol/openid-connect/token";
 
         // Create RestTemplate instance
         RestTemplate restTemplate = new RestTemplate();
@@ -159,7 +159,7 @@ public class MessagingServiceImpl implements MessagingService {
     }
 
     private String getUserUsername(String userId) {
-        String url = "http://keycloak:8080/admin/realms/PatientSystem/users/" + userId;
+        String url = "https://fullstackkc.app.cloud.cbh.kth.se/admin/realms/PatientSystem/users/" + userId;
 
         // Create RestTemplate instance
         RestTemplate restTemplate = new RestTemplate();

@@ -104,7 +104,7 @@ public class PatientServiceImpl implements PatientService{
             try {
                 // First, try to get the doctor details
                 ResponseEntity<DoctorDto> doctorResponse = restTemplate.exchange(
-                        "http://doctorstaff-ms:8080/api/doctors/" + note.getDoctorstaffId(),
+                        "https://fullstack24-doctorstaff.app.cloud.cbh.kth.se/api/doctors/" + note.getDoctorstaffId(),
                         HttpMethod.GET,
                         entity,
                         DoctorDto.class
@@ -121,7 +121,7 @@ public class PatientServiceImpl implements PatientService{
                     try {
                         // If no doctor is found, fetch the staff details
                         ResponseEntity<StaffDto> staffResponse = restTemplate.exchange(
-                                "http://doctorstaff-ms:8080/api/staff/" + note.getDoctorstaffId(),
+                                "https://fullstack24-doctorstaff.app.cloud.cbh.kth.se/api/staff/" + note.getDoctorstaffId(),
                                 HttpMethod.GET,
                                 entity,
                                 StaffDto.class
@@ -167,7 +167,7 @@ public class PatientServiceImpl implements PatientService{
             try {
                 // First, try to get the doctor details
                 ResponseEntity<DoctorDto> doctorResponse = restTemplate.exchange(
-                        "http://doctorstaff-ms:8080/api/doctors/" + diagnosis.getDoctorstaffId(),
+                        "https://fullstack24-doctorstaff.app.cloud.cbh.kth.se/api/doctors/" + diagnosis.getDoctorstaffId(),
                         HttpMethod.GET,
                         entity,
                         DoctorDto.class
@@ -188,7 +188,7 @@ public class PatientServiceImpl implements PatientService{
             try {
                 // If no doctor is found, fetch the staff details
                 ResponseEntity<StaffDto> staffResponse = restTemplate.exchange(
-                        "http://doctorstaff-ms:8080/api/staff/" + diagnosis.getDoctorstaffId(),
+                        "https://fullstack24-doctorstaff.app.cloud.cbh.kth.se/api/staff/" + diagnosis.getDoctorstaffId(),
                         HttpMethod.GET,
                         entity,
                         StaffDto.class
@@ -249,7 +249,7 @@ public class PatientServiceImpl implements PatientService{
 
         for (String doctorstaffId : doctorstaffIds) {
             // Fetch doctor information
-            String doctorUrl = "http://doctorstaff-ms:8080/api/doctors/" + doctorstaffId;
+            String doctorUrl = "https://fullstack24-doctorstaff.app.cloud.cbh.kth.se/api/doctors/" + doctorstaffId;
             try {
                 ResponseEntity<DoctorDto> doctorResponse = restTemplate.exchange(
                         doctorUrl,
@@ -265,7 +265,7 @@ public class PatientServiceImpl implements PatientService{
             }
 
             // Fetch staff information
-            String staffUrl = "http://doctorstaff-ms:8080/api/staff/" + doctorstaffId;
+            String staffUrl = "https://fullstack24-doctorstaff.app.cloud.cbh.kth.se/api/staff/" + doctorstaffId;
             try {
                 ResponseEntity<StaffDto> staffResponse = restTemplate.exchange(
                         staffUrl,

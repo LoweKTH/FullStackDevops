@@ -11,7 +11,7 @@ const app = express();
 
 // JWKS client setup to fetch keys from Keycloak
 const client = jwksClient({
-    jwksUri: 'http://keycloak:8080/realms/PatientSystem/protocol/openid-connect/certs'
+    jwksUri: 'https://fullstackkc.app.cloud.cbh.kth.se/realms/PatientSystem/protocol/openid-connect/certs'
 });
 
 process.env.NODE_TLS_REJECT_UNAUTHORIZED = '0';

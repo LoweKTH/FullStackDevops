@@ -1,6 +1,5 @@
 import React, {useEffect, useState} from "react";
 import { useNavigate } from "react-router-dom";
-import keycloak from "../keycloak";
 import {jwtDecode} from "jwt-decode";
 
 function Dashboard() {

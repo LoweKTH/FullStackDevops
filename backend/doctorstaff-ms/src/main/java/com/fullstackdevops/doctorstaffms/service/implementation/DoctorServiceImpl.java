@@ -59,7 +59,7 @@ public class DoctorServiceImpl implements DoctorService {
         // Create HttpEntity with headers
         HttpEntity<String> entity = new HttpEntity<>(headers);
 
-        String url = "http://patient-ms:8080/api/patients/" + doctorId + "/doctorstaffgetpatients";
+        String url = "https://fullstack24-patient.app.cloud.cbh.kth.se/api/patients/" + doctorId + "/doctorstaffgetpatients";
         ResponseEntity<List<String>> response = restTemplate.exchange(
                 url,
                 HttpMethod.GET,
@@ -70,7 +70,7 @@ public class DoctorServiceImpl implements DoctorService {
 
         List<PatientDto> patientDtos = new ArrayList<>();
         for (String patientId : patientIds) {
-            String patientUrl = "http://patient-ms:8080/api/patients/" + patientId;
+            String patientUrl = "https://fullstack24-patient.app.cloud.cbh.kth.se/api/patients/" + patientId;
 
             ResponseEntity<PatientDto> patientResponse = restTemplate.exchange(
                     patientUrl,
