@@ -40,10 +40,7 @@ public class SearchResource {
     @GET
     @Path("/patients")
     @Produces(MediaType.APPLICATION_JSON)
-    public Uni<Response> searchPatientsByDiagnosis(@QueryParam("diagnosis") String diagnosis) {
-        return searchService.searchPatientsByDiagnosis(diagnosis)
-                .onItem().invoke(patients -> System.out.println("Patients List: " + patients))
-                .map(patients -> Response.ok(patients).build());
+    public Uni<List<PatientDto>> searchPatientsByDiagnosis(@QueryParam("diagnosis") String diagnosis) {
+        return searchService.searchPatientsByDiagnosis(diagnosis);
     }
-
 }

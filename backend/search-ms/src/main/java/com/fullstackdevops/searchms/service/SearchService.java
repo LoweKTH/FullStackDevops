@@ -1,5 +1,6 @@
 package com.fullstackdevops.searchms.service;
 
+import com.fullstackdevops.searchms.config.DoctorMSClient;
 import com.fullstackdevops.searchms.config.PatientMsClient;
 import com.fullstackdevops.searchms.dto.DoctorDto;
 import com.fullstackdevops.searchms.dto.DoctorStaffDto;
@@ -20,9 +21,14 @@ import java.util.stream.Collectors;
 public class SearchService {
 
     private final PatientMsClient patientMsClient;
+    private final DoctorMSClient doctorMSClient;
 
     public SearchService(@RestClient PatientMsClient patientMsClient) {this.patientMsClient = patientMsClient;}
 
+    @Inject
+    public SearchService(DoctorMSClient doctorMSClient) {
+        this.doctorMSClient = doctorMSClient;
+    }
 
 
     public DoctorStaffDto searchDoctorsForPatient(Long patientId, String doctorName) {
@@ -42,4 +48,9 @@ public class SearchService {
     public Uni<List<PatientDto>> searchPatientsByDiagnosis(String diagnosis) {
         return patientMsClient.getPatientsByDiagnosis(diagnosis);
     }
+
+    public Uni<List<DoctorDto>> getDoctorsByName(String name){
+        return doctorMSClient.get("")
+    }
+
 }

@@ -5,18 +5,16 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="09d6a3b5-9b2e-4587-b1b1-5156eb6a8f42" name="Changes" comment="quarkus">
+      <change afterPath="$PROJECT_DIR$/search-ms/src/main/java/com/fullstackdevops/searchms/dto/DoctorWithPatientsDto.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/patient-ms/src/main/java/com/fullstackdevops/patientms/model/Patient.java" beforeDir="false" afterPath="$PROJECT_DIR$/patient-ms/src/main/java/com/fullstackdevops/patientms/model/Patient.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/patient-ms/src/main/java/com/fullstackdevops/patientms/service/implementation/PatientServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/patient-ms/src/main/java/com/fullstackdevops/patientms/service/implementation/PatientServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/doctorstaff-ms/src/main/java/com/fullstackdevops/doctorstaffms/controller/DoctorController.java" beforeDir="false" afterPath="$PROJECT_DIR$/doctorstaff-ms/src/main/java/com/fullstackdevops/doctorstaffms/controller/DoctorController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/doctorstaff-ms/src/main/java/com/fullstackdevops/doctorstaffms/repository/DoctorRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/doctorstaff-ms/src/main/java/com/fullstackdevops/doctorstaffms/repository/DoctorRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/doctorstaff-ms/src/main/java/com/fullstackdevops/doctorstaffms/service/DoctorService.java" beforeDir="false" afterPath="$PROJECT_DIR$/doctorstaff-ms/src/main/java/com/fullstackdevops/doctorstaffms/service/DoctorService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/search-ms/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/search-ms/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/search-ms/src/main/java/com/fullstackdevops/searchms/config/PatientMsClient.java" beforeDir="false" afterPath="$PROJECT_DIR$/search-ms/src/main/java/com/fullstackdevops/searchms/config/PatientMsClient.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/search-ms/src/main/java/com/fullstackdevops/searchms/controller/SearchController.java" beforeDir="false" afterPath="$PROJECT_DIR$/search-ms/src/main/java/com/fullstackdevops/searchms/controller/SearchResource.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/search-ms/src/main/java/com/fullstackdevops/searchms/dto/DoctorStaffDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/search-ms/src/main/java/com/fullstackdevops/searchms/dto/DoctorStaffDto.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/search-ms/src/main/java/com/fullstackdevops/searchms/dto/PatientDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/search-ms/src/main/java/com/fullstackdevops/searchms/dto/PatientDto.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/search-ms/src/main/java/com/fullstackdevops/searchms/config/DoctorMSClient.java" beforeDir="false" afterPath="$PROJECT_DIR$/search-ms/src/main/java/com/fullstackdevops/searchms/config/DoctorMSClient.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/search-ms/src/main/java/com/fullstackdevops/searchms/controller/SearchResource.java" beforeDir="false" afterPath="$PROJECT_DIR$/search-ms/src/main/java/com/fullstackdevops/searchms/controller/SearchResource.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/search-ms/src/main/java/com/fullstackdevops/searchms/service/SearchService.java" beforeDir="false" afterPath="$PROJECT_DIR$/search-ms/src/main/java/com/fullstackdevops/searchms/service/SearchService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/search-ms/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/search-ms/src/main/resources/application.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../frontend/src/api/Patient-ms-api.js" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/src/api/Patient-ms-api.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../frontend/src/api/Search-ms-api.js" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/src/api/Search-ms-api.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../frontend/src/components/SearchCompForDoctors.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/src/components/SearchCompForDoctors.jsx" afterDir="false" />
     </list>
     <list id="79177b7e-e8af-49c6-aa54-aba545e8c75b" name="Changes by benny" comment="Changes by benny" />
@@ -148,7 +146,7 @@
       </set>
     </option>
   </component>
-  <component name="RunManager" selected="Docker.docker-compose.yaml.patient-ms: Compose Deployment">
+  <component name="RunManager" selected="Docker.docker-compose.yaml: Compose Deployment">
     <configuration name="search-ms" type="QuarkusRunConfigurationType" factoryName="Quarkus" nameIsGenerated="true">
       <module name="search-ms" />
       <QsMavenRunConfiguration>
@@ -325,9 +323,9 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Docker.docker-compose.yaml: Compose Deployment" />
         <item itemvalue="Docker.docker-compose.yaml.patient-ms: Compose Deployment" />
         <item itemvalue="Docker.docker-compose.yaml.db: Compose Deployment" />
-        <item itemvalue="Docker.docker-compose.yaml: Compose Deployment" />
         <item itemvalue="Docker.docker-compose.yaml.search-ms: Compose Deployment" />
         <item itemvalue="Docker.docker-compose.yaml.messaging-ms: Compose Deployment" />
       </list>
@@ -361,7 +359,8 @@
       <workItem from="1733683804682" duration="3930000" />
       <workItem from="1733691024902" duration="1664000" />
       <workItem from="1733693345762" duration="5192000" />
-      <workItem from="1736010646905" duration="50701000" />
+      <workItem from="1736010646905" duration="61138000" />
+      <workItem from="1737295179780" duration="7339000" />
     </task>
     <task id="LOCAL-00001" summary="#2">
       <created>1730889193106</created>
@@ -401,7 +400,15 @@
       <option name="project" value="LOCAL" />
       <updated>1736197154544</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="quarkus">
+      <option name="closed" value="true" />
+      <created>1736210324754</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1736210324754</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">

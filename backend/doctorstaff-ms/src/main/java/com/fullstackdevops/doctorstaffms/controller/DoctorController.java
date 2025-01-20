@@ -29,6 +29,14 @@ public class DoctorController {
         return ResponseEntity.ok(doctor);
     }
 
+    @GetMapping("/{doctorId}")
+    public ResponseEntity<DoctorDto> getDoctorById(@PathVariable String name){
+        DoctorDto doctor = doctorService.getDoctorById(doctorId);
+        return ResponseEntity.ok(doctor);
+    }
+
+
+
     @GetMapping("/{doctorId}/patients")
     public ResponseEntity<List<PatientDto>> getPatientsForDoctor(@PathVariable Long doctorId){
         List<PatientDto> patients = doctorService.getPatientsForDoctor(doctorId);
