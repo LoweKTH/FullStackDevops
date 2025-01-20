@@ -74,10 +74,10 @@ public class SecurityConfig {
         };
     }
 
-    @Bean
+    /*@Bean
     CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration configuration = new CorsConfiguration();
-        configuration.setAllowedOrigins(Arrays.asList("https://fullstack24-frontendnew.app.cloud.cbh.kth.se")); // Add your frontend URL
+        configuration.setAllowedOrigins(Arrays.asList("http://localhost:3000")); // Add your frontend URL
         configuration.setAllowedMethods(Arrays.asList("GET", "POST", "PUT", "DELETE", "OPTIONS"));
         configuration.setAllowedHeaders(Arrays.asList("Authorization", "Content-Type"));
         configuration.setExposedHeaders(Arrays.asList("Authorization"));
@@ -86,5 +86,5 @@ public class SecurityConfig {
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
         source.registerCorsConfiguration("/**", configuration);
         return source;
-    }
+    }*/
 }

@@ -12,7 +12,7 @@ import java.util.List;
 
 @RestController
 @AllArgsConstructor
-@CrossOrigin("*")
+@CrossOrigin(origins = "https://fullstack24-frontendnew.app.cloud.cbh.kth.se", allowCredentials = "true")
 @RequestMapping("/api/doctors")
 public class DoctorController {
 
