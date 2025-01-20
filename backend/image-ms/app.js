@@ -53,16 +53,24 @@ async function verifyJWT(req, res, next) {
         next();
     });
 }
-
 app.use(cors({
-    origin: 'https://fullstack24-frontendnew.app.cloud.cbh.kth.se',
+    origin: 'https://fullstack24-frontendnew.app.cloud.cbh.kth.se', // Set specific origin (not '*')
     methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
     allowedHeaders: ['Authorization', 'Content-Type'],
     exposedHeaders: ['Authorization'],
-    credentials: true
+    credentials: true,  // Allow credentials (Authorization header, cookies)
 }));
 
-app.options('*', cors());
+// Handle pre-flight OPTIONS requests
+app.options('*', (req, res) => {
+    res.header('Access-Control-Allow-Origin', 'https://fullstack24-frontendnew.app.cloud.cbh.kth.se');
+    res.header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
+    res.header('Access-Control-Allow-Headers', 'Authorization, Content-Type');
+    res.header('Access-Control-Allow-Credentials', 'true');  // Allow credentials
+    res.sendStatus(204); // No content
+});
+
+
 
 app.use((req, res, next) => {
     if (req.method === 'OPTIONS') return res.sendStatus(204);
