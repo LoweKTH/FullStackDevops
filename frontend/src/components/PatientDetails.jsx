@@ -45,7 +45,7 @@ const PatientDetails = () => {
             const response = await retrieveImagesByUserId(patient.userId);
 
             const imagesWithFullPath = response.map(image => {
-                image.imagePath = `http://localhost:3002${image.imagePath}`;
+                image.imagePath = `https://fullstack24-image.app.cloud.cbh.kth.se${image.imagePath}`;
                 return image;
             });
 

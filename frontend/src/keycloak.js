@@ -2,7 +2,7 @@ import Keycloak from "keycloak-js";
 
 // Initialize the Keycloak instance
 const keycloak = new Keycloak({
-    url: "http://localhost:8080", // Keycloak server URL
+    url: "https://fullstackkc.app.cloud.cbh.kth.se", // Keycloak server URL
     realm: "PatientSystem",    // Keycloak realm name
     clientId: "user-ms", // Keycloak client ID
 });

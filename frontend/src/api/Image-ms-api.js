@@ -2,7 +2,7 @@ import axios from "axios";
 
 // Create an Axios instance for the image API
 const imageApi = axios.create({
-    baseURL: "http://localhost:3002/api/image",
+    baseURL: "https://fullstack24-image.app.cloud.cbh.kth.se",
     headers: {
         "Content-Type": "application/json",
     },

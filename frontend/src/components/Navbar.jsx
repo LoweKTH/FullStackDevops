@@ -25,9 +25,9 @@ const Navbar = () => {
 
     const handleLogout = () => {
         if (keycloak) {
-            const redirectUri = "http://localhost:3000";
+            const redirectUri = "https://fullstack24-frontend.app.cloud.cbh.kth.se";
 
-            const logoutUrl = `http://localhost:8080/realms/PatientSystem/protocol/openid-connect/logout?client_id=user-ms&post_logout_redirect_uri=${encodeURIComponent(redirectUri)}`;
+            const logoutUrl = `https://fullstackkc.app.cloud.cbh.kth.se/realms/PatientSystem/protocol/openid-connect/logout?client_id=user-ms&post_logout_redirect_uri=${encodeURIComponent(redirectUri)}`;
             localStorage.removeItem("role");
             localStorage.removeItem("token");
             localStorage.removeItem("userId");

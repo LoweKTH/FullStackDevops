@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const messagingBaseURL = 'http://localhost:8084/api/messages'; // Update this to your messaging API URL
+const messagingBaseURL = 'https://fullstack24-messaging.app.cloud.cbh.kth.se'; // Update this to your messaging API URL
 
 // Create an Axios instance
 const api = axios.create({

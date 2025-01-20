@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const staffmsBaseUrl = 'http://localhost:8083/api/staff';
+const staffmsBaseUrl = 'https://fullstack24-doctorstaff.app.cloud.cbh.kth.se';
 
 const api = axios.create({
     baseURL: staffmsBaseUrl,

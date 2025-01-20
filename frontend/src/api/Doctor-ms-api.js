@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const doctormsBaseURL = 'http://localhost:8083/api/doctors';
+const doctormsBaseURL = 'https://fullstack24-doctorstaff.app.cloud.cbh.kth.se';
 
 // Create an Axios instance
 const api = axios.create({
