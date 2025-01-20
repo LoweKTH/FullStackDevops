@@ -3,7 +3,6 @@ const cors = require('cors');
 const path = require('path');
 const imageController = require('./controller/ImageController');
 const { sequelize } = require('./utils/db');
-const Image = require('./model/Image');
 const jwt = require('jsonwebtoken');
 const jwksClient = require('jwks-rsa');
 
