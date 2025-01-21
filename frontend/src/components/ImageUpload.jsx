@@ -19,9 +19,11 @@ const ImageUpload = () => {
         setImage(selectedImage);
 
         if (selectedImage) {
-            const previewUrl = URL.createObjectURL(selectedImage);
-            setImagePreview(previewUrl);
+            const reader = new FileReader();
+            reader.onload = () => setImagePreview(reader.result); // Show preview as base64
+            reader.readAsDataURL(selectedImage);
         }
+
     };
 
     const handleTitleChange = (event) => {

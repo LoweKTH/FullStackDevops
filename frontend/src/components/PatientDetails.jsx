@@ -44,13 +44,13 @@ const PatientDetails = () => {
         try {
             const response = await retrieveImagesByUserId(patient.userId);
 
-            const imagesWithFullPath = response.map(image => {
-                image.imagePath = `https://b23849a9-d97a-4b9e-bd06-a4bf766b28e1.storage.cloud.cbh.kth.se/files${image.imagePath}`;
-                console.log(image.imagePath);
-                return image;
-            });
+            // Convert imageBlob to a usable image URL (if it is base64 data)
+            const imagesWithUrls = response.map((image) => ({
+                ...image,
+                imageUrl: `data:image/png;base64,${image.imageBlob}`, // Use the blob to construct the image URL
+            }));
 
-            setImages(imagesWithFullPath);
+            setImages(imagesWithUrls);
             setModalTitle("Patient Images");
             setIsModalOpen(true);
         } catch (err) {
@@ -113,18 +113,16 @@ const PatientDetails = () => {
                                         images.map((image, index) => (
                                             <div key={index} className="image-item">
                                                 <img
-                                                    src={image.imagePath}
-                                                    alt=""
+                                                    src={image.imageUrl}
+                                                    alt={image.title || "Patient Image"}
                                                     className="patient-image"
                                                 />
                                                 <div className="image-details">
                                                     <h4>{image.title}</h4>
                                                     <p><strong>Description:</strong> {image.description}</p>
-                                                    <p><strong>Uploaded
-                                                        At:</strong> {new Date(image.uploadedAt).toLocaleString()}</p>
+                                                    <p><strong>Uploaded At:</strong> {new Date(image.uploadedAt).toLocaleString()}</p>
                                                     <button
-                                                        onClick={() => handleEditClick(image.imagePath,image.id)}
-                                                      //  className="message-btn"
+                                                        onClick={() => handleEditClick(image.imageUrl, image.id)} // Pass the URL and ID for editing
                                                     >
                                                         Edit
                                                     </button>

@@ -5,21 +5,16 @@ const Image  = require('../model/Image')
 console.log('Image Model:', Image);
 
 const uploadImage = async (uploadedFile, userId, title, description) => {
-    const fileNameWithoutExtension = path.parse(uploadedFile.originalname).name;
-    const filePath = path.join(__dirname, '../uploads', `${fileNameWithoutExtension}.png`);
-    const relativePath = `/uploads/${fileNameWithoutExtension}.png`;
-
-    console.log('Uploaded file:', uploadedFile);
-    console.log('User ID:', userId);
-
-
     try {
+        console.log('Uploaded file:', uploadedFile);
+        console.log('User ID:', userId);
 
-        await sharp(uploadedFile.path)
+        // Process image to buffer using sharp
+        const imageBuffer = await sharp(uploadedFile.path)
             .toFormat('png')
-            .toFile(filePath);
+            .toBuffer();
 
-
+        // Remove the temporary file
         fs.unlinkSync(uploadedFile.path);
 
         console.log('Creating image...');
@@ -27,48 +22,50 @@ const uploadImage = async (uploadedFile, userId, title, description) => {
             userId,
             title,
             description,
-            imagePath: relativePath,
+            imageBlob: imageBuffer, // Store the buffer in the database
         });
 
         console.log('Image metadata saved:', image.toJSON());
 
-
-        return `/uploads/${fileNameWithoutExtension}.png`;
+        return 'Image uploaded successfully';
     } catch (error) {
         console.error('Error during image processing:', error);
         throw new Error('Error processing image');
     }
 };
 
+
 const editImage = async (uploadedFile, imageId) => {
     try {
+        // Process the new image to a buffer
+        const imageBuffer = await sharp(uploadedFile.path)
+            .toFormat('png')
+            .toBuffer();
 
-
-        const filePath = path.join(__dirname, '../uploads', `${imageId}.png`);
-
-        await sharp(uploadedFile.path)
-            .toFile(filePath);
+        // Remove the temporary file
+        fs.unlinkSync(uploadedFile.path);
 
         // Update the image record in the database
         const updatedImage = await Image.update(
-            { imagePath: `/uploads/${imageId}.png` },
+            { imageBlob: imageBuffer },
             { where: { id: imageId } }
         );
 
-        return `/uploads/${imageId}.png`;
+        console.log('Image updated successfully:', updatedImage);
+        return 'Image updated successfully';
     } catch (error) {
         console.error('Error during image editing:', error);
         throw new Error('Error editing image');
     }
 };
 
+
 const retrieveImagesByUserId = async (userId) => {
     try {
         const images = await Image.findAll({
             where: { userId },
-            attributes: ['id', 'title', 'description', 'imagePath', 'uploadedAt'],
+            attributes: ['id', 'title', 'description', 'imageBlob', 'uploadedAt'],
         });
-
 
         if (!images || images.length === 0) {
             return [];
@@ -78,7 +75,7 @@ const retrieveImagesByUserId = async (userId) => {
             id: image.id,
             title: image.title,
             description: image.description,
-            imagePath: image.imagePath,
+            imageBlob: image.imageBlob.toString('base64'), // Convert to base64 for easier transmission
             uploadedAt: image.uploadedAt,
         }));
     } catch (error) {
@@ -86,5 +83,6 @@ const retrieveImagesByUserId = async (userId) => {
         throw new Error('Error retrieving images');
     }
 };
+
 
 module.exports = { uploadImage, retrieveImagesByUserId, editImage };
