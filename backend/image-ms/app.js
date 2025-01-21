@@ -7,6 +7,7 @@ const jwt = require('jsonwebtoken');
 const jwksClient = require('jwks-rsa');
 
 const app = express();
+
 process.env.NODE_TLS_REJECT_UNAUTHORIZED = '0';
 
 const client = jwksClient({
@@ -53,6 +54,8 @@ async function verifyJWT(req, res, next) {
         next();
     });
 }
+app.use(express.json({ limit: '50mb' })); // Adjust to match your multer fileSize limit
+app.use(express.urlencoded({ extended: true, limit: '50mb' }));
 
 // CORS setup with logging for debugging
 app.use((req, res, next) => {
