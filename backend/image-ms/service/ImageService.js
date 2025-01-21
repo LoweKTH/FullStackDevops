@@ -3,56 +3,55 @@ const path = require('path');
 const fs = require('fs');
 const Image  = require('../model/Image')
 console.log('Image Model:', Image);
+const db = require('../utils/db');
 
-const uploadImage = async (uploadedFile, userId, title, description) => {
+const uploadImage = async (file, userId, title, description) => {
     try {
-        console.log('Uploaded file:', uploadedFile);
-        console.log('User ID:', userId);
+        const imageBuffer = fs.readFileSync(file.path);
 
-        // Process image to buffer using sharp
-        const imageBuffer = await sharp(uploadedFile.path)
-            .toFormat('png')
-            .toBuffer();
-
-        // Remove the temporary file
-        fs.unlinkSync(uploadedFile.path);
-
-        console.log('Creating image...');
         const image = await Image.create({
             userId,
             title,
             description,
-            imageBlob: imageBuffer, // Store the buffer in the database
+            imageBlob: imageBuffer,
         });
 
-        console.log('Image metadata saved:', image.toJSON());
+        fs.unlinkSync(file.path); // Clean up the uploaded file from the server
 
-        return 'Image uploaded successfully';
+        return image;
     } catch (error) {
-        console.error('Error during image processing:', error);
-        throw new Error('Error processing image');
+        console.error("Error saving image:", error);
+        throw new Error("Failed to upload image.");
     }
 };
 
-
-const editImage = async (uploadedFile, imageId) => {
+const editImage = async (uploadedFile, imageId, title, description) => {
     try {
-        // Process the new image to a buffer
+        // Process the new image to a buffer (ensure it's a PNG)
         const imageBuffer = await sharp(uploadedFile.path)
             .toFormat('png')
             .toBuffer();
 
-        // Remove the temporary file
+        // Remove the temporary uploaded file
         fs.unlinkSync(uploadedFile.path);
 
-        // Update the image record in the database
-        const updatedImage = await Image.update(
-            { imageBlob: imageBuffer },
-            { where: { id: imageId } }
-        );
+        // Find the image record to check if it exists
+        const existingImage = await Image.findByPk(imageId);
+        if (!existingImage) {
+            throw new Error('Image not found.');
+        }
+
+        // Update the image metadata and/or the image blob in the database
+        const updatedImage = await existingImage.update({
+            imageBlob: imageBuffer, // Update the image blob
+            title: title || existingImage.title, // Update title if provided
+            description: description || existingImage.description, // Update description if provided
+        });
 
         console.log('Image updated successfully:', updatedImage);
-        return 'Image updated successfully';
+
+        // Return the updated image metadata (including image ID, title, description, and path)
+        return updatedImage;
     } catch (error) {
         console.error('Error during image editing:', error);
         throw new Error('Error editing image');
@@ -60,29 +59,28 @@ const editImage = async (uploadedFile, imageId) => {
 };
 
 
+
 const retrieveImagesByUserId = async (userId) => {
     try {
         const images = await Image.findAll({
             where: { userId },
-            attributes: ['id', 'title', 'description', 'imageBlob', 'uploadedAt'],
+            attributes: ['id', 'title', 'description', 'uploadedAt', 'imageBlob'],
         });
-
-        if (!images || images.length === 0) {
-            return [];
-        }
 
         return images.map((image) => ({
             id: image.id,
             title: image.title,
             description: image.description,
-            imageBlob: image.imageBlob.toString('base64'), // Convert to base64 for easier transmission
             uploadedAt: image.uploadedAt,
+            imageBlob: image.imageBlob.toString('base64'), // Convert BLOB to base64
         }));
     } catch (error) {
-        console.error('Error retrieving images by userId:', error);
-        throw new Error('Error retrieving images');
+        console.error("Error retrieving images:", error);
+        throw new Error("Failed to fetch images.");
     }
 };
+
+
 
 
 module.exports = { uploadImage, retrieveImagesByUserId, editImage };
