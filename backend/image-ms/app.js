@@ -5,11 +5,11 @@ const imageController = require('./controller/ImageController');
 const { sequelize } = require('./utils/db');
 const jwt = require('jsonwebtoken');
 const jwksClient = require('jwks-rsa');
-
+var bodyParser = require("body-parser");
 const app = express();
 
 
-
+app.use(bodyParser.json({limit: '1000kb'}));
 app.use(express.json({ limit: '100mb' })); // Adjust to match your multer fileSize limit
 app.use(express.urlencoded({ extended: true, limit: '100mb' }));
 process.env.NODE_TLS_REJECT_UNAUTHORIZED = '0';
