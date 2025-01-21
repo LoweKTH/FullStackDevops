@@ -116,6 +116,8 @@ const ImageEdit = () => {
 
         // Create a file from the Blob
         const file = new File([blob], "edited-image.png", { type: "image/png" });
+        console.log(`Blob size: ${blob.size} bytes`);
+
 
         const formData = new FormData();
         formData.append("image", file);
