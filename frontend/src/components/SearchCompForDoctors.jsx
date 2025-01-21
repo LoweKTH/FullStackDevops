@@ -16,8 +16,7 @@ const SearchCompForDoctors = () => {
         try {
             setLoading(true);
             const response = await searchPatientsByDiagnosis(searchTerm);
-            console.log("API Response:", response?.data); // Debug API response
-            setPatients(response.data);
+            setPatients(response);
         } catch (error) {
             console.error("Error fetching patients:", error);
             setError("Failed to fetch patients. Please try again.");
