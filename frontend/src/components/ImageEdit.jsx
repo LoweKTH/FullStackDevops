@@ -109,26 +109,30 @@ const ImageEdit = () => {
             format: "png",
             quality: 1,
         });
-
+        // Convert the dataURL to a Blob (this is similar to the process of converting to a file)
         const blob = await fetch(dataURL)
-            .then((res) => res.blob())
-            .catch((err) => console.error("Error converting to Blob:", err));
+            .then(res => res.blob())
+            .catch(err => console.error("Error converting to Blob:", err));
+
+        // Create a file from the Blob
+        const file = new File([blob], "edited-image.png", { type: "image/png" });
 
         const formData = new FormData();
-        formData.append("image", blob, "edited-image.png");
+        formData.append("image", file);
         formData.append("imageId", imageId);
+
 
         try {
             await updateImage(formData);
 
             alert("Image updated successfully!");
             navigate(-1);
+
         } catch (err) {
             console.error("Error updating image:", err);
             alert("Error updating image.");
         }
     };
-
 
     return (
         <div className="image-edit-container">

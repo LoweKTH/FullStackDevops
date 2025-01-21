@@ -19,8 +19,8 @@ const Image = sequelize.define('Image', {
         type: DataTypes.STRING,
         allowNull: false,
     },
-    imageBlob: {
-        type: DataTypes.BLOB('long'),
+    imagePath: {
+        type: DataTypes.STRING,
         allowNull: false,
     },
     uploadedAt: {

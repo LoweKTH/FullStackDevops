@@ -1,20 +1,21 @@
 const express = require('express');
 const multer = require('multer');
-const { uploadImage, retrieveImagesByUserId, editImage } = require('../service/ImageService');
-
+const { uploadImage } = require('../service/ImageService');
+const { retrieveImagesByUserId } = require('../service/ImageService');
+const { editImage } = require('../service/ImageService');
 
 const upload = multer({
     dest: 'uploads/',
     limits: {
-        fileSize: 50 * 1024 * 1024, // 50mb
-    },
+        fileSize: 50 * 1024 * 1024 // 50mb
+    }
 });
 
 const router = express.Router();
 
-// Upload a new image
+
 router.post('/upload', upload.single('image'), async (req, res) => {
-    const { userId, title, description } = req.body;
+    const {userId,title,description} = req.body;
     const uploadedFile = req.file;
 
     if (!uploadedFile) {
@@ -22,37 +23,33 @@ router.post('/upload', upload.single('image'), async (req, res) => {
     }
 
     try {
-        // Call the uploadImage function to process and store the image as a blob
-        await uploadImage(uploadedFile, userId, title, description);
-
-        res.status(200).json({ message: 'Image uploaded successfully' });
+        const imagePath = await uploadImage(uploadedFile, userId, title, description);
+        res.status(200).json({ message: 'Image uploaded successfully', path: imagePath });
     } catch (error) {
-        console.error('Error uploading image:', error);
+        console.error(error);
         res.status(500).json({ message: 'Error uploading image.' });
     }
 });
 
-// Edit an existing image
-router.post('/edit', upload.single('image'), async (req, res) => {
+router.post('/edit', upload.single('image'),async (req, res) => {
     const { imageId } = req.body;
     const uploadedFile = req.file;
-
+    console.log("Uploaded file field name:", req.file);
     if (!uploadedFile || !imageId) {
-        return res.status(400).json({ message: 'No image file or image ID provided.' });
+        return res.status(400).json({ message: 'No image data or image ID provided.' });
     }
 
-    try {
-        // Call the editImage function to update the blob in the database
-        await editImage(uploadedFile, imageId);
+    //const imagePath = await editImage(imageData,imageId);
 
-        res.status(200).json({ message: 'Image updated successfully' });
+    try {
+        const imagePath = await editImage(uploadedFile,imageId);
+        res.status(200).json({ message: 'Image uploaded successfully', path: imagePath });
     } catch (error) {
-        console.error('Error editing image:', error);
-        res.status(500).json({ message: 'Error editing image.' });
+        console.error(error);
+        res.status(500).json({ message: 'Error uploading image.' });
     }
 });
 
-// Retrieve all images for a user
 router.get('/user/:userId', async (req, res) => {
     const { userId } = req.params;
 
@@ -63,7 +60,6 @@ router.get('/user/:userId', async (req, res) => {
             return res.status(404).json({ message: 'No images found for this user.' });
         }
 
-        // Respond with the retrieved images
         res.status(200).json(images);
     } catch (error) {
         console.error('Error retrieving images:', error);
