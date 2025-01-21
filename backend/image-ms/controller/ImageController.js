@@ -6,9 +6,9 @@ const { editImage } = require('../service/ImageService');
 
 const upload = multer({
     dest: 'uploads/',
-    limits: {
+    /*limits: {
         fileSize: 50 * 1024 * 1024 // 50mb
-    }
+    }*/
 });
 
 const router = express.Router();
