@@ -33,8 +33,8 @@ const PostRegistration = () => {
             console.log(userInfo);
             // Construct the PatientDto
             const patientDto = {
-                firstname: userInfo.family_name,
-                lastname: userInfo.given_name,
+                firstname: userInfo.given_name,
+                lastname: userInfo.family_name,
                 email: userInfo.email,
                 socialSecurityNumber: userInfo.socialsecuritynumber,
                 phoneNumber: userInfo.phonenumber,
@@ -56,8 +56,8 @@ const PostRegistration = () => {
             console.log(userInfo);
             // Construct the PatientDto
             const doctorDto = {
-                firstname: userInfo.family_name,
-                lastname: userInfo.given_name,
+                firstname: userInfo.given_name,
+                lastname: userInfo.family_name,
                 email: userInfo.email,
                 socialSecurityNumber: userInfo.socialsecuritynumber,
                 phoneNumber: userInfo.phonenumber,
@@ -78,8 +78,8 @@ const PostRegistration = () => {
             console.log(userInfo);
             // Construct the PatientDto
             const staffDto = {
-                firstname: userInfo.family_name,
-                lastname: userInfo.given_name,
+                firstname: userInfo.given_name,
+                lastname: userInfo.family_name,
                 email: userInfo.email,
                 socialSecurityNumber: userInfo.socialsecuritynumber,
                 phoneNumber: userInfo.phonenumber,
