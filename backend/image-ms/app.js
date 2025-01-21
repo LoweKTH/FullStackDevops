@@ -88,20 +88,7 @@ app.use((req, res, next) => {
     next();
 });
 
-app.use((req, res, next) => {
-    console.log('Request body size:', req.headers['content-length']);
-    next();
-});
 
-// Handle pre-flight OPTIONS requests and log responses
-app.options('*', (req, res) => {
-    console.log('Handling OPTIONS request:', req.method, req.url);
-    res.header('Access-Control-Allow-Origin', 'https://fullstack24-frontendnew.app.cloud.cbh.kth.se');
-    res.header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
-    res.header('Access-Control-Allow-Headers', 'Authorization, Content-Type');
-    res.header('Access-Control-Allow-Credentials', 'true');  // Allow credentials
-    res.sendStatus(204); // No content
-});
 
 // Additional logging for OPTIONS pre-flight request
 app.use((req, res, next) => {
