@@ -3,7 +3,7 @@ name: Patient
 on:
   push:
     branches:
-      - kthcloudtest
+      - kthcloudtesta
 
 jobs:
 

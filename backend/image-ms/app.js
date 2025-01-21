@@ -88,6 +88,11 @@ app.use((req, res, next) => {
     next();
 });
 
+app.use((req, res, next) => {
+    console.log('Request body size:', req.headers['content-length']);
+    next();
+});
+
 // Handle pre-flight OPTIONS requests and log responses
 app.options('*', (req, res) => {
     console.log('Handling OPTIONS request:', req.method, req.url);
