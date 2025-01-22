@@ -62,6 +62,7 @@ public class SecurityConfig {
 
             System.out.println("Parsed roles: " + clientRoles);
             return clientRoles.stream()
+                    .map(role -> "ROLE_" + role) // Add prefix
                     .map(SimpleGrantedAuthority::new)
                     .collect(Collectors.toList());
         };
