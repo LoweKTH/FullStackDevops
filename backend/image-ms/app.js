@@ -10,7 +10,7 @@ const app = express();
 
 
 app.use(bodyParser.json({limit: '1000kb'}));
-app.use(express.json({ limit: '100mb' })); // Adjust to match your multer fileSize limit
+app.use(express.json({ limit: '100mb' }));
 app.use(express.urlencoded({ extended: true, limit: '100mb' }));
 process.env.NODE_TLS_REJECT_UNAUTHORIZED = '0';
 
@@ -63,17 +63,17 @@ async function verifyJWT(req, res, next) {
 // CORS setup with logging for debugging
 app.use((req, res, next) => {
     console.log('Incoming Request:', req.method, req.url);
-    console.log('Request Headers:', req.headers); // Log incoming headers
+    console.log('Request Headers:', req.headers);
 
-    next(); // Proceed to the next middleware
+    next();
 });
 
 app.use(cors({
-    origin: 'https://fullstack24-frontendnew.app.cloud.cbh.kth.se', // Set specific origin (not '*')
+    origin: 'https://fullstack24-frontendnew.app.cloud.cbh.kth.se',
     methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
     allowedHeaders: ['Authorization', 'Content-Type'],
     exposedHeaders: ['Authorization'],
-    credentials: true,  // Allow credentials (Authorization header, cookies)
+    credentials: true,
 }));
 
 // Log CORS-related headers on responses
@@ -81,10 +81,10 @@ app.use((req, res, next) => {
     const originalSend = res.send;
 
     res.send = function (body) {
-        // Log the CORS headers being sent
+
         console.log('Response Headers:', res.getHeaders());
 
-        // Call the original send method
+
         return originalSend.call(this, body);
     };
 
@@ -101,7 +101,7 @@ app.use((req, res, next) => {
     next();
 });
 
-// Handle the rest of the routes
+
 app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 app.use('/api/image', verifyJWT, imageController);
 

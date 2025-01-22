@@ -87,22 +87,20 @@ public class PatientServiceImpl implements PatientService{
     public List<NoteDto> getNotesForPatient(String patientId) {
         List<Note> notes = noteRepository.findByPatientId(patientId);
 
-        // Initialize the list of NoteDto objects
         List<NoteDto> noteDtos = new ArrayList<>();
 
-        // Get the JWT token from the security context
-        String token = getJwtTokenFromSecurityContext(); // Assumes this method retrieves the token
+        String token = getJwtTokenFromSecurityContext();
         System.out.println("TOKEN:    "+token);
-        // Set the authorization header
+
         HttpHeaders headers = new HttpHeaders();
         headers.set("Authorization", "Bearer " + token);
 
-        // Create HttpEntity with headers
+
         HttpEntity<String> entity = new HttpEntity<>(headers);
         System.out.println(notes);
         for (Note note : notes) {
             try {
-                // First, try to get the doctor details
+
                 ResponseEntity<DoctorDto> doctorResponse = restTemplate.exchange(
                         "https://fullstack24-doctorstaff.app.cloud.cbh.kth.se/api/doctors/" + note.getDoctorstaffId(),
                         HttpMethod.GET,
@@ -119,7 +117,7 @@ public class PatientServiceImpl implements PatientService{
                     noteDtos.add(noteDto);
                 }else{
                     try {
-                        // If no doctor is found, fetch the staff details
+
                         ResponseEntity<StaffDto> staffResponse = restTemplate.exchange(
                                 "https://fullstack24-doctorstaff.app.cloud.cbh.kth.se/api/staff/" + note.getDoctorstaffId(),
                                 HttpMethod.GET,
@@ -135,12 +133,12 @@ public class PatientServiceImpl implements PatientService{
                             noteDtos.add(noteDto);
                         }
                     } catch (Exception ex) {
-                        // Log or handle the exception if needed
+
                     }
 
                 }
             } catch (Exception ex) {
-                // Log or handle the exception if needed
+
             }
 
 
@@ -155,9 +153,9 @@ public class PatientServiceImpl implements PatientService{
         List<Diagnosis> diagnoses = diagnosisRepository.findByPatientId(patientId);
         List<DiagnosisDto> diagnosisDtos = new ArrayList<>();
 
-        String token = getJwtTokenFromSecurityContext(); // Method from above
+        String token = getJwtTokenFromSecurityContext();
 
-        // Set the authorization header for the request
+
         HttpHeaders headers = new HttpHeaders();
         headers.set("Authorization", "Bearer " + token);
 
@@ -165,7 +163,7 @@ public class PatientServiceImpl implements PatientService{
 
         for (Diagnosis diagnosis : diagnoses) {
             try {
-                // First, try to get the doctor details
+
                 ResponseEntity<DoctorDto> doctorResponse = restTemplate.exchange(
                         "https://fullstack24-doctorstaff.app.cloud.cbh.kth.se/api/doctors/" + diagnosis.getDoctorstaffId(),
                         HttpMethod.GET,
@@ -179,14 +177,13 @@ public class PatientServiceImpl implements PatientService{
                     diagnosisDto.setDoctorstaffName(doctor.getFirstname() + " " + doctor.getLastname());
                     diagnosisDto.setRole("Doctor");
                     diagnosisDtos.add(diagnosisDto);
-                    continue; // Skip to the next iteration if doctor is found
+                    continue;
                 }
             } catch (Exception ex) {
-                // Log or handle the exception if needed
+
             }
 
             try {
-                // If no doctor is found, fetch the staff details
                 ResponseEntity<StaffDto> staffResponse = restTemplate.exchange(
                         "https://fullstack24-doctorstaff.app.cloud.cbh.kth.se/api/staff/" + diagnosis.getDoctorstaffId(),
                         HttpMethod.GET,
@@ -202,7 +199,7 @@ public class PatientServiceImpl implements PatientService{
                     diagnosisDtos.add(diagnosisDto);
                 }
             } catch (Exception ex) {
-                // Log or handle the exception if needed
+
             }
         }
 
@@ -225,14 +222,14 @@ public class PatientServiceImpl implements PatientService{
     @Override
     public DoctorStaffDto getDoctorstaffForPatient(String patientId) {
 
-        String token = getJwtTokenFromSecurityContext(); // Assumes this method retrieves the token
+        String token = getJwtTokenFromSecurityContext();
         System.out.println("TOKEN:    " + token);
 
-        // Set the authorization header
+
         HttpHeaders headers = new HttpHeaders();
         headers.set("Authorization", "Bearer " + token);
 
-        // Create HttpEntity with headers
+
         HttpEntity<String> entity = new HttpEntity<>(headers);
 
 
@@ -248,13 +245,13 @@ public class PatientServiceImpl implements PatientService{
         List<StaffDto> staffDtos = new ArrayList<>();
 
         for (String doctorstaffId : doctorstaffIds) {
-            // Fetch doctor information
+
             String doctorUrl = "https://fullstack24-doctorstaff.app.cloud.cbh.kth.se/api/doctors/" + doctorstaffId;
             try {
                 ResponseEntity<DoctorDto> doctorResponse = restTemplate.exchange(
                         doctorUrl,
                         HttpMethod.GET,
-                        entity, // Pass the headers with token
+                        entity,
                         DoctorDto.class
                 );
                 if (doctorResponse.getBody() != null) {
@@ -264,13 +261,13 @@ public class PatientServiceImpl implements PatientService{
                 System.err.println("Failed to fetch doctor info for ID: " + doctorstaffId + ", Error: " + ex.getMessage());
             }
 
-            // Fetch staff information
+
             String staffUrl = "https://fullstack24-doctorstaff.app.cloud.cbh.kth.se/api/staff/" + doctorstaffId;
             try {
                 ResponseEntity<StaffDto> staffResponse = restTemplate.exchange(
                         staffUrl,
                         HttpMethod.GET,
-                        entity, // Pass the headers with token
+                        entity,
                         StaffDto.class
                 );
                 if (staffResponse.getBody() != null) {

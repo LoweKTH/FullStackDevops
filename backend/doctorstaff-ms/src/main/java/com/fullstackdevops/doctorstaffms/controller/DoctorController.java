@@ -6,6 +6,7 @@ import com.fullstackdevops.doctorstaffms.service.DoctorService;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -30,6 +31,7 @@ public class DoctorController {
     }
 
     @GetMapping("/{doctorId}/patients")
+    @PreAuthorize("hasRole('ROLE_DOCTOR')")
     public ResponseEntity<List<PatientDto>> getPatientsForDoctor(@PathVariable String doctorId){
         List<PatientDto> patients = doctorService.getPatientsForDoctor(doctorId);
         return ResponseEntity.ok(patients);

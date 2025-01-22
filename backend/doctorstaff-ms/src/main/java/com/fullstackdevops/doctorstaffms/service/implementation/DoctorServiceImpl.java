@@ -52,11 +52,11 @@ public class DoctorServiceImpl implements DoctorService {
 
         String token = getJwtTokenFromSecurityContext();
         System.out.println("TOKEN:    "+token);
-        // Set the authorization header
+
         HttpHeaders headers = new HttpHeaders();
         headers.set("Authorization", "Bearer " + token);
 
-        // Create HttpEntity with headers
+
         HttpEntity<String> entity = new HttpEntity<>(headers);
 
         String url = "https://fullstack24-patient.app.cloud.cbh.kth.se/api/patients/" + doctorId + "/doctorstaffgetpatients";
@@ -75,7 +75,7 @@ public class DoctorServiceImpl implements DoctorService {
             ResponseEntity<PatientDto> patientResponse = restTemplate.exchange(
                     patientUrl,
                     HttpMethod.GET,
-                    entity, // Pass the same headers with token
+                    entity,
                     PatientDto.class
             );
 

@@ -76,15 +76,13 @@ public class MessagingServiceImpl implements MessagingService {
         for (Message message : messages) {
             try {
 
-
                 String senderName = getUserUsername(message.getSenderId());
 
-                // Map the Message entity to a DTO
                 MessageDto messageDto = MessageMapper.toDto(message);
                 messageDto.setSenderName(senderName);
                 messageDtos.add(messageDto);
             } catch (Exception e) {
-                // Handle exceptions (e.g., user not found in Keycloak)
+
                 e.printStackTrace();
             }
         }

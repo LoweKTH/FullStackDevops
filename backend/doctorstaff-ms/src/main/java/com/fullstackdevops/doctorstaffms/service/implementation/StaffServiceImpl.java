@@ -46,13 +46,13 @@ public class StaffServiceImpl implements StaffService {
     @Override
     public List<PatientDto> getPatientsForStaff(String staffId) {
 
-        String token = getJwtTokenFromSecurityContext(); // Assumes this method retrieves the token
+        String token = getJwtTokenFromSecurityContext();
         System.out.println("TOKEN:    "+token);
-        // Set the authorization header
+
         HttpHeaders headers = new HttpHeaders();
         headers.set("Authorization", "Bearer " + token);
 
-        // Create HttpEntity with headers
+
         HttpEntity<String> entity = new HttpEntity<>(headers);
 
         String url = "http://patient-ms:8080/api/patients/" + staffId + "/doctorstaffgetpatients";
@@ -72,7 +72,7 @@ public class StaffServiceImpl implements StaffService {
             ResponseEntity<PatientDto> patientResponse = restTemplate.exchange(
                     patientUrl,
                     HttpMethod.GET,
-                    entity, // Pass the same headers with token
+                    entity,
                     PatientDto.class
             );
 
