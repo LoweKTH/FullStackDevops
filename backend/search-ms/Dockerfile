@@ -13,10 +13,10 @@ FROM openjdk:17-jdk-slim
 WORKDIR /app
 
 # Copy the built application JAR from the build stage
-COPY --from=build /app/target/*-runner.jar search-ms.jar
+COPY --from=build /app/target/*-runner.jar search-ms-1.0-SNAPSHOT.jar
 
 # Expose the port the Quarkus service listens on
 EXPOSE 8085
 
 # Run the application
-ENTRYPOINT ["java", "-jar", "search-ms.jar"]
+ENTRYPOINT ["java", "-jar", "search-ms-1.0-SNAPSHOT.jar"]
