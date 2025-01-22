@@ -5,7 +5,7 @@ const imageController = require('./controller/ImageController');
 const { sequelize } = require('./utils/db');
 const jwt = require('jsonwebtoken');
 const jwksClient = require('jwks-rsa');
-var bodyParser = require("body-parser");
+const bodyParser = require("body-parser");
 const app = express();
 
 

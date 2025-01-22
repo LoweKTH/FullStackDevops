@@ -24,6 +24,7 @@ public class PatientController {
         return new ResponseEntity<>(patientService.createPatient(patientDto), HttpStatus.CREATED);
     }
 
+    @PreAuthorize("hasRole('DOCTOR')")
     @GetMapping("/{id}")
     public ResponseEntity<PatientDto> getPatientById(@PathVariable String id) {
             PatientDto patientDto = patientService.getPatientById(id);
