@@ -51,7 +51,7 @@ public class SearchResource {
     @GET
     @Path("/searchDoctors")
     @Produces(MediaType.APPLICATION_JSON)
-    public Uni<List<DoctorWithPatients>> searchDoctorsWithPatiens(@QueryParam("name") String name){
+    public Uni<List<DoctorWithPatients>> searchDoctorsWithPatients(@QueryParam("name") String name){
         return searchService.getDoctorsWithPatients(name);
     }
 }

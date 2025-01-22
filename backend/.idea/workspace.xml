@@ -4,31 +4,33 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="09d6a3b5-9b2e-4587-b1b1-5156eb6a8f42" name="Changes" comment="#5">
-      <change afterPath="$PROJECT_DIR$/search-ms/src/main/java/com/fullstackdevops/searchms/config/DoctorMSClient.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/search-ms/src/main/java/com/fullstackdevops/searchms/config/PatientMSClient.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/search-ms/src/main/java/com/fullstackdevops/searchms/controller/SearchResource.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/search-ms/src/main/java/com/fullstackdevops/searchms/dto/DiagnosisDto.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/search-ms/src/main/java/com/fullstackdevops/searchms/dto/DoctorDto.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/search-ms/src/main/java/com/fullstackdevops/searchms/dto/DoctorStaffDto.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/search-ms/src/main/java/com/fullstackdevops/searchms/dto/DoctorWithPatients.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/search-ms/src/main/java/com/fullstackdevops/searchms/dto/NoteDto.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/search-ms/src/main/java/com/fullstackdevops/searchms/dto/PatientDto.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/search-ms/src/main/java/com/fullstackdevops/searchms/dto/StaffDto.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/search-ms/src/main/java/com/fullstackdevops/searchms/service/SearchService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../frontend/src/api/Search-ms-api.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../frontend/src/components/SearchCompForDoctors.jsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../frontend/src/components/SearchCompForPatients.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+    <list default="true" id="09d6a3b5-9b2e-4587-b1b1-5156eb6a8f42" name="Changes" comment="Search ms">
+      <change afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_1_22_2025_3_07_AM__Changes_.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/image-ms/image-ms.iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/search-ms/.idea/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/search-ms/.idea/compiler.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/search-ms/.idea/jarRepositories.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/search-ms/mvnw" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/search-ms/mvnw.cmd" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/search-ms/pom.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/search-ms/src/resources/application.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../.idea/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../.idea/FullStack24.iml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../.idea/FullStackDevops.iml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../.idea/compiler.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../.idea/encodings.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../.idea/inspectionProfiles/Project_Default.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../.idea/jarRepositories.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../.idea/misc.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../.idea/modules.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../.idea/uiDesigner.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../.idea/vcs.xml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/doctorstaff-ms/src/main/java/com/fullstackdevops/doctorstaffms/controller/DoctorController.java" beforeDir="false" afterPath="$PROJECT_DIR$/doctorstaff-ms/src/main/java/com/fullstackdevops/doctorstaffms/controller/DoctorController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/doctorstaff-ms/src/main/java/com/fullstackdevops/doctorstaffms/repository/DoctorRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/doctorstaff-ms/src/main/java/com/fullstackdevops/doctorstaffms/repository/DoctorRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/doctorstaff-ms/src/main/java/com/fullstackdevops/doctorstaffms/service/DoctorService.java" beforeDir="false" afterPath="$PROJECT_DIR$/doctorstaff-ms/src/main/java/com/fullstackdevops/doctorstaffms/service/DoctorService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/doctorstaff-ms/src/main/java/com/fullstackdevops/doctorstaffms/service/implementation/DoctorServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/doctorstaff-ms/src/main/java/com/fullstackdevops/doctorstaffms/service/implementation/DoctorServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../frontend/src/App.js" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/src/App.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../frontend/src/components/Dashboard.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/src/components/Dashboard.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/search-ms/src/main/java/com/fullstackdevops/searchms/controller/SearchResource.java" beforeDir="false" afterPath="$PROJECT_DIR$/search-ms/src/main/java/com/fullstackdevops/searchms/controller/SearchResource.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../frontend/src/api/Search-ms-api.js" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/src/api/Search-ms-api.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../frontend/src/components/SearchCompForPatients.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/src/components/SearchCompForPatients.jsx" afterDir="false" />
     </list>
     <list id="79177b7e-e8af-49c6-aa54-aba545e8c75b" name="Changes by benny" comment="Changes by benny" />
     <option name="SHOW_DIALOG" value="false" />
@@ -68,6 +70,11 @@
     </option>
   </component>
   <component name="Git.Settings">
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$/.." value="quarkusnew" />
+      </map>
+    </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
   </component>
   <component name="GitHubPullRequestSearchHistory">{
@@ -89,6 +96,13 @@
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
   </component>
+  <component name="MavenImportPreferences">
+    <option name="generalSettings">
+      <MavenGeneralSettings>
+        <option name="mavenHomeTypeForPersistence" value="WRAPPER" />
+      </MavenGeneralSettings>
+    </option>
+  </component>
   <component name="ProjectColorInfo">{
   &quot;associatedIndex&quot;: 5
 }</component>
@@ -109,6 +123,7 @@
     "RequestMappingsPanelWidth1": "75",
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
     "Spring Boot.UserMsApplication.executor": "Run",
     "WebServerToolWindowFactoryState": "false",
     "git-widget-placeholder": "search-ms-branch",
@@ -245,6 +260,8 @@
       <list>
         <item itemvalue="Docker.docker-compose.yaml: Compose Deployment" />
         <item itemvalue="Docker.docker-compose.yaml.db: Compose Deployment" />
+        <item itemvalue="Docker.docker-compose.yaml: Compose Deployment" />
+        <item itemvalue="Docker.docker-compose.yaml.db: Compose Deployment" />
       </list>
     </recent_temporary>
   </component>
@@ -274,6 +291,7 @@
       <workItem from="1737418620224" duration="6398000" />
       <workItem from="1737430594015" duration="3666000" />
       <workItem from="1737483830342" duration="12428000" />
+      <workItem from="1737580086695" duration="5272000" />
     </task>
     <task id="LOCAL-00001" summary="#2">
       <created>1730889193106</created>
