@@ -26,7 +26,7 @@ public class PatientController {
 
 
     @GetMapping("/{id}")
-    @PreAuthorize("hasRole('ROLE_PATIENT') or hasRole('ROLE_DOCTOR')")
+    @PreAuthorize("hasRole('ROLE_PATIENT') or hasRole('ROLE_DOCTOR') or hasRole('ROLE_STAFF')")
     public ResponseEntity<PatientDto> getPatientById(@PathVariable String id) {
             PatientDto patientDto = patientService.getPatientById(id);
             return ResponseEntity.ok(patientDto);
@@ -34,6 +34,7 @@ public class PatientController {
 
 
     @PostMapping("/{patientId}/notes")
+    @PreAuthorize("hasRole('ROLE_DOCTOR') or hasRole('ROLE_STAFF')")
     public ResponseEntity<NoteDto> addNoteToPatient(@PathVariable String patientId, @RequestBody NoteDto noteDto) {
         String doctorstaffId= noteDto.getDoctorstaffId();
         NoteDto createdNote = patientService.addNoteToPatient(patientId, noteDto ,doctorstaffId);
@@ -41,12 +42,14 @@ public class PatientController {
     }
 
     @GetMapping("/{patientId}/getnotes")
+    @PreAuthorize("hasRole('ROLE_PATIENT') or hasRole('ROLE_DOCTOR') or hasRole('ROLE_STAFF')")
     public ResponseEntity<List<NoteDto>> getNotesForPatient(@PathVariable String patientId) {
         List<NoteDto> notes = patientService.getNotesForPatient(patientId);
         return new ResponseEntity<>(notes, HttpStatus.CREATED);
     }
 
     @GetMapping("/{patientId}/getdiagnoses")
+    @PreAuthorize("hasRole('ROLE_PATIENT') or hasRole('ROLE_DOCTOR') or hasRole('ROLE_STAFF')")
     public ResponseEntity<List<DiagnosisDto>> getDiagnosesForPatient(@PathVariable String patientId) {
         List<DiagnosisDto> diagnoses = patientService.getDiagnosesForPatient(patientId);
         return new ResponseEntity<>(diagnoses, HttpStatus.CREATED);
@@ -60,18 +63,21 @@ public class PatientController {
     }*/
 
     @GetMapping("/")
+    @PreAuthorize("hasRole('ROLE_DOCTOR') or hasRole('ROLE_STAFF')")
     public ResponseEntity<List<PatientDto>> getAllPatients() {
         List<PatientDto> patients = patientService.getAllPatients();
         return new ResponseEntity<>(patients, HttpStatus.OK);
     }
 
     @PostMapping("/{patientId}/diagnosis")
+    @PreAuthorize("hasRole('ROLE_DOCTOR') or hasRole('ROLE_STAFF')")
     public DiagnosisDto addDiagnosis(@PathVariable String patientId, @RequestBody DiagnosisDto diagnosisDto) {
         String doctorstaffId = diagnosisDto.getDoctorstaffId();
         return patientService.addDiagnosisToPatient(patientId, diagnosisDto, doctorstaffId);
     }
 
     @GetMapping("/{patientId}/doctorstaff")
+    @PreAuthorize("hasRole('ROLE_PATIENT')")
     public ResponseEntity<DoctorStaffDto> getDoctorsForPatient(@PathVariable String patientId){
         DoctorStaffDto doctors = patientService.getDoctorstaffForPatient(patientId);
         return ResponseEntity.ok(doctors);
@@ -84,6 +90,7 @@ public class PatientController {
     }*/
 
     @GetMapping("/{doctorstaffId}/doctorstaffgetpatients")
+    @PreAuthorize("hasRole('ROLE_DOCTOR') or hasRole('ROLE_STAFF')")
     public ResponseEntity<List<String>> getPatientsByDoctorstaffId(@PathVariable String doctorstaffId) {
         List<String> patientIds = patientService.getPatientsByDoctorstaffId(doctorstaffId);
         return ResponseEntity.ok(patientIds);
