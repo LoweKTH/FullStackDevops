@@ -92,4 +92,12 @@ public class DoctorServiceImpl implements DoctorService {
         }
         return null;
     }
+
+    @Override
+    public List<DoctorDto> searchDoctors(String search) {
+        if(search == null || search.isEmpty()) {
+            return null;
+        }
+        return doctorRepository.findByFirstnameContainingIgnoreCaseOrLastnameContainingIgnoreCase(search, search);
+    }
 }
