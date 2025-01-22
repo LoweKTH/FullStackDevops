@@ -1,5 +1,6 @@
 package com.fullstackdevops.patientms.utils;
 
+import com.nimbusds.jose.shaded.gson.internal.LinkedTreeMap;
 import lombok.AllArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -48,20 +49,28 @@ public class SecurityConfig {
         return http.build();
     }
 
-    private JwtAuthenticationConverter jwtAuthenticationConverter() {
+    @Bean
+    public JwtAuthenticationConverter jwtAuthenticationConverter() {
+        Converter<Jwt, Collection<GrantedAuthority>> jwtGrantedAuthoritiesConverter = jwt -> {
+            Map<String, Object> resourceAccess = jwt.getClaim("resource_access");
+
+            Object client = resourceAccess.get("user-ms");
+
+            LinkedTreeMap<String, List<String>> clientRoleMap = (LinkedTreeMap<String, List<String>>) client;
+
+            List<String> clientRoles = new ArrayList<>(clientRoleMap.get("roles"));
+
+            return clientRoles.stream()
+                    .map(SimpleGrantedAuthority::new)
+                    .collect(Collectors.toList());
+        };
+
         JwtAuthenticationConverter jwtAuthenticationConverter = new JwtAuthenticationConverter();
-        jwtAuthenticationConverter.setJwtGrantedAuthoritiesConverter(jwtGrantedAuthoritiesConverter());
+
+        jwtAuthenticationConverter.setJwtGrantedAuthoritiesConverter(jwtGrantedAuthoritiesConverter);
+
         return jwtAuthenticationConverter;
     }
-
-    private JwtGrantedAuthoritiesConverter jwtGrantedAuthoritiesConverter() {
-        JwtGrantedAuthoritiesConverter grantedAuthoritiesConverter = new JwtGrantedAuthoritiesConverter();
-        grantedAuthoritiesConverter.setAuthorityPrefix("");
-        grantedAuthoritiesConverter.setAuthoritiesClaimName("resource_access.user-ms.roles"); // Path to roles
-
-        return grantedAuthoritiesConverter;
-    }
-
 
 
     @Bean
