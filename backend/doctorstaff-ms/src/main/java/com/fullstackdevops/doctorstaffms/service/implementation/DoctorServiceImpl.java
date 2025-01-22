@@ -24,6 +24,7 @@ import org.springframework.web.client.RestTemplate;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 @AllArgsConstructor
@@ -95,9 +96,14 @@ public class DoctorServiceImpl implements DoctorService {
 
     @Override
     public List<DoctorDto> searchDoctors(String search) {
-        if(search == null || search.isEmpty()) {
-            return null;
+        if (search == null || search.isEmpty()) {
+            return List.of();
         }
-        return doctorRepository.findByFirstnameContainingIgnoreCaseOrLastnameContainingIgnoreCase(search, search);
+
+        List<Doctor> doctors = doctorRepository.findByFirstnameContainingIgnoreCaseOrLastnameContainingIgnoreCase(search, search);
+
+        return doctors.stream()
+                .map(DoctorMapper::toDto)
+                .collect(Collectors.toList());
     }
 }
