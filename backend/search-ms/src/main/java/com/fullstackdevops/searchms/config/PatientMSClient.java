@@ -15,7 +15,7 @@ import java.util.List;
 public interface PatientMSClient {
     @GET
     @Path("/{patientId}/doctorstaff")
-    DoctorStaffDto getDoctorsForPatient(@PathParam("patientId") Long patientId);
+    DoctorStaffDto getDoctorsForPatient(@PathParam("patientId") String patientId);
 
     @GET
     @Path("/diagnosis")
@@ -23,6 +23,6 @@ public interface PatientMSClient {
 
     @GET
     @Path("/{doctorStaffId}/doctorstaffgetpatients")
-    Uni<List<PatientDto>> getPatientsByDoctorId(@PathParam("doctorStaffId") Long doctorId);
+    Uni<List<PatientDto>> getPatientsByDoctorId(@PathParam("doctorStaffId") String doctorId);
 
 }

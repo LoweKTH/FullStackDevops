@@ -23,7 +23,7 @@ public class SearchService {
     @RestClient
     PatientMSClient patientMSClient;
 
-    public DoctorStaffDto searchDoctorsForPatient(Long patientId, String doctorName) {
+    public DoctorStaffDto searchDoctorsForPatient(String patientId, String doctorName) {
         DoctorStaffDto doctorStaffDto = patientMSClient.getDoctorsForPatient(patientId);
 
         if (doctorStaffDto == null || doctorStaffDto.getDoctors() == null || doctorStaffDto.getStaffs() == null) {
@@ -61,7 +61,7 @@ public class SearchService {
         return doctorMSClient.searchDoctorsByName(name);
     }
 
-    public Uni<List<PatientDto>> getPatientsByDoctorId(Long doctorId) {
+    public Uni<List<PatientDto>> getPatientsByDoctorId(String doctorId) {
         return patientMSClient.getPatientsByDoctorId(doctorId);
     }
 

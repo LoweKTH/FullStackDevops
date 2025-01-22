@@ -9,7 +9,7 @@ public class DoctorDto {
     @JsonProperty("socialSecurityNumber")
     private Long socialSecurityNumber;
     @JsonProperty("userId")
-    private Long userId;
+    private String userId;
     @JsonProperty("firstname")
     private String firstname;
     @JsonProperty("lastname")
@@ -21,7 +21,7 @@ public class DoctorDto {
     @JsonProperty("specialty")
     private String specialty;
 
-    public DoctorDto(Long socialSecurityNumber, Long userId, String firstname, String lastname, String email, String phoneNumber, String specialty) {
+    public DoctorDto(Long socialSecurityNumber, String userId, String firstname, String lastname, String email, String phoneNumber, String specialty) {
         this.socialSecurityNumber = socialSecurityNumber;
         this.userId = userId;
         this.firstname = firstname;
@@ -41,11 +41,11 @@ public class DoctorDto {
         this.socialSecurityNumber = socialSecurityNumber;
     }
 
-    public Long getUserId() {
+    public String getUserId() {
         return userId;
     }
 
-    public void setUserId(Long userId) {
+    public void setUserId(String userId) {
         this.userId = userId;
     }
 

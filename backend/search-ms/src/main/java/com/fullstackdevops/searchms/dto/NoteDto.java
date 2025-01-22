@@ -15,9 +15,9 @@ public class NoteDto {
     @JsonProperty("createdAt")
     private Date createdAt;
     @JsonProperty("doctorStaffId")
-    private Long doctorStaffId;
+    private String doctorStaffId;
     @JsonProperty("patientId")
-    private Long patientId;
+    private String patientId;
 
 
     // Getters and Setters
@@ -45,19 +45,19 @@ public class NoteDto {
         this.createdAt = createdAt;
     }
 
-    public Long getDoctorStaffId() {
+    public String getDoctorStaffId() {
         return doctorStaffId;
     }
 
-    public void setDoctorStaffId(Long doctorStaffId) {
+    public void setDoctorStaffId(String doctorStaffId) {
         this.doctorStaffId = doctorStaffId;
     }
 
-    public Long getPatientId() {
+    public String getPatientId() {
         return patientId;
     }
 
-    public void setPatientId(Long patientId) {
+    public void setPatientId(String patientId) {
         this.patientId = patientId;
     }
 }

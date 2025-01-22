@@ -14,7 +14,7 @@ public class PatientDto {
     @JsonProperty("socialSecurityNumber")
     private Long socialSecurityNumber;
     @JsonProperty("userId")
-    private Long userId; // User ID associated with the patient
+    private String userId; // User ID associated with the patient
     @JsonProperty("firstname")
     private String firstname;
     @JsonProperty("lastname")
@@ -37,7 +37,7 @@ public class PatientDto {
 
 
     public PatientDto() {}
-    public PatientDto(Long id, Long socialSecurityNumber, Long userId, String firstname, String lastname, Date dateOfBirth, String address, String gender, String email, String phoneNumber, List<NoteDto> notes, List<DiagnosisDto> diagnoses) {
+    public PatientDto(Long id, Long socialSecurityNumber, String userId, String firstname, String lastname, Date dateOfBirth, String address, String gender, String email, String phoneNumber, List<NoteDto> notes, List<DiagnosisDto> diagnoses) {
         this.id = id;
         this.socialSecurityNumber = socialSecurityNumber;
         this.userId = userId;
@@ -69,11 +69,11 @@ public class PatientDto {
         this.socialSecurityNumber = socialSecurityNumber;
     }
 
-    public Long getUserId() {
+    public String getUserId() {
         return userId;
     }
 
-    public void setUserId(Long userId) {
+    public void setUserId(String userId) {
         this.userId = userId;
     }
 

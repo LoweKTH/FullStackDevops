@@ -27,7 +27,7 @@ public class SearchResource {
     @GET
     @Path("/{patientId}")
     public Response searchDoctorsForPatient(
-            @PathParam("patientId") Long patientId,
+            @PathParam("patientId") String patientId,
             @QueryParam("name") String doctorName) {
 
         if (doctorName == null || doctorName.isBlank()) {
