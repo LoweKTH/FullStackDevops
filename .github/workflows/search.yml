@@ -7,7 +7,7 @@ on:
 
 jobs:
 
-  doctorstaff-ms-build:
+  search-ms-build:
     name: Build and Test search Microservice
     runs-on: ubuntu-latest
 
