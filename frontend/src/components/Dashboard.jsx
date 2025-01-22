@@ -52,13 +52,21 @@ function Dashboard() {
         });
     }
 
+    const handleSearchCompForPatients = () => {
+        navigate("/patientsearch");
+    }
+
+    const handleSearchCompForDoctors = () => {
+        navigate("/doctorsearch");
+    }
+
     return (
         <div className="dashboard">
             <h2>Welcome to the Dashboard</h2>
             {(role === "DOCTOR" || role === "STAFF") && (
                 <>
                     <button onClick={handleCheckPatients}>Check Patients</button>
-
+                    <button onClick={handleSearchCompForDoctors}>Search</button>
                 </>
 
             )}
@@ -66,6 +74,7 @@ function Dashboard() {
                 <>
                     <button onClick={handleCheckDoctorStaff}>Check Doctor/Staff</button>
                     <button onClick={handleMyProfile}>My Profile</button>
+                    <button onClick={handleSearchCompForPatients}>Search</button>
                 </>
             )}
         </div>

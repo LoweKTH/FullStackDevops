@@ -11,4 +11,5 @@ public interface DoctorService {
     DoctorDto createDoctor(DoctorDto doctorDto);
     DoctorDto getDoctorById(String doctorId);
     List<PatientDto> getPatientsForDoctor(String doctorId);
+    List<DoctorDto> searchDoctors(String search);
 }

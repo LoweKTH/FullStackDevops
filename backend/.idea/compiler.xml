@@ -11,6 +11,7 @@
         <module name="user-ms" />
         <module name="patient-ms" />
         <module name="doctorstaff-ms" />
+        <module name="search-ms" />
       </profile>
       <profile name="Gradle Imported" enabled="true">
         <outputRelativeToContentRoot value="true" />
