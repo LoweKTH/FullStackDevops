@@ -60,6 +60,7 @@ public class SecurityConfig {
 
             List<String> clientRoles = new ArrayList<>(clientRoleMap.get("roles"));
 
+            System.out.println("Parsed roles: " + clientRoles);
             return clientRoles.stream()
                     .map(SimpleGrantedAuthority::new)
                     .collect(Collectors.toList());
