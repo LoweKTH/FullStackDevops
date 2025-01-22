@@ -26,7 +26,7 @@ public class PatientController {
 
 
     @GetMapping("/{id}")
-    @PreAuthorize("hasRole('DOCTOR') or hasRole('PATIENT') or hasRole('ROLE_PATIENT') or hasRole('ROLE_DOCTOR')")
+    @PreAuthorize("hasRole('ROLE_PATIENT') or hasRole('ROLE_DOCTOR')")
     public ResponseEntity<PatientDto> getPatientById(@PathVariable String id) {
             PatientDto patientDto = patientService.getPatientById(id);
             return ResponseEntity.ok(patientDto);
