@@ -6,6 +6,7 @@ import com.fullstackdevops.searchms.dto.DoctorWithPatients;
 import com.fullstackdevops.searchms.dto.PatientDto;
 import com.fullstackdevops.searchms.service.SearchService;
 import io.smallrye.mutiny.Uni;
+import jakarta.annotation.security.DenyAll;
 import jakarta.annotation.security.PermitAll;
 import jakarta.annotation.security.RolesAllowed;
 import jakarta.inject.Inject;
@@ -73,6 +74,7 @@ public class SearchResource {
 
     @GET
     @Path("/hello")
+    @DenyAll
     public Response helloWorld() {
         return Response.ok("Hello, world!").build();
     }
