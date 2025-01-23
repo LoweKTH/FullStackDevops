@@ -10,6 +10,8 @@ import jakarta.inject.Inject;
 import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
+import org.eclipse.microprofile.jwt.Claim;
+import org.eclipse.microprofile.jwt.JsonWebToken;
 
 import java.util.List;
 
@@ -21,7 +23,11 @@ public class SearchResource {
     private final SearchService searchService;
 
     public SearchResource(SearchService searchService) {this.searchService = searchService;}
-
+    @Inject
+    JsonWebToken jwt;
+    @Inject
+    @Claim("username") // Access a specific claim
+    String username;
 
 
     @GET
@@ -45,7 +51,7 @@ public class SearchResource {
     @Path("/patients")
     @Produces(MediaType.APPLICATION_JSON)
     public Uni<List<PatientDto>> searchPatientsByDiagnosis(@QueryParam("diagnosis") String diagnosis) {
-        System.out.println("test");
+        System.out.println("test"+ jwt.getClaimNames()+username);
         return searchService.searchPatientsByDiagnosis(diagnosis);
     }
 
