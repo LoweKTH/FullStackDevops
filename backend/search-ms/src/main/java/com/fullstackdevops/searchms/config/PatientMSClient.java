@@ -32,7 +32,7 @@ public interface PatientMSClient {
     Uni<List<PatientDto>> getPatientsByDoctorId(@PathParam("doctorStaffId") String doctorId);
 
     // Static method for token header generation
-    static String generateAuthorizationHeader() {
+    default String generateAuthorizationHeader() {
         return "Bearer " + JwtTokenHolder.getToken();
     }
 }
