@@ -5,6 +5,7 @@ import com.fullstackdevops.searchms.dto.DoctorStaffDto;
 import com.fullstackdevops.searchms.dto.DoctorWithPatients;
 import com.fullstackdevops.searchms.dto.PatientDto;
 import com.fullstackdevops.searchms.service.SearchService;
+import com.fullstackdevops.searchms.utils.JwtTokenHolder;
 import io.smallrye.mutiny.Uni;
 import jakarta.annotation.security.DenyAll;
 import jakarta.annotation.security.PermitAll;
@@ -43,23 +44,22 @@ public class SearchResource {
                     .build();
         }
 
-        // Use JWT claims for logging/debugging
-        String userId = jwt.getSubject();
-        String role = jwt.getClaim("role");
+        JwtTokenHolder.setToken(jwt.getRawToken());
 
-        System.out.println("Request by User ID: " + userId + ", Role: " + role);
-
-        DoctorStaffDto result = searchService.searchDoctorsForPatient(patientId, doctorName);
-        return Response.ok(result).build();
+        try {
+            DoctorStaffDto result = searchService.searchDoctorsForPatient(patientId, doctorName);
+            return Response.ok(result).build();
+        } finally {
+            JwtTokenHolder.clearToken();
+        }
     }
+
 
     @GET
     @Path("/patients")
     @Produces(MediaType.APPLICATION_JSON)
     public Uni<List<PatientDto>> searchPatientsByDiagnosis(@QueryParam("diagnosis") String diagnosis) {
-        // Log JWT claims for debugging
-        System.out.println("JWT Claims: " + jwt.getClaimNames());
-        System.out.println("User Preferred Username: " + jwt.getClaim("preferred_username"));
+        JwtTokenHolder.setToken(jwt.getRawToken());
         return searchService.searchPatientsByDiagnosis(diagnosis);
     }
 
@@ -67,8 +67,7 @@ public class SearchResource {
     @Path("/searchDoctors")
     @Produces(MediaType.APPLICATION_JSON)
     public Uni<List<DoctorWithPatients>> searchDoctorsWithPatients(@QueryParam("name") String name) {
-        String userId = jwt.getSubject();
-        System.out.println("Searching Doctors for User: " + userId);
+        JwtTokenHolder.setToken(jwt.getRawToken());
         return searchService.getDoctorsWithPatients(name);
     }
 
