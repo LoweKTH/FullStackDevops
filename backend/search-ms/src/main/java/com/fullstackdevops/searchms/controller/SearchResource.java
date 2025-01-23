@@ -74,7 +74,6 @@ public class SearchResource {
 
     @GET
     @Path("/hello")
-    @DenyAll
     public Response helloWorld() {
         return Response.ok("Hello, world!").build();
     }
