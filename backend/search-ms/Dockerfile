@@ -1,30 +1,18 @@
-# Stage 1: Build the application using Maven (JVM or Native)
-FROM maven:3.8.6-openjdk-17-slim AS build
+# Use a base image that matches your project's Java version
+# For Quarkus, you might use a smaller image for efficiency
+FROM registry.access.redhat.com/ubi8/openjdk-17:1.15
 
-# Set the working directory
+# Set the working directory in the container
 WORKDIR /app
 
-# Copy the pom.xml and download the dependencies (this caches dependencies)
-COPY pom.xml .
-RUN mvn dependency:go-offline
+# Copy the application artifact into the container
+# Assuming you're using the default Quarkus packaging which produces a 'quarkus-app' directory
+COPY target/quarkus-app /app
 
-# Copy the source code and compile the app (JVM or Native)
-COPY src /app/src
-
-# Build the app, skipping tests
-RUN mvn clean package -DskipTests
-
-# Stage 2: Prepare the runtime image
-FROM openjdk:17-jdk-slim AS runtime
-
-# Set working directory in the runtime image
-WORKDIR /app
-
-# Copy the generated artifact from the build stage
-COPY --from=build /app/target/search-ms-1.0-SNAPSHOT.jar /app/quarkus-app.jar
-
-# Expose the port the app runs on (default for Quarkus is 8080)
+# Expose the port your application will run on
+# Change this to the port your Quarkus app is configured to use
 EXPOSE 8080
 
-# Command to run the app in JVM mode
-CMD ["java", "-jar", "/app/quarkus-app.jar"]
+# Run the Java application
+# For Quarkus, use the runner JAR which includes the main class configuration
+CMD ["java", "-jar", "quarkus-run.jar"]
