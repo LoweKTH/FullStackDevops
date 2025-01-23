@@ -6,6 +6,7 @@ import com.fullstackdevops.searchms.dto.DoctorWithPatients;
 import com.fullstackdevops.searchms.dto.PatientDto;
 import com.fullstackdevops.searchms.service.SearchService;
 import io.smallrye.mutiny.Uni;
+import jakarta.annotation.security.PermitAll;
 import jakarta.inject.Inject;
 import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.MediaType;
@@ -29,6 +30,7 @@ public class SearchResource {
     }
 
     @GET
+    @PermitAll
     @Path("/{patientId}")
     public Response searchDoctorsForPatient(
             @PathParam("patientId") String patientId,
@@ -50,6 +52,7 @@ public class SearchResource {
     }
 
     @GET
+    @PermitAll
     @Path("/patients")
     @Produces(MediaType.APPLICATION_JSON)
     public Uni<List<PatientDto>> searchPatientsByDiagnosis(@QueryParam("diagnosis") String diagnosis) {
@@ -60,6 +63,7 @@ public class SearchResource {
     }
 
     @GET
+    @PermitAll
     @Path("/searchDoctors")
     @Produces(MediaType.APPLICATION_JSON)
     public Uni<List<DoctorWithPatients>> searchDoctorsWithPatients(@QueryParam("name") String name) {
