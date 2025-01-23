@@ -11,7 +11,7 @@ import org.eclipse.microprofile.rest.client.inject.RegisterRestClient;
 
 import java.util.List;
 
-@RegisterRestClient
+@RegisterRestClient(baseUri = "https://fullstack24-doctorstaff.app.cloud.cbh.kth.se/api/doctors")
 @ApplicationScoped
 public interface DoctorMSClient {
 

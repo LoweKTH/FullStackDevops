@@ -9,7 +9,7 @@ import org.eclipse.microprofile.rest.client.inject.RegisterRestClient;
 
 import java.util.List;
 
-@RegisterRestClient
+@RegisterRestClient(baseUri = "https://fullstack24-patient.app.cloud.cbh.kth.se/api/patients")
 @Consumes(MediaType.APPLICATION_JSON)
 @Produces(MediaType.APPLICATION_JSON)
 public interface PatientMSClient {
