@@ -32,7 +32,6 @@ public class SearchResource {
 
     @GET
     @Path("/{patientId}")
-    @PermitAll // Allow all requests to all endpoints in this resource
     public Response searchDoctorsForPatient(
             @PathParam("patientId") String patientId,
             @QueryParam("name") String doctorName) {
@@ -55,7 +54,6 @@ public class SearchResource {
 
     @GET
     @Path("/patients")
-    @PermitAll
     @Produces(MediaType.APPLICATION_JSON)
     public Uni<List<PatientDto>> searchPatientsByDiagnosis(@QueryParam("diagnosis") String diagnosis) {
         // Log JWT claims for debugging
@@ -66,11 +64,16 @@ public class SearchResource {
 
     @GET
     @Path("/searchDoctors")
-    @PermitAll // Allow all requests to all endpoints in this resource
     @Produces(MediaType.APPLICATION_JSON)
     public Uni<List<DoctorWithPatients>> searchDoctorsWithPatients(@QueryParam("name") String name) {
         String userId = jwt.getSubject();
         System.out.println("Searching Doctors for User: " + userId);
         return searchService.getDoctorsWithPatients(name);
+    }
+
+    @GET
+    @Path("/hello")
+    public Response helloWorld() {
+        return Response.ok("Hello, world!").build();
     }
 }
