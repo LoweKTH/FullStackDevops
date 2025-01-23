@@ -10,6 +10,7 @@ import jakarta.inject.Inject;
 import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
+import org.eclipse.microprofile.jwt.JsonWebToken;
 
 import java.util.List;
 
@@ -20,9 +21,12 @@ public class SearchResource {
 
     private final SearchService searchService;
 
-    public SearchResource(SearchService searchService) {this.searchService = searchService;}
+    @Inject
+    JsonWebToken jwt; // Inject JsonWebToken
 
-
+    public SearchResource(SearchService searchService) {
+        this.searchService = searchService;
+    }
 
     @GET
     @Path("/{patientId}")
@@ -36,6 +40,10 @@ public class SearchResource {
                     .build();
         }
 
+        // Access JWT claims (example)
+        String username = jwt.getName(); // Get the username
+        System.out.println("User accessing searchDoctorsForPatient: " + username);
+
         DoctorStaffDto result = searchService.searchDoctorsForPatient(patientId, doctorName);
 
         return Response.ok(result).build();
@@ -45,13 +53,19 @@ public class SearchResource {
     @Path("/patients")
     @Produces(MediaType.APPLICATION_JSON)
     public Uni<List<PatientDto>> searchPatientsByDiagnosis(@QueryParam("diagnosis") String diagnosis) {
+        // Access JWT claims (example)
+        String username = jwt.getName(); // Get the username
+        System.out.println("User accessing searchPatientsByDiagnosis: " + username);
         return searchService.searchPatientsByDiagnosis(diagnosis);
     }
 
     @GET
     @Path("/searchDoctors")
     @Produces(MediaType.APPLICATION_JSON)
-    public Uni<List<DoctorWithPatients>> searchDoctorsWithPatients(@QueryParam("name") String name){
+    public Uni<List<DoctorWithPatients>> searchDoctorsWithPatients(@QueryParam("name") String name) {
+        // Access JWT claims (example)
+        String username = jwt.getName(); // Get the username
+        System.out.println("User accessing searchDoctorsWithPatients: " + username);
         return searchService.getDoctorsWithPatients(name);
     }
 }
