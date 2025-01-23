@@ -3,7 +3,7 @@ name: Doctorstaff
 on:
   push:
     branches:
-      - kthcloudtest
+      - kthcloudtesta
 
 jobs:
 
