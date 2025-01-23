@@ -26,5 +26,6 @@ COPY --from=build /app/target/search-ms-1.0-SNAPSHOT.jar /app/quarkus-app.jar
 # Expose the port the app runs on (default for Quarkus is 8080)
 EXPOSE 8080
 
+
 # Command to run the app in JVM mode
 CMD ["java", "-jar", "/app/quarkus-app.jar"]
