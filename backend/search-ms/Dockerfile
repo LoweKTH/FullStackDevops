@@ -5,7 +5,7 @@ FROM registry.access.redhat.com/ubi8/openjdk-17:1.15
 WORKDIR /app
 
 # Copy only the application.properties file
-COPY target/application.properties /app/application.properties
+COPY src/resources/application.properties /app/application.properties
 
 # Copy the application artifact (assuming it's a JAR file)
 COPY target/*.jar /app/
