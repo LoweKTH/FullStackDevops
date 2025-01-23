@@ -74,6 +74,7 @@ public class SearchResource {
 
     @GET
     @Path("/hello")
+    @RolesAllowed("DOCTOR")
     public Response helloWorld() {
         return Response.ok("Hello, world!").build();
     }
