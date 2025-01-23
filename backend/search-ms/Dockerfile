@@ -4,9 +4,11 @@ FROM registry.access.redhat.com/ubi8/openjdk-17:1.15
 # Set the working directory in the container
 WORKDIR /app
 
-# Copy the application artifact into the container
-# This assumes you're using the Quarkus "legacy-jar" packaging or default "quarkus-app" directory
-COPY target/quarkus-app /app
+# Copy only the application.properties file
+COPY target/application.properties /app/application.properties
+
+# Copy the application artifact (assuming it's a JAR file)
+COPY target/*.jar /app/
 
 # Expose the port your application will run on
 EXPOSE 8080
@@ -17,4 +19,4 @@ ENV QUARKUS_PROFILE=dev
 
 # Run the Java application
 # Ensure the correct JAR is used to run your application
-CMD ["java", "-jar", "/app/quarkus-run.jar"]
+CMD ["java", "-jar", "/app/*.jar"]
