@@ -6,11 +6,12 @@ import com.fullstackdevops.searchms.dto.DoctorWithPatients;
 import com.fullstackdevops.searchms.dto.PatientDto;
 import com.fullstackdevops.searchms.service.SearchService;
 import io.smallrye.mutiny.Uni;
+import jakarta.annotation.security.PermitAll;
+import jakarta.annotation.security.RolesAllowed;
 import jakarta.inject.Inject;
 import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
-import org.eclipse.microprofile.jwt.Claim;
 import org.eclipse.microprofile.jwt.JsonWebToken;
 
 import java.util.List;
@@ -22,16 +23,16 @@ public class SearchResource {
 
     private final SearchService searchService;
 
-    public SearchResource(SearchService searchService) {this.searchService = searchService;}
+    public SearchResource(SearchService searchService) {
+        this.searchService = searchService;
+    }
+
     @Inject
     JsonWebToken jwt;
-    @Inject
-    @Claim("username") // Access a specific claim
-    String username;
-
 
     @GET
     @Path("/{patientId}")
+    @PermitAll // Allow all requests to all endpoints in this resource
     public Response searchDoctorsForPatient(
             @PathParam("patientId") String patientId,
             @QueryParam("name") String doctorName) {
@@ -42,23 +43,34 @@ public class SearchResource {
                     .build();
         }
 
-        DoctorStaffDto result = searchService.searchDoctorsForPatient(patientId, doctorName);
+        // Use JWT claims for logging/debugging
+        String userId = jwt.getSubject();
+        String role = jwt.getClaim("role");
 
+        System.out.println("Request by User ID: " + userId + ", Role: " + role);
+
+        DoctorStaffDto result = searchService.searchDoctorsForPatient(patientId, doctorName);
         return Response.ok(result).build();
     }
 
     @GET
     @Path("/patients")
+    @PermitAll
     @Produces(MediaType.APPLICATION_JSON)
     public Uni<List<PatientDto>> searchPatientsByDiagnosis(@QueryParam("diagnosis") String diagnosis) {
-        System.out.println("test"+ jwt.getClaimNames()+username);
+        // Log JWT claims for debugging
+        System.out.println("JWT Claims: " + jwt.getClaimNames());
+        System.out.println("User Preferred Username: " + jwt.getClaim("preferred_username"));
         return searchService.searchPatientsByDiagnosis(diagnosis);
     }
 
     @GET
     @Path("/searchDoctors")
+    @PermitAll // Allow all requests to all endpoints in this resource
     @Produces(MediaType.APPLICATION_JSON)
-    public Uni<List<DoctorWithPatients>> searchDoctorsWithPatients(@QueryParam("name") String name){
+    public Uni<List<DoctorWithPatients>> searchDoctorsWithPatients(@QueryParam("name") String name) {
+        String userId = jwt.getSubject();
+        System.out.println("Searching Doctors for User: " + userId);
         return searchService.getDoctorsWithPatients(name);
     }
 }
