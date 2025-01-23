@@ -1,22 +1,28 @@
-# Use Maven to build the application
-FROM maven:3.8.4-openjdk-17 AS build
+# Build stage
+FROM maven:3.8.6-openjdk-17-slim AS build
+
+# Set the working directory
 WORKDIR /app
 
-# Copy the project files
-COPY . .
+# Copy pom.xml and download dependencies
+COPY pom.xml .
+RUN mvn dependency:go-offline
 
-# Build the application and skip tests
+# Copy the source code and compile the app
+COPY src /app/src
 RUN mvn clean package -DskipTests
 
-# Use OpenJDK 17 for the runtime environment
+# Runtime stage
 FROM openjdk:17-jdk-slim
+
+# Set the working directory for the runtime container
 WORKDIR /app
 
-# Copy the built application JAR from the build stage
-COPY --from=build /app/target/search-ms-1.0-SNAPSHOT.jar search-ms-1.0-SNAPSHOT.jar
+# Copy the built artifact from the build stage
+COPY --from=build /app/target/*-runner.jar /app/quarkus-app.jar
 
-# Expose the port the Quarkus service listens on
-EXPOSE 8085
+# Expose the application port (default for Quarkus is 8080)
+EXPOSE 8080
 
-# Run the application
-ENTRYPOINT ["java", "-jar", "search-ms-1.0-SNAPSHOT.jar"]
+# Command to run the application
+CMD ["java", "-jar", "/app/quarkus-app.jar"]
