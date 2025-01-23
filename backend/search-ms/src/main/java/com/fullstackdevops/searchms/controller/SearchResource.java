@@ -45,6 +45,7 @@ public class SearchResource {
     @Path("/patients")
     @Produces(MediaType.APPLICATION_JSON)
     public Uni<List<PatientDto>> searchPatientsByDiagnosis(@QueryParam("diagnosis") String diagnosis) {
+        System.out.println("test");
         return searchService.searchPatientsByDiagnosis(diagnosis);
     }
 
