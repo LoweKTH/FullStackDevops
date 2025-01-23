@@ -97,5 +97,15 @@ public class PatientController {
     }
 
 
+    @GetMapping("/diagnosis")
+    public ResponseEntity<List<PatientDto>> getPatientsByDiagnosisName(@RequestParam String name) {
+        List<PatientDto> patients = patientService.getPatientsByDiagnosisName(name);
+        System.out.println("PRINT TEST!!!");
+        for(int i = 0; i < patients.size(); i++){
+            System.out.println(patients.get(i).toString());
+        }
+        return new ResponseEntity<>(patients, HttpStatus.OK);
+    }
+
 
 }

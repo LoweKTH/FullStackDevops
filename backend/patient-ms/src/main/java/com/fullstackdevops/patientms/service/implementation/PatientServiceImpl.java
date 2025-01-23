@@ -298,6 +298,29 @@ public class PatientServiceImpl implements PatientService{
         return patientIdsList;
     }
 
+    @Override
+    public List<DoctorStaffDto> getAllDoctorsForPatient(Long patientId) {
+        return List.of();
+    }
+
+    @Override
+    public List<PatientDto> getPatientsByDiagnosisName(String diagnosisName) {
+        List<String> patientIds = diagnosisRepository.findPatientIdsByDiagnosisName(diagnosisName);
+        System.out.println("PATIENTMS SERVICE #1" + patientIds.toString());
+
+        List<Patient> patients = new ArrayList<>();
+        for (String patientId : patientIds) {
+            Patient patient = patientRepository.findByUserId(patientId).orElseThrow(()
+                    -> new PatientNotFoundException("Patient with specified ID not found"));
+            patients.add(patient);
+        }
+
+        System.out.println("PATIENTS SERVICE #2" + patients);
+
+
+        return PatientMapper.toDtoList(patients);
+    }
+
     private String getJwtTokenFromSecurityContext() {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         if (authentication != null && authentication.getPrincipal() instanceof Jwt) {

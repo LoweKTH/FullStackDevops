@@ -3,6 +3,9 @@ package com.fullstackdevops.patientms.utils;
 import com.fullstackdevops.patientms.dto.PatientDto;
 import com.fullstackdevops.patientms.model.Patient;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 public class PatientMapper {
 
     public static PatientDto toDto(Patient patient) {
@@ -36,5 +39,11 @@ public class PatientMapper {
         patient.setPhoneNumber(dto.getPhoneNumber());
 
         return patient;
+    }
+
+    public static List<PatientDto> toDtoList(List<Patient> patients) {
+        return patients.stream()
+                .map(PatientMapper::toDto)
+                .collect(Collectors.toList());
     }
 }
