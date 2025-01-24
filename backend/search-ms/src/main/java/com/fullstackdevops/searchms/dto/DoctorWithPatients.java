@@ -18,6 +18,9 @@ public class DoctorWithPatients {
         this.doctor = doctor;
         this.patients = patients;
     }
+    public DoctorWithPatients(){
+
+    }
 
     public DoctorDto getDoctor() {
         return doctor;
