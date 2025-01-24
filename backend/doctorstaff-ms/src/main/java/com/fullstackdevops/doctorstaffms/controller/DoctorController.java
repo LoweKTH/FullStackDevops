@@ -32,7 +32,7 @@ public class DoctorController {
     }
 
     @GetMapping("/{doctorId}/patients")
-    @PreAuthorize("hasRole('ROLE_DOCTOR')")
+    @PreAuthorize("hasRole('ROLE_PATIENT') or hasRole('ROLE_DOCTOR') or hasRole('ROLE_STAFF')")
     public ResponseEntity<List<PatientDto>> getPatientsForDoctor(@PathVariable String doctorId){
         List<PatientDto> patients = doctorService.getPatientsForDoctor(doctorId);
         return ResponseEntity.ok(patients);

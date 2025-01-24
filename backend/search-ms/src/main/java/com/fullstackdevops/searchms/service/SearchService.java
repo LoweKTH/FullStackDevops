@@ -75,7 +75,7 @@ public class SearchService {
     }
 
     public Uni<List<PatientDto>> getPatientsByDoctorId(String doctorId) {
-        return patientMSClient.getPatientsByDoctorId(doctorId);
+        return doctorMSClient.getPatientsByDoctorId(doctorId);
     }
 
     public Uni<List<PatientDto>> searchPatientsByName(String name) {
