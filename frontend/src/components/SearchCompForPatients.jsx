@@ -7,7 +7,6 @@ const SearchCompForPatients = () => {
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState(null);
 
-    // Function to handle searching
     const handleSearch = async () => {
         setLoading(true);
         setError(null);
@@ -42,14 +41,19 @@ const SearchCompForPatients = () => {
 
         return (
             <div>
-                {doctors.map((doctor, index) => (
+                {doctors.map((doctorWithPatients, index) => (
                     <div key={index} className="doctor-card">
-                        <h3>{doctor.doctor.name}</h3>
-                        <p>Specialty: {doctor.doctor.specialty}</p>
+                        <h3>
+                            {doctorWithPatients.doctor.firstname} {doctorWithPatients.doctor.lastname}
+                        </h3>
+                        <p>Email: {doctorWithPatients.doctor.email}</p>
+                        <p>Specialty: {doctorWithPatients.doctor.specialty || 'N/A'}</p>
                         <p>Patients:</p>
                         <ul>
-                            {doctor.patients.map((patient, pIndex) => (
-                                <li key={pIndex}>{patient.name}</li>
+                            {doctorWithPatients.patients.map((patient, pIndex) => (
+                                <li key={pIndex}>
+                                    {patient.firstname} {patient.lastname} - {patient.email}
+                                </li>
                             ))}
                         </ul>
                     </div>

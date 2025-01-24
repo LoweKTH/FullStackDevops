@@ -25,7 +25,7 @@ public interface DoctorMSClient {
     Uni<List<DoctorDto>> searchDoctorsByName(@QueryParam("name") String name);
 
     @GET
-    @Path("/{doctorId}/patients")  // Updated to match the correct endpoint
+    @Path("/{doctorId}/patients")
     @ClientHeaderParam(name = "Authorization", value = "{generateAuthorizationHeader}")
     Uni<List<PatientDto>> getPatientsByDoctorId(@PathParam("doctorId") String doctorId);
 
