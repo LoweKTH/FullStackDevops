@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { searchDoctorsWithPatients } from '../api/Search-ms-api';
 
-const SearchCompForPatients = () => {
+const SearchCompForStaff = () => {
     const [searchName, setSearchName] = useState('');
     const [doctors, setDoctors] = useState([]);
     const [loading, setLoading] = useState(false);
@@ -77,4 +77,4 @@ const SearchCompForPatients = () => {
     );
 };
 
-export default SearchCompForPatients;
+export default SearchCompForStaff;

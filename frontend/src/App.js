@@ -14,7 +14,7 @@ import ImageUpload from "./components/ImageUpload";
 import ImageEdit from "./components/ImageEdit";
 import PostRegistration from "./components/PostRegistration";
 import PostLogin from "./components/PostLogin";
-import SearchCompForPatients from "./components/SearchCompForPatients";
+import SearchCompForStaff from "./components/SearchCompForStaff";
 import SearchCompForDoctors from "./components/SearchCompForDoctors";
 
 
@@ -40,7 +40,7 @@ function App() {
                 <Route path="/image-edit" element={<ImageEdit />} />
                 <Route path="/post-registration" element={<PostRegistration />} />
                 <Route path="/post-login" element={<PostLogin />} />
-                <Route path="/patientsearch" element={<SearchCompForPatients />} />
+                <Route path="/staffsearch" element={<SearchCompForStaff />} />
                 <Route path="/doctorsearch" element={<SearchCompForDoctors />} />
             </Routes>
         </Router>
