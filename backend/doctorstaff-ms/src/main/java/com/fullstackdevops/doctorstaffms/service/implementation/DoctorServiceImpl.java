@@ -96,6 +96,7 @@ public class DoctorServiceImpl implements DoctorService {
 
     @Override
     public List<DoctorDto> searchDoctors(String name) {
+        System.out.println("search1"+name);
         if (name == null || name.isEmpty()) {
             return List.of();
         }
