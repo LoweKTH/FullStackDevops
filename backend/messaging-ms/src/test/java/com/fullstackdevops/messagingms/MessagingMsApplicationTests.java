@@ -53,7 +53,7 @@ public class MessagingMsApplicationTests {
 						.param("senderId", "feweuhfi1edasd")
 						.param("recipientId", "12eeih2eihde2i")
 						.contentType(MediaType.APPLICATION_JSON)
-						.with(jwt())
+						.with(jwt().authorities(() -> "ROLE_PATIENT"))
 						.with(csrf()))
 				.andExpect(status().isOk())  // Expect HTTP 200 OK
 				.andExpect(jsonPath("$.id").value(1L))  // Check the conversation ID

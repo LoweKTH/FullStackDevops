@@ -26,6 +26,7 @@ public class StaffController {
     }
 
     @GetMapping("/{staffId}")
+    @PreAuthorize("hasRole('ROLE_PATIENT') or hasRole('ROLE_DOCTOR') or hasRole('ROLE_STAFF')")
     public ResponseEntity<StaffDto> getStaffById(@PathVariable String staffId){
         StaffDto staff = staffService.getStaffById(staffId);
         return ResponseEntity.ok(staff);

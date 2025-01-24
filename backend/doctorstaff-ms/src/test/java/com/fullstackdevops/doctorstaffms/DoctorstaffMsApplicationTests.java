@@ -77,15 +77,15 @@ class DoctorstaffMsApplicationTests {
 
         // Perform the GET request and verify the response
         mockMvc.perform(get("/api/doctors/324234ewfafsdfda")
-                .with(jwt())
-                .with(csrf()))
-                .andExpect(status().isOk())
-                .andExpect(jsonPath("$.userId").value("324234ewfafsdfda"))
-                .andExpect(jsonPath("$.firstname").value("John"))
-                .andExpect(jsonPath("$.lastname").value("Doe"))
-                .andExpect(jsonPath("$.specialty").value("Cardiology"))
-                .andExpect(jsonPath("$.email").value("dr.john.doe@example.com"))
-                .andExpect(jsonPath("$.phoneNumber").value("987-654-3210"));
+                        .with(jwt().authorities(() -> "ROLE_PATIENT"))
+                        .with(csrf()))
+                        .andExpect(status().isOk())
+                        .andExpect(jsonPath("$.userId").value("324234ewfafsdfda"))
+                        .andExpect(jsonPath("$.firstname").value("John"))
+                        .andExpect(jsonPath("$.lastname").value("Doe"))
+                        .andExpect(jsonPath("$.specialty").value("Cardiology"))
+                        .andExpect(jsonPath("$.email").value("dr.john.doe@example.com"))
+                        .andExpect(jsonPath("$.phoneNumber").value("987-654-3210"));
     }
 
 }
