@@ -3,6 +3,9 @@ package com.fullstackdevops.doctorstaffms.utils;
 import com.fullstackdevops.doctorstaffms.model.Doctor;
 import com.fullstackdevops.doctorstaffms.dto.DoctorDto;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 public class DoctorMapper {
 
     public static DoctorDto toDto(Doctor doctor) {
@@ -37,5 +40,11 @@ public class DoctorMapper {
         doctor.setSpecialty(doctorDto.getSpecialty());
 
         return doctor;
+    }
+
+    public static List<DoctorDto> toDtoList(List<Doctor> doctors) {
+        return doctors.stream()
+                .map(DoctorMapper::toDto)
+                .collect(Collectors.toList());
     }
 }

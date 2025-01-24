@@ -103,8 +103,6 @@ public class DoctorServiceImpl implements DoctorService {
 
         List<Doctor> doctors = doctorRepository.findByNameContainingIgnoreCase(name);
 
-        return doctors.stream()
-                .map(DoctorMapper::toDto)
-                .collect(Collectors.toList());
+        return DoctorMapper.toDtoList(doctors);
     }
 }
