@@ -31,7 +31,8 @@ public class DoctorDto {
         this.specialty = specialty;
     }
 
-
+    public DoctorDto() {
+    }
 
     public Long getSocialSecurityNumber() {
         return socialSecurityNumber;
