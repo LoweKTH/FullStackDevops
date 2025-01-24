@@ -47,7 +47,6 @@ const SearchCompForPatients = () => {
                             {doctorWithPatients.doctor.firstname} {doctorWithPatients.doctor.lastname}
                         </h3>
                         <p>Email: {doctorWithPatients.doctor.email}</p>
-                        <p>Specialty: {doctorWithPatients.doctor.specialty || 'N/A'}</p>
                         <p>Patients:</p>
                         <ul>
                             {doctorWithPatients.patients.map((patient, pIndex) => (
