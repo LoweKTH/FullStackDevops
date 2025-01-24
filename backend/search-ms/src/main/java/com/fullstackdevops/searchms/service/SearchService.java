@@ -65,4 +65,8 @@ public class SearchService {
         return patientMSClient.getPatientsByDoctorId(doctorId);
     }
 
+    public Uni<List<PatientDto>> searchPatientsByName(String name) {
+        return patientMSClient.getPatientsByName(name);
+    }
+
 }

@@ -72,6 +72,15 @@ public class SearchResource {
     }
 
     @GET
+    @Path("/patients/name")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Uni<List<PatientDto>> searchPatientsByName(@QueryParam("name") String name) {
+        JwtTokenHolder.setToken(jwt.getRawToken());
+        return searchService.searchPatientsByName(name);
+    }
+
+
+    @GET
     @Path("/hello")
     @RolesAllowed("DOCTOR")
     public Response helloWorld() {

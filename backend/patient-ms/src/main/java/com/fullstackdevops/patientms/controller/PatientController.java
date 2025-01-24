@@ -107,5 +107,11 @@ public class PatientController {
         return new ResponseEntity<>(patients, HttpStatus.OK);
     }
 
+    @GetMapping("/name")
+    public ResponseEntity<List<PatientDto>> getPatientsByName(@RequestParam String name) {
+        List<PatientDto> patients = patientService.getPatientsByName(name);
+        return new ResponseEntity<>(patients, HttpStatus.OK);
+    }
+
 
 }

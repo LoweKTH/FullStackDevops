@@ -49,3 +49,16 @@ export const searchPatientsByDiagnosis = async (diagnosis) => {
         throw err;
     }
 };
+
+
+export const searchPatientsByName = async (name) => {
+    try {
+        const response = await api.get(`/patients/name`, {
+            params: { name },
+        });
+        return response.data;
+    } catch (err) {
+        console.error("Error searching patients by name:", err);
+        throw err;
+    }
+};

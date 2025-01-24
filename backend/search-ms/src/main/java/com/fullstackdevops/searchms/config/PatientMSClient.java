@@ -31,6 +31,12 @@ public interface PatientMSClient {
     @ClientHeaderParam(name = "Authorization", value = "{generateAuthorizationHeader}")
     Uni<List<PatientDto>> getPatientsByDoctorId(@PathParam("doctorStaffId") String doctorId);
 
+
+    @GET
+    @Path("/name")
+    @ClientHeaderParam(name = "Authorization", value = "{generateAuthorizationHeader}")
+    Uni<List<PatientDto>> getPatientsByName(@QueryParam("name") String name);
+
     // Static method for token header generation
     default String generateAuthorizationHeader() {
         return "Bearer " + JwtTokenHolder.getToken();

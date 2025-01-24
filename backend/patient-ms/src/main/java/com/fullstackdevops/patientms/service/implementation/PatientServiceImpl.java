@@ -321,6 +321,16 @@ public class PatientServiceImpl implements PatientService{
         return PatientMapper.toDtoList(patients);
     }
 
+
+    @Override
+    public List<PatientDto> getPatientsByName(String name) {
+        List<Patient> patients = patientRepository.findByNameContainingIgnoreCase(name); // Assuming you have this method in your repository
+        if (patients.isEmpty()) {
+            throw new PatientNotFoundException("No patients found with the specified name");
+        }
+
+        return PatientMapper.toDtoList(patients);
+    }
     private String getJwtTokenFromSecurityContext() {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         if (authentication != null && authentication.getPrincipal() instanceof Jwt) {
