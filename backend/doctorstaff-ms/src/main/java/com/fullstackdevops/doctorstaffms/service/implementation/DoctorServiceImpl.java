@@ -101,7 +101,8 @@ public class DoctorServiceImpl implements DoctorService {
             return List.of();
         }
 
-        List<Doctor> doctors = doctorRepository.findByNameContainingIgnoreCase(name);
+        List<Doctor> doctors = doctorRepository.findByFirstnameContainingIgnoreCaseOrLastnameContainingIgnoreCase(name,name);
+        System.out.println(doctors);
 
         return DoctorMapper.toDtoList(doctors);
     }
