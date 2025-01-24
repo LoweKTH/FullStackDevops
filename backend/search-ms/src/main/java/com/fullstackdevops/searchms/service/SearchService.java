@@ -43,19 +43,32 @@ public class SearchService {
 
     public Uni<List<DoctorWithPatients>> getDoctorsWithPatients(String name) {
         return searchDoctors(name)
+                .onItem().invoke(doctors -> {
+                    if (doctors.isEmpty()) {
+                        System.out.println("No doctors found for name: " + name);
+                    } else {
+                        System.out.println("Doctors found: " + doctors);
+                    }
+                })
                 .onItem().transformToUni(doctors ->
                         Uni.combine().all()
                                 .unis(
                                         doctors.stream()
-                                                .map(doctor -> getPatientsByDoctorId(doctor.getUserId())
-                                                        .onItem().transform(
-                                                                patients -> new DoctorWithPatients(doctor, patients)
-                                                        )
-                                                ).collect(Collectors.toList())
+                                                .map(doctor -> {
+                                                    System.out.println("Fetching patients for doctorId: " + doctor.getUserId());
+                                                    return getPatientsByDoctorId(doctor.getUserId())
+                                                            .onItem().invoke(patients ->
+                                                                    System.out.println("Patients found for doctorId " + doctor.getUserId() + ": " + patients)
+                                                            )
+                                                            .onItem().transform(
+                                                                    patients -> new DoctorWithPatients(doctor, patients)
+                                                            );
+                                                }).collect(Collectors.toList())
                                 )
-                                .withUni(results -> Uni.createFrom().item((List<DoctorWithPatients>)results))
+                                .withUni(results -> Uni.createFrom().item((List<DoctorWithPatients>) results))
                 );
     }
+
 
     public Uni<List<DoctorDto>> searchDoctors(String name){
         return doctorMSClient.searchDoctorsByName(name);
