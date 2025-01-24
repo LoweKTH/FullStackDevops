@@ -3,7 +3,7 @@ name: Search
 on:
   push:
     branches:
-      - kthcloudtesta
+      - kthcloudtest
 
 jobs:
 
