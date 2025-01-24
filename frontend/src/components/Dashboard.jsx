@@ -52,8 +52,8 @@ function Dashboard() {
         });
     }
 
-    const handleSearchCompForPatients = () => {
-        navigate("/patientsearch");
+    const handleSearchCompForStaff = () => {
+        navigate("/staffsearch");
     }
 
     const handleSearchCompForDoctors = () => {
@@ -80,7 +80,7 @@ function Dashboard() {
                 <>
                     <button onClick={handleCheckPatients}>Check Patients</button>
                     <button onClick={handleSearchCompForDoctors}>Search Patients</button>
-                    <button onClick={handleSearchCompForPatients}>Search Doctors</button>
+                    <button onClick={handleSearchCompForStaff}>Search Doctors</button>
                 </>
 
             )}
