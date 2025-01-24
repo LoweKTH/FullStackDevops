@@ -41,6 +41,7 @@ public class DoctorController {
     @GetMapping("/searchDoctors")
     public ResponseEntity<List<DoctorDto>> searchDoctors(@RequestParam(name = "search", required = false) String search) {
         List<DoctorDto> doctors = doctorService.searchDoctors(search);
+        System.out.println("hit kommer vi");
         return ResponseEntity.ok(doctors);
     }
 
