@@ -324,10 +324,8 @@ public class PatientServiceImpl implements PatientService{
 
     @Override
     public List<PatientDto> getPatientsByName(String name) {
-        List<Patient> patients = patientRepository.findByNameContainingIgnoreCase(name); // Assuming you have this method in your repository
-        if (patients.isEmpty()) {
-            throw new PatientNotFoundException("No patients found with the specified name");
-        }
+        List<Patient> patients = patientRepository.findByNameContainingIgnoreCase(name);
+
 
         return PatientMapper.toDtoList(patients);
     }
