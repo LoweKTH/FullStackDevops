@@ -95,12 +95,12 @@ public class DoctorServiceImpl implements DoctorService {
     }
 
     @Override
-    public List<DoctorDto> searchDoctors(String search) {
-        if (search == null || search.isEmpty()) {
+    public List<DoctorDto> searchDoctors(String name) {
+        if (name == null || name.isEmpty()) {
             return List.of();
         }
 
-        List<Doctor> doctors = doctorRepository.findByFirstnameContainingIgnoreCaseOrLastnameContainingIgnoreCase(search, search);
+        List<Doctor> doctors = doctorRepository.findByFirstnameContainingIgnoreCaseOrLastnameContainingIgnoreCase(name, name);
 
         return doctors.stream()
                 .map(DoctorMapper::toDto)

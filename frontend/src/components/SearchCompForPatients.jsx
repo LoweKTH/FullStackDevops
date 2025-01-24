@@ -12,6 +12,8 @@ const SearchCompForPatients = () => {
         setLoading(true);
         setError(null);
         try {
+            console.log("Search term:", searchName);
+
             const data = await searchDoctorsWithPatients(searchName);
             setDoctors(data);
         } catch (err) {

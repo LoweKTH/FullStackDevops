@@ -39,9 +39,9 @@ public class DoctorController {
     }
 
     @GetMapping("/searchDoctors")
-    public ResponseEntity<List<DoctorDto>> searchDoctors(@RequestParam(name = "search", required = false) String search) {
-        System.out.println("search: " + search);
-        List<DoctorDto> doctors = doctorService.searchDoctors(search);
+    public ResponseEntity<List<DoctorDto>> searchDoctors(@RequestParam(name = "name", required = false) String name) {
+        System.out.println("search: " + name);
+        List<DoctorDto> doctors = doctorService.searchDoctors(name);
         System.out.println("hit kommer vi");
         return ResponseEntity.ok(doctors);
     }
