@@ -9,6 +9,7 @@ import jakarta.inject.Inject;
 import org.eclipse.microprofile.rest.client.inject.RestClient;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -41,21 +42,29 @@ public class SearchService {
         return patientMSClient.getPatientsByDiagnosis(diagnosis);
     }
 
+
     public Uni<List<DoctorWithPatients>> getDoctorsWithPatients(String name) {
         return searchDoctors(name)
-                .onItem().transformToUni(doctors ->
-                        Uni.combine().all()
-                                .unis(
-                                        doctors.stream()
-                                                .map(doctor -> getPatientsByDoctorId(doctor.getUserId())
-                                                        .onItem().transform(
-                                                                patients -> new DoctorWithPatients(doctor, patients)
-                                                        )
-                                                ).collect(Collectors.toList())
-                                )
-                                .withUni(results -> Uni.createFrom().item((List<DoctorWithPatients>)results))
-                );
+                .onItem().transformToUni(doctors -> {
+                    if (doctors.isEmpty()) {
+                        // Return an empty list wrapped in a Uni if no doctors are found
+                        return Uni.createFrom().item(Collections.emptyList());
+                    }
+
+                    // Proceed with the combination if the doctors list is not empty
+                    return Uni.combine().all()
+                            .unis(
+                                    doctors.stream()
+                                            .map(doctor -> getPatientsByDoctorId(doctor.getUserId())
+                                                    .onItem().transform(
+                                                            patients -> new DoctorWithPatients(doctor, patients)
+                                                    )
+                                            ).collect(Collectors.toList())
+                            )
+                            .withUni(results -> Uni.createFrom().item((List<DoctorWithPatients>)results));
+                });
     }
+
 
     public Uni<List<DoctorDto>> searchDoctors(String name){
         return doctorMSClient.searchDoctorsByName(name);
