@@ -19,7 +19,7 @@ const Navbar = () => {
 
     const handleRegister = () => {
         keycloak.register({
-            redirectUri: window.location.origin + "/post-registration", // Redirect here after registration
+            redirectUri: window.location.origin + "/post-registration",
         });
     };
 
@@ -31,45 +31,11 @@ const Navbar = () => {
             localStorage.removeItem("role");
             localStorage.removeItem("token");
             localStorage.removeItem("userId");
-            // Redirect the user to the logout URL
             window.location.href = logoutUrl;
         }
     };
 
 
-    /*const handleLogout = () => {
-        if (keycloak) {
-            // Post the logout request to the specified URL
-            const logoutUrl = `http://localhost:8080/realms/PatientSystem/protocol/openid-connect/logout`;
-
-
-            fetch(logoutUrl, {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                    'Authorization': `Bearer ${keycloak.token}` // Using the token to authenticate the request
-                }
-            })
-                .then(response => {
-                    if (response.ok) {
-                        // Logout successful, proceed to logout from keycloak and clear local storage
-                        keycloak.logout({
-                            redirectUri: 'http://localhost:3000/'
-                        }).then(() => {
-                            localStorage.removeItem("role");
-                            localStorage.removeItem("token");
-                            localStorage.removeItem("userId");
-                        });
-                    } else {
-                        // Handle errors
-                        console.error('Logout failed:', response);
-                    }
-                })
-                .catch(error => {
-                    console.error('Request failed:', error);
-                });
-        }
-    };*/
 
 
     const getDashboardTitle = () => {

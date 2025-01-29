@@ -1,8 +1,8 @@
 import axios from "axios";
+import keycloak from "../keycloak";
 
-const messagingBaseURL = 'https://fullstack24-messaging.app.cloud.cbh.kth.se/api/messages'; // Update this to your messaging API URL
+const messagingBaseURL = 'https://fullstack24-messaging.app.cloud.cbh.kth.se/api/messages';
 
-// Create an Axios instance
 const api = axios.create({
     baseURL: messagingBaseURL,
     headers: {
@@ -10,10 +10,10 @@ const api = axios.create({
     },
 });
 
-// Add a request interceptor to attach the token
+
 api.interceptors.request.use(
     (config) => {
-        const token = localStorage.getItem("token"); // Replace with your token storage mechanism
+        const token = keycloak.token;
         if (token) {
             config.headers.Authorization = `Bearer ${token}`;
         }
@@ -25,14 +25,14 @@ api.interceptors.request.use(
     }
 );
 
-// Define API calls using the `api` instance
+
 export const fetchMessages = async (conversationId) => {
     try {
         const response = await api.get(`/${conversationId}`);
-        return response; // Return the response data (e.g., messages)
+        return response;
     } catch (error) {
         console.error("Error fetching messages:", error);
-        throw error; // Rethrow the error for further handling
+        throw error;
     }
 };
 
@@ -42,22 +42,22 @@ export const sendMessage = async (conversationId, senderId, message) => {
             senderId,
             content: message,
         });
-        return response; // Return the response data (e.g., success message)
+        return response;
     } catch (error) {
         console.error("Error sending message:", error);
-        throw error; // Rethrow the error for further handling
+        throw error;
     }
 };
 
 export const createConversation = async (senderId, recipientId) => {
     try {
         const response = await api.post(`/conversation`, null, {
-            params: { senderId, recipientId }, // Send params via the query string
+            params: { senderId, recipientId },
         });
-        return response; // Return the response data (e.g., conversation details)
+        return response;
     } catch (error) {
         console.error("Error creating conversation:", error);
-        throw error; // Rethrow the error for further handling
+        throw error;
     }
 };
 
@@ -66,9 +66,9 @@ export const fetchConversations = async (userId) => {
         const response = await api.get("/getconversations", {
             params: { userId },
         });
-        return response; // Return the response data (e.g., list of conversations)
+        return response;
     } catch (error) {
         console.error("Error fetching conversations:", error);
-        throw error; // Rethrow the error for further handling
+        throw error;
     }
 };

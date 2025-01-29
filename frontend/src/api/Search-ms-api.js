@@ -1,8 +1,8 @@
 import axios from "axios";
+import keycloak from "../keycloak";
 
 const searchMsBaseURL = 'https://fullstack24-search.app.cloud.cbh.kth.se/api/search';
 
-// Create an Axios instance
 const api = axios.create({
     baseURL: searchMsBaseURL,
     headers: {
@@ -10,10 +10,9 @@ const api = axios.create({
     },
 });
 
-// Add a request interceptor to attach the token
 api.interceptors.request.use(
     (config) => {
-        const token = localStorage.getItem("token"); // Replace with your token storage mechanism
+        const token =  keycloak.token;
         if (token) {
             config.headers.Authorization = `Bearer ${token}`;
         }
@@ -25,7 +24,6 @@ api.interceptors.request.use(
     }
 );
 
-// Define API calls using the `api` instance
 export const searchDoctorsWithPatients = async (name) => {
     try {
         const response = await api.get(`/searchDoctors`, {

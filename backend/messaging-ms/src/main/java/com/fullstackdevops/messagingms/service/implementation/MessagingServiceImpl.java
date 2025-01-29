@@ -2,34 +2,22 @@ package com.fullstackdevops.messagingms.service.implementation;
 
 import com.fullstackdevops.messagingms.dto.ConversationDto;
 import com.fullstackdevops.messagingms.dto.MessageDto;
-import com.fullstackdevops.messagingms.dto.UserDto;
+import com.fullstackdevops.messagingms.model.Conversation;
 import com.fullstackdevops.messagingms.model.Message;
 import com.fullstackdevops.messagingms.repository.ConversationRepository;
 import com.fullstackdevops.messagingms.repository.MessageRepository;
 import com.fullstackdevops.messagingms.service.MessagingService;
-import com.fullstackdevops.messagingms.model.Conversation;
 import com.fullstackdevops.messagingms.utils.MessageMapper;
 import lombok.AllArgsConstructor;
-import org.jboss.resteasy.client.jaxrs.ResteasyClientBuilder;
-import org.keycloak.admin.client.KeycloakBuilder;
 import org.springframework.http.*;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.oauth2.jwt.Jwt;
 import org.springframework.stereotype.Service;
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
 import org.springframework.web.client.RestTemplate;
-import org.keycloak.admin.client.Keycloak;
-import org.keycloak.admin.client.resource.UserResource;
-import org.keycloak.admin.client.resource.UsersResource;
-
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.stream.Collectors;
 
 @Service
 @AllArgsConstructor

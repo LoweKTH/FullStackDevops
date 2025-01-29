@@ -1,4 +1,4 @@
-/* Container for the entire component */
+
 .note-container {
     margin: 40px auto;
     max-width: 600px;
@@ -10,14 +10,14 @@
     text-align: center;
 }
 
-/* Heading */
+
 .note-container h2 {
     font-size: 24px;
     margin-bottom: 20px;
     color: #333;
 }
 
-/* Textarea styling */
+
 .note-textarea {
     width: 100%;
     padding: 10px;
@@ -28,7 +28,7 @@
     resize: vertical;
 }
 
-/* Success and error messages */
+
 .success-message {
     color: green;
     margin-bottom: 10px;
@@ -41,7 +41,7 @@
     font-weight: bold;
 }
 
-/* Buttons */
+
 .button-group {
     display: flex;
     justify-content: space-between;

@@ -1,8 +1,8 @@
 import axios from "axios";
+import keycloak from "../keycloak";
 
 const patientmsBaseURL = 'https://fullstack24-patient.app.cloud.cbh.kth.se/api/patients';
 
-// Create an Axios instance
 const api = axios.create({
     baseURL: patientmsBaseURL,
     headers: {
@@ -10,10 +10,10 @@ const api = axios.create({
     },
 });
 
-// Add a request interceptor to attach the token
+
 api.interceptors.request.use(
     (config) => {
-        const token = localStorage.getItem("token"); // Replace with your token storage mechanism
+        const token = keycloak.token;
         if (token) {
             config.headers.Authorization = `Bearer ${token}`;
         }
@@ -25,14 +25,13 @@ api.interceptors.request.use(
     }
 );
 
-// Define API calls using the `api` instance
 export const fetchPatients = async () => {
     try {
         const response = await api.get('/');
-        return response; // Return the list of patients or response data
+        return response;
     } catch (error) {
         console.error('Error fetching patients:', error);
-        throw error; // Rethrow the error for further handling
+        throw error;
     }
 };
 
@@ -99,9 +98,9 @@ export const fetchUserProfile = async (userId) => {
 export const addPatient = async (patientDto) => {
     try {
         const response = await api.post('/addPatient', patientDto);
-        return response; // Return the response data (e.g., success message, patient details)
+        return response;
     } catch (error) {
         console.error('Error adding patient:', error);
-        throw error; // Rethrow the error for further handling
+        throw error;
     }
 };

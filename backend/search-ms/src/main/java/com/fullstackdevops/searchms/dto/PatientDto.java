@@ -2,7 +2,6 @@ package com.fullstackdevops.searchms.dto;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import io.quarkus.runtime.annotations.RegisterForReflection;
-import jakarta.json.bind.annotation.JsonbProperty;
 
 import java.util.Date;
 import java.util.List;
@@ -10,11 +9,11 @@ import java.util.List;
 @RegisterForReflection
 public class PatientDto {
     @JsonProperty("id")
-    private Long id; // Patient ID
+    private Long id;
     @JsonProperty("socialSecurityNumber")
     private Long socialSecurityNumber;
     @JsonProperty("userId")
-    private String userId; // User ID associated with the patient
+    private String userId;
     @JsonProperty("firstname")
     private String firstname;
     @JsonProperty("lastname")
@@ -31,9 +30,9 @@ public class PatientDto {
     private String phoneNumber;
 
     @JsonProperty("notes")
-    private List<NoteDto> notes; // Notes associated with the patient
+    private List<NoteDto> notes;
     @JsonProperty("diagnoses")
-    private List<DiagnosisDto> diagnoses; // Diagnoses associated with the patient
+    private List<DiagnosisDto> diagnoses;
 
 
     public PatientDto() {}

@@ -11,13 +11,13 @@ export const addStaff = async (staffDto, token) => {
     try {
         const response = await api.post('/addStaff', staffDto, {
             headers: {
-                'Authorization': `Bearer ${token}`,  // Include the Keycloak token for authentication
+                'Authorization': `Bearer ${token}`,
                 'Content-Type': 'application/json',
             }
         });
-        return response.data;  // Return the response data (e.g., success message, patient details)
+        return response.data;
     } catch (error) {
         console.error('Error adding staff:', error);
-        throw error;  // Rethrow the error for further handling
+        throw error;
     }
 };

@@ -22,7 +22,7 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-@WebMvcTest(UserController.class) // Use @WebMvcTest for controller testing
+@WebMvcTest(UserController.class)
 public class UserMsApplicationTests {
 
 	@MockBean
@@ -36,52 +36,46 @@ public class UserMsApplicationTests {
 
 	@BeforeEach
 	void setUp() {
-		// Initialize mocks
 		MockitoAnnotations.openMocks(this);
-		mockMvc = MockMvcBuilders.standaloneSetup(userController).build(); // Manually setup MockMvc
+		mockMvc = MockMvcBuilders.standaloneSetup(userController).build();
 	}
 
 	@Test
 	void testGetUserById() throws Exception {
-		// Arrange
 		Long userId = 1L;
 		UserDto userDto = new UserDto(userId, "test@example.com", "testuser", "password", "ROLE_USER");
 
-		// Mock the service call
 		when(userService.getUserById(userId)).thenReturn(userDto);
 
-		// Act & Assert
-		mockMvc.perform(get("/api/user/{id}", userId)) // Perform GET request
-				.andExpect(status().isOk()) // Expect 200 OK status
-				.andExpect(jsonPath("$.id").value(userId)) // Check if the ID in the response matches
-				.andExpect(jsonPath("$.username").value("testuser")) // Check if the username in the response matches
-				.andExpect(jsonPath("$.email").value("test@example.com")); // Check if the email in the response matches
+		mockMvc.perform(get("/api/user/{id}", userId))
+				.andExpect(status().isOk())
+				.andExpect(jsonPath("$.id").value(userId))
+				.andExpect(jsonPath("$.username").value("testuser"))
+				.andExpect(jsonPath("$.email").value("test@example.com"));
 
-		// Verify that the service method was called once
 		verify(userService, times(1)).getUserById(userId);
 	}
 
 	@Test
 	void testLogin() throws Exception {
-		// Arrange
+
 		String username = "testuser";
 		String password = "password";
 		LoginDto loginDto = new LoginDto(username, password);
 
-		// Mock the service call
+
 		UserDto userDto = new UserDto(1L, "test@example.com", "testuser", "password", "ROLE_USER");
 		when(userService.login(username, password)).thenReturn(userDto);
 
-		// Act & Assert
+
 		mockMvc.perform(post("/api/user/login")
 						.contentType("application/json")
-						.content("{\"username\":\"testuser\",\"password\":\"password\"}")) // Perform POST request with LoginDto
-				.andExpect(status().isOk()) // Expect 200 OK status
-				.andExpect(jsonPath("$.id").value(1L)) // Check if the ID in the response matches
-				.andExpect(jsonPath("$.username").value("testuser")) // Check if the username in the response matches
-				.andExpect(jsonPath("$.email").value("test@example.com")); // Check if the email in the response matches
+						.content("{\"username\":\"testuser\",\"password\":\"password\"}"))
+				.andExpect(status().isOk())
+				.andExpect(jsonPath("$.id").value(1L))
+				.andExpect(jsonPath("$.username").value("testuser"))
+				.andExpect(jsonPath("$.email").value("test@example.com"));
 
-		// Verify that the service method was called once
 		verify(userService, times(1)).login(username, password);
 	}
 }

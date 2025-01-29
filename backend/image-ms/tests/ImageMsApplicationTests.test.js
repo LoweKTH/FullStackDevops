@@ -8,10 +8,10 @@ const app = express();
 app.use(express.json());
 app.use('/api/image', imageController);
 
-// Mocking the authentication and authorization middlewares
+
 jest.mock('../utils/authentication', () => ({
-    verifyJWT: (req, res, next) => next(), // Skip actual JWT verification
-    requireRole: (role) => (req, res, next) => next(), // Skip role-based authorization
+    verifyJWT: (req, res, next) => next(),
+    requireRole: (role) => (req, res, next) => next(),
 }));
 
 jest.mock('../service/ImageService', () => ({

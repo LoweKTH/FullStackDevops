@@ -1,6 +1,7 @@
 import React, {useEffect, useState} from "react";
 import { useNavigate } from "react-router-dom";
 import {jwtDecode} from "jwt-decode";
+import keycloak from "../keycloak";
 
 function Dashboard() {
     const [role, setRole] = useState(null);
@@ -8,20 +9,19 @@ function Dashboard() {
     const userId = localStorage.getItem("userId");
 
     useEffect(() => {
-        const role = getInfoFromToken(); // Extract role from the token
+        const role = getInfoFromToken();
         console.log(role);
-        setRole(role); // Set the role state
+        setRole(role);
     }, []);
 
 
     const getInfoFromToken = () => {
-        const token = localStorage.getItem("token"); // Retrieve token from localStorage
-       // const token = keycloak.token;
+
+        const token = keycloak.token;
         console.log("token:" +   token);
 
         if (token) {
             const decodedToken = jwtDecode(token);
-            // For client-level roles
             const clientRoles = decodedToken.resource_access?.['user-ms']?.roles || [];
             const userId = decodedToken.sub;
             localStorage.setItem("userId",userId);
@@ -32,7 +32,7 @@ function Dashboard() {
 
             console.log('Client Roles:', clientRoles);
         }
-        return "Guest"; // Default role if token is not found
+        return "Guest";
     };
 
 

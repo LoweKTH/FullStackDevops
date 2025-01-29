@@ -45,16 +45,6 @@ app.use((req, res, next) => {
 });
 
 
-
-// Additional logging for OPTIONS pre-flight request
-app.use((req, res, next) => {
-    if (req.method === 'OPTIONS') {
-        console.log('Pre-flight OPTIONS request received');
-    }
-    next();
-});
-
-
 app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 app.use('/api/image', imageController);
 

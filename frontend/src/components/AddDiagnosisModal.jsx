@@ -14,7 +14,7 @@ const AddDiagnosisModal = ({ show, onClose, onSubmit }) => {
     };
 
     if (!show) {
-        console.log("Modal hidden."); // Debug
+        console.log("Modal hidden.");
         return null;
     }
 

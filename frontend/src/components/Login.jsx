@@ -3,7 +3,6 @@ import {loginUser} from "../api/User-ms-api";
 import {useNavigate} from "react-router-dom";
 
 function Login() {
-    // Define state for username, password, and error message
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
     const [error, setError] = useState('');

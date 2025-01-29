@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { searchPatientsByDiagnosis } from "../api/Search-ms-api";
-import { searchPatientsByName } from "../api/Search-ms-api";  // Assuming you create this API function
+import { searchPatientsByName } from "../api/Search-ms-api";
 
 const SearchCompForDoctors = () => {
     const [patients, setPatients] = useState([]);

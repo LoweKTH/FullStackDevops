@@ -30,8 +30,7 @@ function Messaging() {
 
         try {
             await sendMessage(conversationId, userId, newMessage);
-            setNewMessage(""); // Clear the input after sending
-            // Refetch the messages to show the latest one
+            setNewMessage("");
             const response = await fetchMessages(conversationId);
             setMessages(response.data);
         } catch (error) {

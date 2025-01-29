@@ -3,12 +3,11 @@ import { registerUser } from "../api/User-ms-api";
 import { useNavigate } from "react-router-dom";
 
 function Register() {
-    // Define state for user details
     const [email, setEmail] = useState("");
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
 
-    // Define state for additional info
+
     const [socialSecurityNumber, setSocialSecurityNumber] = useState("");
     const [firstname, setFirstname] = useState("");
     const [lastname, setLastname] = useState("");
@@ -28,7 +27,7 @@ function Register() {
                 email,
                 username,
                 password,
-                role: "Patient", // Default role
+                role: "Patient",
             },
             additionalInfoDetails: {
                 socialSecurityNumber,

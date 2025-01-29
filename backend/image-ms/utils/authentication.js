@@ -42,7 +42,6 @@ async function verifyJWT(req, res, next) {
             return res.status(401).json({ message: `Invalid issuer: ${decoded.iss}` });
         }
 
-        // Extract roles from resource_access
         const roles = decoded?.resource_access?.['user-ms']?.roles || [];
         req.user = { ...decoded, roles };
 

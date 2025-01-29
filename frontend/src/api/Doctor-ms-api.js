@@ -1,8 +1,9 @@
 import axios from "axios";
+import keycloak from "../keycloak";
 
 const doctormsBaseURL = 'https://fullstack24-doctorstaff.app.cloud.cbh.kth.se/api/doctors';
 
-// Create an Axios instance
+
 const api = axios.create({
     baseURL: doctormsBaseURL,
     headers: {
@@ -10,10 +11,10 @@ const api = axios.create({
     },
 });
 
-// Add a request interceptor to attach the token
+
 api.interceptors.request.use(
     (config) => {
-        const token = localStorage.getItem("token"); // Replace with your token storage mechanism
+        const token =  keycloak.token;
         if (token) {
             config.headers.Authorization = `Bearer ${token}`;
         }
@@ -25,23 +26,23 @@ api.interceptors.request.use(
     }
 );
 
-// Define API calls using the `api` instance
+
 export const fetchAssignedPatients = async (doctorId) => {
     try {
         const response = await api.get(`/${doctorId}/patients`);
-        return response; // Return the response data (e.g., assigned patients)
+        return response;
     } catch (error) {
         console.error('Error fetching assigned patients:', error);
-        throw error; // Rethrow the error for further handling
+        throw error;
     }
 };
 
 export const addDoctor = async (doctorDto) => {
     try {
         const response = await api.post('/addDoctor', doctorDto);
-        return response;  // Return the response data (e.g., success message, doctor details)
+        return response;
     } catch (error) {
         console.error('Error adding doctor:', error);
-        throw error;  // Rethrow the error for further handling
+        throw error;
     }
 };

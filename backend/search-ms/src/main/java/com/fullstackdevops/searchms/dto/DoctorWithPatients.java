@@ -9,10 +9,10 @@ import java.util.List;
 public class DoctorWithPatients {
 
     @JsonProperty
-    private DoctorDto doctor; // A single doctor
+    private DoctorDto doctor;
 
     @JsonProperty
-    private List<PatientDto> patients; // Patients specific to this doctor
+    private List<PatientDto> patients;
 
     public DoctorWithPatients(DoctorDto doctor, List<PatientDto> patients) {
         this.doctor = doctor;
