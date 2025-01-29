@@ -39,7 +39,6 @@ class PatientMsApplicationTests {
 
 	@BeforeEach
 	void setUp() {
-		// Initialize a mock patient object
 
 		mockPatient = new PatientDto();
 		mockPatient.setUserId("321423543rrefr");
@@ -51,10 +50,8 @@ class PatientMsApplicationTests {
 
 	@Test
 	void testCreatePatient() throws Exception {
-		// Mock the service behavior
 		when(patientService.createPatient(any(PatientDto.class))).thenReturn(mockPatient);
 
-		// Perform the POST request and verify the response
 		mockMvc.perform(post("/api/patients/addPatient")
 						.contentType(MediaType.APPLICATION_JSON)
 						.content(objectMapper.writeValueAsString(mockPatient))

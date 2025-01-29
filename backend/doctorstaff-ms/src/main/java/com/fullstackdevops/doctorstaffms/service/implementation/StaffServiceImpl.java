@@ -55,7 +55,7 @@ public class StaffServiceImpl implements StaffService {
 
         HttpEntity<String> entity = new HttpEntity<>(headers);
 
-        String url = "http://patient-ms:8080/api/patients/" + staffId + "/doctorstaffgetpatients";
+        String url = "https://fullstack24-patient.app.cloud.cbh.kth.se/api/patients/" + staffId + "/doctorstaffgetpatients";
         ResponseEntity<List<String>> response = restTemplate.exchange(
                 url,
                 HttpMethod.GET,
@@ -67,7 +67,7 @@ public class StaffServiceImpl implements StaffService {
         List<PatientDto> patientDtos = new ArrayList<>();
 
         for (String patientId : patientIds) {
-            String patientUrl = "http://patient-ms:8080/api/patients/" + patientId;
+            String patientUrl = "https://fullstack24-patient.app.cloud.cbh.kth.se/api/patients/" + patientId;
 
             ResponseEntity<PatientDto> patientResponse = restTemplate.exchange(
                     patientUrl,

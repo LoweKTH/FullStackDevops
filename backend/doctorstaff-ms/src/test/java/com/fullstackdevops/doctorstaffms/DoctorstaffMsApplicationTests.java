@@ -40,7 +40,6 @@ class DoctorstaffMsApplicationTests {
 
     @BeforeEach
     void setUp() {
-        // Initialize a mock doctor object
         mockDoctor = new DoctorDto();
         mockDoctor.setUserId("324234ewfafsdfda");
         mockDoctor.setFirstname("John");
@@ -52,10 +51,8 @@ class DoctorstaffMsApplicationTests {
 
     @Test
     void testCreateDoctor() throws Exception {
-        // Mock the service behavior
         when(doctorService.createDoctor(any(DoctorDto.class))).thenReturn(mockDoctor);
 
-        // Perform the POST request and verify the response
         mockMvc.perform(post("/api/doctors/addDoctor")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(objectMapper.writeValueAsString(mockDoctor))
@@ -72,10 +69,8 @@ class DoctorstaffMsApplicationTests {
 
     @Test
     void testGetDoctorById() throws Exception {
-        // Mock the service behavior
         when(doctorService.getDoctorById("324234ewfafsdfda")).thenReturn(mockDoctor);
 
-        // Perform the GET request and verify the response
         mockMvc.perform(get("/api/doctors/324234ewfafsdfda")
                         .with(jwt().authorities(() -> "ROLE_PATIENT"))
                         .with(csrf()))

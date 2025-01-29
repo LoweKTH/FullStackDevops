@@ -40,6 +40,7 @@ const PostRegistration = () => {
                 phoneNumber: userInfo.phonenumber,
                 address: userInfo.address,
                 userId: userId,
+                dateOfBirth: userInfo.dateOfBirth,
                 gender: userInfo.gender,
             };
             console.log(patientDto);
