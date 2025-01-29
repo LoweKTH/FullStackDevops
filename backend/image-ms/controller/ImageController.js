@@ -3,6 +3,7 @@ const multer = require('multer');
 const { uploadImage } = require('../service/ImageService');
 const { retrieveImagesByUserId } = require('../service/ImageService');
 const { editImage } = require('../service/ImageService');
+const { verifyJWT, requireRole } = require('../utils/authentication');
 
 const upload = multer({
     dest: 'uploads/',
@@ -14,7 +15,7 @@ const upload = multer({
 const router = express.Router();
 
 
-router.post('/upload', upload.single('image'), async (req, res) => {
+router.post('/upload', verifyJWT, requireRole('DOCTOR'), upload.single('image'), async (req, res) => {
     const {userId,title,description} = req.body;
     const uploadedFile = req.file;
 
@@ -31,7 +32,7 @@ router.post('/upload', upload.single('image'), async (req, res) => {
     }
 });
 
-router.post('/edit', upload.single('image'),async (req, res) => {
+router.post('/edit', verifyJWT, requireRole('DOCTOR'), upload.single('image'),async (req, res) => {
     const { imageId } = req.body;
     const uploadedFile = req.file;
     console.log("Uploaded file field name:", req.file);
@@ -50,7 +51,7 @@ router.post('/edit', upload.single('image'),async (req, res) => {
     }
 });
 
-router.get('/user/:userId', async (req, res) => {
+router.get('/user/:userId',verifyJWT, async (req, res) => {
     const { userId } = req.params;
 
     try {
